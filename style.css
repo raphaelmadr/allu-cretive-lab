@@ -368,13 +368,66 @@ p.subtitle {
     background: rgba(255,255,255,0.2);
 }
 
+/* Carousel Multi-Canvas Layout */
+#canvas-wrapper {
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) transparent;
+}
+
+#canvas-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+#canvas-wrapper::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+.carousel-del-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    width: 24px;
+    height: 24px;
+    background: #ff4444;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    border: 2px solid var(--allu-161617);
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s;
+}
+
+.carousel-del-btn:hover {
+    transform: scale(1.2);
+    background: #ff2222;
+}
+
 /* Carousel Manager Styles */
 #carousel-manager {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .carousel-thumb {
-    transition: all 0.2s ease;
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    border: 2px solid var(--glass-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: white;
+    transition: all 0.2s;
+    flex-shrink: 0;
 }
 
 .carousel-thumb:hover {
@@ -385,6 +438,9 @@ p.subtitle {
 
 .carousel-thumb.active {
     box-shadow: 0 0 15px rgba(39, 174, 96, 0.3);
+    border-color: var(--accent);
+    background: rgba(39, 174, 96, 0.1);
+    color: var(--accent);
     transform: scale(1.05);
 }
 
@@ -400,9 +456,4 @@ p.subtitle {
 
 #btn-add-page:active {
     transform: scale(0.95);
-}
-
-#carousel-pages::-webkit-scrollbar {
-    width: 0;
-    height: 0;
 }
