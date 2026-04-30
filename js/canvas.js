@@ -18,52 +18,70 @@ export function setupCanvas() {
 }
 
 export function resizeCanvas(w, h) {
-    const canvas = state.getCanvas();
-    if (!canvas) return;
-
     const wrapper = document.getElementById('canvas-wrapper');
-    const padding = 120; // Espaço de respiro
+    if (!wrapper) return;
+
+    // Se estivermos em modo carrossel, as larguras podem ser diferentes
+    const formatDisplay = document.getElementById('format-display');
+    const isCarouselMode = formatDisplay && formatDisplay.innerText.includes('Carrossel');
+
+    // Configurar wrapper para scroll horizontal se for carrossel
+    if (isCarouselMode) {
+        wrapper.style.display = 'flex';
+        wrapper.style.flexDirection = 'row';
+        wrapper.style.alignItems = 'center';
+        wrapper.style.justifyContent = 'flex-start';
+        wrapper.style.gap = '80px';
+        wrapper.style.overflowX = 'auto';
+        wrapper.style.padding = '100px';
+    } else {
+        wrapper.style.display = 'flex';
+        wrapper.style.flexDirection = 'column';
+        wrapper.style.alignItems = 'center';
+        wrapper.style.justifyContent = 'center';
+        wrapper.style.overflowX = 'hidden';
+        wrapper.style.padding = '20px';
+    }
+
+    const padding = 120; 
     const availableW = wrapper.clientWidth - padding;
     const availableH = wrapper.clientHeight - padding;
     const scale = Math.min(availableW / w, availableH / h, 1);
     
-    canvas.setDimensions({ 
-        width: w * scale, 
-        height: h * scale 
-    }, { backstoreOnly: false });
-    
-    canvas.setZoom(scale);
-    
-    // Garantir que o container do Fabric.js tenha o tamanho exato
-    const container = canvas.getElement().parentNode;
-    container.style.width = Math.round(w * scale) + 'px';
-    container.style.height = Math.round(h * scale) + 'px';
-    
-    // Ativar/Desativar modo Carrossel baseado no preset
-    const formatDisplay = document.getElementById('format-display');
-    if (formatDisplay) {
-        const formatLabel = formatDisplay.innerText;
-        const isCarouselMode = formatLabel.includes('Carrossel');
-        const manager = document.getElementById('carousel-manager');
+    // Aplicar a todos os canvases no estado
+    state.canvases.forEach(canvas => {
+        canvas.setDimensions({ 
+            width: w * scale, 
+            height: h * scale 
+        }, { backstoreOnly: false });
         
+        canvas.setZoom(scale);
+        
+        const container = canvas.getElement().parentNode;
+        container.style.width = Math.round(w * scale) + 'px';
+        container.style.height = Math.round(h * scale) + 'px';
+        container.style.flexShrink = '0'; // Não deixa o canvas espremer
+        
+        // Redesenhar guias
+        drawSafeGuides(canvas, w, h, scale);
+    });
+
+    // Ativar/Desativar modo Carrossel baseado no preset
+    if (formatDisplay) {
+        const manager = document.getElementById('carousel-manager');
         if (isCarouselMode) {
             carousel.active = true;
-            if (manager) {
-                manager.style.display = 'flex';
-            }
-            if (carousel.pages.length === 0) carousel.init();
+            if (manager) manager.style.display = 'flex';
+            if (state.canvases.length === 0) carousel.init();
             carousel.updateUI();
         } else {
             carousel.active = false;
-            if (manager) {
-                manager.style.display = 'none';
-            }
+            if (manager) manager.style.display = 'none';
         }
     }
     
     updateZoomDisplay(scale);
-    drawSafeGuides(w, h, scale);
-    canvas.renderAll();
+    state.canvases.forEach(c => c.renderAll());
 }
 
 export function updateZoomDisplay(scale) {
@@ -71,16 +89,14 @@ export function updateZoomDisplay(scale) {
     if(zoomText) zoomText.innerText = Math.round(scale * 100) + '%';
 }
 
-export function drawSafeGuides(w, h, scale) {
-    const canvas = state.getCanvas();
-    if (!canvas) return;
-
-    // Remover guias antigas
-    document.querySelectorAll('.canvas-guide').forEach(g => g.remove());
-    
+export function drawSafeGuides(canvas, w, h, scale) {
     const container = canvas.getElement().parentNode;
-    const marginW = 0.05 * w * scale; // 5% de margem real baseada na largura da arte
-    const marginH = 0.05 * h * scale; // 5% de margem real baseada na altura da arte
+    
+    // Remover guias antigas deste container específico
+    container.querySelectorAll('.canvas-guide').forEach(g => g.remove());
+    
+    const marginW = 0.05 * w * scale; 
+    const marginH = 0.05 * h * scale; 
     
     const guide = document.createElement('div');
     guide.className = 'canvas-guide';
