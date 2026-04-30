@@ -445,8 +445,8 @@
     },
     {
         "name": "POLAR Ignite 3 Preto",
-        "price": "R$ 154,90",
-        "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Figp1.png&w=3840&q=90",
+        "price": "POLAR Ignite 3 Preto",
+        "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Figb1.png&w=3840&q=90",
         "local_img": "./assets/products/polar-ignite-3-preto.png"
     },
     {
@@ -898,12 +898,6 @@
         "price": "Notebook Gamer Acer Nitro V15 RTX3050 I5 8GB",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fnit1.png&w=3840&q=90",
         "local_img": "./assets/products/notebook-gamer-acer-nitro-v15-rtx3050-i5-8gb.png"
-    },
-    {
-        "name": "POLAR Ignite 3 Preto",
-        "price": "POLAR Ignite 3 Preto",
-        "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Figb1.png&w=3840&q=90",
-        "local_img": "./assets/products/polar-ignite-3-preto.png"
     },
     {
         "name": "Polar Vantage V3 Smartwatch Multiesportivo GPS",
