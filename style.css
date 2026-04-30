@@ -111,10 +111,12 @@ body {
 
 .main-content {
     flex: 1;
+    min-width: 0; /* Essencial para flex não expandir além do pai */
     display: flex;
     flex-direction: column;
     position: relative;
-    background: #f0f0f0; /* Cinza claro neutro para melhor visualização */
+    background: #f0f0f0; 
+    overflow: hidden;
 }
 
 /* Canvas Container */
