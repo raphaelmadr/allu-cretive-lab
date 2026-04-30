@@ -64,12 +64,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnSync) {
         btnSync.onclick = () => {
             const icon = btnSync.querySelector('i');
-            
             if(icon) icon.classList.add('fa-spin');
-            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:var(--accent);"></i> Recarregando...';
+            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:var(--accent);"></i> Atualizando...';
             
-            // Exibir um alerta informando o fluxo correto para o Vercel
-            alert("Para sincronizar preços novos do site:\\n\\n1. Abra o terminal do seu computador no projeto.\\n2. Rode o comando: python sync_products.py\\n3. Faça o commit/push pro GitHub.\\n\\nA página vai recarregar agora para ler o arquivo local mais recente.");
+            // Exibir um alerta informando que agora é automático via GitHub Actions
+            alert("✅ Sincronização Automática Ativa!\\n\\nOs preços e produtos são atualizados automaticamente a cada 1 hora via GitHub Actions.\\n\\nSe você acabou de fazer uma mudança no GitHub, aguarde alguns minutos e recarregue a página para ver as novidades.");
             
             setTimeout(() => {
                 window.location.reload();

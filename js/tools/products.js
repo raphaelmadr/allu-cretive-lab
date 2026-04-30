@@ -118,13 +118,8 @@ export function renderProductsTools(sidebarContent) {
     const btnSync = document.getElementById('btn-sync-catalog');
     if (btnSync) {
         btnSync.onclick = async () => {
-            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sincronizando...';
-            try {
-                if(window.pywebview) await window.pywebview.api.sync_products();
-                updateSidebar('products');
-            } catch(e) {
-                btnSync.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Erro ao sync';
-            }
+            alert("⚙️ Sincronização em Nuvem\\n\\nOs produtos são sincronizados automaticamente a cada 1 hora no GitHub.\\n\\nPara ver os preços mais recentes agora, basta recarregar a página.");
+            window.location.reload();
         };
     }
 }
