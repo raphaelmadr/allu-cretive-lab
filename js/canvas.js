@@ -49,7 +49,6 @@ export function resizeCanvas(w, h) {
         if (isCarouselMode) {
             carousel.active = true;
             if (manager) {
-                manager.style.visibility = 'visible';
                 manager.style.display = 'flex';
             }
             if (carousel.pages.length === 0) carousel.init();
@@ -57,7 +56,6 @@ export function resizeCanvas(w, h) {
         } else {
             carousel.active = false;
             if (manager) {
-                manager.style.visibility = 'hidden';
                 manager.style.display = 'none';
             }
         }

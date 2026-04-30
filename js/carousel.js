@@ -16,7 +16,6 @@ export const carousel = {
         
         const manager = document.getElementById('carousel-manager');
         if (manager) {
-            manager.style.visibility = 'visible';
             manager.style.display = 'flex';
         }
         this.updateUI();

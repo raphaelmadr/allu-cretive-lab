@@ -51,9 +51,9 @@ export function setupOnboarding() {
                 <span style="font-size: 0.6rem; margin-top: 5px; color: var(--accent); font-weight:700;">DOCUMENTO EM BRANCO</span>
             `;
             card.onclick = () => {
-                resizeCanvas(p.w, p.h);
                 const formatDisplay = document.getElementById('format-display');
                 if (formatDisplay) formatDisplay.innerText = `${p.name} (${p.w}x${p.h})`;
+                resizeCanvas(p.w, p.h);
                 if (modal) modal.style.display = 'none';
                 history.save();
             };
