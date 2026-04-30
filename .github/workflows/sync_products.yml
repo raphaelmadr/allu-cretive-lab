@@ -2,7 +2,7 @@ name: Sincronizar Produtos Allu
 
 on:
   schedule:
-    - cron: '0 */12 * * *' # Roda a cada 12 horas
+    - cron: '0 * * * *' # Roda a cada 1 hora
   workflow_dispatch: # Permite rodar manualmente pelo GitHub
 
 jobs:
