@@ -31,5 +31,5 @@ jobs:
       run: |
         git config --global user.name 'Allu Bot'
         git config --global user.email 'bot@allugator.com'
-        git add assets/products.json assets/products.js
+        git add assets/products.json assets/products.js assets/products/
         git diff --quiet && git diff --staged --quiet || (git commit -m "data: sync products automation" && git push)
