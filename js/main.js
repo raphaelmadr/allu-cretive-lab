@@ -65,29 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
         btnSync.onclick = () => {
             const icon = btnSync.querySelector('i');
             
-            if (!window.alluProducts || window.alluProducts.length === 0) {
-                btnSync.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:#ff4444;"></i> Python não rodou';
-                setTimeout(() => {
-                    btnSync.innerHTML = '<i class="fa-solid fa-arrows-rotate" style="color:var(--accent);"></i> Atualizar Catálogo';
-                }, 3000);
-                return;
-            }
-
             if(icon) icon.classList.add('fa-spin');
-            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:var(--accent);"></i> Sincronizando...';
+            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:var(--accent);"></i> Recarregando...';
+            
+            // Exibir um alerta informando o fluxo correto para o Vercel
+            alert("Para sincronizar preços novos do site:\\n\\n1. Abra o terminal do seu computador no projeto.\\n2. Rode o comando: python sync_products.py\\n3. Faça o commit/push pro GitHub.\\n\\nA página vai recarregar agora para ler o arquivo local mais recente.");
             
             setTimeout(() => {
-                btnSync.innerHTML = '<i class="fa-solid fa-check" style="color:var(--accent);"></i> Atualizado';
-                
-                const propBtn = document.querySelector('.btn-tool[data-tab="products"]');
-                if (propBtn && propBtn.classList.contains('active')) {
-                    updateSidebar('products');
-                }
-
-                setTimeout(() => {
-                    btnSync.innerHTML = '<i class="fa-solid fa-arrows-rotate" style="color:var(--accent);"></i> Atualizar Catálogo';
-                }, 3000);
-            }, 800);
+                window.location.reload();
+            }, 500);
         };
     }
 
