@@ -151,6 +151,6 @@ export function setupHistoryEvents() {
 
     setTimeout(() => {
         history.save();
-        history.loadDraft();
+        // history.loadDraft(); // Alerta removido conforme solicitado pelo usuário
     }, 1000);
 }
