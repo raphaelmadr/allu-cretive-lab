@@ -1,108 +1,132 @@
 // js/carousel.js
 import { state } from './state.js';
 import { history } from './history.js';
+import { setupCanvas, resizeCanvas } from './canvas.js';
 
 export const carousel = {
-    pages: [],
-    currentIndex: 0,
     active: false,
     
     init() {
-        const canvas = state.getCanvas();
-        if (!canvas) return;
-        this.pages = [ { json: canvas.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id']) } ];
-        this.currentIndex = 0;
         this.active = true;
-        
         const manager = document.getElementById('carousel-manager');
         if (manager) {
             manager.style.display = 'flex';
         }
+        
+        // Se já temos um canvas inicial, garanta que ele está no array
+        const initialCanvas = state.getCanvas();
+        if (initialCanvas && state.canvases.length === 0) {
+            state.setCanvas(initialCanvas);
+        }
+        
         this.updateUI();
     },
     
     addPage() {
-        const canvas = state.getCanvas();
-        if (!canvas) return;
+        const activePreset = state.getActivePreset() || { w: 1080, h: 1080 };
+        const wrapper = document.getElementById('canvas-wrapper');
+        if (!wrapper) return;
 
-        // Salvar estado da página atual antes de mudar
-        this.pages[this.currentIndex].json = canvas.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id']);
+        // Criar novo elemento canvas
+        const canvasId = `canvas-${Date.now()}`;
+        const newCanvasEl = document.createElement('canvas');
+        newCanvasEl.id = canvasId;
+        wrapper.appendChild(newCanvasEl);
+
+        // Inicializar Fabric
+        const newCanvas = new fabric.Canvas(canvasId, {
+            backgroundColor: '#ffffff',
+            preserveObjectStacking: true,
+            width: activePreset.w,
+            height: activePreset.h
+        });
+
+        // Configurar protótipo e estilos globais se necessário
+        setupCanvas(); 
+
+        // Configurar eventos
+        newCanvas.on('selection:created', () => this.onSelection(newCanvas));
+        newCanvas.on('selection:updated', () => this.onSelection(newCanvas));
+        newCanvas.on('object:modified', () => history.save());
+        newCanvas.on('object:added', () => history.save());
+        newCanvas.on('object:removed', () => history.save());
+
+        // Adicionar ao estado
+        state.addCanvas(newCanvas);
         
-        // Nova página mantém o fundo da anterior
-        const bgColor = canvas.backgroundColor;
-        canvas.clear();
-        canvas.setBackgroundColor(bgColor, canvas.renderAll.bind(canvas));
+        // Sincronizar tamanho
+        resizeCanvas(activePreset.w, activePreset.h);
         
-        this.pages.push({ json: canvas.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id']) });
-        this.currentIndex = this.pages.length - 1;
+        // Rolar até o novo canvas
+        setTimeout(() => {
+            newCanvasEl.parentNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        }, 100);
+
         this.updateUI();
         history.save();
     },
 
-    deletePage(index) {
-        const canvas = state.getCanvas();
-        if (!canvas) return;
+    onSelection(canvasInstance) {
+        const index = state.canvases.indexOf(canvasInstance);
+        if (index !== -1) {
+            state.setActiveCanvas(index);
+            this.updateUI();
+            const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
+            if (propBtn) propBtn.click();
+        }
+    },
 
-        if (this.pages.length <= 1) return; // Não deleta a última
+    deletePage(index) {
+        if (state.canvases.length <= 1) return;
         if (!confirm('Deseja excluir esta página?')) return;
         
-        this.pages.splice(index, 1);
-        if (this.currentIndex >= this.pages.length) {
-            this.currentIndex = this.pages.length - 1;
-        }
+        const canvasToDelete = state.canvases[index];
+        const container = canvasToDelete.getElement().parentNode;
+        container.parentNode.removeChild(container);
         
-        canvas.loadFromJSON(this.pages[this.currentIndex].json, () => {
-            canvas.renderAll();
-            this.updateUI();
-        });
+        state.removeCanvas(index);
+        this.updateUI();
+        history.save();
     },
     
     switchPage(index) {
+        state.setActiveCanvas(index);
         const canvas = state.getCanvas();
-        if (!canvas) return;
-
-        if (index === this.currentIndex) return;
-        // Salvar estado da página atual
-        this.pages[this.currentIndex].json = canvas.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id']);
-        
-        this.currentIndex = index;
-        canvas.loadFromJSON(this.pages[index].json, () => {
-            canvas.renderAll();
-            this.updateUI();
-        });
+        if (canvas) {
+            const container = canvas.getElement().parentNode;
+            container.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            
+            // Destacar o canvas selecionado visualmente
+            document.querySelectorAll('.canvas-container').forEach(c => c.style.outline = 'none');
+            container.style.outline = '2px solid var(--accent)';
+            container.style.outlineOffset = '4px';
+        }
+        this.updateUI();
     },
 
     async exportAll(format = 'png') {
-        const canvas = state.getCanvas();
-        if (!canvas) return;
-
-        const originalIndex = this.currentIndex;
-        this.pages[this.currentIndex].json = canvas.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id']);
+        const originalIndex = state.activeCanvasIndex;
         
-        for (let i = 0; i < this.pages.length; i++) {
-            await new Promise(resolve => {
-                canvas.loadFromJSON(this.pages[i].json, () => {
-                    canvas.renderAll();
-                    const dataURL = canvas.toDataURL({
-                        format: format === 'jpg' ? 'jpeg' : format,
-                        quality: 0.9,
-                        multiplier: 2 // Alta resolução
-                    });
-                    
-                    const link = document.createElement('a');
-                    link.download = `Allu_Creative_Lab_Page_${i + 1}.${format}`;
-                    link.href = dataURL;
-                    link.click();
-                    setTimeout(resolve, 500); // Pequeno delay para evitar sobrecarga de download
-                });
+        for (let i = 0; i < state.canvases.length; i++) {
+            const canvas = state.canvases[i];
+            canvas.discardActiveObject();
+            canvas.renderAll();
+            
+            const dataURL = canvas.toDataURL({
+                format: format === 'jpg' ? 'jpeg' : format,
+                quality: 0.9,
+                multiplier: 2
             });
+            
+            const link = document.createElement('a');
+            link.download = `Allu_Creative_Lab_Page_${i + 1}.${format}`;
+            link.href = dataURL;
+            link.click();
+            await new Promise(r => setTimeout(r, 500));
         }
         
-        // Voltar para a página original
-        canvas.loadFromJSON(this.pages[originalIndex].json, () => {
-            canvas.renderAll();
-            this.updateUI();
-        });
+        state.setActiveCanvas(originalIndex);
+        this.updateUI();
     },
     
     updateUI() {
@@ -111,34 +135,20 @@ export const carousel = {
         if (!container || !countDisplay) return;
         
         container.innerHTML = '';
-        this.pages.forEach((page, index) => {
+        state.canvases.forEach((canvas, index) => {
             const item = document.createElement('div');
             item.style.position = 'relative';
             
             const thumb = document.createElement('div');
-            const isActive = index === this.currentIndex;
+            const isActive = index === state.activeCanvasIndex;
             thumb.className = `carousel-thumb ${isActive ? 'active' : ''}`;
-            thumb.style.cssText = `
-                width: 50px; height: 50px; background: ${isActive ? 'rgba(39, 174, 96, 0.1)' : 'rgba(255,255,255,0.05)'}; 
-                border-radius: 12px; border: 2px solid ${isActive ? 'var(--accent)' : 'var(--glass-border)'}; 
-                cursor: pointer; display: flex; align-items: center; justify-content: center; 
-                font-size: 0.85rem; font-weight: 800; color: ${isActive ? 'var(--accent)' : 'white'};
-                transition: all 0.2s; flex-shrink: 0; position: relative;
-            `;
             thumb.innerText = index + 1;
             thumb.onclick = () => this.switchPage(index);
 
-            // Botão de Deletar (apenas se tiver mais de 1 página)
-            if (this.pages.length > 1) {
+            if (state.canvases.length > 1) {
                 const delBtn = document.createElement('div');
+                delBtn.className = 'carousel-del-btn';
                 delBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-                delBtn.style.cssText = `
-                    position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; 
-                    background: #ff4444; color: white; border-radius: 50%; display: flex !important; 
-                    align-items: center; justify-content: center; font-size: 10px; 
-                    cursor: pointer; border: 1.5px solid #161617; z-index: 10;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-                `;
                 delBtn.onclick = (e) => {
                     e.stopPropagation();
                     this.deletePage(index);
@@ -149,7 +159,21 @@ export const carousel = {
             item.appendChild(thumb);
             container.appendChild(item);
         });
-        countDisplay.innerText = `${this.currentIndex + 1} / ${this.pages.length}`;
+        countDisplay.innerText = `${state.activeCanvasIndex + 1} / ${state.canvases.length}`;
+
+        // Atualizar destaque dos containers de canvas
+        state.canvases.forEach((canvas, index) => {
+            const container = canvas.getElement().parentNode;
+            if (index === state.activeCanvasIndex) {
+                container.style.outline = '3px solid var(--accent)';
+                container.style.outlineOffset = '8px';
+                container.style.boxShadow = '0 0 50px rgba(39, 174, 96, 0.2)';
+            } else {
+                container.style.outline = 'none';
+                container.style.boxShadow = 'none';
+                container.style.opacity = '0.6';
+            }
+        });
     }
 };
 
