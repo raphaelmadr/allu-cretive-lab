@@ -1,16 +1,29 @@
 // js/state.js
 
 export const state = {
-    canvas: null,
+    canvases: [],
+    activeCanvasIndex: 0,
     activePreset: null,
     
     setCanvas(canvasInstance) {
-        this.canvas = canvasInstance;
-        window.canvas = canvasInstance; // Expor globalmente por precaução
+        this.canvases = [canvasInstance];
+        this.activeCanvasIndex = 0;
+        window.canvas = canvasInstance;
     },
     
     getCanvas() {
-        return this.canvas;
+        return this.canvases[this.activeCanvasIndex];
+    },
+
+    setActiveCanvas(index) {
+        this.activeCanvasIndex = index;
+        window.canvas = this.canvases[index];
+    },
+
+    addCanvas(canvasInstance) {
+        this.canvases.push(canvasInstance);
+        this.activeCanvasIndex = this.canvases.length - 1;
+        window.canvas = canvasInstance;
     },
 
     setActivePreset(preset) {
