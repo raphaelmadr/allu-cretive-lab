@@ -5,29 +5,16 @@ import { updateSidebar } from '../ui/sidebar.js';
 import { history } from '../history.js';
 
 export function renderProductsTools(sidebarContent) {
-    const canvas = state.getCanvas();
     const div = document.createElement('div');
     div.className = 'animate-fade';
     
-    let contentHTML = '';
-    
-    if (window.alluProducts && window.alluProducts.length > 0) {
-        contentHTML = `
-            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:20px; border:1px solid var(--glass-border);">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Status do Banco</span>
-                    <span style="font-size:0.7rem; color:var(--accent); background:rgba(39, 174, 96, 0.2); padding:2px 8px; border-radius:10px;"><i class="fa-solid fa-check-circle"></i> Atualizado</span>
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4;">
-                    Última checagem: Hoje às ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}<br>
-                    Produtos em estoque: <b>${window.alluProducts.length} itens</b>
-                </div>
-            </div>
-            <p class="subtitle">Produtos Disponíveis</p>
-            <div id="products-list" class="preset-grid">`;
-            
-        window.alluProducts.forEach(p => {
-            contentHTML += `
+    const renderList = (products) => {
+        if (!products || products.length === 0) {
+            return `<div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:0.8rem;">Nenhum produto encontrado.</div>`;
+        }
+        let listHTML = '<div id="products-list" class="preset-grid">';
+        products.forEach(p => {
+            listHTML += `
                 <div class="preset-card product-draggable" data-product='${JSON.stringify(p).replace(/'/g, "&#39;")}' style="padding:12px; display:flex; flex-direction:column; gap:8px; cursor:pointer;">
                     <div style="height:100px; width:100%; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
                         <img src="${p.local_img}" style="max-height:85%; max-width:85%; object-fit:contain;">
@@ -39,10 +26,37 @@ export function renderProductsTools(sidebarContent) {
                 </div>
             `;
         });
+        listHTML += '</div>';
+        return listHTML;
+    };
 
-        contentHTML += `</div>`;
+    let headerHTML = '';
+    let searchHTML = '';
+    
+    if (window.alluProducts && window.alluProducts.length > 0) {
+        headerHTML = `
+            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:20px; border:1px solid var(--glass-border);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
+                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Status do Banco</span>
+                    <span style="font-size:0.7rem; color:var(--accent); background:rgba(39, 174, 96, 0.2); padding:2px 8px; border-radius:10px;"><i class="fa-solid fa-check-circle"></i> Atualizado</span>
+                </div>
+                <div style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4;">
+                    Última checagem: Hoje às ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}<br>
+                    Produtos em estoque: <b>${window.alluProducts.length} itens</b>
+                </div>
+            </div>`;
+            
+        searchHTML = `
+            <div style="position:relative; margin-bottom:20px;">
+                <input type="text" id="product-search" placeholder="Buscar produto..." style="width:100%; padding:12px 12px 12px 40px; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:10px; color:white; font-size:0.85rem; outline:none; transition:all 0.2s;">
+                <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-secondary); font-size:0.9rem;"></i>
+            </div>
+            <p class="subtitle">Produtos Disponíveis</p>
+            <div id="products-container">
+                ${renderList(window.alluProducts)}
+            </div>`;
     } else {
-        contentHTML = `
+        headerHTML = `
             <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:20px; border:1px solid var(--glass-border);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
                     <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Status do Banco</span>
@@ -52,11 +66,10 @@ export function renderProductsTools(sidebarContent) {
                     Nenhum produto carregado na sessão.<br>
                     Clique em "Atualizar Catálogo" no menu superior.
                 </div>
-            </div>
-        `;
+            </div>`;
     }
 
-    div.innerHTML = contentHTML + `
+    const footerHTML = `
         <button class="btn-primary" id="btn-sync-catalog" style="width:100%; margin-top:20px; padding:12px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
             <i class="fa-solid fa-arrows-rotate"></i> Atualizar Produtos
         </button>
@@ -72,15 +85,34 @@ export function renderProductsTools(sidebarContent) {
             </div>
         </div>
     `;
+
+    div.innerHTML = headerHTML + searchHTML + footerHTML;
     sidebarContent.appendChild(div);
 
-    if (window.alluProducts && window.alluProducts.length > 0) {
-        div.querySelectorAll('.product-draggable').forEach(card => {
+    // Eventos de clique iniciais
+    const attachEvents = (container) => {
+        container.querySelectorAll('.product-draggable').forEach(card => {
             card.onclick = () => {
                 const p = JSON.parse(card.dataset.product);
                 addProductToCanvas(p, 'solto');
             };
         });
+    };
+
+    const containerEl = div.querySelector('#products-container');
+    if (containerEl) attachEvents(containerEl);
+
+    // Lógica de Busca
+    const searchInput = div.querySelector('#product-search');
+    if (searchInput && containerEl) {
+        searchInput.oninput = () => {
+            const query = searchInput.value.toLowerCase();
+            const filtered = window.alluProducts.filter(p => p.name.toLowerCase().includes(query));
+            containerEl.innerHTML = renderList(filtered);
+            attachEvents(containerEl);
+        };
+        searchInput.onfocus = () => searchInput.style.borderColor = 'var(--accent)';
+        searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
     }
 
     const btnSync = document.getElementById('btn-sync-catalog');
@@ -88,7 +120,6 @@ export function renderProductsTools(sidebarContent) {
         btnSync.onclick = async () => {
             btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sincronizando...';
             try {
-                // Simula trigger do Python e recarrega sidebar
                 if(window.pywebview) await window.pywebview.api.sync_products();
                 updateSidebar('products');
             } catch(e) {
@@ -124,7 +155,6 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
         
         // Cálculos de Preço
         const numericPrice = parseFloat(p.price.replace('R$', '').replace('.', '').replace(',', '.').trim()) || 499.90;
-        const fakePrice = "R$ " + (numericPrice * 1.2).toLocaleString('pt-BR', {minimumFractionDigits: 2});
         
         if (mode === 'solto') {
             fabricImg.scaleToWidth(300);
