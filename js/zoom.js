@@ -5,13 +5,14 @@ import { drawSafeGuides, updateZoomDisplay } from './canvas.js';
 
 export function setupZoom() {
     const setManualZoom = (delta) => {
-        const canvas = state.getCanvas();
-        if (!canvas) return;
+        if (state.canvases.length === 0) return;
 
-        let currentScale = canvas.getZoom();
+        // Basear o zoom no primeiro canvas para consistência
+        const baseCanvas = state.canvases[0];
+        let currentScale = baseCanvas.getZoom();
         let newScale = currentScale + delta;
-        if (newScale < 0.1) newScale = 0.1; // Limite mínimo 10%
-        if (newScale > 3) newScale = 3;   // Limite máximo 300%
+        if (newScale < 0.1) newScale = 0.1;
+        if (newScale > 3) newScale = 3;
 
         const formatDisplay = document.getElementById('format-display');
         const formatStr = formatDisplay ? formatDisplay.innerText.split(' (')[0] : 'Instagram Feed';
@@ -21,23 +22,24 @@ export function setupZoom() {
         const w = activePreset.w;
         const h = activePreset.h;
 
-        // Atualiza as dimensões físicas do elemento canvas de acordo com o novo zoom
-        canvas.setDimensions({ 
-            width: w * newScale, 
-            height: h * newScale 
-        }, { backstoreOnly: false });
-        
-        // Aplica o zoom visual
-        canvas.setZoom(newScale);
-        
-        // Atualiza o container parente
-        const container = canvas.getElement().parentNode;
-        container.style.width = Math.round(w * newScale) + 'px';
-        container.style.height = Math.round(h * newScale) + 'px';
+        // Aplicar a TODOS os canvases
+        state.canvases.forEach(canvas => {
+            canvas.setDimensions({ 
+                width: w * newScale, 
+                height: h * newScale 
+            }, { backstoreOnly: false });
+            
+            canvas.setZoom(newScale);
+            
+            const container = canvas.getElement().parentNode;
+            container.style.width = Math.round(w * newScale) + 'px';
+            container.style.height = Math.round(h * newScale) + 'px';
 
-        drawSafeGuides(w, h, newScale);
+            drawSafeGuides(canvas, w, h, newScale);
+            canvas.renderAll();
+        });
+
         updateZoomDisplay(newScale);
-        canvas.renderAll();
     };
 
     const btnZoomIn = document.getElementById('btn-zoom-in');
