@@ -115,11 +115,35 @@ export function renderProductsTools(sidebarContent) {
         searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
     }
 
+    if (!window.hasSyncedAPI) {
+        window.hasSyncedAPI = true;
+        syncProductsWithAPI().then(count => {
+            if (count > 0 && containerEl) {
+                containerEl.innerHTML = renderList(window.alluProducts);
+                attachEvents(containerEl);
+            }
+        });
+    }
+
     const btnSync = document.getElementById('btn-sync-catalog');
     if (btnSync) {
         btnSync.onclick = async () => {
-            alert("⚙️ Sincronização em Nuvem\\n\\nOs produtos são sincronizados automaticamente a cada 1 hora no GitHub.\\n\\nPara ver os preços mais recentes agora, basta recarregar a página.");
-            window.location.reload();
+            const originalHTML = btnSync.innerHTML;
+            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Atualizando...';
+            btnSync.style.opacity = '0.7';
+            
+            const count = await syncProductsWithAPI();
+            
+            btnSync.innerHTML = originalHTML;
+            btnSync.style.opacity = '1';
+            
+            if (count > 0 && containerEl) {
+                containerEl.innerHTML = renderList(window.alluProducts);
+                attachEvents(containerEl);
+                alert(`✅ ${count} produtos atualizados com sucesso via API da Allugator!`);
+            } else {
+                alert("✨ Os preços já estão totalmente atualizados com a API.");
+            }
         };
     }
 }
@@ -334,4 +358,38 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
     };
     imgElement.src = p.local_img;
 }
+
+export async function syncProductsWithAPI() {
+    try {
+        const url = 'https://api-gateway.dev.digital.allugator.com/api/public/v1/products?pageIndex=0&pageSize=1000&page=1&limit=10&sortOrder=asc&includeCommercialTags=false&includePhotos=false&soldOutLast=false&excludeSoldOut=false';
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const result = await response.json();
+        
+        if (result && result.data && Array.isArray(result.data)) {
+            let count = 0;
+            if (window.alluProducts && window.alluProducts.length > 0) {
+                window.alluProducts.forEach(prod => {
+                    const match = result.data.find(item => 
+                        item.name.toLowerCase().trim() === prod.name.toLowerCase().trim() ||
+                        item.slug.toLowerCase().trim() === prod.name.toLowerCase().replace(/\s+/g, '-').trim()
+                    );
+                    
+                    if (match && match.skus && match.skus.length > 0) {
+                        const validSku = match.skus.find(s => s.installment_value && parseFloat(s.installment_value) > 0);
+                        if (validSku) {
+                            const numericVal = parseFloat(validSku.installment_value);
+                            prod.price = "R$ " + numericVal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                            count++;
+                        }
+                    }
+                });
+            }
+            console.log(`Sincronizados ${count} produtos com sucesso via API.`);
+            return count;
+        }
+    } catch (err) {
+        console.error('Erro ao sincronizar com API da Allu:', err);
+    }
+    return 0;
 }
