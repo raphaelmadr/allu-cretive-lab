@@ -8,7 +8,7 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 - **Personalização de Preços**: Adicionados inputs de texto na Sidebar (aba de Propriedades) que permitem a alteração dinâmica e em tempo real dos preços dos produtos nos modos Card e Tabela.
 
 ### Adicionado
-- **Sincronização em Tempo Real (API)**: Integração com a API pública da Allugator para sincronizar e atualizar os preços dinamicamente ao abrir o canvas ou clicar no botão "Atualizar" no cabeçalho ou aba de produtos.
+- **Sincronização em Tempo Real (API)**: Os preços e produtos agora são obtidos e sincronizados diretamente da API pública da Allugator toda vez que a aba de Produtos for exibida, garantindo que os dados estejam sempre 100% atualizados.
 
 ## [0.3.0] - 2026-04-30
 ### Adicionado
