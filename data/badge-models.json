@@ -1,0 +1,82 @@
+[
+    {
+        "id": "entrega-rapida-verde",
+        "name": "Entrega Rápida",
+        "category": "logística",
+        "config": {
+            "shape": "circle",
+            "preset": { "id": "entrega", "icon": "truck", "lines": ["Entrega", "Rápida"] },
+            "iconSize": 28,
+            "iconStroke": 2.5,
+            "fontSize": 36,
+            "lineHeight": 115,
+            "letterSpacing": 2,
+            "fillColor": "#27AE60",
+            "borderColor": "#ffffff",
+            "borderWidth": 0,
+            "shadowBlur": 0,
+            "shadowColor": "rgba(0,0,0,0.5)",
+            "textColor": "#ffffff"
+        }
+    },
+    {
+        "id": "oferta-vermelha",
+        "name": "Oferta",
+        "category": "promoção",
+        "config": {
+            "shape": "burst",
+            "preset": { "id": "oferta", "icon": "tag", "lines": ["Oferta"] },
+            "iconSize": 28,
+            "iconStroke": 2.5,
+            "fontSize": 40,
+            "lineHeight": 115,
+            "letterSpacing": 2,
+            "fillColor": "#C01A21",
+            "borderColor": "#ffffff",
+            "borderWidth": 0,
+            "shadowBlur": 0,
+            "shadowColor": "rgba(0,0,0,0.5)",
+            "textColor": "#ffffff"
+        }
+    },
+    {
+        "id": "novidade-azul",
+        "name": "Novidade na Allu",
+        "category": "lançamento",
+        "config": {
+            "shape": "star",
+            "preset": { "id": "novidade", "icon": "sparkles", "lines": ["Novidade"] },
+            "iconSize": 28,
+            "iconStroke": 2.5,
+            "fontSize": 34,
+            "lineHeight": 115,
+            "letterSpacing": 2,
+            "fillColor": "#267AB3",
+            "borderColor": "#ffffff",
+            "borderWidth": 0,
+            "shadowBlur": 0,
+            "shadowColor": "rgba(0,0,0,0.5)",
+            "textColor": "#ffffff"
+        }
+    },
+    {
+        "id": "off-20-escuro",
+        "name": "20% OFF",
+        "category": "promoção",
+        "config": {
+            "shape": "burst",
+            "preset": { "id": "off", "icon": "zap", "lines": ["até", "20%", "OFF"], "editable": true },
+            "iconSize": 28,
+            "iconStroke": 2.5,
+            "fontSize": 36,
+            "lineHeight": 115,
+            "letterSpacing": 2,
+            "fillColor": "#0F190A",
+            "borderColor": "#ffffff",
+            "borderWidth": 0,
+            "shadowBlur": 0,
+            "shadowColor": "rgba(0,0,0,0.5)",
+            "textColor": "#ffffff"
+        }
+    }
+]
