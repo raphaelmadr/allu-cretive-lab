@@ -125,7 +125,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* Remove barras de rolagem */
+    overflow: auto; /* Necessário para zoom-to-cursor (scroll programático) */
     padding: 20px;
 }
 
