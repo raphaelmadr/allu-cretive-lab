@@ -1,6 +1,6 @@
 // js/tools/properties.js
 import { state } from '../state.js';
-import { colors, backgroundColors } from '../config.js';
+import { colors, backgroundColors, textColors } from '../config.js';
 import { history } from '../history.js';
 import { updateSidebar } from '../ui/sidebar.js';
 // TODO: import addProductToCanvas
@@ -256,7 +256,7 @@ export function renderPropertiesTools(sidebarContent) {
 
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Cor do Texto</label>
-                ${generateColorSwatches('text', currentColor)}
+                <div id="prop-text-color-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;"></div>
             </div>
 
             <div style="display:flex; flex-direction:column; gap:8px;">
