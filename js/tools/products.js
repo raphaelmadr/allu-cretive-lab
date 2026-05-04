@@ -7,7 +7,10 @@ import { history } from '../history.js';
 export function renderProductsTools(sidebarContent) {
     const div = document.createElement('div');
     div.className = 'animate-fade';
-    
+    sidebarContent.appendChild(div);
+
+    div.innerHTML = `<div id="api-loading" style="text-align:center; padding:40px; color:var(--text-secondary);"><i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem; color:var(--accent); margin-bottom:12px;"></i><br>Carregando catálogo...</div>`;
+
     const renderList = (products) => {
         if (!products || products.length === 0) {
             return `<div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:0.8rem;">Nenhum produto encontrado.</div>`;
@@ -30,11 +33,17 @@ export function renderProductsTools(sidebarContent) {
         return listHTML;
     };
 
-    let headerHTML = '';
-    let searchHTML = '';
-    
-    if (window.alluProducts && window.alluProducts.length > 0) {
-        headerHTML = `
+    const attachEvents = (container) => {
+        container.querySelectorAll('.product-draggable').forEach(card => {
+            card.onclick = () => {
+                const p = JSON.parse(card.dataset.product);
+                addProductToCanvas(p, 'solto');
+            };
+        });
+    };
+
+    syncProductsWithAPI().then(() => {
+        const headerHTML = `
             <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:20px; border:1px solid var(--glass-border);">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
                     <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Status do Banco</span>
@@ -45,8 +54,8 @@ export function renderProductsTools(sidebarContent) {
                     Produtos em estoque: <b>${window.alluProducts.length} itens</b>
                 </div>
             </div>`;
-            
-        searchHTML = `
+
+        const searchHTML = `
             <div style="position:relative; margin-bottom:20px;">
                 <input type="text" id="product-search" placeholder="Buscar produto..." style="width:100%; padding:12px 12px 12px 40px; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:10px; color:white; font-size:0.85rem; outline:none; transition:all 0.2s;">
                 <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-secondary); font-size:0.9rem;"></i>
@@ -55,97 +64,65 @@ export function renderProductsTools(sidebarContent) {
             <div id="products-container">
                 ${renderList(window.alluProducts)}
             </div>`;
-    } else {
-        headerHTML = `
-            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:20px; border:1px solid var(--glass-border);">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Status do Banco</span>
-                    <span style="font-size:0.7rem; color:#ff4444; background:rgba(255, 68, 68, 0.2); padding:2px 8px; border-radius:10px;"><i class="fa-solid fa-triangle-exclamation"></i> Desatualizado</span>
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4;">
-                    Nenhum produto carregado na sessão.<br>
-                    Clique em "Atualizar Catálogo" no menu superior.
+
+        const footerHTML = `
+            <button class="btn-primary" id="btn-sync-catalog" style="width:100%; margin-top:20px; padding:12px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
+                <i class="fa-solid fa-arrows-rotate"></i> Atualizar Produtos
+            </button>
+            <div style="margin-top:30px; border-top:1px solid var(--glass-border); padding-top:20px;">
+                <p class="subtitle">Selos e Ofertas</p>
+                <div style="display:grid; grid-template-columns: 1fr; gap:10px;">
+                    <button class="btn-tool" onclick="addPriceStamp()" style="width:100%; height:auto; padding:12px; border:1px solid var(--glass-border); justify-content:flex-start; gap:10px;">
+                        <i class="fa-solid fa-tag"></i> Selo de Preço (De/Por)
+                    </button>
+                    <button class="btn-tool" onclick="addAvailabilityStamp()" style="width:100%; height:auto; padding:12px; border:1px solid var(--glass-border); justify-content:flex-start; gap:10px;">
+                        <i class="fa-solid fa-circle-check"></i> Selo Disponibilidade
+                    </button>
                 </div>
             </div>`;
-    }
 
-    const footerHTML = `
-        <button class="btn-primary" id="btn-sync-catalog" style="width:100%; margin-top:20px; padding:12px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
-            <i class="fa-solid fa-arrows-rotate"></i> Atualizar Produtos
-        </button>
-        <div style="margin-top:30px; border-top:1px solid var(--glass-border); padding-top:20px;">
-            <p class="subtitle">Selos e Ofertas</p>
-            <div style="display:grid; grid-template-columns: 1fr; gap:10px;">
-                <button class="btn-tool" onclick="addPriceStamp()" style="width:100%; height:auto; padding:12px; border:1px solid var(--glass-border); justify-content:flex-start; gap:10px;">
-                    <i class="fa-solid fa-tag"></i> Selo de Preço (De/Por)
-                </button>
-                <button class="btn-tool" onclick="addAvailabilityStamp()" style="width:100%; height:auto; padding:12px; border:1px solid var(--glass-border); justify-content:flex-start; gap:10px;">
-                    <i class="fa-solid fa-circle-check"></i> Selo Disponibilidade
-                </button>
-            </div>
-        </div>
-    `;
+        div.innerHTML = headerHTML + searchHTML + footerHTML;
 
-    div.innerHTML = headerHTML + searchHTML + footerHTML;
-    sidebarContent.appendChild(div);
+        const containerEl = div.querySelector('#products-container');
+        if (containerEl) attachEvents(containerEl);
 
-    // Eventos de clique iniciais
-    const attachEvents = (container) => {
-        container.querySelectorAll('.product-draggable').forEach(card => {
-            card.onclick = () => {
-                const p = JSON.parse(card.dataset.product);
-                addProductToCanvas(p, 'solto');
+        const searchInput = div.querySelector('#product-search');
+        if (searchInput && containerEl) {
+            searchInput.oninput = () => {
+                const query = searchInput.value.toLowerCase();
+                const filtered = window.alluProducts.filter(p => p.name.toLowerCase().includes(query));
+                containerEl.innerHTML = renderList(filtered);
+                attachEvents(containerEl);
             };
-        });
-    };
+            searchInput.onfocus = () => searchInput.style.borderColor = 'var(--accent)';
+            searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
+        }
 
-    const containerEl = div.querySelector('#products-container');
-    if (containerEl) attachEvents(containerEl);
+        const btnSync = div.querySelector('#btn-sync-catalog');
+        if (btnSync) {
+            btnSync.onclick = async () => {
+                const originalHTML = btnSync.innerHTML;
+                btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Atualizando...';
+                btnSync.style.opacity = '0.7';
 
-    // Lógica de Busca
-    const searchInput = div.querySelector('#product-search');
-    if (searchInput && containerEl) {
-        searchInput.oninput = () => {
-            const query = searchInput.value.toLowerCase();
-            const filtered = window.alluProducts.filter(p => p.name.toLowerCase().includes(query));
-            containerEl.innerHTML = renderList(filtered);
-            attachEvents(containerEl);
-        };
-        searchInput.onfocus = () => searchInput.style.borderColor = 'var(--accent)';
-        searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
-    }
+                const count = await syncProductsWithAPI();
 
-    if (!window.hasSyncedAPI) {
-        window.hasSyncedAPI = true;
-        syncProductsWithAPI().then(count => {
-            if (count > 0 && containerEl) {
-                containerEl.innerHTML = renderList(window.alluProducts);
-                attachEvents(containerEl);
-            }
-        });
-    }
+                btnSync.innerHTML = originalHTML;
+                btnSync.style.opacity = '1';
 
-    const btnSync = document.getElementById('btn-sync-catalog');
-    if (btnSync) {
-        btnSync.onclick = async () => {
-            const originalHTML = btnSync.innerHTML;
-            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Atualizando...';
-            btnSync.style.opacity = '0.7';
-            
-            const count = await syncProductsWithAPI();
-            
-            btnSync.innerHTML = originalHTML;
-            btnSync.style.opacity = '1';
-            
-            if (count > 0 && containerEl) {
-                containerEl.innerHTML = renderList(window.alluProducts);
-                attachEvents(containerEl);
-                alert(`✅ ${count} produtos atualizados com sucesso via API da Allugator!`);
-            } else {
-                alert("✨ Os preços já estão totalmente atualizados com a API.");
-            }
-        };
-    }
+                if (count > 0 && containerEl) {
+                    containerEl.innerHTML = renderList(window.alluProducts);
+                    attachEvents(containerEl);
+                    alert(`✅ ${count} produtos atualizados com sucesso via API da Allugator!`);
+                } else {
+                    alert("✨ Os preços já estão totalmente atualizados com a API.");
+                }
+            };
+        }
+    }).catch(err => {
+        console.error('Erro ao carregar produtos:', err);
+        div.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:0.8rem;">Erro ao conectar com a API.</div>';
+    });
 }
 
 export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
