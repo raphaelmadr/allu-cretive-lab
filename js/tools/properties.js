@@ -259,6 +259,7 @@ export function renderPropertiesTools(sidebarContent) {
                 <div id="prop-text-color-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;"></div>
             </div>
 
+            ${(active.type !== 'i-text' && active.type !== 'text') ? `
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Cor do Fundo</label>
                 ${generateColorSwatches('bg', currentBg)}
@@ -267,7 +268,7 @@ export function renderPropertiesTools(sidebarContent) {
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Cor da Borda</label>
                 ${generateColorSwatches('border', currentBorder)}
-            </div>
+            </div>` : ''}
 
         </div>
 
