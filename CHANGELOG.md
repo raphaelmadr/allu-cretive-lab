@@ -7,6 +7,9 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 - **Fidelidade de Preços**: Correção da divergência de preços das assinaturas de catálogo em relação ao site oficial da Allugator.
 - **Personalização de Preços**: Adicionados inputs de texto na Sidebar (aba de Propriedades) que permitem a alteração dinâmica e em tempo real dos preços dos produtos nos modos Card e Tabela.
 
+### Adicionado
+- **Sincronização em Tempo Real (API)**: Integração com a API pública da Allugator para sincronizar e atualizar os preços dinamicamente ao abrir o canvas ou clicar no botão "Atualizar" no cabeçalho ou aba de produtos.
+
 ## [0.3.0] - 2026-04-30
 ### Adicionado
 - **Automação de Sincronização (GitHub Actions)**: O catálogo de produtos agora é atualizado automaticamente a cada 1 hora via GitHub Actions, garantindo preços sempre atualizados sem intervenção manual.
