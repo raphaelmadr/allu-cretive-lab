@@ -2,10 +2,20 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [0.4.0] - 2026-05-04
+### Adicionado
+- **Construtor de Selos (Badges)**: Novo módulo completo para criação de selos personalizados (Oferta, % OFF, Entrega Rápida) com formas geométricas dinâmicas (Estrela, Explosão, Círculo).
+- **Controles Avançados de Selos**: Ajustes em tempo real de espessura de ícone, altura de linha, espaçamento de fonte, sombras e bordas.
+- **Sistema de Modelos (Templates)**: Nova aba de Modelos que permite salvar, carregar, atualizar, exportar e importar o estado completo do canvas (artes inteiras) para colaboração.
+- **Preview em Tempo Real**: Mini-canvas integrado na sidebar de selos que reflete todas as alterações de design instantaneamente.
+
+### Melhorado
+- **Curadoria de Cores**: Restrição estrita das paletas de cores de fundo e texto para alinhar com o Key Visual (KV) da marca Allu.
+- **UX de Propriedades**: Ocultação inteligente de propriedades irrelevantes (como borda/fundo de texto) para manter a interface limpa.
+- **Navegação do Canvas**: Implementação de zoom-to-cursor (comportamento estilo Figma) para precisão milimétrica na edição.
+- **Estrutura de Persistência**: Criação da infraestrutura de pastas para templates organizados por categoria (Instagram, Assinaturas, etc).
+
 ## [0.3.1] - 2026-05-04
-### Corrigido
-- **Fidelidade de Preços**: Correção da divergência de preços das assinaturas de catálogo em relação ao site oficial da Allugator.
-- **Personalização de Preços**: Adicionados inputs de texto na Sidebar (aba de Propriedades) que permitem a alteração dinâmica e em tempo real dos preços dos produtos nos modos Card e Tabela.
 
 ### Adicionado
 - **Sincronização em Tempo Real (API)**: Os preços e produtos agora são obtidos e sincronizados diretamente da API pública da Allugator toda vez que a aba de Produtos for exibida, garantindo que os dados estejam sempre 100% atualizados.
