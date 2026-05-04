@@ -282,6 +282,47 @@ export function renderPropertiesTools(sidebarContent) {
     
     div.innerHTML = propertiesHTML;
 
+    // ── Cartões de Cor do Texto (paleta filtrada) ───────────────────────────
+    const textColorGrid = div.querySelector('#prop-text-color-grid');
+    if (textColorGrid) {
+        const currentTextHex = (currentColor || '#000000').toUpperCase();
+        const updateTextCards = (selectedHex) => {
+            textColorGrid.querySelectorAll('.prop-text-card').forEach(card => {
+                const active = card.dataset.hex.toUpperCase() === selectedHex.toUpperCase();
+                card.style.outline = active ? '2px solid var(--accent)' : '1px solid var(--glass-border)';
+                card.style.transform = active ? 'scale(1.08)' : 'scale(1)';
+                card.querySelector('.check-icon').style.display = active ? 'flex' : 'none';
+            });
+        };
+        textColors.forEach(({ hex, label }) => {
+            const card = document.createElement('div');
+            card.className = 'prop-text-card';
+            card.dataset.hex = hex;
+            const isActive = currentTextHex === hex.toUpperCase();
+            const isLight = (parseInt(hex.replace('#', ''), 16) > 0xffffff / 2);
+            card.style.cssText = `
+                height:52px; border-radius:10px; background-color:${hex};
+                cursor:pointer; display:flex; align-items:center; justify-content:center;
+                transition:all 0.15s ease; position:relative;
+                outline:${isActive ? '2px solid var(--accent)' : '1px solid var(--glass-border)'};
+                transform:${isActive ? 'scale(1.08)' : 'scale(1)'};
+            `;
+            card.innerHTML = `
+                <span class="check-icon" style="display:${isActive ? 'flex' : 'none'}; position:absolute; inset:0; align-items:center; justify-content:center;">
+                    <i class="fa-solid fa-check" style="font-size:0.75rem; color:${isLight ? '#161617' : '#ffffff'};"></i>
+                </span>
+            `;
+            card.title = label;
+            card.onmouseenter = () => { if (!card.style.transform.includes('1.08')) card.style.outline = '1px solid rgba(255,255,255,0.4)'; };
+            card.onmouseleave = () => { if (!card.style.transform.includes('1.08')) card.style.outline = '1px solid var(--glass-border)'; };
+            card.onclick = () => {
+                applyColor('text', hex);
+                updateTextCards(hex);
+            };
+            textColorGrid.appendChild(card);
+        });
+    }
+
     div.querySelectorAll('.prop-mode-btn').forEach(btn => {
         btn.onclick = () => {
             const newMode = btn.dataset.mode;
