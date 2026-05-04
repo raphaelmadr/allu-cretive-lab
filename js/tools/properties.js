@@ -103,11 +103,57 @@ export function renderPropertiesTools(sidebarContent) {
     if (active.productData) {
         const p = active.productData;
         const currentMode = active.currentMode;
+
+        let p12 = '', p24 = '', p36 = '';
+        if (active.getObjects) {
+            const obj12 = active.getObjects().find(o => o.priceMonths === 12);
+            const obj24 = active.getObjects().find(o => o.priceMonths === 24);
+            const obj36 = active.getObjects().find(o => o.priceMonths === 36 || o.priceCard === true);
+            if (obj12) p12 = obj12.text.replace('R$ ', '').trim();
+            if (obj24) p24 = obj24.text.replace('R$ ', '').trim();
+            if (obj36) p36 = obj36.text.replace('R$ ', '').trim();
+        }
+
+        if (!p36 && p.price) p36 = p.price.replace('R$', '').trim();
+
+        let priceInputsHTML = '';
+        if (currentMode === 'table-left' || currentMode === 'table-top') {
+            priceInputsHTML = `
+                <p class="subtitle" style="margin-bottom:12px;">Editar Preços do Catálogo</p>
+                <div style="display:flex; flex-direction:column; gap:12px; background:rgba(255,255,255,0.02); padding:15px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:24px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">12 Meses (R$)</label>
+                        <input type="text" id="prop-p12" value="${p12}" style="width:100px; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:right;">
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">24 Meses (R$)</label>
+                        <input type="text" id="prop-p24" value="${p24}" style="width:100px; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:right;">
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">36 Meses (R$)</label>
+                        <input type="text" id="prop-p36" value="${p36}" style="width:100px; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:right;">
+                    </div>
+                </div>
+            `;
+        } else if (currentMode === 'card') {
+            priceInputsHTML = `
+                <p class="subtitle" style="margin-bottom:12px;">Editar Preço do Card</p>
+                <div style="display:flex; flex-direction:column; gap:12px; background:rgba(255,255,255,0.02); padding:15px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:24px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Preço (R$)</label>
+                        <input type="text" id="prop-p36" value="${p36}" style="width:100px; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:right;">
+                    </div>
+                </div>
+            `;
+        }
+
         propertiesHTML += `
             <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:16px; margin-bottom:24px; border:1px solid var(--glass-border); display:flex; flex-direction:column; align-items:center; gap:12px;">
                 <img src="${p.local_img}" style="height:80px; object-fit:contain;">
                 <span style="font-size:0.85rem; font-weight:700; text-align:center;">${p.name}</span>
             </div>
+            
+            ${priceInputsHTML}
             
             <p class="subtitle" style="margin-bottom:12px;">Formato de Apresentação</p>
             <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:24px;">
@@ -124,7 +170,7 @@ export function renderPropertiesTools(sidebarContent) {
                     <i class="fa-solid fa-table-cells-large"></i> Tabela (Topo)
                 </button>
             </div>
-        `;
+        `;`;
     } else if (active.type === 'image') {
         propertiesHTML += `
             <p class="subtitle" style="margin-bottom:12px;">Edição de Imagem</p>
@@ -224,6 +270,35 @@ export function renderPropertiesTools(sidebarContent) {
             }
         };
     });
+
+    const p12Input = div.querySelector('#prop-p12');
+    const p24Input = div.querySelector('#prop-p24');
+    const p36Input = div.querySelector('#prop-p36');
+
+    if (p12Input) p12Input.oninput = (e) => {
+        const val = e.target.value.trim();
+        const obj = active.getObjects().find(o => o.priceMonths === 12);
+        if (obj) {
+            obj.set('text', val.startsWith('R$') ? val : `R$ ${val}`);
+            canvas.renderAll();
+        }
+    };
+    if (p24Input) p24Input.oninput = (e) => {
+        const val = e.target.value.trim();
+        const obj = active.getObjects().find(o => o.priceMonths === 24);
+        if (obj) {
+            obj.set('text', val.startsWith('R$') ? val : `R$ ${val}`);
+            canvas.renderAll();
+        }
+    };
+    if (p36Input) p36Input.oninput = (e) => {
+        const val = e.target.value.trim();
+        const obj = active.getObjects().find(o => o.priceMonths === 36 || o.priceCard === true);
+        if (obj) {
+            obj.set('text', val.startsWith('R$') ? val : `R$ ${val}`);
+            canvas.renderAll();
+        }
+    };
 
     const sizeInput = div.querySelector('#prop-text-size');
     const sizeVal = div.querySelector('#prop-text-size-val');
