@@ -168,10 +168,12 @@ export const carousel = {
                 container.style.outline = '3px solid var(--accent)';
                 container.style.outlineOffset = '8px';
                 container.style.boxShadow = '0 0 50px rgba(39, 174, 96, 0.2)';
+                container.style.opacity = '1';
             } else {
-                container.style.outline = 'none';
+                container.style.outline = '1px solid rgba(255,255,255,0.1)';
+                container.style.outlineOffset = '8px';
                 container.style.boxShadow = 'none';
-                container.style.opacity = '0.6';
+                container.style.opacity = '1';
             }
         });
     }
