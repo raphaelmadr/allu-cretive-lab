@@ -32,10 +32,18 @@ export const colors = [
 
 // Paleta exclusiva para a aba de Fundo (Background)
 export const backgroundColors = [
-    { hex: '#27AE60', label: 'Verde Allu'      },
-    { hex: '#0F190A', label: 'Verde Escuro'    },
-    { hex: '#F4F4EF', label: 'Off-White'       },
-    { hex: '#F7F7F9', label: 'Branco Suave'   },
-    { hex: '#565661', label: 'Cinza Médio'     },
-    { hex: '#2E2F39', label: 'Cinza Escuro'   },
+    { hex: '#27AE60', label: 'Verde Allu'    },
+    { hex: '#0F190A', label: 'Verde Escuro'  },
+    { hex: '#F4F4EF', label: 'Off-White'     },
+    { hex: '#F7F7F9', label: 'Branco Suave'  },
+    { hex: '#565661', label: 'Cinza Médio'   },
+    { hex: '#2E2F39', label: 'Cinza Escuro'  },
+];
+
+// Paleta exclusiva para cores de texto
+export const textColors = [
+    { hex: '#2E2F39', label: 'Cinza Escuro'  },
+    { hex: '#F7F7F9', label: 'Branco Suave'  },
+    { hex: '#1E8549', label: 'Verde Allu'    },
+    { hex: '#A8A9B8', label: 'Cinza Claro'   },
 ];
