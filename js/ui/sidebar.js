@@ -9,6 +9,7 @@ import { renderImageTools } from '../tools/images.js';
 import { renderLayersTools } from '../tools/layers.js';
 import { renderPropertiesTools } from '../tools/properties.js';
 import { renderBadgesTools } from '../tools/badges.js';
+import { renderModelsTools } from '../tools/models.js';
 
 export function setupSidebar() {
     const tabs = document.querySelectorAll('.btn-tool[data-tab]');
@@ -71,6 +72,10 @@ export function updateSidebar(tab, sidebarTitle, sidebarContent) {
         case 'badges':
             sidebarTitle.innerText = 'Selos';
             renderBadgesTools(sidebarContent);
+            break;
+        case 'models':
+            sidebarTitle.innerText = 'Modelos';
+            renderModelsTools(sidebarContent);
             break;
     }
 }
