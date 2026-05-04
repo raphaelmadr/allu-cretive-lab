@@ -170,7 +170,7 @@ export function renderPropertiesTools(sidebarContent) {
                     <i class="fa-solid fa-table-cells-large"></i> Tabela (Topo)
                 </button>
             </div>
-        `;`;
+        `;
     } else if (active.type === 'image') {
         propertiesHTML += `
             <p class="subtitle" style="margin-bottom:12px;">Edição de Imagem</p>
