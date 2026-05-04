@@ -1,6 +1,6 @@
 // js/tools/properties.js
 import { state } from '../state.js';
-import { colors } from '../config.js';
+import { colors, backgroundColors } from '../config.js';
 import { history } from '../history.js';
 import { updateSidebar } from '../ui/sidebar.js';
 // TODO: import addProductToCanvas
@@ -49,34 +49,62 @@ export function renderPropertiesTools(sidebarContent) {
             </div>
             
             <p class="subtitle" style="margin-bottom:12px;">Fundo do Documento</p>
-            <div style="display:flex; flex-direction:column; gap:20px; background:rgba(255,255,255,0.02); padding:20px; border-radius:12px; border:1px solid var(--glass-border);">
-                <div style="display:flex; flex-direction:column; gap:8px;">
-                    <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Cor de Fundo</label>
-                    ${generateColorSwatches('doc-bg', docBgHex)}
-                </div>
+            <div id="prop-bg-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px;"></div>
+            <button id="prop-clear-bg" style="width:100%; padding:11px; border-radius:10px; background:transparent; border:1px solid var(--glass-border); color:var(--text-secondary); cursor:pointer; font-size:0.82rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; transition:all 0.2s; font-family:inherit; margin-bottom:20px;">
+                <i class="fa-solid fa-droplet-slash"></i> Branco (padrão)
+            </button>
 
-                <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px;">
-                    <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Imagem de Fundo</label>
-                    <input type="file" id="prop-doc-bg-upload" accept="image/*" style="display:none">
-                    <button class="btn-primary" onclick="document.getElementById('prop-doc-bg-upload').click()" style="width:100%; padding:12px; border-radius:8px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
-                        <i class="fa-solid fa-upload"></i> Fazer Upload
-                    </button>
-                </div>
+            <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px; padding-top:16px; border-top:1px solid var(--glass-border);">
+                <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Imagem de Fundo</label>
+                <input type="file" id="prop-doc-bg-upload" accept="image/*" style="display:none">
+                <button class="btn-primary" onclick="document.getElementById('prop-doc-bg-upload').click()" style="width:100%; padding:12px; border-radius:8px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;">
+                    <i class="fa-solid fa-upload"></i> Fazer Upload
+                </button>
             </div>
         `;
         
         sidebarContent.appendChild(div);
 
-        div.querySelectorAll('.prop-swatch-doc-bg').forEach(swatch => {
-            swatch.onclick = () => {
-                div.querySelectorAll('.prop-swatch-doc-bg').forEach(s => s.style.border = '1px solid rgba(255,255,255,0.1)');
-                swatch.style.border = '2px solid white';
-                const c = swatch.dataset.color;
+        // Cartões de cor de fundo (apenas as 6 cores aprovadas)
+        const bgGrid = div.querySelector('#prop-bg-grid');
+        const currentBg = (canvas.backgroundColor || '#ffffff').toUpperCase();
+
+        const updateCardStates = (selectedHex) => {
+            bgGrid.querySelectorAll('.prop-bg-card').forEach(card => {
+                const isActive = card.dataset.hex.toUpperCase() === selectedHex.toUpperCase();
+                card.style.outline = isActive ? '2px solid var(--accent)' : '1px solid var(--glass-border)';
+                card.style.transform = isActive ? 'scale(1.03)' : 'scale(1)';
+            });
+        };
+
+        backgroundColors.forEach(({ hex, label }) => {
+            const card = document.createElement('div');
+            card.className = 'prop-bg-card';
+            card.dataset.hex = hex;
+            const isActive = currentBg === hex.toUpperCase();
+            const isLight = (parseInt(hex.replace('#',''), 16) > 0xffffff / 2);
+            const textColor = isLight ? '#161617' : '#ffffff';
+            card.style.cssText = `height:64px; border-radius:12px; background-color:${hex}; cursor:pointer; display:flex; align-items:flex-end; padding:7px 9px; transition:all 0.18s ease; outline:${isActive ? '2px solid var(--accent)' : '1px solid var(--glass-border)'}; transform:${isActive ? 'scale(1.03)' : 'scale(1)'};`;
+            card.innerHTML = `<span style="font-size:0.65rem; font-weight:700; color:${textColor}; opacity:0.85; text-shadow:0 1px 3px rgba(0,0,0,0.3);">${label}</span>`;
+            card.onmouseenter = () => { if (bgGrid.querySelector('.prop-bg-card[style*="scale(1.03)"]') !== card) card.style.outline = '1px solid rgba(255,255,255,0.4)'; };
+            card.onmouseleave = () => { if (bgGrid.querySelector('.prop-bg-card[style*="scale(1.03)"]') !== card) card.style.outline = '1px solid var(--glass-border)'; };
+            card.onclick = () => {
                 canvas.setBackgroundImage(null, canvas.renderAll.bind(canvas));
-                canvas.setBackgroundColor(c === 'transparent' ? '#ffffff' : c, canvas.renderAll.bind(canvas));
+                canvas.setBackgroundColor(hex, canvas.renderAll.bind(canvas));
                 history.save();
+                updateCardStates(hex);
             };
+            bgGrid.appendChild(card);
         });
+
+        div.querySelector('#prop-clear-bg').onclick = () => {
+            canvas.setBackgroundImage(null, canvas.renderAll.bind(canvas));
+            canvas.setBackgroundColor('#ffffff', canvas.renderAll.bind(canvas));
+            history.save();
+            updateCardStates('#ffffff');
+        };
+        div.querySelector('#prop-clear-bg').onmouseenter = e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'white'; };
+        div.querySelector('#prop-clear-bg').onmouseleave = e => { e.target.style.borderColor = 'var(--glass-border)'; e.target.style.color = 'var(--text-secondary)'; };
 
         div.querySelector('#prop-doc-bg-upload').onchange = (e) => {
             const file = e.target.files[0];
