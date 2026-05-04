@@ -283,6 +283,7 @@ p.subtitle {
     padding: 40px;
     text-align: center;
     box-shadow: var(--glass-shadow);
+    position: relative;
 }
 
 .onboarding-steps {
