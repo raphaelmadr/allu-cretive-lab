@@ -62,17 +62,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sync button
     const btnSync = document.getElementById('btn-sync');
     if (btnSync) {
-        btnSync.onclick = () => {
+        btnSync.onclick = async () => {
+            const originalHTML = btnSync.innerHTML;
             const icon = btnSync.querySelector('i');
             if(icon) icon.classList.add('fa-spin');
             btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:var(--accent);"></i> Atualizando...';
             
-            // Exibir um alerta informando que agora é automático via GitHub Actions
-            alert("✅ Sincronização Automática Ativa!\\n\\nOs preços e produtos são atualizados automaticamente a cada 1 hora via GitHub Actions.\\n\\nSe você acabou de fazer uma mudança no GitHub, aguarde alguns minutos e recarregue a página para ver as novidades.");
-            
-            setTimeout(() => {
-                window.location.reload();
-            }, 500);
+            try {
+                const module = await import('./tools/products.js');
+                const count = await module.syncProductsWithAPI();
+                
+                btnSync.innerHTML = originalHTML;
+                
+                if (count > 0) {
+                    alert(`✅ ${count} produtos atualizados com sucesso via API da Allugator!`);
+                    // If the active tab is products, update the sidebar to show the new prices
+                    const activeTab = document.querySelector('.btn-tool.active');
+                    if (activeTab && activeTab.dataset.tab === 'products') {
+                        import('./ui/sidebar.js').then(sidebarModule => {
+                            sidebarModule.updateSidebar('products');
+                        });
+                    }
+                } else {
+                    alert("✨ Os preços já estão totalmente atualizados com a API.");
+                }
+            } catch (err) {
+                console.error('Erro ao sincronizar produtos:', err);
+                btnSync.innerHTML = originalHTML;
+                alert("❌ Ocorreu um erro ao conectar com a API.");
+            }
         };
     }
 
