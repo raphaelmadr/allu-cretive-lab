@@ -29,16 +29,17 @@ Visão geral das próximas etapas de desenvolvimento.
 - [x] Implementar sistema de "Desfazer/Refazer" (Undo/Redo).
 - [x] Adicionar mais modelos de posts e apresentações (Carousel Mode).
 - [x] Melhorar gerenciamento de camadas (Visibility & Lock).
-- [x] Implementar ferramenta de corte (Crop) para imagens.
-- [x] Suporte a salvamento de rascunhos localmente (Auto-save).
+- [ ] Implementar ferramenta de corte (Crop) para imagens.
+- [x] Suporte a salvamento de rascunhos localmente (Auto-save / Models).
 - [x] Reestruturação de Onboarding com integração de Templates.
-- [x] Implementação de Sistema de Formas Geométricas.
+- [x] Implementação de Sistema de Formas Geométricas e Selos (Badges).
 
 ## Fase 6: Automação e Ecossistema
 - [x] Implementar automação de preços via GitHub Actions (Sincronização Horária).
 - [x] Criar dashboard de status de sincronização no editor.
 - [ ] Exportação em alta resolução (DPI configurável).
 - [ ] Sistema de "Pastas" para organizar logos e ativos.
+- [x] Sistema de Templates colaborativos (Modelos Salvos).
+- [ ] Persistência em Servidor para Templates (Node.js/API integration).
 - [ ] Suporte a animações básicas para Stories.
 - [ ] Modo de apresentação de slides integrado.
-
