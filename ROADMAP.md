@@ -34,3 +34,11 @@ Visão geral das próximas etapas de desenvolvimento.
 - [x] Reestruturação de Onboarding com integração de Templates.
 - [x] Implementação de Sistema de Formas Geométricas.
 
+## Fase 6: Automação e Ecossistema
+- [x] Implementar automação de preços via GitHub Actions (Sincronização Horária).
+- [x] Criar dashboard de status de sincronização no editor.
+- [ ] Exportação em alta resolução (DPI configurável).
+- [ ] Sistema de "Pastas" para organizar logos e ativos.
+- [ ] Suporte a animações básicas para Stories.
+- [ ] Modo de apresentação de slides integrado.
+
