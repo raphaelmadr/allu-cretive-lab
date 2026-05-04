@@ -60,12 +60,12 @@ const PREVIEW_SIZE = 200;
 
 // ── Build badge (shared) ───────────────────────────────────────────────────────
 async function buildBadgeObjects(opts, size) {
-    const { preset, shapeId, iconSize, iconStroke, fontSize, lineHeight, letterSpacing, fillColor, borderColor, borderWidth, shadowBlur, shadowColor, textColor } = opts;
+    const { preset, shape, iconSize, iconStroke, fontSize, lineHeight, letterSpacing, fillColor, borderColor, borderWidth, shadowBlur, shadowColor, textColor } = opts;
 
     // Shape
-    const shape = makeShape(shapeId, size, fillColor, borderColor, borderWidth);
+    const shapeObj = makeShape(shape, size, fillColor, borderColor, borderWidth);
     if (shadowBlur > 0) {
-        shape.set('shadow', new fabric.Shadow({ color: shadowColor, blur: shadowBlur, offsetX: 0, offsetY: shadowBlur * 0.3 }));
+        shapeObj.set('shadow', new fabric.Shadow({ color: shadowColor, blur: shadowBlur, offsetX: 0, offsetY: shadowBlur * 0.3 }));
     }
 
     // Icon
@@ -94,7 +94,7 @@ async function buildBadgeObjects(opts, size) {
         top: startY + i * fontSize * lh,
     }));
 
-    return [shape, iconObj, ...textObjs];
+    return [shapeObj, iconObj, ...textObjs];
 }
 
 // ── Sidebar UI ─────────────────────────────────────────────────────────────────
