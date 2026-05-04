@@ -195,7 +195,8 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
                 fontFamily: 'Plus Jakarta Sans',
                 fontSize: 16,
                 fill: '#828392',
-                textDecoration: 'line-through'
+                textDecoration: 'line-through',
+                fakePriceCard: true
             });
 
             const priceLabel = new fabric.Text('por apenas', {
@@ -213,7 +214,8 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
                 fontFamily: 'Plus Jakarta Sans',
                 fontSize: 36,
                 fontWeight: '900',
-                fill: '#27AE60'
+                fill: '#27AE60',
+                priceCard: true
             });
 
             const group = new fabric.Group([rect, fabricImg, nameText, fakeText, priceLabel, realPriceText], {
@@ -288,17 +290,17 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
                 const fakePriceStr = fakePriceNum.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                 
                 const mText = new fabric.Text(`${months} Meses`, { left, top: colsTop, fontFamily: 'Plus Jakarta Sans', fontSize: 16, fontWeight: '700', fill: '#ffffff' });
-                const fakeText = new fabric.Text(`De R$ ${fakePriceStr}`, { left, top: colsTop + 35, fontFamily: 'Plus Jakarta Sans', fontSize: 14, fill: '#828392', textDecoration: 'line-through' });
+                const fakeText = new fabric.Text(`De R$ ${fakePriceStr}`, { left, top: colsTop + 35, fontFamily: 'Plus Jakarta Sans', fontSize: 14, fill: '#828392', textDecoration: 'line-through', fakePriceMonths: months });
                 const lblText = new fabric.Text('por apenas', { left, top: colsTop + 55, fontFamily: 'Plus Jakarta Sans', fontSize: 12, fill: '#828392' });
-                const pText = new fabric.Text(`R$ ${priceStr}`, { left, top: colsTop + 75, fontFamily: 'Plus Jakarta Sans', fontSize: 26, fontWeight: '800', fill: '#27AE60' });
+                const pText = new fabric.Text(`R$ ${priceStr}`, { left, top: colsTop + 75, fontFamily: 'Plus Jakarta Sans', fontSize: 26, fontWeight: '800', fill: '#27AE60', priceMonths: months });
                 const totalText = new fabric.Text('por mês', { left, top: colsTop + 110, fontFamily: 'Plus Jakarta Sans', fontSize: 12, fill: '#828392' });
                 
                 return [mText, fakeText, lblText, pText, totalText];
             };
 
-            const price12 = numericPrice * 1.15;
-            const price24 = numericPrice;
-            const price36 = numericPrice * 0.85;
+            const price36 = numericPrice;
+            const price24 = numericPrice * 1.05263;
+            const price12 = numericPrice * 1.10526;
 
             const col1Left = isLeft ? titleLeft : 50;
             const col2Left = isLeft ? (titleLeft + 170) : 230;
@@ -331,4 +333,5 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
         history.save();
     };
     imgElement.src = p.local_img;
+}
 }
