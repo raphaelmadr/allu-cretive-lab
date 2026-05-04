@@ -2,6 +2,23 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [0.3.1] - 2026-05-04
+### Corrigido
+- **Fidelidade de Preços**: Correção da divergência de preços das assinaturas de catálogo em relação ao site oficial da Allugator.
+- **Personalização de Preços**: Adicionados inputs de texto na Sidebar (aba de Propriedades) que permitem a alteração dinâmica e em tempo real dos preços dos produtos nos modos Card e Tabela.
+
+## [0.3.0] - 2026-04-30
+### Adicionado
+- **Automação de Sincronização (GitHub Actions)**: O catálogo de produtos agora é atualizado automaticamente a cada 1 hora via GitHub Actions, garantindo preços sempre atualizados sem intervenção manual.
+- **Indicador de Status do Banco**: Novo componente na sidebar de produtos que mostra a data/hora da última sincronização e o status de conexão com o banco.
+- **Scripts de Manutenção**: Implementação de `sync_products.py` otimizado para scraping massivo e bypass de proteções.
+- **Sistema de Templates para Assinaturas**: Suporte inicial para modelos de assinatura de email dinâmicos.
+
+### Melhorado
+- **Fluxo de Dados**: Transição de sincronização local para pipeline em nuvem.
+- **UX de Produtos**: Busca instantânea e feedback visual de produtos carregados.
+- **Estrutura de Arquivos**: Organização melhorada de assets e scripts de sincronização.
+
 ## [0.2.0] - 2026-04-30
 ### Adicionado
 - Sistema de exportação multiformato: PNG, JPG e PDF integrado.
