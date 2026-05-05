@@ -78,6 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            const activeTab = document.querySelector('.btn-tool.active');
+            if (activeTab && activeTab.dataset.tab === 'text' && obj.type === 'i-text') return;
+
             const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
             if (propBtn) propBtn.click();
         }
@@ -105,6 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 return;
             }
+
+            const activeTab = document.querySelector('.btn-tool.active');
+            if (activeTab && activeTab.dataset.tab === 'text' && obj.type === 'i-text') return;
 
             const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
             if (propBtn) propBtn.click();

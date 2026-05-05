@@ -43,17 +43,18 @@ export function renderTextTools(sidebarContent) {
     
     div.querySelectorAll('.btn-add-text').forEach(btn => {
         btn.onclick = () => {
+            const activeCanvas = state.getCanvas();
+            if (!activeCanvas) return;
+
             const size = parseInt(btn.dataset.size);
             const weight = btn.dataset.weight === 'bold' ? 'bold' : btn.dataset.weight;
-            const formatDisplay = document.getElementById('format-display');
-            const formatStr = formatDisplay ? formatDisplay.innerText.split(' (')[0] : 'Instagram Feed';
-            const activePreset = Object.values(presets).find(preset => preset.name === formatStr);
-            const docW = activePreset ? activePreset.w : 1080;
-            const docH = activePreset ? activePreset.h : 1080;
+            
+            // Posição centralizada baseada na visualização atual
+            const center = activeCanvas.getVpCenter();
 
             const text = new fabric.IText('Novo Texto', {
-                left: docW / 2,
-                top: docH / 2,
+                left: center.x,
+                top: center.y,
                 originX: 'center',
                 originY: 'center',
                 fontFamily: 'Plus Jakarta Sans',
@@ -61,8 +62,10 @@ export function renderTextTools(sidebarContent) {
                 fontSize: size,
                 fontWeight: weight
             });
-            canvas.add(text);
-            canvas.setActiveObject(text);
+
+            activeCanvas.add(text);
+            activeCanvas.setActiveObject(text);
+            activeCanvas.renderAll();
             history.save();
         };
     });
