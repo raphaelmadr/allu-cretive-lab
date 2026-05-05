@@ -4,6 +4,9 @@ export const state = {
     canvases: [],
     activeCanvasIndex: 0,
     activePreset: null,
+    currentUser: null,
+    activeDesignId: null,
+
     
     setCanvas(canvasInstance) {
         this.canvases = [canvasInstance];
