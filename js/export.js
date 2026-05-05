@@ -68,7 +68,8 @@ export function setupExport() {
                     // Exportação normal (página atual)
                     if (format === 'pdf') {
                         const { jsPDF } = window.jspdf;
-                        const dataURL = canvas.toDataURL({ format: 'jpeg', quality: 1.0, multiplier: 2 });
+                        // Usar multiplicador alto para o PDF também
+                        const dataURL = canvas.toDataURL({ format: 'jpeg', quality: 1.0, multiplier: 4 });
                         const pdf = new jsPDF({
                             orientation: canvas.width > canvas.height ? 'landscape' : 'portrait',
                             unit: 'px',
@@ -77,15 +78,16 @@ export function setupExport() {
                         pdf.addImage(dataURL, 'JPEG', 0, 0, canvas.width, canvas.height);
                         pdf.save('Allu_Creative_Lab_Design.pdf');
                     } else {
-                        // Tentar gerar o DataURL
+                        // Tentar gerar o DataURL com QUALIDADE MÁXIMA
                         let dataURL;
                         try {
                             dataURL = canvas.toDataURL({
                                 format: format === 'jpg' ? 'jpeg' : format,
-                                quality: 0.9,
-                                multiplier: 2 
+                                quality: 1.0, // Qualidade máxima
+                                multiplier: 4 // 4x a resolução original (ex: 1080px -> 4320px)
                             });
                         } catch (canvasErr) {
+
                             console.warn("Erro ao gerar DataURL básico, tentando modo de segurança...", canvasErr);
                             // Se falhar (provavelmente por imagem externa sem CORS), 
                             // tentamos alertar o usuário especificamente sobre isso

@@ -125,9 +125,10 @@ export const carousel = {
             try {
                 const dataURL = canvas.toDataURL({
                     format: format === 'jpg' ? 'jpeg' : format,
-                    quality: 0.9,
-                    multiplier: 2
+                    quality: 1.0,
+                    multiplier: 4 // Alta resolução (4x)
                 });
+
                 
                 const link = document.createElement('a');
                 link.download = `Allu_Creative_Lab_Page_${i + 1}.${format}`;
