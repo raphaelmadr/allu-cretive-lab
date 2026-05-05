@@ -56,8 +56,6 @@ const PRESETS = [
     { id: 'off', label: '% OFF', icon: 'zap', lines: ['até', '20%'], shape: 'burst', bg: '#0F190A', editable: true },
 ];
 
-const PREVIEW_SIZE = 200;
-
 // ── Build badge (shared) ───────────────────────────────────────────────────────
 async function buildBadgeObjects(opts, size) {
     const { preset, shape, iconSize, iconStroke, fontSize, lineHeight, letterSpacing, fillColor, borderColor, borderWidth, shadowBlur, shadowColor, textColor } = opts;
@@ -110,122 +108,185 @@ export function renderBadgesTools(sidebarContent) {
         shadowBlur: 0, shadowColor: 'rgba(0,0,0,0.5)', textColor: '#ffffff',
     };
 
-    let previewCanvas = null;
+    function getLines() {
+        return sel.preset.editable ? ['até', `${sel.pct}%`, 'OFF'] : sel.preset.lines;
+    }
+
+    const canvas = state.getCanvas();
+
+    // ── Update Logic ────────────────────────────────────────────────────────
+    async function updateCanvasBadge(forceAdd = false) {
+        if (!canvas) return;
+        const activeObj = canvas.getActiveObject();
+        const isBadge = (obj) => obj && (obj.isBadge || (obj.get && obj.get('isBadge')));
+        const isEditing = isBadge(activeObj);
+
+        if (!isEditing && !forceAdd) return;
+
+        const p = { ...sel.preset, lines: getLines() };
+        const objs = await buildBadgeObjects({ ...sel, preset: p }, 300);
+        
+        if (isEditing) {
+            const { left, top, scaleX, scaleY, angle } = activeObj;
+            const newBadge = new fabric.Group(objs, {
+                left, top, scaleX, scaleY, angle,
+                originX: 'center', originY: 'center',
+            });
+            newBadge.set({ isBadge: true, badgeData: JSON.parse(JSON.stringify(sel)) });
+            canvas.remove(activeObj);
+            canvas.add(newBadge);
+            canvas.setActiveObject(newBadge);
+        } else if (forceAdd) {
+            const newBadge = new fabric.Group(objs, {
+                left: canvas.width / 2, top: canvas.height / 2,
+                originX: 'center', originY: 'center',
+            });
+            newBadge.set({ isBadge: true, badgeData: JSON.parse(JSON.stringify(sel)) });
+            canvas.add(newBadge);
+            canvas.setActiveObject(newBadge);
+            history.save();
+        }
+        canvas.renderAll();
+    }
+
+    function syncSidebarWithBadge(badge) {
+        if (!badge || (!badge.isBadge && !badge.get?.('isBadge')) || (!badge.badgeData && !badge.get?.('badgeData'))) return;
+        const data = badge.badgeData || badge.get?.('badgeData');
+        sel = JSON.parse(JSON.stringify(data));
+        updateUIFromState();
+    }
+
+    div.syncWithBadge = syncSidebarWithBadge;
     let previewDebounce = null;
 
     const colorBtn = (hex, cls) => {
         const isLight = parseInt(hex.replace('#', ''), 16) > 0xaaaaaa;
         return `<div class="${cls}" data-hex="${hex}" style="width:26px;height:26px;border-radius:6px;background:${hex};cursor:pointer;border:1px solid var(--glass-border);transition:all .15s;${isLight ? 'box-shadow:inset 0 0 0 1px rgba(0,0,0,0.08);' : ''}" title="${hex}"></div>`;
     };
-    const bgColorsHTML = backgroundColors.map(c => colorBtn(c.hex, 'bcol-fill')).join('');
+
+    const badgeBgColors = ['#27AE60', '#E3292F', '#161617', '#C01A21', '#267AB3', '#0F190A', '#ffffff', '#A8A9B8'];
+    const bgColorsHTML = badgeBgColors.map(c => colorBtn(c, 'bcol-fill')).join('');
     const textColorsHTML = ['#ffffff', '#F7F7F9', '#2E2F39', '#0F190A', '#1E8549', '#A8A9B8'].map(h => colorBtn(h, 'bcol-text')).join('');
     const borderColorsHTML = ['#ffffff', '#F7F7F9', '#2E2F39', '#0F190A', '#27AE60', '#A8A9B8'].map(h => colorBtn(h, 'bcol-border')).join('');
 
     const slider = (id, label, min, max, val, suffix) => `
-        <div style="margin-bottom:10px;">
-            <p class="subtitle" style="margin-bottom:5px;">${label}</p>
-            <div style="display:flex;align-items:center;gap:8px;">
-                <input id="${id}" type="range" min="${min}" max="${max}" value="${val}" step="${id === 'b-ico-sw' ? '0.5' : '1'}" style="flex:1;">
-                <span id="${id}-val" style="font-size:.72rem;min-width:30px;text-align:right;">${val}${suffix}</span>
+        <div style="margin-bottom:12px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <p style="font-size:.62rem;text-transform:uppercase;opacity:.5;font-weight:800;letter-spacing:0.05em;">${label}</p>
+                <span id="${id}-val" style="font-size:.65rem;font-weight:800;color:var(--accent);">${val}${suffix}</span>
             </div>
+            <input id="${id}" type="range" min="${min}" max="${max}" value="${val}" step="${id === 'b-ico-sw' ? '0.5' : '1'}" style="width:100%;height:4px;cursor:pointer;">
         </div>`;
 
+    function updateUIFromState() {
+        setGroup('.bsh', sel.shape);
+        setGroup('.bpr', sel.preset.id);
+        const pctBox = div.querySelector('#b-pct-box');
+        if (pctBox) pctBox.style.display = sel.preset.editable ? 'block' : 'none';
+        if (div.querySelector('#b-pct')) div.querySelector('#b-pct').value = sel.pct;
+        const updateSlider = (id, val) => {
+            const inp = div.querySelector('#' + id);
+            const span = div.querySelector('#' + id + '-val');
+            if (inp) inp.value = val;
+            if (span) span.textContent = val + (id.includes('size') || id === 'b-lh' ? '%' : (id === 'b-fs' ? 'px' : ''));
+        };
+        updateSlider('b-ico-size', sel.iconSize);
+        updateSlider('b-ico-sw', sel.iconStroke);
+        updateSlider('b-fs', sel.fontSize);
+        updateSlider('b-lh', sel.lineHeight);
+        updateSlider('b-ls', sel.letterSpacing);
+        updateSlider('b-bw', sel.borderWidth);
+        updateSlider('b-sh', sel.shadowBlur);
+        markColor(div.querySelector('#b-fill-grid'), sel.fillColor);
+        markColor(div.querySelector('#b-text-grid'), sel.textColor);
+        markColor(div.querySelector('#b-border-grid'), sel.borderColor);
+    }
+
     div.innerHTML = `
-        <div style="background:repeating-conic-gradient(rgba(255,255,255,0.03) 0% 25%, rgba(255,255,255,0.06) 0% 50%) 50% / 16px 16px;border:1px solid var(--glass-border);border-radius:14px;padding:8px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;">
-            <canvas id="badge-preview-canvas" width="${PREVIEW_SIZE}" height="${PREVIEW_SIZE}" style="border-radius:10px;"></canvas>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;">
+            ${PRESETS.map((p) => `
+                <button class="bpr" data-v="${p.id}" title="${p.label}" style="height:42px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.03);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative;">
+                    <span style="width:24px;height:24px;border-radius:50%;background:${p.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                        <i class="fa-solid ${p.icon === 'truck' ? 'fa-truck' : p.icon === 'tag' ? 'fa-tag' : p.icon === 'sparkles' ? 'fa-wand-magic-sparkles' : 'fa-bolt'}" style="font-size:.65rem;color:white;"></i>
+                    </span>
+                </button>`).join('')}
         </div>
 
-        <p class="subtitle" style="margin-bottom:6px;">Forma</p>
-        <div id="b-shapes" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;">
-            ${SHAPES.map(s => `<button class="bsh" data-v="${s.id}" style="padding:10px 0;border-radius:8px;border:${s.id === sel.shape ? '2px solid var(--accent)' : '1px solid var(--glass-border)'};background:${s.id === sel.shape ? 'rgba(39,174,96,.12)' : 'rgba(255,255,255,.03)'};color:${s.id === sel.shape ? 'var(--accent)' : 'var(--text-secondary)'};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;font-family:inherit;transition:all .15s;"><i class="fa-solid ${s.icon}" style="font-size:1rem;"></i><span style="font-size:.58rem;font-weight:700;">${s.label}</span></button>`).join('')}
+        <div id="b-pct-box" style="display:none;margin-bottom:20px;">
+            <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:8px;font-weight:800;letter-spacing:0.05em;">Texto Customizado</p>
+            <input id="b-pct" type="text" value="20" placeholder="Ex: 20%" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.05);color:white;font-size:1.1rem;font-weight:800;text-align:center;font-family:inherit;outline:none;border:1px solid var(--accent);">
         </div>
 
-        <p class="subtitle" style="margin-bottom:6px;">Tipo de Selo</p>
-        <div id="b-presets" style="display:flex;flex-direction:column;gap:5px;margin-bottom:12px;">
-            ${PRESETS.map((p, i) => `<button class="bpr" data-v="${p.id}" style="padding:9px 12px;border-radius:10px;border:${i === 0 ? '2px solid var(--accent)' : '1px solid var(--glass-border)'};background:${i === 0 ? 'rgba(39,174,96,.1)' : 'rgba(255,255,255,.03)'};color:white;cursor:pointer;text-align:left;display:flex;align-items:center;gap:10px;transition:all .15s;font-family:inherit;"><span style="width:24px;height:24px;border-radius:50%;background:${p.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fa-solid ${p.icon === 'truck' ? 'fa-truck' : p.icon === 'tag' ? 'fa-tag' : p.icon === 'sparkles' ? 'fa-wand-magic-sparkles' : 'fa-bolt'}" style="font-size:.5rem;color:white;"></i></span><span style="font-size:.75rem;font-weight:700;">${p.label}</span></button>`).join('')}
-        </div>
-
-        <div id="b-pct-box" style="display:none;background:rgba(255,255,255,.03);border:1px solid var(--glass-border);border-radius:10px;padding:10px;margin-bottom:12px;">
-            <label style="font-size:.72rem;font-weight:600;color:var(--text-secondary);margin-bottom:4px;display:block;">Desconto (%)</label>
-            <input id="b-pct" type="number" min="1" max="99" value="20" style="width:100%;padding:7px;border-radius:6px;border:1px solid var(--glass-border);background:rgba(255,255,255,.05);color:white;font-size:1rem;font-weight:800;text-align:center;font-family:inherit;outline:none;">
-        </div>
-
-        <div style="border-top:1px solid var(--glass-border);padding-top:10px;">
-            ${slider('b-ico-size', 'Ícone — Tamanho', 10, 50, 28, '%')}
-            ${slider('b-ico-sw', 'Ícone — Espessura', 1, 5, 2.5, '')}
-            ${slider('b-fs', 'Fonte — Tamanho', 14, 72, 36, 'px')}
-            ${slider('b-lh', 'Fonte — Altura da Linha', 60, 180, 115, '%')}
-            ${slider('b-ls', 'Fonte — Espaçamento', -5, 20, 2, '')}
-        </div>
-
-        <div style="border-top:1px solid var(--glass-border);padding-top:10px;margin-bottom:10px;">
-            <p class="subtitle" style="margin-bottom:5px;">Cor da Forma</p>
-            <div id="b-fill-grid" style="display:flex;flex-wrap:wrap;gap:6px;">${bgColorsHTML}</div>
-        </div>
-        <div style="margin-bottom:10px;">
-            <p class="subtitle" style="margin-bottom:5px;">Cor do Texto / Ícone</p>
-            <div id="b-text-grid" style="display:flex;flex-wrap:wrap;gap:6px;">${textColorsHTML}</div>
-        </div>
-        <div style="margin-bottom:10px;">
-            <p class="subtitle" style="margin-bottom:5px;">Borda</p>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
-                <input id="b-bw" type="range" min="0" max="12" value="0" style="flex:1;">
-                <span id="b-bw-val" style="font-size:.72rem;width:24px;text-align:right;">0</span>
+        <div style="background:rgba(255,255,255,0.02);padding:14px;border-radius:16px;border:1px solid var(--glass-border);margin-bottom:20px;box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+            <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:15px;">
+                <div>
+                    <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:10px;font-weight:800;letter-spacing:0.05em;">Formato</p>
+                    <div id="b-shapes" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;">
+                        ${SHAPES.map(s => `<button class="bsh" data-v="${s.id}" title="${s.label}" style="height:32px;border-radius:8px;border:1px solid var(--glass-border);background:rgba(255,255,255,.03);color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;"><i class="fa-solid ${s.icon}" style="font-size:0.9rem;"></i></button>`).join('')}
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:10px;font-weight:800;letter-spacing:0.05em;">Cor Base</p>
+                    <div id="b-fill-grid" style="display:flex;flex-wrap:wrap;gap:6px;">${bgColorsHTML}</div>
+                </div>
             </div>
-            <div id="b-border-grid" style="display:flex;flex-wrap:wrap;gap:6px;">${borderColorsHTML}</div>
-        </div>
-        <div style="margin-bottom:14px;">
-            ${slider('b-sh', 'Sombra', 0, 40, 0, '')}
         </div>
 
-        <p class="subtitle" style="margin-bottom:5px;">Posição ao Inserir</p>
-        <div id="b-align" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:14px;">
-            ${['left|fa-align-left|Esq.','center|fa-align-center|Centro','right|fa-align-right|Dir.'].map(s => { const [id,ic,lb] = s.split('|'); return `<button class="bal" data-v="${id}" style="padding:8px 0;border-radius:8px;border:${id === 'center' ? '2px solid var(--accent)' : '1px solid var(--glass-border)'};background:${id === 'center' ? 'rgba(39,174,96,.12)' : 'rgba(255,255,255,.03)'};color:${id === 'center' ? 'var(--accent)' : 'var(--text-secondary)'};cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-family:inherit;"><i class="fa-solid ${ic}" style="font-size:.85rem;"></i><span style="font-size:.55rem;font-weight:700;">${lb}</span></button>`; }).join('')}
+        <div style="padding:0 4px;margin-bottom:15px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+                ${slider('b-ico-size', 'Tam. Ícone', 10, 50, 28, '%')}
+                ${slider('b-fs', 'Tam. Texto', 14, 72, 36, 'px')}
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px;">
+                ${slider('b-ico-sw', 'Traço', 1, 5, 2.5, '')}
+                ${slider('b-lh', 'Entrelinha', 60, 180, 115, '%')}
+            </div>
         </div>
 
-        <button id="b-add" style="width:100%;padding:14px;border-radius:10px;background:var(--accent);color:white;border:none;cursor:pointer;font-size:.85rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;font-family:inherit;">
-            <i class="fa-solid fa-stamp"></i> Inserir Selo
+        <div style="background:rgba(255,255,255,0.02);padding:14px;border-radius:16px;border:1px solid var(--glass-border);margin-bottom:24px;box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+                <div>
+                    <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:10px;font-weight:800;letter-spacing:0.05em;">Conteúdo</p>
+                    <div id="b-text-grid" style="display:flex;flex-wrap:wrap;gap:6px;">${textColorsHTML}</div>
+                </div>
+                <div>
+                    <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:10px;font-weight:800;letter-spacing:0.05em;">Borda</p>
+                    <div id="b-border-grid" style="display:flex;flex-wrap:wrap;gap:6px;">${borderColorsHTML}</div>
+                </div>
+            </div>
+            <div style="margin-top:15px;display:flex;align-items:center;gap:12px;">
+                <i class="fa-solid fa-border-all" style="font-size:.8rem;opacity:.4;"></i>
+                <input id="b-bw" type="range" min="0" max="12" value="0" style="flex:1;height:4px;cursor:pointer;">
+            </div>
+        </div>
+
+        <button id="b-add" style="width:100%;padding:16px;border-radius:14px;background:var(--accent);color:white;border:none;cursor:pointer;font-size:.9rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:12px;transition:all .3s;font-family:inherit;box-shadow: 0 8px 24px rgba(39,174,96,0.3);">
+            <i class="fa-solid fa-plus-circle" style="font-size:1.2rem;"></i> Inserir Novo Selo
         </button>
     `;
 
     sidebarContent.appendChild(div);
 
-    // ── Preview canvas ─────────────────────────────────────────────────────
-    const previewEl = div.querySelector('#badge-preview-canvas');
-    previewCanvas = new fabric.StaticCanvas(previewEl, { width: PREVIEW_SIZE, height: PREVIEW_SIZE, backgroundColor: 'transparent' });
-
-    function getLines() {
-        return sel.preset.editable ? ['até', `${sel.pct}%`, 'OFF'] : sel.preset.lines;
-    }
-
-    async function refreshPreview() {
-        if (!previewCanvas) return;
-        previewCanvas.clear();
-        const badgeSize = PREVIEW_SIZE * 0.82;
-        const scale = badgeSize / 300;
-        try {
-            const objs = await buildBadgeObjects({
-                ...sel,
-                preset: { ...sel.preset, lines: getLines() },
-                fontSize: sel.fontSize * scale,
-            }, badgeSize);
-            const group = new fabric.Group(objs, {
-                left: PREVIEW_SIZE / 2, top: PREVIEW_SIZE / 2,
-                originX: 'center', originY: 'center',
-                selectable: false, evented: false,
-            });
-            previewCanvas.add(group);
-            previewCanvas.renderAll();
-        } catch (e) { console.warn('Badge preview error:', e); }
-    }
-
-    function queuePreview() {
+    function queueUpdate() {
         clearTimeout(previewDebounce);
-        previewDebounce = setTimeout(refreshPreview, 50);
+        previewDebounce = setTimeout(() => updateCanvasBadge(false), 20);
     }
-    refreshPreview();
 
-    // ── Wiring ─────────────────────────────────────────────────────────────
+    if (canvas && !canvas._badgeEventsAdded) {
+        const globalSync = (e) => {
+            const badge = e.selected ? e.selected[0] : null;
+            if (badge && (badge.isBadge || badge.get?.('isBadge'))) {
+                const activeSidebar = document.querySelector('#sidebar-content > div');
+                if (activeSidebar && activeSidebar.syncWithBadge) {
+                    activeSidebar.syncWithBadge(badge);
+                }
+            }
+        };
+        canvas.on('selection:created', globalSync);
+        canvas.on('selection:updated', globalSync);
+        canvas._badgeEventsAdded = true;
+    }
+
     const setGroup = (cls, val) => {
         div.querySelectorAll(cls).forEach(b => {
             const a = b.dataset.v === val;
@@ -241,27 +302,22 @@ export function renderBadgesTools(sidebarContent) {
         });
     };
 
-    div.querySelectorAll('.bsh').forEach(b => b.onclick = () => { sel.shape = b.dataset.v; setGroup('.bsh', sel.shape); queuePreview(); });
-
+    div.querySelectorAll('.bsh').forEach(b => b.onclick = () => { sel.shape = b.dataset.v; setGroup('.bsh', sel.shape); queueUpdate(); });
     div.querySelectorAll('.bpr').forEach(b => b.onclick = () => {
         sel.preset = PRESETS.find(p => p.id === b.dataset.v);
         sel.fillColor = sel.preset.bg;
         sel.shape = sel.preset.shape;
-        setGroup('.bpr', sel.preset.id);
-        setGroup('.bsh', sel.shape);
-        div.querySelector('#b-pct-box').style.display = sel.preset.editable ? 'block' : 'none';
-        markColor(div.querySelector('#b-fill-grid'), sel.fillColor);
-        queuePreview();
+        updateUIFromState();
+        queueUpdate();
     });
 
     const pctIn = div.querySelector('#b-pct');
-    if (pctIn) pctIn.oninput = () => { sel.pct = pctIn.value; queuePreview(); };
+    if (pctIn) pctIn.oninput = () => { sel.pct = pctIn.value; queueUpdate(); };
 
-    // Sliders (including new iconStroke and lineHeight)
     const wireSlider = (id, key, suffix) => {
         const inp = div.querySelector('#' + id);
         const v = div.querySelector('#' + id + '-val');
-        if (inp) inp.oninput = () => { sel[key] = parseFloat(inp.value); v.textContent = inp.value + suffix; queuePreview(); };
+        if (inp) inp.oninput = () => { sel[key] = parseFloat(inp.value); if(v) v.textContent = inp.value + suffix; queueUpdate(); };
     };
     wireSlider('b-ico-size', 'iconSize', '%');
     wireSlider('b-ico-sw', 'iconStroke', '');
@@ -275,33 +331,18 @@ export function renderBadgesTools(sidebarContent) {
     const textGrid = div.querySelector('#b-text-grid');
     const borderGrid = div.querySelector('#b-border-grid');
 
-    fillGrid.querySelectorAll('[data-hex]').forEach(c => c.onclick = () => { sel.fillColor = c.dataset.hex; markColor(fillGrid, sel.fillColor); queuePreview(); });
-    textGrid.querySelectorAll('[data-hex]').forEach(c => c.onclick = () => { sel.textColor = c.dataset.hex; markColor(textGrid, sel.textColor); queuePreview(); });
-    borderGrid.querySelectorAll('[data-hex]').forEach(c => c.onclick = () => { sel.borderColor = c.dataset.hex; markColor(borderGrid, sel.borderColor); queuePreview(); });
-    markColor(fillGrid, sel.fillColor);
-    markColor(textGrid, sel.textColor);
+    fillGrid.querySelectorAll('[data-hex]').forEach(c => c.onclick = () => { sel.fillColor = c.dataset.hex; markColor(fillGrid, sel.fillColor); queueUpdate(); });
+    textGrid.querySelectorAll('[data-hex]').forEach(c => c.onclick = () => { sel.textColor = c.dataset.hex; markColor(textGrid, sel.textColor); queueUpdate(); });
+    borderGrid.querySelectorAll('[data-hex]').forEach(c => c.onclick = () => { sel.borderColor = c.dataset.hex; markColor(borderGrid, sel.borderColor); queueUpdate(); });
 
-    div.querySelectorAll('.bal').forEach(b => b.onclick = () => { sel.align = b.dataset.v; setGroup('.bal', sel.align); });
+    const isBadge = (obj) => obj && (obj.isBadge || (obj.get && obj.get('isBadge')));
+    const activeObj = canvas.getActiveObject();
+    if (isBadge(activeObj)) {
+        syncSidebarWithBadge(activeObj);
+    } else {
+        updateUIFromState();
+    }
 
     const btnAdd = div.querySelector('#b-add');
-    btnAdd.onmouseenter = () => { btnAdd.style.filter = 'brightness(1.15)'; };
-    btnAdd.onmouseleave = () => { btnAdd.style.filter = ''; };
-    btnAdd.onclick = () => {
-        const canvas = state.getCanvas();
-        if (!canvas) return;
-        const p = { ...sel.preset, lines: getLines() };
-        buildBadgeObjects({ ...sel, preset: p }, 300).then(objs => {
-            const badge = new fabric.Group(objs, {
-                left: canvas.width / 2, top: canvas.height / 2,
-                originX: 'center', originY: 'center',
-            });
-            if (sel.align === 'left') badge.set({ left: 180 });
-            else if (sel.align === 'right') badge.set({ left: canvas.width - 180 });
-            badge.isBadge = true;
-            canvas.add(badge);
-            canvas.setActiveObject(badge);
-            canvas.renderAll();
-            history.save();
-        });
-    };
+    btnAdd.onclick = () => updateCanvasBadge(true);
 }
