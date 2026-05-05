@@ -99,15 +99,16 @@ body {
 
 .toolbar .logo {
     display: flex;
-    justify-content: flex-start;
-    margin-bottom: 32px;
-    padding: 0;
+    justify-content: center;
+    margin-bottom: 24px;
+    padding: 0 10px;
 }
 
 .toolbar .logo img {
-    max-width: 30%;
+    width: 60px; /* Tamanho mais equilibrado para o toolbar de 100px */
     height: auto;
 }
+
 
 .main-content {
     flex: 1;
