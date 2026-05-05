@@ -2,6 +2,8 @@
 import { state } from './state.js';
 import { history } from './history.js';
 import { setupCanvas, resizeCanvas } from './canvas.js';
+import { notifications } from './ui/notifications.js';
+
 
 export const carousel = {
     active: false,
@@ -76,9 +78,11 @@ export const carousel = {
         }
     },
 
-    deletePage(index) {
+    async deletePage(index) {
         if (state.canvases.length <= 1) return;
-        if (!confirm('Deseja excluir esta página?')) return;
+        const ok = await notifications.confirm('Excluir Página?', 'Deseja realmente excluir esta página? Esta ação não pode ser desfeita.', 'fa-trash-can');
+        if (!ok) return;
+
         
         const canvasToDelete = state.canvases[index];
         const container = canvasToDelete.getElement().parentNode;
