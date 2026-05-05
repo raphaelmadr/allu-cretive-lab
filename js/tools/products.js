@@ -139,9 +139,6 @@ export function renderProductsTools(sidebarContent) {
         searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
     }
 
-        searchInput.onfocus = () => searchInput.style.borderColor = 'var(--accent)';
-        searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
-    }
 
     const btnSync = div.querySelector('#btn-sync-catalog');
     if (btnSync) {
