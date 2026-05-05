@@ -21,9 +21,9 @@ export function initStorage() {
     let users = get(KEYS.USERS);
     if (users.length === 0) {
         users = [
-            { id: 'u1', name: 'Raphael Madureira', avatar: 'https://github.com/raphaelmadr.png', isMe: true },
-            { id: 'u2', name: 'Time Allu', avatar: '', isMe: false },
-            { id: 'u3', name: 'Design Lab', avatar: '', isMe: false }
+            { id: 'u1', name: 'Raphael Madureira', avatar: 'https://github.com/raphaelmadr.png' },
+            { id: 'u2', name: 'Time Design Allu', avatar: '' },
+            { id: 'u3', name: 'Visitante', avatar: '' }
         ];
         set(KEYS.USERS, users);
     }
@@ -31,15 +31,25 @@ export function initStorage() {
     let folders = get(KEYS.FOLDERS);
     if (folders.length === 0) {
         folders = [
-            { id: 'f1', userId: 'u1', name: 'Meus Projetos', createdAt: new Date().toISOString() },
-            { id: 'f2', userId: 'u2', name: 'Modelos Oficiais', createdAt: new Date().toISOString() }
+            { id: 'f1', userId: 'u1', name: 'Assinaturas Oficiais', createdAt: new Date().toISOString() },
+            { id: 'f2', userId: 'u2', name: 'Catálogo de Produtos', createdAt: new Date().toISOString() },
+            { id: 'f3', userId: 'u3', name: 'Rascunhos', createdAt: new Date().toISOString() }
         ];
         set(KEYS.FOLDERS, folders);
     }
 }
 
 export function getUsers() { return get(KEYS.USERS); }
-export function getCurrentUser() { return getUsers().find(u => u.isMe) || getUsers()[0]; }
+
+export function getCurrentUser() { 
+    const id = localStorage.getItem('allu_current_user_id');
+    return getUsers().find(u => u.id === id) || null; 
+}
+
+export function setCurrentUser(id) {
+    localStorage.setItem('allu_current_user_id', id);
+}
+
 
 // ── Folders ───────────────────────────────────────────────────────────────────
 export function getFolders(userId = null) {
