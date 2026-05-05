@@ -2,6 +2,21 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [0.5.0] - 2026-05-05
+### Adicionado
+- **Notificações Branded**: Substituição de alertas nativos do navegador por popups modernos e personalizados integrados à identidade visual da Allu.
+- **Workflow Multi-Páginas (Exportação)**: Estabilização do processo de exportação em lote para carrosséis e apresentações.
+- **Resiliência de Imagens**: Sistema de fallback automático para imagens de produtos (404/403), garantindo que a exportação nunca falhe por ativos ausentes.
+
+### Corrigido
+- **Estabilidade no Vercel**: Correção de erros de CORS e protocolos de segurança que impediam o carregamento de ativos externos em ambientes de produção.
+- **Runtime de Exportação**: Resolução de erros de execução durante a geração sequencial de múltiplas páginas.
+- **Alinhamento de Marca**: Ajuste fino das proporções e alinhamento do logo Allu na sidebar para conformidade total com o KV.
+
+### Melhorado
+- **CORS Policy**: Implementação de políticas de acesso cross-origin robustas para ativos de terceiros.
+- **UX de Exportação**: Feedback visual aprimorado durante o processamento de grandes volumes de páginas.
+
 ## [0.4.0] - 2026-05-04
 ### Adicionado
 - **Construtor de Selos (Badges)**: Novo módulo completo para criação de selos personalizados (Oferta, % OFF, Entrega Rápida) com formas geométricas dinâmicas (Estrela, Explosão, Círculo).

@@ -54,6 +54,7 @@ const PRESETS = [
     { id: 'oferta', label: 'Oferta', icon: 'tag', lines: ['Oferta'], shape: 'burst', bg: '#C01A21' },
     { id: 'novidade', label: 'Novidade', icon: 'sparkles', lines: ['Novidade'], shape: 'star', bg: '#267AB3' },
     { id: 'off', label: '% OFF', icon: 'zap', lines: ['até', '20%'], shape: 'burst', bg: '#0F190A', editable: true },
+    { id: 'cta', label: 'CTA', icon: 'none', lines: ['SAIBA', 'MAIS'], shape: 'square', bg: '#27AE60', editable: true },
 ];
 
 // ── Build badge (shared) ───────────────────────────────────────────────────────
@@ -66,25 +67,34 @@ async function buildBadgeObjects(opts, size) {
         shapeObj.set('shadow', new fabric.Shadow({ color: shadowColor, blur: shadowBlur, offsetX: 0, offsetY: shadowBlur * 0.3 }));
     }
 
-    // Icon
-    const svgStr = ICONS[preset.icon]
-        .replace(/currentColor/g, textColor)
-        .replace(/SW/g, String(iconStroke));
-    const icoSize = size * (iconSize / 100);
-    const iconObj = await new Promise(resolve => {
-        fabric.loadSVGFromString(svgStr, (objs, o) => {
-            const g = fabric.util.groupSVGElements(objs, o);
-            const s = icoSize / Math.max(g.width, g.height);
-            g.set({ scaleX: s, scaleY: s, originX: 'center', originY: 'center', left: 0, top: -(size * 0.13) });
-            resolve(g);
+    const objects = [shapeObj];
+
+    // Icon (Optional)
+    let hasIcon = preset.icon && preset.icon !== 'none' && ICONS[preset.icon];
+    if (hasIcon) {
+        const svgStr = ICONS[preset.icon]
+            .replace(/currentColor/g, textColor)
+            .replace(/SW/g, String(iconStroke));
+        const icoSize = size * (iconSize / 100);
+        const iconObj = await new Promise(resolve => {
+            fabric.loadSVGFromString(svgStr, (objs, o) => {
+                const g = fabric.util.groupSVGElements(objs, o);
+                const s = icoSize / Math.max(g.width, g.height);
+                g.set({ scaleX: s, scaleY: s, originX: 'center', originY: 'center', left: 0, top: -(size * 0.13) });
+                resolve(g);
+            });
         });
-    });
+        objects.push(iconObj);
+    }
 
     // Text
     const lines = preset.lines;
     const lh = lineHeight / 100; // 100 = normal
     const totalH = lines.length * fontSize * lh;
-    const startY = size * 0.06;
+    
+    // Position: Center if no icon, otherwise offset
+    const startY = hasIcon ? (size * 0.06) : -(totalH / 2);
+
     const textObjs = lines.map((line, i) => new fabric.Text(line, {
         fontFamily: 'Plus Jakarta Sans', fontSize, fontWeight: '800',
         fill: textColor, charSpacing: letterSpacing * 10,
@@ -92,7 +102,8 @@ async function buildBadgeObjects(opts, size) {
         top: startY + i * fontSize * lh,
     }));
 
-    return [shapeObj, iconObj, ...textObjs];
+    objects.push(...textObjs);
+    return objects;
 }
 
 // ── Sidebar UI ─────────────────────────────────────────────────────────────────
@@ -109,7 +120,14 @@ export function renderBadgesTools(sidebarContent) {
     };
 
     function getLines() {
-        return sel.preset.editable ? ['até', `${sel.pct}%`, 'OFF'] : sel.preset.lines;
+        if (!sel.preset.editable) return sel.preset.lines;
+        if (sel.preset.id === 'off') {
+            const val = sel.pct || '20';
+            return ['até', `${val}%`, 'OFF'];
+        }
+        // Para CTA ou outros textos livres
+        const text = sel.pct || '';
+        return text.split('\n').map(l => l.trim()).filter(l => l !== '');
     }
 
     const canvas = state.getCanvas();
@@ -203,18 +221,18 @@ export function renderBadgesTools(sidebarContent) {
     }
 
     div.innerHTML = `
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px;">
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:20px;">
             ${PRESETS.map((p) => `
                 <button class="bpr" data-v="${p.id}" title="${p.label}" style="height:42px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.03);color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative;">
                     <span style="width:24px;height:24px;border-radius:50%;background:${p.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
-                        <i class="fa-solid ${p.icon === 'truck' ? 'fa-truck' : p.icon === 'tag' ? 'fa-tag' : p.icon === 'sparkles' ? 'fa-wand-magic-sparkles' : 'fa-bolt'}" style="font-size:.65rem;color:white;"></i>
+                        <i class="fa-solid ${p.icon === 'truck' ? 'fa-truck' : p.icon === 'tag' ? 'fa-tag' : p.icon === 'sparkles' ? 'fa-wand-magic-sparkles' : p.icon === 'zap' ? 'fa-bolt' : 'fa-font'}" style="font-size:.65rem;color:white;"></i>
                     </span>
                 </button>`).join('')}
         </div>
 
         <div id="b-pct-box" style="display:none;margin-bottom:20px;">
-            <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:8px;font-weight:800;letter-spacing:0.05em;">Texto Customizado</p>
-            <input id="b-pct" type="text" value="20" placeholder="Ex: 20%" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.05);color:white;font-size:1.1rem;font-weight:800;text-align:center;font-family:inherit;outline:none;border:1px solid var(--accent);">
+            <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:8px;font-weight:800;letter-spacing:0.05em;">Conteúdo do Selo</p>
+            <textarea id="b-pct" placeholder="Digite o texto..." style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.05);color:white;font-size:0.95rem;font-weight:800;text-align:center;font-family:inherit;outline:none;border:1px solid var(--accent);resize:none;height:80px;"></textarea>
         </div>
 
         <div style="background:rgba(255,255,255,0.02);padding:14px;border-radius:16px;border:1px solid var(--glass-border);margin-bottom:20px;box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
@@ -304,9 +322,15 @@ export function renderBadgesTools(sidebarContent) {
 
     div.querySelectorAll('.bsh').forEach(b => b.onclick = () => { sel.shape = b.dataset.v; setGroup('.bsh', sel.shape); queueUpdate(); });
     div.querySelectorAll('.bpr').forEach(b => b.onclick = () => {
-        sel.preset = PRESETS.find(p => p.id === b.dataset.v);
+        const newPreset = PRESETS.find(p => p.id === b.dataset.v);
+        const isNew = sel.preset.id !== newPreset.id;
+        sel.preset = newPreset;
         sel.fillColor = sel.preset.bg;
         sel.shape = sel.preset.shape;
+        if (isNew && sel.preset.editable) {
+            if (sel.preset.id === 'off') sel.pct = '20';
+            else if (sel.preset.id === 'cta') sel.pct = sel.preset.lines.join('\n');
+        }
         updateUIFromState();
         queueUpdate();
     });

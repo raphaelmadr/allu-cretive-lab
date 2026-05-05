@@ -24,6 +24,8 @@ Visão geral das próximas etapas de desenvolvimento.
 - [x] Finalizar sistema de download multiformato (PNG/JPG/PDF).
 - [x] Otimizações de performance e micro-animações.
 - [x] Implementação de sistema de templates básicos.
+- [x] Sistema de Notificações Customizadas (Branded Popups).
+- [x] Resiliência de ativos e fallback de imagens na exportação.
 
 ## Fase 5: Expansão e UX Avançada
 - [x] Implementar sistema de "Desfazer/Refazer" (Undo/Redo).
@@ -37,9 +39,7 @@ Visão geral das próximas etapas de desenvolvimento.
 ## Fase 6: Automação e Ecossistema
 - [x] Implementar automação de preços via GitHub Actions (Sincronização Horária).
 - [x] Criar dashboard de status de sincronização no editor.
-- [ ] Exportação em alta resolução (DPI configurável).
-- [ ] Sistema de "Pastas" para organizar logos e ativos.
 - [x] Sistema de Templates colaborativos (Modelos Salvos).
 - [ ] Persistência em Servidor para Templates (Node.js/API integration).
-- [ ] Suporte a animações básicas para Stories.
+- [ ] Suporte a animações básicas e exportação de GIFs/Vídeos.
 - [ ] Modo de apresentação de slides integrado.
