@@ -15,9 +15,15 @@ export const carousel = {
         }
         
         const initialCanvas = state.getCanvas();
-        if (initialCanvas && state.canvases.length === 0) {
-            state.setCanvas(initialCanvas);
+        if (initialCanvas) {
+            if (state.canvases.length === 0) state.setCanvas(initialCanvas);
+            
+            // Listeners para a primeira página
+            initialCanvas.on('selection:created', () => this.onSelection(initialCanvas));
+            initialCanvas.on('selection:updated', () => this.onSelection(initialCanvas));
+            initialCanvas.on('mouse:down', () => this.onSelection(initialCanvas));
         }
+
         
         this.updateUI();
     },
@@ -43,7 +49,9 @@ export const carousel = {
 
         newCanvas.on('selection:created', () => this.onSelection(newCanvas));
         newCanvas.on('selection:updated', () => this.onSelection(newCanvas));
+        newCanvas.on('mouse:down', () => this.onSelection(newCanvas)); // Clique para focar página
         newCanvas.on('object:modified', () => history.save());
+
         newCanvas.on('object:added', () => history.save());
         newCanvas.on('object:removed', () => history.save());
 
@@ -183,12 +191,17 @@ export const carousel = {
                 container.style.outline = '3px solid var(--accent)';
                 container.style.outlineOffset = '8px';
                 container.style.boxShadow = '0 0 50px rgba(39, 174, 96, 0.2)';
-                container.style.display = 'block';
+                container.style.opacity = '1';
             } else {
-                container.style.outline = 'none';
-                container.style.display = 'none';
+                container.style.outline = '1px solid rgba(255,255,255,0.1)';
+                container.style.outlineOffset = '8px';
+                container.style.boxShadow = 'none';
+                container.style.opacity = '0.5'; // Opacidade reduzida para páginas inativas
             }
+            container.style.display = 'block'; // Garante que todas estão visíveis
+            container.style.marginBottom = '60px'; // Espaçamento entre páginas
         });
+
     },
 
     reset() {
