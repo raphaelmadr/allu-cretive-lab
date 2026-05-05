@@ -10,6 +10,8 @@ import { setupExport } from './export.js';
 import { setupAlignment } from './align.js';
 import { setupZoom } from './zoom.js';
 import { initStorage, getCurrentUser } from './storage.js';
+import { setupAuth } from './ui/auth.js';
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize Storage & User
     initStorage();
-    state.currentUser = getCurrentUser();
+    setupAuth();
+
 
 
     // 2. Setup Modules
