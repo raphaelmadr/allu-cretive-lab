@@ -122,6 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (propBtn) propBtn.click();
     });
 
+    // Deselect all when clicking on the workspace (grey area)
+    const wrapper = document.getElementById('canvas-wrapper');
+    if (wrapper) {
+        wrapper.addEventListener('mousedown', (e) => {
+            if (e.target === wrapper) {
+                state.canvases.forEach(c => {
+                    c.discardActiveObject();
+                    c.renderAll();
+                });
+            }
+        });
+    }
+
 
     // Sync button
     const btnSync = document.getElementById('btn-sync');
