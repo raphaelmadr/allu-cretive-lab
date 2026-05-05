@@ -10,19 +10,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <!-- Carousel Manager (Vertical Strip on Right) -->
-    <div id="carousel-manager" style="display: none; position: fixed; right: 24px; top: 50%; transform: translateY(-50%); background: #161617; border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 20px; z-index: 9999; box-shadow: 0 10px 40px rgba(0,0,0,0.8); flex-direction: column; align-items: center; gap: 12px; width: 85px;">
-        <div style="padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; width: 100%;">
-            <span style="font-size: 10px; font-weight: 800; color: #27AE60; letter-spacing: 1px; margin-bottom: 2px;">PÁGINAS</span>
-            <span id="carousel-count" style="font-size: 12px; font-weight: 700; color: white;">1 / 1</span>
+    <!-- Carousel Manager (Horizontal Bottom Bar) -->
+    <div id="carousel-manager" style="display: none; position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #161617; border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 24px; z-index: 9999; box-shadow: 0 10px 40px rgba(0,0,0,0.8); align-items: center; gap: 12px; width: auto; max-width: 90vw;">
+        <div style="padding-right: 12px; border-right: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <span style="font-size: 9px; font-weight: 800; color: #27AE60; letter-spacing: 1px; margin-bottom: 2px;">PÁGINAS</span>
+            <span id="carousel-count" style="font-size: 11px; font-weight: 700; color: white;">1 / 1</span>
         </div>
-        <div id="carousel-pages" style="display: flex; flex-direction: column; gap: 10px; align-items: center; max-height: 50vh; overflow-y: auto; padding: 2px; scrollbar-width: none; width: 100%;">
+        
+        <button id="btn-prev-page" style="background: transparent; border: none; color: white; cursor: pointer; opacity: 0.5; padding: 4px; transition: opacity 0.2s;" title="Página Anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <div id="carousel-pages" style="display: flex; flex-direction: row; gap: 10px; align-items: center; max-width: 400px; overflow-x: auto; padding: 4px; scrollbar-width: none; scroll-behavior: smooth;">
             <!-- Thumbnails JS -->
         </div>
-        <button id="btn-add-page" style="width: 50px; height: 50px; border-radius: 15px; background: #27AE60; border: none; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4); margin-top: 5px;" title="Nova Página">
-            <i class="fa-solid fa-plus" style="font-size: 1.4rem;"></i>
+
+        <button id="btn-next-page" style="background: transparent; border: none; color: white; cursor: pointer; opacity: 0.5; padding: 4px; transition: opacity 0.2s;" title="Próxima Página">
+            <i class="fa-solid fa-chevron-right"></i>
         </button>
+
+        <div style="padding-left: 8px; border-left: 1px solid rgba(255,255,255,0.1); flex-shrink: 0;">
+            <button id="btn-add-page" style="width: 42px; height: 42px; border-radius: 14px; background: #27AE60; border: none; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);" title="Nova Página">
+                <i class="fa-solid fa-plus" style="font-size: 1.1rem;"></i>
+            </button>
+        </div>
     </div>
+
 
     <!-- Barra de Ferramentas Vertical -->
     <aside class="toolbar">
