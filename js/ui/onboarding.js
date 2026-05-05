@@ -2,6 +2,8 @@
 import { presets, networkPresets, templatesList } from '../config.js';
 import { resizeCanvas } from '../canvas.js';
 import { history } from '../history.js';
+import { state } from '../state.js';
+
 // TODO: import loadTemplate when it's moved
 
 export function setupOnboarding() {
