@@ -24,12 +24,16 @@ const SHAPES = [
 ];
 
 // ── Core Logic ─────────────────────────────────────────────────────────────────
+// Cache para evitar requests repetidos ao mesmo ícone
+const SVG_CACHE = new Map();
+
+// ── Core Logic ─────────────────────────────────────────────────────────────────
 async function buildIconObject(opts) {
     const { iconName, shape, iconColor, bgColor, iconSize, strokeWidth, padding } = opts;
     const url = `https://unpkg.com/lucide-static@latest/icons/${iconName}.svg`;
 
     return new Promise((resolve) => {
-        fabric.loadSVGFromURL(url, (objects, options) => {
+        const processSVG = (objects, options) => {
             const iconObj = fabric.util.groupSVGElements(objects, options);
             
             // Apply colors and stroke
@@ -45,6 +49,10 @@ async function buildIconObject(opts) {
             iconObj.set({ originX: 'center', originY: 'center', left: 0, top: 0 });
 
             if (shape === 'none') {
+                iconObj.set({
+                    isIcon: true,
+                    iconData: JSON.parse(JSON.stringify(opts))
+                });
                 resolve(iconObj);
                 return;
             }
@@ -78,7 +86,18 @@ async function buildIconObject(opts) {
             });
 
             resolve(group);
-        });
+        };
+
+        if (SVG_CACHE.has(url)) {
+            const { objects, options } = SVG_CACHE.get(url);
+            // Clonar para evitar mutar o original do cache
+            processSVG(objects.map(o => fabric.util.object.clone(o)), { ...options });
+        } else {
+            fabric.loadSVGFromURL(url, (objects, options) => {
+                SVG_CACHE.set(url, { objects, options });
+                processSVG(objects, options);
+            });
+        }
     });
 }
 
@@ -99,10 +118,11 @@ export function renderIconsTools(sidebarContent) {
 
     const canvas = state.getCanvas();
     let previewDebounce = null;
+    let isInternalUpdate = false;
 
     function queueUpdate() {
         clearTimeout(previewDebounce);
-        previewDebounce = setTimeout(() => updateCanvasIcon(false), 20);
+        previewDebounce = setTimeout(() => updateCanvasIcon(false), 10);
     }
 
     async function updateCanvasIcon(forceAdd = false) {
@@ -113,6 +133,7 @@ export function renderIconsTools(sidebarContent) {
 
         if (!isEditing && !forceAdd) return;
 
+        isInternalUpdate = true; // Bloqueia o sync reverso durante o update
         const iconObj = await buildIconObject(sel);
         
         if (isEditing) {
@@ -128,11 +149,14 @@ export function renderIconsTools(sidebarContent) {
             history.save();
         }
         canvas.renderAll();
+        setTimeout(() => { isInternalUpdate = false; }, 100);
     }
 
     function syncSidebarWithIcon(obj) {
-        if (!obj || !obj.isIcon) return;
-        sel = JSON.parse(JSON.stringify(obj.iconData));
+        if (isInternalUpdate || !obj) return;
+        const data = obj.iconData || (obj.get && obj.get('iconData'));
+        if (!data) return;
+        sel = JSON.parse(JSON.stringify(data));
         updateUIFromState();
     }
 
@@ -255,7 +279,7 @@ export function renderIconsTools(sidebarContent) {
     if (canvas && !canvas._iconEventsAdded) {
         const sync = (e) => {
             const obj = e.selected ? e.selected[0] : null;
-            if (obj && obj.isIcon) {
+            if (obj && (obj.isIcon || (obj.get && obj.get('isIcon')))) {
                 const activeSidebar = document.querySelector('#sidebar-content > div');
                 if (activeSidebar && activeSidebar.syncWithIcon) activeSidebar.syncWithIcon(obj);
             }
@@ -265,5 +289,11 @@ export function renderIconsTools(sidebarContent) {
         canvas._iconEventsAdded = true;
     }
 
-    updateUIFromState();
+    // Inicialização se já houver ícone selecionado
+    const activeObj = canvas ? canvas.getActiveObject() : null;
+    if (activeObj && (activeObj.isIcon || (activeObj.get && activeObj.get('isIcon')))) {
+        syncSidebarWithIcon(activeObj);
+    } else {
+        updateUIFromState();
+    }
 }
