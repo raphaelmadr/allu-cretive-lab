@@ -119,9 +119,10 @@ export function renderProductsTools(sidebarContent) {
     if (btnSync) {
         btnSync.onclick = async () => {
             const originalHTML = btnSync.innerHTML;
-            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Atualizando...';
+            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Atualizando Detalhes...';
             btnSync.style.opacity = '0.7';
 
+            // Sincronização rápida de preços no navegador (Foco em detalhes)
             const count = await syncProductsWithAPI();
 
             btnSync.innerHTML = originalHTML;
@@ -130,12 +131,42 @@ export function renderProductsTools(sidebarContent) {
             if (count > 0 && containerEl) {
                 containerEl.innerHTML = renderList(window.alluProducts);
                 attachEvents(containerEl);
-                alert(`✅ ${count} produtos atualizados com sucesso via API da Allugator!`);
+                alert(`✅ Detalhes e preços de ${count} produtos atualizados com sucesso!`);
             } else {
-                alert("✨ Os preços já estão totalmente atualizados com a API.");
+                alert("✨ Os detalhes dos produtos já estão atualizados.");
             }
         };
     }
+
+    // Botão secundário para correção de fotos (Dispara Action no GitHub)
+    const btnFixImages = document.createElement('button');
+    btnFixImages.className = 'btn-tool';
+    btnFixImages.style.width = '100%';
+    btnFixImages.style.marginTop = '10px';
+    btnFixImages.style.fontSize = '0.7rem';
+    btnFixImages.style.border = '1px dashed var(--allu-828392)';
+    btnFixImages.innerHTML = '<i class="fa-solid fa-image"></i> Sincronizar Galeria (Baixar Fotos)';
+    btnFixImages.onclick = async () => {
+        const originalHTML = btnFixImages.innerHTML;
+        btnFixImages.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Solicitando download...';
+        
+        try {
+            const res = await fetch('/api/sync', { method: 'POST' });
+            if (res.ok) {
+                alert("🚀 Solicitação enviada! O servidor começará a baixar as imagens em segundo plano. Elas estarão disponíveis em alguns minutos após o término do processo no GitHub.");
+            } else {
+                alert("❌ Erro ao solicitar sincronização. Verifique as configurações do servidor.");
+            }
+        } catch (e) {
+            console.error(e);
+            alert("❌ Falha na conexão com o servidor de sincronização.");
+        } finally {
+            btnFixImages.innerHTML = originalHTML;
+        }
+    };
+    div.appendChild(btnFixImages);
+
+
 }
 
 export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
