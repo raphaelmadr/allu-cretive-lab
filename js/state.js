@@ -29,6 +29,16 @@ export const state = {
         window.canvas = canvasInstance;
     },
 
+    removeCanvas(index) {
+        if (this.canvases.length <= 1) return;
+        this.canvases.splice(index, 1);
+        if (this.activeCanvasIndex >= this.canvases.length) {
+            this.activeCanvasIndex = this.canvases.length - 1;
+        }
+        window.canvas = this.canvases[this.activeCanvasIndex];
+    },
+
+
     setActivePreset(preset) {
         this.activePreset = preset;
     },
