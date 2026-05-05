@@ -3,6 +3,7 @@ import { state } from '../state.js';
 import { history } from '../history.js';
 import * as storage from '../storage.js';
 import { carousel } from '../carousel.js';
+import { notifications } from '../ui/notifications.js';
 
 let activeFolderId = null;
 
@@ -40,11 +41,12 @@ export function renderModelsTools(sidebarContent) {
         const addFolder = document.createElement('button');
         addFolder.innerHTML = '<i class="fa-solid fa-plus"></i>';
         addFolder.style.cssText = 'padding:6px 12px;border-radius:20px;border:1px dashed var(--glass-border);background:transparent;color:var(--text-secondary);cursor:pointer;';
-        addFolder.onclick = () => {
-            const name = prompt('Nome da nova pasta:');
+        addFolder.onclick = async () => {
+            const name = await notifications.prompt('Nova Pasta', 'Escolha um nome para o seu novo catálogo:', '', 'Ex: Assinaturas 2024');
             if (name) {
                 const f = storage.createFolder(name);
                 activeFolderId = f.id;
+                notifications.toast(`Pasta "${name}" criada!`);
                 rebuild();
             }
         };
@@ -74,9 +76,9 @@ export function renderModelsTools(sidebarContent) {
                     <div style="font-size:.58rem;opacity:.5;margin-top:2px;">Editado em ${new Date(d.updatedAt).toLocaleDateString()}</div>
                 </div>
             `;
-            card.onclick = () => {
+            card.onclick = async () => {
                 if (d.isShared) {
-                    alert('📢 Atenção: Você está abrindo um MODELO COMPARTILHADO. Qualquer alteração que você fizer e salvar afetará o arquivo original para todos os usuários.');
+                    await notifications.alert('Modelo Compartilhado', '📢 Atenção: Você está abrindo um MODELO COMPARTILHADO. Qualquer alteração que você fizer e salvar afetará o arquivo original para todos os usuários.', 'fa-bullhorn');
                 }
                 loadDesign(d);
                 rebuild();
@@ -110,18 +112,18 @@ export function renderModelsTools(sidebarContent) {
             <p style="font-size:.55rem;opacity:.4;margin-top:10px;text-align:center;">${state.canvases.length} página(s) serão salvas.</p>
         `;
 
-        saveCard.querySelector('#btn-save-final').onclick = () => {
+        saveCard.querySelector('#btn-save-final').onclick = async () => {
             const name = saveCard.querySelector('#save-name').value.trim() || 'Sem nome';
             const isShared = saveCard.querySelector('#save-shared').checked;
             
             if (isShared && !activeDesign?.isShared) {
-                if (!confirm('⚠️ Ao compartilhar, este projeto poderá ser editado por qualquer pessoa. O arquivo original será modificado por quem usá-lo. Deseja continuar?')) return;
+                const ok = await notifications.confirm('Compartilhar Arte?', '⚠️ Ao compartilhar, esta arte poderá ser editada por qualquer pessoa. O arquivo original será modificado por quem usá-lo. Deseja continuar?', 'fa-triangle-exclamation');
+                if (!ok) return;
             }
 
             const mainCanvas = state.canvases[0];
             const thumbScale = 160 / Math.max(mainCanvas.width, mainCanvas.height);
             
-            // Salva todas as páginas
             const pagesData = state.canvases.map(c => c.toJSON(['isBadge', 'badgePresetId', 'badgeShape', 'isAlluCard', 'isAlluTable', 'productData']));
 
             const designData = {
@@ -136,7 +138,7 @@ export function renderModelsTools(sidebarContent) {
             };
 
             state.activeDesignId = storage.saveDesign(designData);
-            alert('✅ Projeto salvo com sucesso!');
+            notifications.toast('Projeto salvo com sucesso!');
             rebuild();
         };
 
@@ -147,10 +149,10 @@ export function renderModelsTools(sidebarContent) {
         if (design.pagesData && design.pagesData.length > 0) {
             await carousel.loadPages(design.pagesData, design.width, design.height);
         } else if (design.canvasData) {
-            // Legado: apenas uma página
             await carousel.loadPages([design.canvasData], design.width, design.height);
         }
         state.activeDesignId = design.id;
+        notifications.toast(`Projeto "${design.name}" carregado`);
     }
 
     rebuild();
