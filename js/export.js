@@ -43,6 +43,12 @@ export function setupExport() {
             
             setTimeout(async () => {
                 try {
+                    // Verificação de segurança para o estado
+                    if (!state || !state.canvases) {
+                        console.error("Estado ou lista de canvases não encontrada:", state);
+                        throw new Error("O sistema de exportação não foi inicializado corretamente.");
+                    }
+
                     // Usar state.canvases para verificar múltiplas páginas
                     if (state.canvases.length > 1) {
                         const ok = await notifications.confirm(
@@ -71,11 +77,20 @@ export function setupExport() {
                         pdf.addImage(dataURL, 'JPEG', 0, 0, canvas.width, canvas.height);
                         pdf.save('Allu_Creative_Lab_Design.pdf');
                     } else {
-                        const dataURL = canvas.toDataURL({
-                            format: format === 'jpg' ? 'jpeg' : format,
-                            quality: 0.9,
-                            multiplier: 2 
-                        });
+                        // Tentar gerar o DataURL
+                        let dataURL;
+                        try {
+                            dataURL = canvas.toDataURL({
+                                format: format === 'jpg' ? 'jpeg' : format,
+                                quality: 0.9,
+                                multiplier: 2 
+                            });
+                        } catch (canvasErr) {
+                            console.warn("Erro ao gerar DataURL básico, tentando modo de segurança...", canvasErr);
+                            // Se falhar (provavelmente por imagem externa sem CORS), 
+                            // tentamos alertar o usuário especificamente sobre isso
+                            throw new Error("SecurityError: Tainted canvas. Uma imagem externa impediu a exportação.");
+                        }
                         
                         const link = document.createElement('a');
                         link.download = `Allu_Creative_Lab_Design.${format}`;
@@ -84,13 +99,26 @@ export function setupExport() {
                     }
                 } catch (err) {
                     console.error("Erro ao exportar:", err);
-                    alert("Ops! Não foi possível gerar a imagem. Isso geralmente acontece por restrições de segurança do navegador com imagens externas. Se você acabou de adicionar um produto, tente aguardar um segundo ou recarregar a página.");
+                    
+                    if (err.message.includes("SecurityError") || err.message.includes("Tainted")) {
+                        notifications.alert(
+                            "Erro de Segurança", 
+                            "Não foi possível gerar a imagem devido a restrições de segurança com imagens externas. Tente remover o último produto adicionado ou recarregar a página.",
+                            "fa-shield-halved"
+                        );
+                    } else {
+                        notifications.alert(
+                            "Erro na Exportação", 
+                            "Ops! Ocorreu um erro ao tentar exportar seu design. Por favor, tente novamente.",
+                            "fa-circle-xmark"
+                        );
+                    }
                 } finally {
-
                     btnMain.innerHTML = originalContent;
                     guides.forEach(g => g.style.display = 'block');
                 }
             }, 500);
+
         };
     });
 }

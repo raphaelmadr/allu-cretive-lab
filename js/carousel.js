@@ -109,27 +109,41 @@ export const carousel = {
     },
 
     async exportAll(format = 'png') {
+        if (!state.canvases || state.canvases.length === 0) {
+            console.error("Nenhuma página encontrada para exportar.");
+            return;
+        }
+
         const originalIndex = state.activeCanvasIndex;
         for (let i = 0; i < state.canvases.length; i++) {
             const canvas = state.canvases[i];
+            if (!canvas) continue;
+
             canvas.discardActiveObject();
             canvas.renderAll();
             
-            const dataURL = canvas.toDataURL({
-                format: format === 'jpg' ? 'jpeg' : format,
-                quality: 0.9,
-                multiplier: 2
-            });
+            try {
+                const dataURL = canvas.toDataURL({
+                    format: format === 'jpg' ? 'jpeg' : format,
+                    quality: 0.9,
+                    multiplier: 2
+                });
+                
+                const link = document.createElement('a');
+                link.download = `Allu_Creative_Lab_Page_${i + 1}.${format}`;
+                link.href = dataURL;
+                link.click();
+            } catch (err) {
+                console.error(`Erro ao exportar página ${i + 1}:`, err);
+                // Continuar para as próximas páginas mesmo se uma falhar
+            }
             
-            const link = document.createElement('a');
-            link.download = `Allu_Creative_Lab_Page_${i + 1}.${format}`;
-            link.href = dataURL;
-            link.click();
             await new Promise(r => setTimeout(r, 500));
         }
         state.setActiveCanvas(originalIndex);
         this.updateUI();
     },
+
     
     updateUI() {
         const container = document.getElementById('carousel-pages');

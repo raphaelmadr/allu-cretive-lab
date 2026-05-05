@@ -159,6 +159,7 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
     // Sempre permitir Cross-Origin para imagens remotas (Allugator ou Fallback)
     imgElement.crossOrigin = "anonymous";
 
+    const placeholder = 'https://ui-avatars.com/api/?name=Allu+Product&background=27AE60&color=fff&size=512';
     
     imgElement.onload = function() {
         const fabricImg = new fabric.Image(imgElement);
@@ -327,10 +328,16 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
         if (imgElement.src !== p.img) {
             console.warn(`Local image failed for ${p.name}, falling back to remote.`);
             imgElement.src = p.img;
+        } else if (imgElement.src !== placeholder) {
+            console.warn(`Remote image failed for ${p.name}, using placeholder.`);
+            imgElement.src = placeholder;
         }
     };
 
-    imgElement.src = p.local_img || p.img;
+    // Usar caminho absoluto relativo à raiz se necessário, ou garantir que local_img seja válido
+    const localImgPath = p.local_img.startsWith('./') ? p.local_img.substring(2) : p.local_img;
+    imgElement.src = localImgPath || p.img;
+
 }
 
 export async function syncProductsWithAPI() {
