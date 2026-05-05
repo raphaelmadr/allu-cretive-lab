@@ -10,15 +10,14 @@ export function renderModelsTools(sidebarContent) {
     div.className = 'animate-fade';
     sidebarContent.appendChild(div);
 
-    // Inicializa com a primeira pasta se não houver ativa
     if (!activeFolderId) {
-        activeFolderId = storage.getFolders(state.currentUser.id)[0]?.id || storage.getFolders()[0]?.id;
+        activeFolderId = storage.getFolders()[0]?.id;
     }
 
     function rebuild() {
         div.innerHTML = '';
         
-        // 1. Lista de Pastas (Abas horizontais)
+        // 1. Pastas (Tabs)
         const folderNav = document.createElement('div');
         folderNav.style.cssText = 'display:flex;gap:6px;overflow-x:auto;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--glass-border);scrollbar-width:none;';
         
@@ -27,7 +26,7 @@ export function renderModelsTools(sidebarContent) {
             const isActive = f.id === activeFolderId;
             btn.textContent = f.name;
             btn.style.cssText = `
-                padding:6px 12px;border-radius:20px;font-size:.65rem;font-weight:700;white-space:nowrap;cursor:pointer;
+                padding:6px 14px;border-radius:20px;font-size:.68rem;font-weight:700;white-space:nowrap;cursor:pointer;
                 border:1px solid ${isActive ? 'var(--accent)' : 'var(--glass-border)'};
                 background:${isActive ? 'var(--accent)' : 'rgba(255,255,255,.03)'};
                 color:${isActive ? 'white' : 'var(--text-secondary)'};
@@ -37,14 +36,13 @@ export function renderModelsTools(sidebarContent) {
             folderNav.appendChild(btn);
         });
 
-        // Botão Nova Pasta
         const addFolder = document.createElement('button');
         addFolder.innerHTML = '<i class="fa-solid fa-plus"></i>';
-        addFolder.style.cssText = 'padding:6px 10px;border-radius:20px;border:1px dashed var(--glass-border);background:transparent;color:var(--text-secondary);cursor:pointer;font-size:.65rem;';
+        addFolder.style.cssText = 'padding:6px 12px;border-radius:20px;border:1px dashed var(--glass-border);background:transparent;color:var(--text-secondary);cursor:pointer;';
         addFolder.onclick = () => {
             const name = prompt('Nome da nova pasta:');
             if (name) {
-                const f = storage.createFolder(name, state.currentUser.id);
+                const f = storage.createFolder(name);
                 activeFolderId = f.id;
                 rebuild();
             }
@@ -54,64 +52,77 @@ export function renderModelsTools(sidebarContent) {
 
         // 2. Grid de Designs
         const grid = document.createElement('div');
-        grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;';
+        grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;';
         
         const designs = storage.getDesigns(activeFolderId);
         if (designs.length === 0) {
-            grid.innerHTML = '<div style="grid-column:span 2;text-align:center;padding:20px;opacity:.3;font-size:.7rem;">Pasta vazia</div>';
+            grid.innerHTML = '<div style="grid-column:span 2;text-align:center;padding:30px;opacity:.3;font-size:.7rem;">Nenhuma arte nesta pasta.</div>';
         }
 
         designs.forEach(d => {
             const card = document.createElement('div');
-            card.style.cssText = 'background:rgba(255,255,255,.03);border:1px solid var(--glass-border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s;';
+            card.style.cssText = 'background:rgba(255,255,255,.03);border:1px solid var(--glass-border);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .2s;position:relative;';
             card.innerHTML = `
-                <div style="aspect-ratio:1.2;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;position:relative;">
+                <div style="aspect-ratio:1.2;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;">
                     <img src="${d.thumbnail}" style="max-width:90%;max-height:90%;object-fit:contain;">
-                    ${d.userId !== state.currentUser.id ? '<i class="fa-solid fa-lock" title="Modelo Protegido" style="position:absolute;top:5px;right:5px;font-size:.5rem;opacity:.5;"></i>' : ''}
+                    ${d.isShared ? '<div style="position:absolute;top:8px;right:8px;background:var(--accent);color:white;font-size:.5rem;padding:2px 6px;border-radius:10px;font-weight:800;box-shadow:0 2px 5px rgba(0,0,0,0.2);">COMPARTILHADO</div>' : ''}
                 </div>
-                <div style="padding:8px 10px;">
-                    <div style="font-size:.68rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${d.name}</div>
-                    <div style="font-size:.55rem;opacity:.5;margin-top:2px;">${new Date(d.updatedAt).toLocaleDateString()}</div>
+                <div style="padding:10px;">
+                    <div style="font-size:.7rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${d.name}</div>
+                    <div style="font-size:.58rem;opacity:.5;margin-top:2px;">Editado em ${new Date(d.updatedAt).toLocaleDateString()}</div>
                 </div>
             `;
             card.onclick = () => {
-                if (confirm(`Carregar "${d.name}"?`)) {
-                    loadDesign(d);
-                    rebuild();
+                if (d.isShared) {
+                    alert('📢 Atenção: Você está abrindo um MODELO COMPARTILHADO. Qualquer alteração que você fizer e salvar afetará o arquivo original para todos os usuários.');
                 }
+                loadDesign(d);
+                rebuild();
             };
             grid.appendChild(card);
         });
         div.appendChild(grid);
 
-        // 3. Rodapé: Salvar Arte
+        // 3. Área de Salvamento
         const activeDesign = state.activeDesignId ? storage.getDesignById(state.activeDesignId) : null;
-        const isOwner = activeDesign && activeDesign.userId === state.currentUser.id;
 
-        const saveSection = document.createElement('div');
-        saveSection.style.cssText = 'padding-top:16px;border-top:1px solid var(--glass-border);';
-        saveSection.innerHTML = `
-            <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:8px;font-weight:800;">Salvar na pasta atual</p>
-            <div style="display:flex;gap:6px;">
-                <input id="mdl-name" type="text" placeholder="Nome da arte..." value="${activeDesign ? activeDesign.name : ''}"
-                    style="flex:1;padding:10px;border-radius:10px;border:1px solid var(--glass-border);background:rgba(255,255,255,.05);color:white;font-size:.8rem;outline:none;">
-                <button id="mdl-save" style="padding:10px 14px;border-radius:10px;background:var(--accent);color:white;border:none;cursor:pointer;font-size:.8rem;">
-                    <i class="fa-solid ${isOwner ? 'fa-floppy-disk' : 'fa-plus'}"></i>
-                </button>
+        const saveCard = document.createElement('div');
+        saveCard.style.cssText = 'background:rgba(255,255,255,0.02);padding:16px;border-radius:16px;border:1px solid var(--glass-border);';
+        saveCard.innerHTML = `
+            <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:12px;font-weight:800;letter-spacing:0.05em;">Salvar Arte</p>
+            
+            <input id="save-name" type="text" placeholder="Dê um nome para a arte..." value="${activeDesign ? activeDesign.name : ''}"
+                style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.05);color:white;font-size:.85rem;outline:none;margin-bottom:12px;">
+            
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:8px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.05);">
+                <input type="checkbox" id="save-shared" ${activeDesign?.isShared ? 'checked' : ''} style="width:16px;height:16px;accent-color:var(--accent);cursor:pointer;">
+                <label for="save-shared" style="font-size:.7rem;color:var(--text-secondary);cursor:pointer;user-select:none;">
+                    Compartilhar com a comunidade
+                </label>
             </div>
-            ${!isOwner && state.activeDesignId ? '<p style="font-size:.55rem;color:var(--accent);margin-top:6px;font-weight:600;">Salvando como novo arquivo (cópia)</p>' : ''}
+
+            <button id="btn-save-final" style="width:100%;padding:14px;border-radius:12px;background:var(--accent);color:white;border:none;cursor:pointer;font-size:.85rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;">
+                <i class="fa-solid fa-floppy-disk"></i> 
+                ${activeDesign ? 'Atualizar Arquivo' : 'Salvar Nova Arte'}
+            </button>
         `;
 
-        saveSection.querySelector('#mdl-save').onclick = async () => {
-            const name = saveSection.querySelector('#mdl-name').value.trim() || 'Nova Arte';
+        saveCard.querySelector('#btn-save-final').onclick = () => {
+            const name = saveCard.querySelector('#save-name').value.trim() || 'Sem nome';
+            const isShared = saveCard.querySelector('#save-shared').checked;
+            
+            if (isShared && !activeDesign?.isShared) {
+                if (!confirm('⚠️ Ao compartilhar, esta arte poderá ser editada por qualquer pessoa. O arquivo original será modificado por quem usá-lo. Deseja continuar?')) return;
+            }
+
             const canvas = state.getCanvas();
             const thumbScale = 160 / Math.max(canvas.width, canvas.height);
             
             const designData = {
-                id: isOwner ? state.activeDesignId : ('d-' + Date.now()),
+                id: state.activeDesignId || ('d-' + Date.now()),
                 name,
                 folderId: activeFolderId,
-                userId: state.currentUser.id,
+                isShared,
                 width: canvas.width,
                 height: canvas.height,
                 thumbnail: canvas.toDataURL({ format: 'png', quality: 0.6, multiplier: thumbScale }),
@@ -119,9 +130,11 @@ export function renderModelsTools(sidebarContent) {
             };
 
             state.activeDesignId = storage.saveDesign(designData);
+            alert('✅ Arte salva com sucesso!');
             rebuild();
         };
-        div.appendChild(saveSection);
+
+        div.appendChild(saveCard);
     }
 
     function loadDesign(design) {
