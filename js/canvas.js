@@ -21,13 +21,14 @@ export function resizeCanvas(w, h) {
     const wrapper = document.getElementById('canvas-wrapper');
     if (!wrapper) return;
 
-    // Agora todos os formatos suportam múltiplas páginas, então o layout é sempre flexível
+    // Layout de pilha vertical para múltiplas páginas
     wrapper.style.display = 'flex';
     wrapper.style.flexDirection = 'column';
     wrapper.style.alignItems = 'center';
-    wrapper.style.justifyContent = 'center';
-    wrapper.style.overflow = 'auto';
-    wrapper.style.padding = '40px';
+    wrapper.style.justifyContent = 'flex-start'; // Começa do topo
+    wrapper.style.overflowY = 'auto';
+    wrapper.style.overflowX = 'auto';
+    wrapper.style.padding = '80px 40px 200px 40px'; // Mais padding no fundo para não bater na barra de páginas
 
     const padding = 120; 
     const availableW = wrapper.clientWidth - padding;
@@ -96,7 +97,7 @@ export function drawSafeGuides(canvas, w, h, scale) {
     `;
     container.appendChild(guide);
 
-    // Borda externa decorativa (opcional, para visual premium)
+    // Borda externa decorativa
     const border = document.createElement('div');
     border.className = 'canvas-guide';
     border.style.cssText = `
