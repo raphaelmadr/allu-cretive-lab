@@ -53,10 +53,12 @@ export function setupOnboarding() {
             card.onclick = () => {
                 const formatDisplay = document.getElementById('format-display');
                 if (formatDisplay) formatDisplay.innerText = `${p.name} (${p.w}x${p.h})`;
+                state.setActivePreset(p);
                 resizeCanvas(p.w, p.h);
                 if (modal) modal.style.display = 'none';
                 history.save();
             };
+
             onboardingPresets.appendChild(card);
         });
 
