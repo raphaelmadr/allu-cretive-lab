@@ -75,12 +75,20 @@ export const carousel = {
         
         const canvasToDelete = state.canvases[index];
         const container = canvasToDelete.getElement().parentNode;
-        container.parentNode.removeChild(container);
         
+        // Se a página deletada for a ativa, mude para outra antes
+        if (index === state.activeCanvasIndex) {
+            const nextIndex = index > 0 ? index - 1 : 1;
+            this.switchPage(nextIndex);
+        }
+
+        container.parentNode.removeChild(container);
         state.removeCanvas(index);
+        
         this.updateUI();
         history.save();
     },
+
     
     switchPage(index) {
         state.setActiveCanvas(index);
