@@ -105,13 +105,13 @@ window.alluProducts = [
         "name": "Esteira Ergométrica ZiYou 150-S",
         "price": "R$ 199,00",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fziesteira1.png&w=3840&q=90",
-        "local_img": "./assets/products/esteira-ergométrica-ziyou-150-s.png"
+        "local_img": "./assets/products/esteira-ergometrica-ziyou-150-s.png"
     },
     {
         "name": "Esteira Ergométrica ZiYou 150-S Com Tablet Android HD 10.1”",
         "price": "R$ 249,00",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fziesteira2.png&w=3840&q=90",
-        "local_img": "./assets/products/esteira-ergométrica-ziyou-150-s-com-tablet-android-hd-10.1”.png"
+        "local_img": "./assets/products/esteira-ergometrica-ziyou-150-s-com-tablet-android-hd-101.png"
     },
     {
         "name": "AirPods Max USB-C Noise Cancelling Spatial Audio",
@@ -129,31 +129,31 @@ window.alluProducts = [
         "name": "Apple Watch SE 3 40mm GPS Alumínio WatchOS",
         "price": "R$ 219,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fapple-watch-se-40mm-1.png&w=3840&q=90",
-        "local_img": "./assets/products/apple-watch-se-3-40mm-gps-alumínio-watchos.png"
+        "local_img": "./assets/products/apple-watch-se-3-40mm-gps-aluminio-watchos.png"
     },
     {
         "name": "Apple Watch SE 3 44mm GPS Alumínio WatchOS",
         "price": "R$ 234,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fapple-watch-se-44mm-1.png&w=3840&q=90",
-        "local_img": "./assets/products/apple-watch-se-3-44mm-gps-alumínio-watchos.png"
+        "local_img": "./assets/products/apple-watch-se-3-44mm-gps-aluminio-watchos.png"
     },
     {
         "name": "Apple Watch Series 11 42mm GPS Alumínio WatchOS",
         "price": "R$ 344,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fw42-1.png&w=3840&q=90",
-        "local_img": "./assets/products/apple-watch-series-11-42mm-gps-alumínio-watchos.png"
+        "local_img": "./assets/products/apple-watch-series-11-42mm-gps-aluminio-watchos.png"
     },
     {
         "name": "Apple Watch Series 11 46mm GPS Alumínio WatchOS",
         "price": "R$ 369,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fw46-1.png&w=3840&q=90",
-        "local_img": "./assets/products/apple-watch-series-11-46mm-gps-alumínio-watchos.png"
+        "local_img": "./assets/products/apple-watch-series-11-46mm-gps-aluminio-watchos.png"
     },
     {
         "name": "Bike Spinning ZiYou 150-S Com Tablet Android HD 10.1”",
         "price": "R$ 219,00",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fziyou1502.png&w=3840&q=90",
-        "local_img": "./assets/products/bike-spinning-ziyou-150-s-com-tablet-android-hd-10.1”.png"
+        "local_img": "./assets/products/bike-spinning-ziyou-150-s-com-tablet-android-hd-101.png"
     },
     {
         "name": "Bike Spinning ZiYou 250-S",
@@ -177,13 +177,13 @@ window.alluProducts = [
         "name": "Console Portátil ASUS ROG Ally X",
         "price": "R$ 789,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FConsole-Rog-Xbox-Ally-Asus-Ryzen-Z2-WHT-1.png&w=3840&q=90",
-        "local_img": "./assets/products/console-portátil-asus-rog-ally-x.png"
+        "local_img": "./assets/products/console-portatil-asus-rog-ally-x.png"
     },
     {
         "name": "Console Portátil Valve Steam Deck OLED",
         "price": "R$ 599,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FSteam%20Deck%20OLED%20512GB-1.png&w=3840&q=90",
-        "local_img": "./assets/products/console-portátil-valve-steam-deck-oled.png"
+        "local_img": "./assets/products/console-portatil-valve-steam-deck-oled.png"
     },
     {
         "name": "Console Rog Xbox Ally Asus Ryzen Z2 WHT",
@@ -201,25 +201,25 @@ window.alluProducts = [
         "name": "Câmera DJI Osmo Pocket 3 4K/120fps Gimbal 3 Eixos 1\" CMOS",
         "price": "R$ 479,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FCa%CC%82mera%20DJI%20Osmo%20Pocket%203%20Standard%20BR%20-%20DJI209-1.png&w=3840&q=90",
-        "local_img": "./assets/products/câmera-dji-osmo-pocket-3-4k-120fps-gimbal-3-eixos-1-cmos.png"
+        "local_img": "./assets/products/camera-dji-osmo-pocket-3-4k120fps-gimbal-3-eixos-1-cmos.png"
     },
     {
         "name": "Câmera Mirrorless Sony ZV-E10 II 26MP 4K60p + Lente E PZ 16-50mm",
         "price": "R$ 769,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FCa%CC%82mera%20Sony%20ZV-E10%20II%20Mirrorless%20com%20lente%2016-50mm-1.png&w=3840&q=90",
-        "local_img": "./assets/products/câmera-mirrorless-sony-zv-e10-ii-26mp-4k60p-+-lente-e-pz-16-50mm.png"
+        "local_img": "./assets/products/camera-mirrorless-sony-zv-e10-ii-26mp-4k60p-lente-e-pz-16-50mm.png"
     },
     {
         "name": "Câmera De Ação GoPro Hero 13",
         "price": "R$ 269,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FGoPro%20Hero%2013%20Black%2027MP%205.3K%2C%20WiFi%2C%20Bluetooth%2C%20A%20Prova%20d_%C3%A1gua%2010m-1.png&w=3840&q=90",
-        "local_img": "./assets/products/câmera-de-ação-gopro-hero-13.png"
+        "local_img": "./assets/products/camera-de-acao-gopro-hero-13.png"
     },
     {
         "name": "Fone Bose QuietComfort Ultra 2ª Geração ANC Bluetooth Wireless",
         "price": "R$ 389,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FBose%20QuietComfort%20Ultra%20Headphones-1.png&w=3840&q=90",
-        "local_img": "./assets/products/fone-bose-quietcomfort-ultra-2ª-geração-anc-bluetooth-wireless.png"
+        "local_img": "./assets/products/fone-bose-quietcomfort-ultra-2a-geracao-anc-bluetooth-wireless.png"
     },
     {
         "name": "Fone De Ouvido Sony WH-1000XM6 Noise Cancelling Bluetooth Hi-Res",
@@ -231,7 +231,7 @@ window.alluProducts = [
         "name": "MacBook Air M5 13”",
         "price": "R$ 819,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FMacbook-Air-M5-512GB-1.png&w=3840&q=90",
-        "local_img": "./assets/products/macbook-air-m5-13”.png"
+        "local_img": "./assets/products/macbook-air-m5-13.png"
     },
     {
         "name": "MacBook Neo 13 256GB",
@@ -249,7 +249,7 @@ window.alluProducts = [
         "name": "Mesa Digitalizadora Wacom Intuos Média Bluetooth 4096 Níveis",
         "price": "R$ 179,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FMesa%20Digitalizadora%20Tablet%20Wacom%20Intuos%20Me%CC%81dia-Bluetooth-1.png&w=3840&q=90",
-        "local_img": "./assets/products/mesa-digitalizadora-wacom-intuos-média-bluetooth-4096-níveis.png"
+        "local_img": "./assets/products/mesa-digitalizadora-wacom-intuos-media-bluetooth-4096-niveis.png"
     },
     {
         "name": "Monitor Gamer UltraGear 24\" LG Full HD 144Hz",
@@ -267,7 +267,7 @@ window.alluProducts = [
         "name": "Notebook Acer Aspire Go 15 Touch I7-13620H 16GB 15.6\" FHD W11",
         "price": "R$ 339,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Facer-aspire-go-15-i7-touch-win-1.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-acer-aspire-go-15-touch-i7-13620h-16gb-15.6-fhd-w11.png"
+        "local_img": "./assets/products/notebook-acer-aspire-go-15-touch-i7-13620h-16gb-156-fhd-w11.png"
     },
     {
         "name": "Notebook Acer Aspire Go 15 I5-13420H 16GB 512GB SSD FHD Linux",
@@ -327,19 +327,19 @@ window.alluProducts = [
         "name": "Notebook Lenovo IdeaPad 1i I3 8GB 512GB SSD 15.6\" FHD W11",
         "price": "R$ 249,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FNotebook-Lenovo-IdeaPad-1i-i7-8GB-512GB-SSD-15.6%27-HD-W11-5.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i3-8gb-512gb-ssd-15.6-fhd-w11.png"
+        "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i3-8gb-512gb-ssd-156-fhd-w11.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad 1i I7 16GB 512GB SSD 15.6\" HD W11",
         "price": "R$ 349,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FNotebook-Lenovo-IdeaPad-1i-i7-8GB-512GB-SSD-15.6%27-HD-W11-5.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i7-16gb-512gb-ssd-15.6-hd-w11.png"
+        "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i7-16gb-512gb-ssd-156-hd-w11.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad Slim 3 I5 16GB 512GB SSD 15.3” W11",
         "price": "R$ 319,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FNotebook-Lenovo-IdeaPad-Slim-3i-Gen10-2.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i5-16gb-512gb-ssd-15.3”-w11.png"
+        "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i5-16gb-512gb-ssd-153-w11.png"
     },
     {
         "name": "Playstation VR2",
@@ -357,49 +357,49 @@ window.alluProducts = [
         "name": "Smart Display Echo Show 15 15.6 Full HD Com Alexa E Fire TV",
         "price": "R$ 259,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FSmart%20Display%20Echo%20Show%2015%20(2%C2%AA%20Gera%C3%A7%C3%A3o)%20Amazon%20com%2015%2C6_%20Full%20HD%20com%20Alexa%20e%20Fire%20TV%20Branco-1.png&w=3840&q=90",
-        "local_img": "./assets/products/smart-display-echo-show-15-15.6-full-hd-com-alexa-e-fire-tv.png"
+        "local_img": "./assets/products/smart-display-echo-show-15-156-full-hd-com-alexa-e-fire-tv.png"
     },
     {
         "name": "Tablet Samsung Galaxy Tab S10 FE 5G 10.9",
         "price": "R$ 499,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FTablet%20Samsung%20Galaxy%20Tab%20S10%20FE%205G%20-%20128GB-1.png&w=3840&q=90",
-        "local_img": "./assets/products/tablet-samsung-galaxy-tab-s10-fe-5g-10.9.png"
+        "local_img": "./assets/products/tablet-samsung-galaxy-tab-s10-fe-5g-109.png"
     },
     {
         "name": "Tablet IPad A16 11\" Wifi Câmera 12MP",
         "price": "R$ 229,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fipad1.png&w=3840&q=90",
-        "local_img": "./assets/products/tablet-ipad-a16-11-wifi-câmera-12mp.png"
+        "local_img": "./assets/products/tablet-ipad-a16-11-wifi-camera-12mp.png"
     },
     {
         "name": "IMac 24\" M4 Retina 4.5K MacOS",
         "price": "R$ 2.219,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fimac-1.png&w=3840&q=90",
-        "local_img": "./assets/products/imac-24-m4-retina-4.5k-macos.png"
+        "local_img": "./assets/products/imac-24-m4-retina-45k-macos.png"
     },
     {
         "name": "Óculos Inteligentes Oakley Meta HSTN Com Meta AI",
         "price": "R$ 354,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FOakley%20Meta%20HSTN%20(Urbano)-1.png&w=3840&q=90",
-        "local_img": "./assets/products/óculos-inteligentes-oakley-meta-hstn-com-meta-ai.png"
+        "local_img": "./assets/products/oculos-inteligentes-oakley-meta-hstn-com-meta-ai.png"
     },
     {
         "name": "Óculos Inteligentes Oakley Meta Vanguard Com Meta AI",
         "price": "R$ 439,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FOakley%20Meta%20Vanguard-1.png&w=3840&q=90",
-        "local_img": "./assets/products/óculos-inteligentes-oakley-meta-vanguard-com-meta-ai.png"
+        "local_img": "./assets/products/oculos-inteligentes-oakley-meta-vanguard-com-meta-ai.png"
     },
     {
         "name": "Óculos Inteligentes Ray-Ban Meta Skyler Gen 2 Com Meta AI",
         "price": "R$ 379,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FRAY-BAN%20META%20SKYLER%20-%20GEN-1.png&w=3840&q=90",
-        "local_img": "./assets/products/óculos-inteligentes-ray-ban-meta-skyler-gen-2-com-meta-ai.png"
+        "local_img": "./assets/products/oculos-inteligentes-ray-ban-meta-skyler-gen-2-com-meta-ai.png"
     },
     {
         "name": "Óculos Inteligentes Ray-Ban Meta Wayfarer Gen 2 Com Meta AI",
         "price": "R$ 379,90",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FRAY-BAN%20META%20WAYFARER-1.png&w=3840&q=90",
-        "local_img": "./assets/products/óculos-inteligentes-ray-ban-meta-wayfarer-gen-2-com-meta-ai.png"
+        "local_img": "./assets/products/oculos-inteligentes-ray-ban-meta-wayfarer-gen-2-com-meta-ai.png"
     },
     {
         "name": "IPhone 13 Pro",
@@ -411,13 +411,13 @@ window.alluProducts = [
         "name": "IPad Air 5ª Geração",
         "price": "R$ 450,12",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fip1.png&w=3840&q=90",
-        "local_img": "./assets/products/ipad-air-5ª-geração.png"
+        "local_img": "./assets/products/ipad-air-5a-geracao.png"
     },
     {
         "name": "Bike Spinning ZiYou 150-S",
         "price": "R$ 169,00",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fziiyou1501.png&w=3840&q=90",
-        "local_img": "https://allu.com.br/favicon.ico"
+        "local_img": "./assets/products/bike-spinning-ziyou-150-s.png"
     },
     {
         "name": "POLAR Pacer Pro",
@@ -435,7 +435,7 @@ window.alluProducts = [
         "name": "IPad 10ª Geração",
         "price": "R$ 248,70",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fi1.png&w=3840&q=90",
-        "local_img": "./assets/products/ipad-10ª-geração.png"
+        "local_img": "./assets/products/ipad-10a-geracao.png"
     },
     {
         "name": "POLAR Grit X2 Pro",
@@ -495,7 +495,7 @@ window.alluProducts = [
         "name": "PlayStation 5 Slim Edição Digital",
         "price": "PlayStation 5 Slim Edição Digital",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fps5-slim-digital.png&w=3840&q=90",
-        "local_img": "./assets/products/playstation-5-slim-edição-digital.png"
+        "local_img": "./assets/products/playstation-5-slim-edicao-digital.png"
     },
     {
         "name": "Notebook Acer Nitro 5 RTX3050 I5 8GB",
@@ -567,7 +567,7 @@ window.alluProducts = [
         "name": "Playstation 5 Edição Disk",
         "price": "Playstation 5 Edição Disk",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fps5-disk-1.png&w=3840&q=90",
-        "local_img": "./assets/products/playstation-5-edição-disk.png"
+        "local_img": "./assets/products/playstation-5-edicao-disk.png"
     },
     {
         "name": "IPhone Air",
@@ -603,19 +603,19 @@ window.alluProducts = [
         "name": "Esteira Ergométrica ZiYou 250-S",
         "price": "Esteira Ergométrica ZiYou 250-S",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fzisteira1.png&w=3840&q=90",
-        "local_img": "./assets/products/esteira-ergométrica-ziyou-250-s.png"
+        "local_img": "./assets/products/esteira-ergometrica-ziyou-250-s.png"
     },
     {
         "name": "Monitor Acer 23.8\" Full HD 120hz",
         "price": "Monitor Acer 23.8\" Full HD 120hz",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fa1.png&w=3840&q=90",
-        "local_img": "./assets/products/monitor-acer-23.8-full-hd-120hz.png"
+        "local_img": "./assets/products/monitor-acer-238-full-hd-120hz.png"
     },
     {
         "name": "Monitor Acer 24.5” Full HD 120hz",
         "price": "Monitor Acer 24.5” Full HD 120hz",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fa1.png&w=3840&q=90",
-        "local_img": "./assets/products/monitor-acer-24.5”-full-hd-120hz.png"
+        "local_img": "./assets/products/monitor-acer-245-full-hd-120hz.png"
     },
     {
         "name": "Monitor Acer 27\" Full HD 120 Hz",
@@ -633,7 +633,7 @@ window.alluProducts = [
         "name": "Monitor Acer Nitro 31.5\" 240hz",
         "price": "Monitor Acer Nitro 31.5\" 240hz",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fmonit1.png&w=3840&q=90",
-        "local_img": "./assets/products/monitor-acer-nitro-31.5-240hz.png"
+        "local_img": "./assets/products/monitor-acer-nitro-315-240hz.png"
     },
     {
         "name": "Monitor Acer Ultrawide 34\" 180hz",
@@ -645,7 +645,7 @@ window.alluProducts = [
         "name": "Monitor Gamer Acer Nitro Series 23.8” Full HD 200hz",
         "price": "Monitor Gamer Acer Nitro Series 23.8” Full HD 200hz",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fmonitoracer2001.png&w=3840&q=90",
-        "local_img": "./assets/products/monitor-gamer-acer-nitro-series-23.8”-full-hd-200hz.png"
+        "local_img": "./assets/products/monitor-gamer-acer-nitro-series-238-full-hd-200hz.png"
     },
     {
         "name": "Monitor Gamer Acer Ultrawide 34\" QHD 100hz",
@@ -657,7 +657,7 @@ window.alluProducts = [
         "name": "Monitor Portátil Acer 15.6\" Full HD",
         "price": "Monitor Portátil Acer 15.6\" Full HD",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fport1.png&w=3840&q=90",
-        "local_img": "./assets/products/monitor-portátil-acer-15.6-full-hd.png"
+        "local_img": "./assets/products/monitor-portatil-acer-156-full-hd.png"
     },
     {
         "name": "Notebook Acer Swift GO AI",
@@ -681,19 +681,19 @@ window.alluProducts = [
         "name": "Projetor ACER 4.800 ANSI Lumens",
         "price": "Projetor ACER 4.800 ANSI Lumens",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fpppp4.png&w=3840&q=90",
-        "local_img": "./assets/products/projetor-acer-4.800-ansi-lumens.png"
+        "local_img": "./assets/products/projetor-acer-4800-ansi-lumens.png"
     },
     {
         "name": "Projetor ACER 5.000 ANSI Lumens",
         "price": "Projetor ACER 5.000 ANSI Lumens",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fpppp4.png&w=3840&q=90",
-        "local_img": "./assets/products/projetor-acer-5.000-ansi-lumens.png"
+        "local_img": "./assets/products/projetor-acer-5000-ansi-lumens.png"
     },
     {
         "name": "Bike Spinning ZiYou 250-S Com Tablet Android HD 10.1”",
         "price": "Bike Spinning ZiYou 250-S Com Tablet Android HD 10.1”",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fzibike2.png&w=3840&q=90",
-        "local_img": "./assets/products/bike-spinning-ziyou-250-s-com-tablet-android-hd-10.1”.png"
+        "local_img": "./assets/products/bike-spinning-ziyou-250-s-com-tablet-android-hd-101.png"
     },
     {
         "name": "Mac Mini M4 10CPU 10GPU 24GB RAM 512GB SSD",
@@ -723,43 +723,43 @@ window.alluProducts = [
         "name": "Notebook ASUS Vivobook 15AMD Ryzen7 16GB 512GB SSD W11 15,6\"FHD",
         "price": "Notebook ASUS Vivobook 15AMD Ryzen7 16GB 512GB SSD W11 15,6\"FHD",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fvivobook15.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-asus-vivobook-15amd-ryzen7-16gb-512gb-ssd-w11-15,6fhd.png"
+        "local_img": "./assets/products/notebook-asus-vivobook-15amd-ryzen7-16gb-512gb-ssd-w11-156fhd.png"
     },
     {
         "name": "Notebook Asus Tuf Gaming A15 AMD Ryzen7 16GB 512GB SSD 15,6\"",
         "price": "Notebook Asus Tuf Gaming A15 AMD Ryzen7 16GB 512GB SSD 15,6\"",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fasustuf.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-asus-tuf-gaming-a15-amd-ryzen7-16gb-512gb-ssd-15,6.png"
+        "local_img": "./assets/products/notebook-asus-tuf-gaming-a15-amd-ryzen7-16gb-512gb-ssd-156.png"
     },
     {
         "name": "Notebook Asus VivoBook 15 13ªGer I5 8GB 512GB SSD W11 Home",
         "price": "Notebook Asus VivoBook 15 13ªGer I5 8GB 512GB SSD W11 Home",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fvivobook15.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-asus-vivobook-15-13ªger-i5-8gb-512gb-ssd-w11-home.png"
+        "local_img": "./assets/products/notebook-asus-vivobook-15-13ager-i5-8gb-512gb-ssd-w11-home.png"
     },
     {
         "name": "Notebook Gamer Lenovo LOQ-E I5 16GB 512GB SSD RTX3050 15.6” W11",
         "price": "Notebook Gamer Lenovo LOQ-E I5 16GB 512GB SSD RTX3050 15.6” W11",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FNotebook-Gamer-Lenovo-LOQ-e-i5-16GB-512GB-SSD-RTX3050-15.6%E2%80%9D-W11-1.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-gamer-lenovo-loq-e-i5-16gb-512gb-ssd-rtx3050-15.6”-w11.png"
+        "local_img": "./assets/products/notebook-gamer-lenovo-loq-e-i5-16gb-512gb-ssd-rtx3050-156-w11.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad 1i I3 8GB 256GB 15.6\"",
         "price": "Notebook Lenovo IdeaPad 1i I3 8GB 256GB 15.6\"",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FLenovo%20i3.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i3-8gb-256gb-15.6.png"
+        "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i3-8gb-256gb-156.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad Slim 3 I7 16GB 512GB SSD 15.3” W11",
         "price": "Notebook Lenovo IdeaPad Slim 3 I7 16GB 512GB SSD 15.3” W11",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FLenovo-IdeaPad-Slim-3-i7-24GB-512GB-15.3%27-FHD-W11-1.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i7-16gb-512gb-ssd-15.3”-w11.png"
+        "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i7-16gb-512gb-ssd-153-w11.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad Slim 3 I7 24GB 512GB 15.3\" FHD W11",
         "price": "Notebook Lenovo IdeaPad Slim 3 I7 24GB 512GB 15.3\" FHD W11",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FLenovo%20IdeaPadd.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i7-24gb-512gb-15.3-fhd-w11.png"
+        "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i7-24gb-512gb-153-fhd-w11.png"
     },
     {
         "name": "Notebook Lenovo Yoga Slim 7i I5 16GB 512GB SSD 14\" OLED W11",
@@ -777,7 +777,7 @@ window.alluProducts = [
         "name": "Notebook Samsung Galaxy Book4 I5 16GB 512GB SSD 15.6 FHD W11 Pro",
         "price": "Notebook Samsung Galaxy Book4 I5 16GB 512GB SSD 15.6 FHD W11 Pro",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FNotebook-Galaxy-Book4-i5-16GB-512GB-15.6%E2%80%9D-1.png&w=3840&q=90",
-        "local_img": "./assets/products/notebook-samsung-galaxy-book4-i5-16gb-512gb-ssd-15.6-fhd-w11-pro.png"
+        "local_img": "./assets/products/notebook-samsung-galaxy-book4-i5-16gb-512gb-ssd-156-fhd-w11-pro.png"
     },
     {
         "name": "Samsung Galaxy A56 5G",
@@ -795,7 +795,7 @@ window.alluProducts = [
         "name": "Óculos De Realidade Virtual Meta Quest 3",
         "price": "Óculos De Realidade Virtual Meta Quest 3",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FMeta%20Quest%203-1.png&w=3840&q=90",
-        "local_img": "./assets/products/óculos-de-realidade-virtual-meta-quest-3.png"
+        "local_img": "./assets/products/oculos-de-realidade-virtual-meta-quest-3.png"
     },
     {
         "name": "Notebook Samsung Galaxy Book4 W11 I5 16GB 512GB",
@@ -861,7 +861,7 @@ window.alluProducts = [
         "name": "Apple Watch S6 40MM + CELL",
         "price": "Apple Watch S6 40MM + CELL",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FApple%2520Watch%2520S6%252040MM.png&w=3840&q=90",
-        "local_img": "./assets/products/apple-watch-s6-40mm-+-cell.png"
+        "local_img": "./assets/products/apple-watch-s6-40mm-cell.png"
     },
     {
         "name": "Controle PS5 Dualsense",
@@ -873,7 +873,7 @@ window.alluProducts = [
         "name": "MacBook Air M4 13”256GB 16GB",
         "price": "MacBook Air M4 13”256GB 16GB",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fmba1.png&w=3840&q=90",
-        "local_img": "./assets/products/macbook-air-m4-13”256gb-16gb.png"
+        "local_img": "./assets/products/macbook-air-m4-13256gb-16gb.png"
     },
     {
         "name": "MacBook Pro M5 14 512GB 16GB RAM",
@@ -885,13 +885,13 @@ window.alluProducts = [
         "name": "Monitor Acer 21.5\"",
         "price": "Monitor Acer 21.5\"",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FPACK%2520-%25201.jpg&w=3840&q=90",
-        "local_img": "./assets/products/monitor-acer-21.5.png"
+        "local_img": "./assets/products/monitor-acer-215.png"
     },
     {
         "name": "Monitor Portátil Acer 15.6” Full HD 60Hz",
         "price": "Monitor Portátil Acer 15.6” Full HD 60Hz",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FPACK%20-%202.jpg&w=3840&q=90",
-        "local_img": "./assets/products/monitor-portátil-acer-15.6”-full-hd-60hz.png"
+        "local_img": "./assets/products/monitor-portatil-acer-156-full-hd-60hz.png"
     },
     {
         "name": "Notebook Gamer Acer Nitro V15 RTX3050 I5 8GB",
@@ -915,7 +915,7 @@ window.alluProducts = [
         "name": "Nescafé Dolce Gusto NEO",
         "price": "Nescafé Dolce Gusto NEO",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Fdg1.png&w=3840&q=90",
-        "local_img": "./assets/products/nescafé-dolce-gusto-neo.png"
+        "local_img": "./assets/products/nescafe-dolce-gusto-neo.png"
     },
     {
         "name": "Geladeira Samsung",
@@ -927,7 +927,7 @@ window.alluProducts = [
         "name": "Máquina Lava E Seca",
         "price": "Máquina Lava E Seca",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2Flava1.png&w=3840&q=90",
-        "local_img": "./assets/products/máquina-lava-e-seca.png"
+        "local_img": "./assets/products/maquina-lava-e-seca.png"
     },
     {
         "name": "ASUS ROG Ally",
@@ -939,7 +939,7 @@ window.alluProducts = [
         "name": "Robô Aspirador IRobot Combo J7+",
         "price": "Robô Aspirador IRobot Combo J7+",
         "img": "https://allugator.com/_next/image?url=https%3A%2F%2Fimages.digital.allugator.com%2Fproducts%2FROOMBAI1.png&w=3840&q=90",
-        "local_img": "./assets/products/robô-aspirador-irobot-combo-j7+.png"
+        "local_img": "./assets/products/robo-aspirador-irobot-combo-j7.png"
     },
     {
         "name": "Samsung TV 75\"",
