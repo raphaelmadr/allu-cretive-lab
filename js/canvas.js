@@ -21,27 +21,13 @@ export function resizeCanvas(w, h) {
     const wrapper = document.getElementById('canvas-wrapper');
     if (!wrapper) return;
 
-    // Se estivermos em modo carrossel, as larguras podem ser diferentes
-    const formatDisplay = document.getElementById('format-display');
-    const isCarouselMode = formatDisplay && formatDisplay.innerText.includes('Carrossel');
-
-    // Configurar wrapper para scroll horizontal se for carrossel
-    if (isCarouselMode) {
-        wrapper.style.display = 'flex';
-        wrapper.style.flexDirection = 'row';
-        wrapper.style.alignItems = 'center';
-        wrapper.style.justifyContent = 'flex-start';
-        wrapper.style.gap = '80px';
-        wrapper.style.overflowX = 'auto';
-        wrapper.style.padding = '100px';
-    } else {
-        wrapper.style.display = 'flex';
-        wrapper.style.flexDirection = 'column';
-        wrapper.style.alignItems = 'center';
-        wrapper.style.justifyContent = 'center';
-        wrapper.style.overflowX = 'hidden';
-        wrapper.style.padding = '20px';
-    }
+    // Agora todos os formatos suportam múltiplas páginas, então o layout é sempre flexível
+    wrapper.style.display = 'flex';
+    wrapper.style.flexDirection = 'column';
+    wrapper.style.alignItems = 'center';
+    wrapper.style.justifyContent = 'center';
+    wrapper.style.overflow = 'auto';
+    wrapper.style.padding = '40px';
 
     const padding = 120; 
     const availableW = wrapper.clientWidth - padding;
@@ -58,28 +44,23 @@ export function resizeCanvas(w, h) {
         canvas.setZoom(scale);
         
         const container = canvas.getElement().parentNode;
-        container.style.width = Math.round(w * scale) + 'px';
-        container.style.height = Math.round(h * scale) + 'px';
-        container.style.flexShrink = '0'; // Não deixa o canvas espremer
-        
-        // Redesenhar guias
-        drawSafeGuides(canvas, w, h, scale);
+        if (container && container.classList.contains('canvas-container')) {
+            container.style.width = Math.round(w * scale) + 'px';
+            container.style.height = Math.round(h * scale) + 'px';
+            container.style.flexShrink = '0';
+            
+            // Redesenhar guias de segurança
+            drawSafeGuides(canvas, w, h, scale);
+        }
     });
 
-    // Ativar/Desativar modo Carrossel baseado no preset
-    if (formatDisplay) {
-        const manager = document.getElementById('carousel-manager');
-        if (isCarouselMode) {
-            carousel.active = true;
-            if (manager) manager.style.display = 'flex';
-            if (state.canvases.length === 0) carousel.init();
-            carousel.updateUI();
-        } else {
-            carousel.active = false;
-            if (manager) manager.style.display = 'none';
-        }
+    // O Gerenciador de páginas (carousel) agora está sempre disponível se houver mais de uma página
+    const manager = document.getElementById('carousel-manager');
+    if (manager) {
+        manager.style.display = 'flex';
     }
     
+    carousel.updateUI();
     updateZoomDisplay(scale);
     state.canvases.forEach(c => c.renderAll());
 }
@@ -91,22 +72,39 @@ export function updateZoomDisplay(scale) {
 
 export function drawSafeGuides(canvas, w, h, scale) {
     const container = canvas.getElement().parentNode;
+    if (!container || !container.classList.contains('canvas-container')) return;
     
-    // Remover guias antigas deste container específico
+    // Remover guias antigas
     container.querySelectorAll('.canvas-guide').forEach(g => g.remove());
     
+    // Margem de segurança de 5%
     const marginW = 0.05 * w * scale; 
     const marginH = 0.05 * h * scale; 
     
     const guide = document.createElement('div');
     guide.className = 'canvas-guide';
-    guide.style.position = 'absolute';
-    guide.style.left = marginW + 'px';
-    guide.style.top = marginH + 'px';
-    guide.style.width = (w * scale - 2 * marginW) + 'px';
-    guide.style.height = (h * scale - 2 * marginH) + 'px';
-    guide.style.pointerEvents = 'none';
-    guide.style.border = '1px dashed rgba(0, 209, 255, 0.5)';
-    guide.style.zIndex = '10';
+    guide.style.cssText = `
+        position: absolute;
+        left: ${marginW}px;
+        top: ${marginH}px;
+        width: ${(w * scale - 2 * marginW)}px;
+        height: ${(h * scale - 2 * marginH)}px;
+        pointer-events: none;
+        border: 1px dashed rgba(0, 209, 255, 0.4);
+        z-index: 10;
+        border-radius: 2px;
+    `;
     container.appendChild(guide);
+
+    // Borda externa decorativa (opcional, para visual premium)
+    const border = document.createElement('div');
+    border.className = 'canvas-guide';
+    border.style.cssText = `
+        position: absolute;
+        inset: -1px;
+        border: 1px solid rgba(255,255,255,0.05);
+        pointer-events: none;
+        z-index: 5;
+    `;
+    container.appendChild(border);
 }
