@@ -196,11 +196,12 @@ export const carousel = {
                 container.style.outline = '1px solid rgba(255,255,255,0.1)';
                 container.style.outlineOffset = '8px';
                 container.style.boxShadow = 'none';
-                container.style.opacity = '0.5'; // Opacidade reduzida para páginas inativas
+                container.style.opacity = '0.5';
             }
-            container.style.display = 'block'; // Garante que todas estão visíveis
-            container.style.marginBottom = '60px'; // Espaçamento entre páginas
+            container.style.display = 'block';
+            container.style.marginBottom = '0'; // Remove margem vertical
         });
+
 
     },
 
