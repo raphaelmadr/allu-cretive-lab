@@ -21,14 +21,15 @@ export function resizeCanvas(w, h) {
     const wrapper = document.getElementById('canvas-wrapper');
     if (!wrapper) return;
 
-    // Layout de pilha vertical para múltiplas páginas
+    // Layout horizontal (Lado a Lado) conforme solicitado
     wrapper.style.display = 'flex';
-    wrapper.style.flexDirection = 'column';
+    wrapper.style.flexDirection = 'row';
     wrapper.style.alignItems = 'center';
-    wrapper.style.justifyContent = 'flex-start'; // Começa do topo
-    wrapper.style.overflowY = 'auto';
+    wrapper.style.justifyContent = 'flex-start'; // Começa da esquerda
     wrapper.style.overflowX = 'auto';
-    wrapper.style.padding = '80px 40px 200px 40px'; // Mais padding no fundo para não bater na barra de páginas
+    wrapper.style.overflowY = 'auto';
+    wrapper.style.padding = '100px';
+    wrapper.style.gap = '80px'; // Espaço generoso entre as telas
 
     const padding = 120; 
     const availableW = wrapper.clientWidth - padding;
@@ -75,10 +76,8 @@ export function drawSafeGuides(canvas, w, h, scale) {
     const container = canvas.getElement().parentNode;
     if (!container || !container.classList.contains('canvas-container')) return;
     
-    // Remover guias antigas
     container.querySelectorAll('.canvas-guide').forEach(g => g.remove());
     
-    // Margem de segurança de 5%
     const marginW = 0.05 * w * scale; 
     const marginH = 0.05 * h * scale; 
     
@@ -97,7 +96,6 @@ export function drawSafeGuides(canvas, w, h, scale) {
     `;
     container.appendChild(guide);
 
-    // Borda externa decorativa
     const border = document.createElement('div');
     border.className = 'canvas-guide';
     border.style.cssText = `
