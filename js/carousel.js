@@ -169,15 +169,63 @@ export const carousel = {
                 container.style.outlineOffset = '8px';
                 container.style.boxShadow = '0 0 50px rgba(39, 174, 96, 0.2)';
                 container.style.opacity = '1';
+                container.style.display = 'block';
             } else {
                 container.style.outline = '1px solid rgba(255,255,255,0.1)';
                 container.style.outlineOffset = '8px';
                 container.style.boxShadow = 'none';
                 container.style.opacity = '1';
+                // No modo carrossel geral, talvez queiramos mostrar todos ou esconder?
+                // O usuário pediu para "ajudar a fazer tabelas de preços que precisam de mais de uma página"
+                // Geralmente carrosséis mostram um por vez ou scroll.
+                // Vou manter o scroll horizontal no CSS, mas destacar o ativo.
             }
         });
+    },
+
+    reset() {
+        while (state.canvases.length > 1) {
+            const canvasToDelete = state.canvases[1];
+            const container = canvasToDelete.getElement().parentNode;
+            container.parentNode.removeChild(container);
+            state.removeCanvas(1);
+        }
+        state.setActiveCanvas(0);
+        this.updateUI();
+    },
+
+    async loadPages(pagesData, width, height) {
+        this.reset();
+        
+        for (let i = 0; i < pagesData.length; i++) {
+            if (i === 0) {
+                // Primeira página já existe, apenas carrega JSON
+                const canvas = state.getCanvas();
+                await new Promise(resolve => {
+                    canvas.loadFromJSON(pagesData[i], () => {
+                        canvas.setDimensions({ width, height });
+                        canvas.renderAll();
+                        resolve();
+                    });
+                });
+            } else {
+                // Adiciona novas páginas
+                this.addPage();
+                const canvas = state.getCanvas();
+                await new Promise(resolve => {
+                    canvas.loadFromJSON(pagesData[i], () => {
+                        canvas.setDimensions({ width, height });
+                        canvas.renderAll();
+                        resolve();
+                    });
+                });
+            }
+        }
+        state.setActiveCanvas(0);
+        this.updateUI();
     }
 };
+
 
 export function setupCarousel() {
     const btnAddPage = document.getElementById('btn-add-page');
