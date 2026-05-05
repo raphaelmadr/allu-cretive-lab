@@ -8,12 +8,17 @@ export function renderProductsTools(sidebarContent) {
     const div = document.createElement('div');
     div.className = 'animate-fade';
 
-    const renderList = (products) => {
+    let displayedItems = 20;
+    let currentFilterResults = window.alluProducts || [];
+
+    const renderList = (products, limit) => {
         if (!products || products.length === 0) {
             return `<div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:0.8rem;">Nenhum produto encontrado.</div>`;
         }
+        
+        const toShow = products.slice(0, limit);
         let listHTML = '<div id="products-list" class="preset-grid">';
-        products.forEach(p => {
+        toShow.forEach(p => {
             listHTML += `
                 <div class="preset-card product-draggable" data-product='${JSON.stringify(p).replace(/'/g, "&#39;")}' style="padding:12px; display:flex; flex-direction:column; gap:8px; cursor:pointer;">
                     <div style="height:100px; width:100%; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
@@ -29,6 +34,15 @@ export function renderProductsTools(sidebarContent) {
             `;
         });
         listHTML += '</div>';
+
+        if (products.length > limit) {
+            listHTML += `
+                <button id="btn-load-more" style="width:100%; margin-top:20px; padding:10px; background:rgba(255,255,255,0.05); border:1px dashed var(--glass-border); color:var(--text-secondary); border-radius:8px; cursor:pointer; font-size:0.75rem; font-weight:600; transition:all 0.2s;">
+                    Mostrar mais (${products.length - limit} restantes)
+                </button>
+            `;
+        }
+
         return listHTML;
     };
 
@@ -39,6 +53,15 @@ export function renderProductsTools(sidebarContent) {
                 addProductToCanvas(p, 'solto');
             };
         });
+
+        const btnLoadMore = container.querySelector('#btn-load-more');
+        if (btnLoadMore) {
+            btnLoadMore.onclick = () => {
+                displayedItems += 20;
+                container.innerHTML = renderList(currentFilterResults, displayedItems);
+                attachEvents(container);
+            };
+        }
     };
 
     let headerHTML = '';
@@ -64,7 +87,7 @@ export function renderProductsTools(sidebarContent) {
             </div>
             <p class="subtitle">Produtos Disponíveis</p>
             <div id="products-container">
-                ${renderList(window.alluProducts)}
+                ${renderList(window.alluProducts, displayedItems)}
             </div>`;
     } else {
         headerHTML = `
@@ -82,7 +105,7 @@ export function renderProductsTools(sidebarContent) {
 
     const footerHTML = `
         <button class="btn-primary" id="btn-sync-catalog" style="width:100%; margin-top:20px; padding:12px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
-            <i class="fa-solid fa-arrows-rotate"></i> Atualizar Produtos
+            <i class="fa-solid fa-arrows-rotate"></i> Atualizar Detalhes
         </button>
         <div style="margin-top:30px; border-top:1px solid var(--glass-border); padding-top:20px;">
             <p class="subtitle">Selos e Ofertas</p>
@@ -107,10 +130,15 @@ export function renderProductsTools(sidebarContent) {
     if (searchInput && containerEl) {
         searchInput.oninput = () => {
             const query = searchInput.value.toLowerCase();
-            const filtered = window.alluProducts.filter(p => p.name.toLowerCase().includes(query));
-            containerEl.innerHTML = renderList(filtered);
+            currentFilterResults = window.alluProducts.filter(p => p.name.toLowerCase().includes(query));
+            displayedItems = 20; // Reseta paginação na busca
+            containerEl.innerHTML = renderList(currentFilterResults, displayedItems);
             attachEvents(containerEl);
         };
+        searchInput.onfocus = () => searchInput.style.borderColor = 'var(--accent)';
+        searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
+    }
+
         searchInput.onfocus = () => searchInput.style.borderColor = 'var(--accent)';
         searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
     }
