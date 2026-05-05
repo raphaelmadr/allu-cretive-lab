@@ -42,22 +42,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // Auto-switch to properties tab when ANY object is selected
     canvas.on('selection:created', (e) => {
         if (e.selected && e.selected[0]) {
+            const obj = e.selected[0];
+            if (obj.isBadge || (obj.get && obj.get('isBadge'))) {
+                const badgeBtn = document.querySelector('.btn-tool[data-tab="badges"]');
+                if (badgeBtn && !badgeBtn.classList.contains('active')) {
+                    badgeBtn.click();
+                }
+                return;
+            }
+
             const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
             if (propBtn) propBtn.click();
         }
     });
+
+
+
 
     canvas.on('selection:updated', (e) => {
         if (e.selected && e.selected[0]) {
+            const obj = e.selected[0];
+            if (obj.isBadge || (obj.get && obj.get('isBadge'))) {
+                const badgeBtn = document.querySelector('.btn-tool[data-tab="badges"]');
+                if (badgeBtn && !badgeBtn.classList.contains('active')) {
+                    badgeBtn.click();
+                }
+                return;
+            }
+
             const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
             if (propBtn) propBtn.click();
         }
     });
 
+
+
+
     canvas.on('selection:cleared', (e) => {
+        const activeTab = document.querySelector('.btn-tool.active');
+        if (activeTab && activeTab.dataset.tab === 'badges') return;
+
         const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
         if (propBtn) propBtn.click();
     });
+
 
     // Sync button
     const btnSync = document.getElementById('btn-sync');
