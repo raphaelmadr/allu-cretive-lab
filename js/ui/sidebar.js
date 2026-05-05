@@ -34,52 +34,64 @@ export function setupSidebar() {
 export function updateSidebar(tab, sidebarTitle, sidebarContent) {
     if (!sidebarTitle) sidebarTitle = document.getElementById('sidebar-title');
     if (!sidebarContent) sidebarContent = document.getElementById('sidebar-content');
+    const sidebarSubtitle = document.querySelector('.sidebar .subtitle');
     
     sidebarContent.innerHTML = '';
     
     switch(tab) {
         case 'products':
             sidebarTitle.innerText = 'Produtos';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Gerencie o catálogo Allu';
             renderProductsTools(sidebarContent);
             break;
         case 'shapes':
             sidebarTitle.innerText = 'Formas Geométricas';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Adicione elementos visuais';
             renderShapesTools(sidebarContent);
             break;
         case 'logos':
             sidebarTitle.innerText = 'Logos da Marca';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Ativos oficiais Allu';
             renderLogosTools(sidebarContent);
             break;
         case 'text':
             sidebarTitle.innerText = 'Texto';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Tipografia e estilos';
             renderTextTools(sidebarContent);
             break;
         case 'brand':
             sidebarTitle.innerText = 'Fundo da Arte';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Cores e imagens de base';
             renderBrandTools(sidebarContent);
             break;
         case 'images':
             sidebarTitle.innerText = 'Imagens';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Upload de arquivos externos';
             renderImageTools(sidebarContent);
             break;
         case 'layers':
             sidebarTitle.innerText = 'Camadas';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Organização de objetos';
             renderLayersTools(sidebarContent);
             break;
         case 'properties':
             sidebarTitle.innerText = 'Propriedades';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Ajustes finos do elemento';
             renderPropertiesTools(sidebarContent);
             break;
         case 'badges':
             sidebarTitle.innerText = 'Selos';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Ofertas e destaques';
             renderBadgesTools(sidebarContent);
             break;
         case 'models':
             sidebarTitle.innerText = 'Modelos';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Seus projetos salvos';
             renderModelsTools(sidebarContent);
             break;
         case 'icons':
             sidebarTitle.innerText = 'Ícones';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Biblioteca Lucide';
             renderIconsTools(sidebarContent);
             break;
     }

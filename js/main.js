@@ -60,10 +60,20 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.on('selection:created', (e) => {
         if (e.selected && e.selected[0]) {
             const obj = e.selected[0];
+            
+            // Redirecionamento para ferramentas especializadas
             if (obj.isBadge || (obj.get && obj.get('isBadge'))) {
                 const badgeBtn = document.querySelector('.btn-tool[data-tab="badges"]');
                 if (badgeBtn && !badgeBtn.classList.contains('active')) {
                     badgeBtn.click();
+                }
+                return;
+            }
+
+            if (obj.isIcon || (obj.get && obj.get('isIcon'))) {
+                const iconBtn = document.querySelector('.btn-tool[data-tab="icons"]');
+                if (iconBtn && !iconBtn.classList.contains('active')) {
+                    iconBtn.click();
                 }
                 return;
             }
@@ -79,10 +89,19 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.on('selection:updated', (e) => {
         if (e.selected && e.selected[0]) {
             const obj = e.selected[0];
+            
             if (obj.isBadge || (obj.get && obj.get('isBadge'))) {
                 const badgeBtn = document.querySelector('.btn-tool[data-tab="badges"]');
                 if (badgeBtn && !badgeBtn.classList.contains('active')) {
                     badgeBtn.click();
+                }
+                return;
+            }
+
+            if (obj.isIcon || (obj.get && obj.get('isIcon'))) {
+                const iconBtn = document.querySelector('.btn-tool[data-tab="icons"]');
+                if (iconBtn && !iconBtn.classList.contains('active')) {
+                    iconBtn.click();
                 }
                 return;
             }
@@ -97,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     canvas.on('selection:cleared', (e) => {
         const activeTab = document.querySelector('.btn-tool.active');
-        if (activeTab && activeTab.dataset.tab === 'badges') return;
+        if (activeTab && (activeTab.dataset.tab === 'badges' || activeTab.dataset.tab === 'icons')) return;
 
         const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
         if (propBtn) propBtn.click();

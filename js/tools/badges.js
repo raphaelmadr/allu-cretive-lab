@@ -367,6 +367,19 @@ export function renderBadgesTools(sidebarContent) {
         updateUIFromState();
     }
 
+    if (canvas && !canvas._badgeEventsAdded) {
+        const sync = (e) => {
+            const obj = e.selected ? e.selected[0] : null;
+            if (isBadge(obj)) {
+                const activeSidebar = document.querySelector('#sidebar-content > div');
+                if (activeSidebar && activeSidebar.syncWithBadge) activeSidebar.syncWithBadge(obj);
+            }
+        };
+        canvas.on('selection:created', sync);
+        canvas.on('selection:updated', sync);
+        canvas._badgeEventsAdded = true;
+    }
+
     const btnAdd = div.querySelector('#b-add');
     btnAdd.onclick = () => updateCanvasBadge(true);
 }

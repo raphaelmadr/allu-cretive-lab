@@ -41,6 +41,15 @@ export function renderPropertiesTools(sidebarContent) {
         }
     }
     
+    // Auto-switch to icons tab if an icon is selected while in properties
+    if (active && (active.isIcon || (active.get && active.get('isIcon')))) {
+        const iconBtn = document.querySelector('.btn-tool[data-tab="icons"]');
+        if (iconBtn) {
+            iconBtn.click();
+            return;
+        }
+    }
+    
     if (!active) {
 
         let docBgHex = canvas.backgroundColor;
