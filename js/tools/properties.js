@@ -32,7 +32,17 @@ export function renderPropertiesTools(sidebarContent) {
     
     const active = canvas.getActiveObject();
     
+    // Auto-switch to badges tab if a badge is selected while in properties
+    if (active && (active.isBadge || (active.get && active.get('isBadge')))) {
+        const badgeBtn = document.querySelector('.btn-tool[data-tab="badges"]');
+        if (badgeBtn) {
+            badgeBtn.click();
+            return;
+        }
+    }
+    
     if (!active) {
+
         let docBgHex = canvas.backgroundColor;
         if (typeof docBgHex === 'object') docBgHex = 'transparent';
 
