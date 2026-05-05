@@ -43,7 +43,9 @@ export function renderLogosTools(sidebarContent) {
             const url = "assets/logos/" + file;
             
             const imgElement = new Image();
+            imgElement.crossOrigin = "anonymous";
             imgElement.onload = function() {
+
                 const obj = new fabric.Image(imgElement);
                 obj.scaleToWidth(200);
                 

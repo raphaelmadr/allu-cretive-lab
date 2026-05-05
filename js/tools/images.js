@@ -33,7 +33,8 @@ export function renderImageTools(sidebarContent) {
                     canvas.setActiveObject(img);
                     canvas.renderAll();
                     history.save();
-                });
+                }, { crossOrigin: 'anonymous' });
+
             };
             reader.readAsDataURL(file);
         };

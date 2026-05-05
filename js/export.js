@@ -75,8 +75,9 @@ export function setupExport() {
                     }
                 } catch (err) {
                     console.error("Erro ao exportar:", err);
-                    alert("Ocorreu um erro ao exportar. Tente rodar o projeto em um servidor local se o erro persistir.");
+                    alert("Ops! Não foi possível gerar a imagem. Isso geralmente acontece por restrições de segurança do navegador com imagens externas. Se você acabou de adicionar um produto, tente aguardar um segundo ou recarregar a página.");
                 } finally {
+
                     btnMain.innerHTML = originalContent;
                     guides.forEach(g => g.style.display = 'block');
                 }

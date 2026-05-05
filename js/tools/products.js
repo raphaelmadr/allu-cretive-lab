@@ -156,9 +156,9 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
     };
 
     const imgElement = new Image();
-    if (p.local_img && p.local_img.startsWith('http')) {
-        imgElement.crossOrigin = "anonymous";
-    }
+    // Sempre permitir Cross-Origin para imagens remotas (Allugator ou Fallback)
+    imgElement.crossOrigin = "anonymous";
+
     
     imgElement.onload = function() {
         const fabricImg = new fabric.Image(imgElement);
