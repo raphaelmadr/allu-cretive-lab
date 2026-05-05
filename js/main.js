@@ -10,6 +10,8 @@ import { setupExport } from './export.js';
 import { setupAlignment } from './align.js';
 import { setupZoom } from './zoom.js';
 import { initStorage } from './storage.js';
+import { notifications } from './ui/notifications.js';
+
 
 
 
@@ -118,8 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnSync.innerHTML = originalHTML;
                 
                 if (count > 0) {
-                    alert(`✅ ${count} produtos atualizados com sucesso via API da Allugator!`);
+                    notifications.alert('Sincronização Concluída', `✅ ${count} produtos atualizados com sucesso via API da Allugator!`, 'fa-cloud-arrow-down');
                     // If the active tab is products, update the sidebar to show the new prices
+
                     const activeTab = document.querySelector('.btn-tool.active');
                     if (activeTab && activeTab.dataset.tab === 'products') {
                         import('./ui/sidebar.js').then(sidebarModule => {
@@ -127,13 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     }
                 } else {
-                    alert("✨ Os preços já estão totalmente atualizados com a API.");
+                    notifications.toast("✨ Preços já estão atualizados.");
                 }
             } catch (err) {
                 console.error('Erro ao sincronizar produtos:', err);
                 btnSync.innerHTML = originalHTML;
-                alert("❌ Ocorreu um erro ao conectar com a API.");
+                notifications.alert('Erro na API', "❌ Ocorreu um erro ao conectar com a API.", 'fa-circle-xmark');
             }
+
         };
     }
 
