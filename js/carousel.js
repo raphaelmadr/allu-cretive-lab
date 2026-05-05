@@ -4,7 +4,6 @@ import { history } from './history.js';
 import { setupCanvas, resizeCanvas } from './canvas.js';
 import { notifications } from './ui/notifications.js';
 
-
 export const carousel = {
     active: false,
     
@@ -15,7 +14,6 @@ export const carousel = {
             manager.style.display = 'flex';
         }
         
-        // Se já temos um canvas inicial, garanta que ele está no array
         const initialCanvas = state.getCanvas();
         if (initialCanvas && state.canvases.length === 0) {
             state.setCanvas(initialCanvas);
@@ -29,13 +27,11 @@ export const carousel = {
         const wrapper = document.getElementById('canvas-wrapper');
         if (!wrapper) return;
 
-        // Criar novo elemento canvas
         const canvasId = `canvas-${Date.now()}`;
         const newCanvasEl = document.createElement('canvas');
         newCanvasEl.id = canvasId;
         wrapper.appendChild(newCanvasEl);
 
-        // Inicializar Fabric
         const newCanvas = new fabric.Canvas(canvasId, {
             backgroundColor: '#ffffff',
             preserveObjectStacking: true,
@@ -43,23 +39,17 @@ export const carousel = {
             height: activePreset.h
         });
 
-        // Configurar protótipo e estilos globais se necessário
         setupCanvas(); 
 
-        // Configurar eventos
         newCanvas.on('selection:created', () => this.onSelection(newCanvas));
         newCanvas.on('selection:updated', () => this.onSelection(newCanvas));
         newCanvas.on('object:modified', () => history.save());
         newCanvas.on('object:added', () => history.save());
         newCanvas.on('object:removed', () => history.save());
 
-        // Adicionar ao estado
         state.addCanvas(newCanvas);
-        
-        // Sincronizar tamanho
         resizeCanvas(activePreset.w, activePreset.h);
         
-        // Rolar até o novo canvas
         setTimeout(() => {
             newCanvasEl.parentNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
         }, 100);
@@ -82,7 +72,6 @@ export const carousel = {
         if (state.canvases.length <= 1) return;
         const ok = await notifications.confirm('Excluir Página?', 'Deseja realmente excluir esta página? Esta ação não pode ser desfeita.', 'fa-trash-can');
         if (!ok) return;
-
         
         const canvasToDelete = state.canvases[index];
         const container = canvasToDelete.getElement().parentNode;
@@ -99,18 +88,12 @@ export const carousel = {
         if (canvas) {
             const container = canvas.getElement().parentNode;
             container.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-            
-            // Destacar o canvas selecionado visualmente
-            document.querySelectorAll('.canvas-container').forEach(c => c.style.outline = 'none');
-            container.style.outline = '2px solid var(--accent)';
-            container.style.outlineOffset = '4px';
         }
         this.updateUI();
     },
 
     async exportAll(format = 'png') {
         const originalIndex = state.activeCanvasIndex;
-        
         for (let i = 0; i < state.canvases.length; i++) {
             const canvas = state.canvases[i];
             canvas.discardActiveObject();
@@ -128,7 +111,6 @@ export const carousel = {
             link.click();
             await new Promise(r => setTimeout(r, 500));
         }
-        
         state.setActiveCanvas(originalIndex);
         this.updateUI();
     },
@@ -136,12 +118,16 @@ export const carousel = {
     updateUI() {
         const container = document.getElementById('carousel-pages');
         const countDisplay = document.getElementById('carousel-count');
+        const btnPrev = document.getElementById('btn-prev-page');
+        const btnNext = document.getElementById('btn-next-page');
+
         if (!container || !countDisplay) return;
         
         container.innerHTML = '';
         state.canvases.forEach((canvas, index) => {
             const item = document.createElement('div');
             item.style.position = 'relative';
+            item.style.flexShrink = '0';
             
             const thumb = document.createElement('div');
             const isActive = index === state.activeCanvasIndex;
@@ -153,6 +139,11 @@ export const carousel = {
                 const delBtn = document.createElement('div');
                 delBtn.className = 'carousel-del-btn';
                 delBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+                delBtn.style.top = '-5px';
+                delBtn.style.right = '-5px';
+                delBtn.style.width = '18px';
+                delBtn.style.height = '18px';
+                delBtn.style.fontSize = '10px';
                 delBtn.onclick = (e) => {
                     e.stopPropagation();
                     this.deletePage(index);
@@ -162,27 +153,32 @@ export const carousel = {
 
             item.appendChild(thumb);
             container.appendChild(item);
+            
+            if (isActive) {
+                setTimeout(() => {
+                    item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }, 50);
+            }
         });
+
         countDisplay.innerText = `${state.activeCanvasIndex + 1} / ${state.canvases.length}`;
 
-        // Atualizar destaque dos containers de canvas
+        // Controlar opacidade das setas
+        if (btnPrev && btnNext) {
+            btnPrev.style.opacity = container.scrollLeft <= 0 ? '0.2' : '1';
+            btnNext.style.opacity = (container.scrollLeft + container.offsetWidth >= container.scrollWidth) ? '0.2' : '1';
+        }
+
         state.canvases.forEach((canvas, index) => {
             const container = canvas.getElement().parentNode;
             if (index === state.activeCanvasIndex) {
                 container.style.outline = '3px solid var(--accent)';
                 container.style.outlineOffset = '8px';
                 container.style.boxShadow = '0 0 50px rgba(39, 174, 96, 0.2)';
-                container.style.opacity = '1';
                 container.style.display = 'block';
             } else {
-                container.style.outline = '1px solid rgba(255,255,255,0.1)';
-                container.style.outlineOffset = '8px';
-                container.style.boxShadow = 'none';
-                container.style.opacity = '1';
-                // No modo carrossel geral, talvez queiramos mostrar todos ou esconder?
-                // O usuário pediu para "ajudar a fazer tabelas de preços que precisam de mais de uma página"
-                // Geralmente carrosséis mostram um por vez ou scroll.
-                // Vou manter o scroll horizontal no CSS, mas destacar o ativo.
+                container.style.outline = 'none';
+                container.style.display = 'none';
             }
         });
     },
@@ -200,10 +196,8 @@ export const carousel = {
 
     async loadPages(pagesData, width, height) {
         this.reset();
-        
         for (let i = 0; i < pagesData.length; i++) {
             if (i === 0) {
-                // Primeira página já existe, apenas carrega JSON
                 const canvas = state.getCanvas();
                 await new Promise(resolve => {
                     canvas.loadFromJSON(pagesData[i], () => {
@@ -213,7 +207,6 @@ export const carousel = {
                     });
                 });
             } else {
-                // Adiciona novas páginas
                 this.addPage();
                 const canvas = state.getCanvas();
                 await new Promise(resolve => {
@@ -230,10 +223,25 @@ export const carousel = {
     }
 };
 
-
 export function setupCarousel() {
     const btnAddPage = document.getElementById('btn-add-page');
-    if (btnAddPage) {
-        btnAddPage.onclick = () => carousel.addPage();
+    if (btnAddPage) btnAddPage.onclick = () => carousel.addPage();
+
+    const btnPrev = document.getElementById('btn-prev-page');
+    const btnNext = document.getElementById('btn-next-page');
+    const pagesList = document.getElementById('carousel-pages');
+
+    if (btnPrev && pagesList) {
+        btnPrev.onclick = () => pagesList.scrollBy({ left: -120, behavior: 'smooth' });
+    }
+    if (btnNext && pagesList) {
+        btnNext.onclick = () => pagesList.scrollBy({ left: 120, behavior: 'smooth' });
+    }
+    
+    if (pagesList) {
+        pagesList.onscroll = () => {
+            if (btnPrev) btnPrev.style.opacity = pagesList.scrollLeft <= 0 ? '0.2' : '1';
+            if (btnNext) btnNext.style.opacity = (pagesList.scrollLeft + pagesList.offsetWidth >= pagesList.scrollWidth - 5) ? '0.2' : '1';
+        };
     }
 }
