@@ -41,6 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
     setupAlignment();
     setupZoom();
     setupHistoryEvents(); // Initializes history tracking and shortcuts
+    
+    // 3. Initialize Multi-page (Carousel) manager for all formats
+    carousel.init();
+
 
     // 3. Global Event Listeners
     window.addEventListener('resize', () => {
