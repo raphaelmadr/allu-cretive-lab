@@ -2,6 +2,7 @@
 import { state } from '../state.js';
 import { history } from '../history.js';
 import * as storage from '../storage.js';
+import { carousel } from '../carousel.js';
 
 let activeFolderId = null;
 
@@ -66,6 +67,7 @@ export function renderModelsTools(sidebarContent) {
                 <div style="aspect-ratio:1.2;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;">
                     <img src="${d.thumbnail}" style="max-width:90%;max-height:90%;object-fit:contain;">
                     ${d.isShared ? '<div style="position:absolute;top:8px;right:8px;background:var(--accent);color:white;font-size:.5rem;padding:2px 6px;border-radius:10px;font-weight:800;box-shadow:0 2px 5px rgba(0,0,0,0.2);">COMPARTILHADO</div>' : ''}
+                    ${d.pagesData && d.pagesData.length > 1 ? `<div style="position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,0.6);color:white;font-size:.55rem;padding:2px 6px;border-radius:6px;">${d.pagesData.length} páginas</div>` : ''}
                 </div>
                 <div style="padding:10px;">
                     <div style="font-size:.7rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${d.name}</div>
@@ -89,9 +91,9 @@ export function renderModelsTools(sidebarContent) {
         const saveCard = document.createElement('div');
         saveCard.style.cssText = 'background:rgba(255,255,255,0.02);padding:16px;border-radius:16px;border:1px solid var(--glass-border);';
         saveCard.innerHTML = `
-            <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:12px;font-weight:800;letter-spacing:0.05em;">Salvar Arte</p>
+            <p style="font-size:.6rem;text-transform:uppercase;opacity:.5;margin-bottom:12px;font-weight:800;letter-spacing:0.05em;">Salvar Projeto</p>
             
-            <input id="save-name" type="text" placeholder="Dê um nome para a arte..." value="${activeDesign ? activeDesign.name : ''}"
+            <input id="save-name" type="text" placeholder="Dê um nome para o projeto..." value="${activeDesign ? activeDesign.name : ''}"
                 style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--glass-border);background:rgba(255,255,255,.05);color:white;font-size:.85rem;outline:none;margin-bottom:12px;">
             
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:8px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.05);">
@@ -103,8 +105,9 @@ export function renderModelsTools(sidebarContent) {
 
             <button id="btn-save-final" style="width:100%;padding:14px;border-radius:12px;background:var(--accent);color:white;border:none;cursor:pointer;font-size:.85rem;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;">
                 <i class="fa-solid fa-floppy-disk"></i> 
-                ${activeDesign ? 'Atualizar Arquivo' : 'Salvar Nova Arte'}
+                ${activeDesign ? 'Atualizar Projeto' : 'Salvar Novo Projeto'}
             </button>
+            <p style="font-size:.55rem;opacity:.4;margin-top:10px;text-align:center;">${state.canvases.length} página(s) serão salvas.</p>
         `;
 
         saveCard.querySelector('#btn-save-final').onclick = () => {
@@ -112,39 +115,42 @@ export function renderModelsTools(sidebarContent) {
             const isShared = saveCard.querySelector('#save-shared').checked;
             
             if (isShared && !activeDesign?.isShared) {
-                if (!confirm('⚠️ Ao compartilhar, esta arte poderá ser editada por qualquer pessoa. O arquivo original será modificado por quem usá-lo. Deseja continuar?')) return;
+                if (!confirm('⚠️ Ao compartilhar, este projeto poderá ser editado por qualquer pessoa. O arquivo original será modificado por quem usá-lo. Deseja continuar?')) return;
             }
 
-            const canvas = state.getCanvas();
-            const thumbScale = 160 / Math.max(canvas.width, canvas.height);
+            const mainCanvas = state.canvases[0];
+            const thumbScale = 160 / Math.max(mainCanvas.width, mainCanvas.height);
             
+            // Salva todas as páginas
+            const pagesData = state.canvases.map(c => c.toJSON(['isBadge', 'badgePresetId', 'badgeShape', 'isAlluCard', 'isAlluTable', 'productData']));
+
             const designData = {
                 id: state.activeDesignId || ('d-' + Date.now()),
                 name,
                 folderId: activeFolderId,
                 isShared,
-                width: canvas.width,
-                height: canvas.height,
-                thumbnail: canvas.toDataURL({ format: 'png', quality: 0.6, multiplier: thumbScale }),
-                canvasData: canvas.toJSON(['isBadge', 'badgePresetId', 'badgeShape', 'isAlluCard', 'isAlluTable', 'productData'])
+                width: mainCanvas.width,
+                height: mainCanvas.height,
+                thumbnail: mainCanvas.toDataURL({ format: 'png', quality: 0.6, multiplier: thumbScale }),
+                pagesData: pagesData
             };
 
             state.activeDesignId = storage.saveDesign(designData);
-            alert('✅ Arte salva com sucesso!');
+            alert('✅ Projeto salvo com sucesso!');
             rebuild();
         };
 
         div.appendChild(saveCard);
     }
 
-    function loadDesign(design) {
-        const canvas = state.getCanvas();
-        canvas.loadFromJSON(design.canvasData, () => {
-            canvas.setDimensions({ width: design.width, height: design.height });
-            canvas.renderAll();
-            state.activeDesignId = design.id;
-            history.save();
-        });
+    async function loadDesign(design) {
+        if (design.pagesData && design.pagesData.length > 0) {
+            await carousel.loadPages(design.pagesData, design.width, design.height);
+        } else if (design.canvasData) {
+            // Legado: apenas uma página
+            await carousel.loadPages([design.canvasData], design.width, design.height);
+        }
+        state.activeDesignId = design.id;
     }
 
     rebuild();
