@@ -146,8 +146,9 @@ export function renderModelsTools(sidebarContent) {
     }
 
     async function loadDesign(design) {
+        state.setActivePreset({ w: design.width, h: design.height, name: design.name });
         if (design.pagesData && design.pagesData.length > 0) {
-            await carousel.loadPages(design.pagesData, design.width, design.height);
+
         } else if (design.canvasData) {
             await carousel.loadPages([design.canvasData], design.width, design.height);
         }
