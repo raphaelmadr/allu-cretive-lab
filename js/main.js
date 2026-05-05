@@ -9,7 +9,8 @@ import { setupSidebar, updateSidebar } from './ui/sidebar.js';
 import { setupExport } from './export.js';
 import { setupAlignment } from './align.js';
 import { setupZoom } from './zoom.js';
-import { initStorage, getCurrentUser } from './storage.js';
+import { initStorage } from './storage.js';
+
 
 
 
