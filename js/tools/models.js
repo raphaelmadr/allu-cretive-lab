@@ -147,11 +147,24 @@ export function renderModelsTools(sidebarContent) {
 
     async function loadDesign(design) {
         state.setActivePreset({ w: design.width, h: design.height, name: design.name });
-        if (design.pagesData && design.pagesData.length > 0) {
+        
+        // Atualiza o display de formato no topo
+        const formatDisplay = document.getElementById('format-display');
+        if (formatDisplay) {
+            formatDisplay.innerText = `${design.name || 'Personalizado'} (${design.width}x${design.height})`;
+        }
 
+        if (design.pagesData && design.pagesData.length > 0) {
+            await carousel.loadPages(design.pagesData, design.width, design.height);
         } else if (design.canvasData) {
             await carousel.loadPages([design.canvasData], design.width, design.height);
         }
+
+        // Garante que o canvas seja redimensionado visualmente para o novo formato
+        import('../canvas.js').then(module => {
+            module.resizeCanvas(design.width, design.height);
+        });
+        
         state.activeDesignId = design.id;
         notifications.toast(`Projeto "${design.name}" carregado`);
     }
