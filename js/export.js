@@ -1,6 +1,8 @@
 // js/export.js
 import { state } from './state.js';
 import { carousel } from './carousel.js';
+import { notifications } from './ui/notifications.js';
+
 
 export function setupExport() {
     const btnDownload = document.getElementById('btn-download');
@@ -41,14 +43,21 @@ export function setupExport() {
             
             setTimeout(async () => {
                 try {
-                    if (carousel.active && carousel.pages.length > 1) {
-                        if (confirm(`Este é um carrossel com ${carousel.pages.length} páginas. Deseja exportar todas?`)) {
+                    // Usar state.canvases para verificar múltiplas páginas
+                    if (state.canvases.length > 1) {
+                        const ok = await notifications.confirm(
+                            'Exportar Carrossel', 
+                            `Este projeto possui ${state.canvases.length} páginas. Deseja exportar todas individualmente?`,
+                            'fa-images'
+                        );
+                        if (ok) {
                             await carousel.exportAll(format);
                             btnMain.innerHTML = originalContent;
                             guides.forEach(g => g.style.display = 'block');
                             return;
                         }
                     }
+
 
                     // Exportação normal (página atual)
                     if (format === 'pdf') {
