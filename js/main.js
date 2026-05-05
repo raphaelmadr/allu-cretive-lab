@@ -10,7 +10,7 @@ import { setupExport } from './export.js';
 import { setupAlignment } from './align.js';
 import { setupZoom } from './zoom.js';
 import { initStorage, getCurrentUser } from './storage.js';
-import { setupAuth } from './ui/auth.js';
+
 
 
 
@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
     state.setCanvas(canvas);
     setupCanvas();
 
-    // Initialize Storage & User
+    // Initialize Storage
     initStorage();
-    setupAuth();
+
 
 
 
