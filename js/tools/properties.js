@@ -152,43 +152,135 @@ export function renderPropertiesTools(sidebarContent) {
         const currentMode = active.currentMode;
 
         let p12 = '', p24 = '', p36 = '';
+        let p12Orig = '', p24Orig = '', p36Orig = '';
+        
         if (active.getObjects) {
             const obj12 = active.getObjects().find(o => o.priceMonths === 12);
             const obj24 = active.getObjects().find(o => o.priceMonths === 24);
             const obj36 = active.getObjects().find(o => o.priceMonths === 36 || o.priceCard === true);
+
+            const obj12O = active.getObjects().find(o => o.fakePriceMonths === 12);
+            const obj24O = active.getObjects().find(o => o.fakePriceMonths === 24);
+            const obj36O = active.getObjects().find(o => o.fakePriceMonths === 36 || o.fakePriceCard === true);
+
             if (obj12) p12 = obj12.text.replace('R$ ', '').trim();
             if (obj24) p24 = obj24.text.replace('R$ ', '').trim();
             if (obj36) p36 = obj36.text.replace('R$ ', '').trim();
+
+            if (obj12O) p12Orig = obj12O.text.replace('De R$ ', '').trim();
+            if (obj24O) p24Orig = obj24O.text.replace('De R$ ', '').trim();
+            if (obj36O) p36Orig = obj36O.text.replace('De R$ ', '').trim();
         }
 
         if (!p36 && p.price) p36 = p.price.replace('R$', '').trim();
+        if (!p36Orig && p36) {
+            const numP36 = parseFloat(p36.replace(/\./g, '').replace(',', '.')) || 0;
+            p36Orig = (numP36 * 1.2).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        const parsePrice = (val) => {
+            if (!val) return 0;
+            return parseFloat(val.replace(/\./g, '').replace(',', '.')) || 0;
+        };
+
+        const getDiscountPct = (orig, final) => {
+            const o = parsePrice(orig);
+            const f = parsePrice(final);
+            if (o > 0 && f > 0 && o > f) {
+                return Math.round((1 - f / o) * 100);
+            }
+            return 0;
+        };
 
         let priceInputsHTML = '';
         if (currentMode === 'table-left' || currentMode === 'table-top') {
+            const disc12 = getDiscountPct(p12Orig, p12);
+            const disc24 = getDiscountPct(p24Orig, p24);
+            const disc36 = getDiscountPct(p36Orig, p36);
+
             priceInputsHTML = `
                 <p class="subtitle" style="margin-bottom:12px;">Editar Preços do Catálogo</p>
-                <div style="display:flex; flex-direction:column; gap:12px; background:rgba(255,255,255,0.02); padding:15px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">12 Meses (R$)</label>
-                        <input type="text" id="prop-p12" value="${p12}" style="width:100px; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:right;">
+                <div style="display:flex; flex-direction:column; gap:16px; background:rgba(255,255,255,0.02); padding:15px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:24px;">
+                    
+                    <!-- 12 Meses -->
+                    <div style="display:flex; flex-direction:column; gap:8px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:12px;">
+                        <span style="font-size:0.75rem; font-weight:700; color:white;">12 Meses</span>
+                        <div style="display:flex; gap:8px;">
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">De (R$)</label>
+                                <input type="text" id="prop-p12-original" value="${p12Orig}" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; font-size:0.75rem;">
+                            </div>
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">Por (R$)</label>
+                                <input type="text" id="prop-p12-final" value="${p12}" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; font-size:0.75rem;">
+                            </div>
+                            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">Desc (%)</label>
+                                <input type="number" id="prop-p12-discount" value="${disc12 || ''}" placeholder="0" style="width:100%; padding:6px 6px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:center; font-size:0.75rem;">
+                            </div>
+                        </div>
                     </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">24 Meses (R$)</label>
-                        <input type="text" id="prop-p24" value="${p24}" style="width:100px; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:right;">
+
+                    <!-- 24 Meses -->
+                    <div style="display:flex; flex-direction:column; gap:8px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:12px;">
+                        <span style="font-size:0.75rem; font-weight:700; color:white;">24 Meses</span>
+                        <div style="display:flex; gap:8px;">
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">De (R$)</label>
+                                <input type="text" id="prop-p24-original" value="${p24Orig}" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; font-size:0.75rem;">
+                            </div>
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">Por (R$)</label>
+                                <input type="text" id="prop-p24-final" value="${p24}" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; font-size:0.75rem;">
+                            </div>
+                            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">Desc (%)</label>
+                                <input type="number" id="prop-p24-discount" value="${disc24 || ''}" placeholder="0" style="width:100%; padding:6px 6px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:center; font-size:0.75rem;">
+                            </div>
+                        </div>
                     </div>
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">36 Meses (R$)</label>
-                        <input type="text" id="prop-p36" value="${p36}" style="width:100px; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:right;">
+
+                    <!-- 36 Meses -->
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <span style="font-size:0.75rem; font-weight:700; color:white;">36 Meses</span>
+                        <div style="display:flex; gap:8px;">
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">De (R$)</label>
+                                <input type="text" id="prop-p36-original" value="${p36Orig}" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; font-size:0.75rem;">
+                            </div>
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">Por (R$)</label>
+                                <input type="text" id="prop-p36-final" value="${p36}" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; font-size:0.75rem;">
+                            </div>
+                            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">Desc (%)</label>
+                                <input type="number" id="prop-p36-discount" value="${disc36 || ''}" placeholder="0" style="width:100%; padding:6px 6px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:center; font-size:0.75rem;">
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             `;
         } else if (currentMode === 'card') {
+            const discCard = getDiscountPct(p36Orig, p36);
             priceInputsHTML = `
                 <p class="subtitle" style="margin-bottom:12px;">Editar Preço do Card</p>
                 <div style="display:flex; flex-direction:column; gap:12px; background:rgba(255,255,255,0.02); padding:15px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:24px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Preço (R$)</label>
-                        <input type="text" id="prop-p36" value="${p36}" style="width:100px; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:right;">
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; gap:8px;">
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">De (R$)</label>
+                                <input type="text" id="prop-card-original" value="${p36Orig}" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; font-size:0.75rem;">
+                            </div>
+                            <div style="flex:1; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">Por (R$)</label>
+                                <input type="text" id="prop-card-final" value="${p36}" style="width:100%; padding:6px 10px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; font-size:0.75rem;">
+                            </div>
+                            <div style="width:60px; display:flex; flex-direction:column; gap:4px;">
+                                <label style="font-size:0.65rem; color:var(--text-secondary);">Desc (%)</label>
+                                <input type="number" id="prop-card-discount" value="${discCard || ''}" placeholder="0" style="width:100%; padding:6px 6px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:center; font-size:0.75rem;">
+                            </div>
+                        </div>
                     </div>
                 </div>
             `;
@@ -290,7 +382,124 @@ export function renderPropertiesTools(sidebarContent) {
             </div>` : ''}
 
         </div>
+    `;
 
+    let textEffectsHTML = '';
+    if (active.type === 'i-text' || active.type === 'text') {
+        const hasShadow = !!active.shadow;
+        const shadowBlur = active.shadow ? active.shadow.blur : 10;
+        const shadowOffsetX = active.shadow ? active.shadow.offsetX : 5;
+        const shadowOffsetY = active.shadow ? active.shadow.offsetY : 5;
+        const shadowColor = active.shadow ? (typeof active.shadow.color === 'string' ? active.shadow.color : '#000000') : '#000000';
+
+        const hasInnerShadow = (active.innerShadowBlur || 0) > 0;
+        const innerShadowBlur = active.innerShadowBlur || 10;
+        const innerShadowOffsetX = active.innerShadowOffsetX || 5;
+        const innerShadowOffsetY = active.innerShadowOffsetY || 5;
+        const innerShadowColor = active.innerShadowColor || '#000000';
+
+        const charSpacingVal = active.charSpacing || 0;
+        const lineHeightVal = active.lineHeight || 1.16;
+
+        textEffectsHTML = `
+            <p class="subtitle" style="margin-top:24px; margin-bottom:12px;">Formatação Avançada</p>
+            <div style="display:flex; flex-direction:column; gap:16px; background:rgba(255,255,255,0.02); padding:20px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:20px;">
+                <!-- Espaçamento -->
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Espaçamento</label>
+                        <span id="prop-char-spacing-val" style="font-size:0.75rem; color:var(--text-secondary);">${charSpacingVal}</span>
+                    </div>
+                    <input type="range" id="prop-char-spacing" min="-100" max="800" value="${charSpacingVal}" style="width:100%;">
+                </div>
+
+                <!-- Altura da Linha -->
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Altura da Linha</label>
+                        <span id="prop-line-height-val" style="font-size:0.75rem; color:var(--text-secondary);">${lineHeightVal.toFixed(2)}</span>
+                    </div>
+                    <input type="range" id="prop-line-height" min="0.5" max="3" step="0.05" value="${lineHeightVal}" style="width:100%;">
+                </div>
+            </div>
+
+            <p class="subtitle" style="margin-top:24px; margin-bottom:12px;">Sombra Projetada (Externa)</p>
+            <div style="display:flex; flex-direction:column; gap:16px; background:rgba(255,255,255,0.02); padding:20px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:20px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <input type="checkbox" id="prop-has-shadow" ${hasShadow ? 'checked' : ''} style="width:16px; height:16px; accent-color:var(--accent); cursor:pointer;">
+                    <label for="prop-has-shadow" style="font-size:0.8rem; font-weight:600; color:var(--text-secondary); cursor:pointer;">Habilitar Sombra</label>
+                </div>
+                
+                <div id="shadow-details-container" style="display:${hasShadow ? 'flex' : 'none'}; flex-direction:column; gap:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.8rem; color:var(--text-secondary);">Cor da Sombra</label>
+                        <input type="color" id="prop-shadow-color" value="${shadowColor.startsWith('#') ? shadowColor : '#000000'}" style="border:none; background:transparent; width:30px; height:24px; cursor:pointer;">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <label style="font-size:0.75rem; color:var(--text-secondary);">Desfoque (Blur)</label>
+                            <span id="prop-shadow-blur-val" style="font-size:0.7rem; color:var(--text-secondary);">${shadowBlur}px</span>
+                        </div>
+                        <input type="range" id="prop-shadow-blur" min="0" max="50" value="${shadowBlur}" style="width:100%;">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <label style="font-size:0.75rem; color:var(--text-secondary);">Deslocamento X</label>
+                            <span id="prop-shadow-offsetx-val" style="font-size:0.7rem; color:var(--text-secondary);">${shadowOffsetX}px</span>
+                        </div>
+                        <input type="range" id="prop-shadow-offsetx" min="-50" max="50" value="${shadowOffsetX}" style="width:100%;">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <label style="font-size:0.75rem; color:var(--text-secondary);">Deslocamento Y</label>
+                            <span id="prop-shadow-offsety-val" style="font-size:0.7rem; color:var(--text-secondary);">${shadowOffsetY}px</span>
+                        </div>
+                        <input type="range" id="prop-shadow-offsety" min="-50" max="50" value="${shadowOffsetY}" style="width:100%;">
+                    </div>
+                </div>
+            </div>
+
+            <p class="subtitle" style="margin-top:24px; margin-bottom:12px;">Sombra Interna (Inset)</p>
+            <div style="display:flex; flex-direction:column; gap:16px; background:rgba(255,255,255,0.02); padding:20px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:20px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <input type="checkbox" id="prop-has-innershadow" ${hasInnerShadow ? 'checked' : ''} style="width:16px; height:16px; accent-color:var(--accent); cursor:pointer;">
+                    <label for="prop-has-innershadow" style="font-size:0.8rem; font-weight:600; color:var(--text-secondary); cursor:pointer;">Habilitar Sombra Interna</label>
+                </div>
+                
+                <div id="innershadow-details-container" style="display:${hasInnerShadow ? 'flex' : 'none'}; flex-direction:column; gap:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.8rem; color:var(--text-secondary);">Cor da Sombra</label>
+                        <input type="color" id="prop-innershadow-color" value="${innerShadowColor.startsWith('#') ? innerShadowColor : '#000000'}" style="border:none; background:transparent; width:30px; height:24px; cursor:pointer;">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <label style="font-size:0.75rem; color:var(--text-secondary);">Desfoque (Blur)</label>
+                            <span id="prop-innershadow-blur-val" style="font-size:0.7rem; color:var(--text-secondary);">${innerShadowBlur}px</span>
+                        </div>
+                        <input type="range" id="prop-innershadow-blur" min="0" max="50" value="${innerShadowBlur}" style="width:100%;">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <label style="font-size:0.75rem; color:var(--text-secondary);">Deslocamento X</label>
+                            <span id="prop-innershadow-offsetx-val" style="font-size:0.7rem; color:var(--text-secondary);">${innerShadowOffsetX}px</span>
+                        </div>
+                        <input type="range" id="prop-innershadow-offsetx" min="-50" max="50" value="${innerShadowOffsetX}" style="width:100%;">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <label style="font-size:0.75rem; color:var(--text-secondary);">Deslocamento Y</label>
+                            <span id="prop-innershadow-offsety-val" style="font-size:0.7rem; color:var(--text-secondary);">${innerShadowOffsetY}px</span>
+                        </div>
+                        <input type="range" id="prop-innershadow-offsety" min="-50" max="50" value="${innerShadowOffsetY}" style="width:100%;">
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    propertiesHTML += textEffectsHTML;
+
+    propertiesHTML += `
         <p class="subtitle" style="margin-top:24px; margin-bottom:12px;">Camadas (Layers)</p>
         <div style="display:flex; justify-content:space-between; gap:8px; margin-bottom:24px;">
             <button id="prop-layer-up" class="btn-tool" style="flex:1; border:1px solid var(--glass-border); border-radius:8px; padding:10px; background:rgba(255,255,255,0.02); color:white; cursor:pointer;" title="Trazer para Frente (1 nível)"><i class="fa-solid fa-angle-up"></i></button>
@@ -360,34 +569,250 @@ export function renderPropertiesTools(sidebarContent) {
         };
     });
 
-    const p12Input = div.querySelector('#prop-p12');
-    const p24Input = div.querySelector('#prop-p24');
-    const p36Input = div.querySelector('#prop-p36');
+    const formatCurrencyStr = (num) => "R$ " + num.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    const formatFakeCurrencyStr = (num) => "De R$ " + num.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 
-    if (p12Input) p12Input.oninput = (e) => {
-        const val = e.target.value.trim();
-        const obj = active.getObjects().find(o => o.priceMonths === 12);
-        if (obj) {
-            obj.set('text', val.startsWith('R$') ? val : `R$ ${val}`);
-            canvas.renderAll();
+    if (active.productData) {
+        if (currentMode === 'card') {
+            const origInput = div.querySelector('#prop-card-original');
+            const finalInput = div.querySelector('#prop-card-final');
+            const discInput = div.querySelector('#prop-card-discount');
+
+            if (origInput && finalInput && discInput) {
+                const updateOnCanvas = () => {
+                    const origVal = parsePrice(origInput.value);
+                    const finalVal = parsePrice(finalInput.value);
+
+                    const origObj = active.getObjects().find(o => o.fakePriceCard === true);
+                    const finalObj = active.getObjects().find(o => o.priceCard === true);
+
+                    if (origObj) origObj.set('text', formatFakeCurrencyStr(origVal));
+                    if (finalObj) finalObj.set('text', formatCurrencyStr(finalVal));
+                    canvas.renderAll();
+                };
+
+                origInput.oninput = () => {
+                    const origVal = parsePrice(origInput.value);
+                    const finalVal = parsePrice(finalInput.value);
+                    if (origVal > 0 && finalVal > 0) {
+                        discInput.value = Math.round((1 - finalVal / origVal) * 100);
+                    }
+                    updateOnCanvas();
+                };
+                origInput.onchange = () => history.save();
+
+                finalInput.oninput = () => {
+                    const origVal = parsePrice(origInput.value);
+                    const finalVal = parsePrice(finalInput.value);
+                    if (origVal > 0 && finalVal > 0) {
+                        discInput.value = Math.round((1 - finalVal / origVal) * 100);
+                    }
+                    updateOnCanvas();
+                };
+                finalInput.onchange = () => history.save();
+
+                discInput.oninput = () => {
+                    const origVal = parsePrice(origInput.value);
+                    const discVal = parseFloat(discInput.value) || 0;
+                    if (origVal > 0) {
+                        const finalVal = origVal * (1 - discVal / 100);
+                        finalInput.value = finalVal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                        updateOnCanvas();
+                    }
+                };
+                discInput.onchange = () => history.save();
+            }
+        } else if (currentMode === 'table-left' || currentMode === 'table-top') {
+            const setupPriceTableEvents = (months) => {
+                const origInput = div.querySelector(`#prop-p${months}-original`);
+                const finalInput = div.querySelector(`#prop-p${months}-final`);
+                const discInput = div.querySelector(`#prop-p${months}-discount`);
+
+                if (!origInput || !finalInput || !discInput) return;
+
+                const updateOnCanvas = () => {
+                    const origVal = parsePrice(origInput.value);
+                    const finalVal = parsePrice(finalInput.value);
+
+                    const origObj = active.getObjects().find(o => o.fakePriceMonths === months);
+                    const finalObj = active.getObjects().find(o => o.priceMonths === months);
+
+                    if (origObj) origObj.set('text', formatFakeCurrencyStr(origVal));
+                    if (finalObj) finalObj.set('text', formatCurrencyStr(finalVal));
+                    canvas.renderAll();
+                };
+
+                origInput.oninput = () => {
+                    const origVal = parsePrice(origInput.value);
+                    const finalVal = parsePrice(finalInput.value);
+                    if (origVal > 0 && finalVal > 0) {
+                        discInput.value = Math.round((1 - finalVal / origVal) * 100);
+                    }
+                    updateOnCanvas();
+                };
+                origInput.onchange = () => history.save();
+
+                finalInput.oninput = () => {
+                    const origVal = parsePrice(origInput.value);
+                    const finalVal = parsePrice(finalInput.value);
+                    if (origVal > 0 && finalVal > 0) {
+                        discInput.value = Math.round((1 - finalVal / origVal) * 100);
+                    }
+                    updateOnCanvas();
+                };
+                finalInput.onchange = () => history.save();
+
+                discInput.oninput = () => {
+                    const origVal = parsePrice(origInput.value);
+                    const discVal = parseFloat(discInput.value) || 0;
+                    if (origVal > 0) {
+                        const finalVal = origVal * (1 - discVal / 100);
+                        finalInput.value = finalVal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+                        updateOnCanvas();
+                    }
+                };
+                discInput.onchange = () => history.save();
+            };
+
+            setupPriceTableEvents(12);
+            setupPriceTableEvents(24);
+            setupPriceTableEvents(36);
         }
-    };
-    if (p24Input) p24Input.oninput = (e) => {
-        const val = e.target.value.trim();
-        const obj = active.getObjects().find(o => o.priceMonths === 24);
-        if (obj) {
-            obj.set('text', val.startsWith('R$') ? val : `R$ ${val}`);
-            canvas.renderAll();
+    }
+
+    // Wiring Text Effects
+    if (active.type === 'i-text' || active.type === 'text') {
+        const charSpacingInput = div.querySelector('#prop-char-spacing');
+        const charSpacingVal = div.querySelector('#prop-char-spacing-val');
+        if (charSpacingInput) {
+            charSpacingInput.oninput = (e) => {
+                const val = parseInt(e.target.value);
+                charSpacingVal.innerText = val;
+                active.set('charSpacing', val);
+                canvas.renderAll();
+            };
+            charSpacingInput.onchange = () => history.save();
         }
-    };
-    if (p36Input) p36Input.oninput = (e) => {
-        const val = e.target.value.trim();
-        const obj = active.getObjects().find(o => o.priceMonths === 36 || o.priceCard === true);
-        if (obj) {
-            obj.set('text', val.startsWith('R$') ? val : `R$ ${val}`);
-            canvas.renderAll();
+
+        const lineHeightInput = div.querySelector('#prop-line-height');
+        const lineHeightVal = div.querySelector('#prop-line-height-val');
+        if (lineHeightInput) {
+            lineHeightInput.oninput = (e) => {
+                const val = parseFloat(e.target.value);
+                lineHeightVal.innerText = val.toFixed(2);
+                active.set('lineHeight', val);
+                canvas.renderAll();
+            };
+            lineHeightInput.onchange = () => history.save();
         }
-    };
+
+        // Outer Shadow
+        const hasShadowCheck = div.querySelector('#prop-has-shadow');
+        const shadowDetails = div.querySelector('#shadow-details-container');
+        const shadowColorInput = div.querySelector('#prop-shadow-color');
+        const shadowBlurInput = div.querySelector('#prop-shadow-blur');
+        const shadowBlurVal = div.querySelector('#prop-shadow-blur-val');
+        const shadowOffsetXInput = div.querySelector('#prop-shadow-offsetx');
+        const shadowOffsetXVal = div.querySelector('#prop-shadow-offsetx-val');
+        const shadowOffsetYInput = div.querySelector('#prop-shadow-offsety');
+        const shadowOffsetYVal = div.querySelector('#prop-shadow-offsety-val');
+
+        const updateShadow = () => {
+            if (hasShadowCheck.checked) {
+                shadowDetails.style.display = 'flex';
+                active.set('shadow', new fabric.Shadow({
+                    color: shadowColorInput.value,
+                    blur: parseInt(shadowBlurInput.value),
+                    offsetX: parseInt(shadowOffsetXInput.value),
+                    offsetY: parseInt(shadowOffsetYInput.value)
+                }));
+            } else {
+                shadowDetails.style.display = 'none';
+                active.set('shadow', null);
+            }
+            canvas.renderAll();
+        };
+
+        if (hasShadowCheck) {
+            hasShadowCheck.onchange = () => {
+                updateShadow();
+                history.save();
+            };
+            shadowColorInput.onchange = () => {
+                updateShadow();
+                history.save();
+            };
+            shadowBlurInput.oninput = (e) => {
+                shadowBlurVal.innerText = e.target.value + 'px';
+                updateShadow();
+            };
+            shadowBlurInput.onchange = () => history.save();
+            shadowOffsetXInput.oninput = (e) => {
+                shadowOffsetXVal.innerText = e.target.value + 'px';
+                updateShadow();
+            };
+            shadowOffsetXInput.onchange = () => history.save();
+            shadowOffsetYInput.oninput = (e) => {
+                shadowOffsetYVal.innerText = e.target.value + 'px';
+                updateShadow();
+            };
+            shadowOffsetYInput.onchange = () => history.save();
+        }
+
+        // Inner Shadow
+        const hasInnerShadowCheck = div.querySelector('#prop-has-innershadow');
+        const innerShadowDetails = div.querySelector('#innershadow-details-container');
+        const innerShadowColorInput = div.querySelector('#prop-innershadow-color');
+        const innerShadowBlurInput = div.querySelector('#prop-innershadow-blur');
+        const innerShadowBlurVal = div.querySelector('#prop-innershadow-blur-val');
+        const innerShadowOffsetXInput = div.querySelector('#prop-innershadow-offsetx');
+        const innerShadowOffsetXVal = div.querySelector('#prop-innershadow-offsetx-val');
+        const innerShadowOffsetYInput = div.querySelector('#prop-innershadow-offsety');
+        const innerShadowOffsetYVal = div.querySelector('#prop-innershadow-offsety-val');
+
+        const updateInnerShadow = () => {
+            if (hasInnerShadowCheck.checked) {
+                innerShadowDetails.style.display = 'flex';
+                active.set('innerShadowColor', innerShadowColorInput.value);
+                active.set('innerShadowBlur', parseInt(innerShadowBlurInput.value));
+                active.set('innerShadowOffsetX', parseInt(innerShadowOffsetXInput.value));
+                active.set('innerShadowOffsetY', parseInt(innerShadowOffsetYInput.value));
+            } else {
+                innerShadowDetails.style.display = 'none';
+                active.set('innerShadowColor', null);
+                active.set('innerShadowBlur', 0);
+                active.set('innerShadowOffsetX', 0);
+                active.set('innerShadowOffsetY', 0);
+            }
+            canvas.renderAll();
+        };
+
+        if (hasInnerShadowCheck) {
+            hasInnerShadowCheck.onchange = () => {
+                updateInnerShadow();
+                history.save();
+            };
+            innerShadowColorInput.onchange = () => {
+                updateInnerShadow();
+                history.save();
+            };
+            innerShadowBlurInput.oninput = (e) => {
+                innerShadowBlurVal.innerText = e.target.value + 'px';
+                updateInnerShadow();
+            };
+            innerShadowBlurInput.onchange = () => history.save();
+            innerShadowOffsetXInput.oninput = (e) => {
+                innerShadowOffsetXVal.innerText = e.target.value + 'px';
+                updateInnerShadow();
+            };
+            innerShadowOffsetXInput.onchange = () => history.save();
+            innerShadowOffsetYInput.oninput = (e) => {
+                innerShadowOffsetYVal.innerText = e.target.value + 'px';
+                updateInnerShadow();
+            };
+            innerShadowOffsetYInput.onchange = () => history.save();
+        }
+    }
 
     const sizeInput = div.querySelector('#prop-text-size');
     const sizeVal = div.querySelector('#prop-text-size-val');

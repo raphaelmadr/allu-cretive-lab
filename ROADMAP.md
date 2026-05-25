@@ -40,6 +40,16 @@ Visão geral das próximas etapas de desenvolvimento.
 - [x] Implementar automação de preços via GitHub Actions (Sincronização Horária).
 - [x] Criar dashboard de status de sincronização no editor.
 - [x] Sistema de Templates colaborativos (Modelos Salvos).
+- [x] Sincronização em tempo real entre Sidebar de Propriedades e Canvas.
+- [x] Refinamento do Workflow de Ícones (Lucide) com edição dinâmica.
+- [x] Otimização da persistência de projetos (.allu) com integridade total.
 - [ ] Persistência em Servidor para Templates (Node.js/API integration).
 - [ ] Suporte a animações básicas e exportação de GIFs/Vídeos.
 - [ ] Modo de apresentação de slides integrado.
+
+## Fase 7: Inteligência e Conectividade (Próximos Passos)
+- [ ] Integração com APIs de bancos de imagens (Pexels/Unsplash) para assets rápidos.
+- [ ] Assistente de IA para geração de títulos e copies curtas para posts.
+- [ ] Sistema de exportação direta para redes sociais via API.
+- [ ] Ferramenta de corte (Crop) inteligente para imagens de produtos.
+- [ ] Histórico de versões de arquivos na nuvem.

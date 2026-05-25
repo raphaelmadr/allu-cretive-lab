@@ -15,6 +15,25 @@ export function setupCanvas() {
         cornerStyle: 'circle',
         borderScaleFactor: 2
     });
+
+    // Sobrescrever renderização de texto do Fabric.js para suportar sombra interna
+    const originalTextRender = fabric.Text.prototype._render;
+    fabric.Text.prototype._render = function(ctx) {
+        originalTextRender.call(this, ctx);
+        
+        if (this.innerShadowBlur > 0 && this.innerShadowColor) {
+            ctx.save();
+            ctx.globalCompositeOperation = 'source-atop';
+            ctx.shadowColor = this.innerShadowColor;
+            ctx.shadowBlur = this.innerShadowBlur;
+            ctx.shadowOffsetX = (this.innerShadowOffsetX || 0) + 10000;
+            ctx.shadowOffsetY = (this.innerShadowOffsetY || 0) + 10000;
+            
+            ctx.translate(-10000, -10000);
+            originalTextRender.call(this, ctx);
+            ctx.restore();
+        }
+    };
 }
 
 export function resizeCanvas(w, h) {

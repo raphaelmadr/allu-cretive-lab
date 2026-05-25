@@ -109,6 +109,17 @@ export function renderModelsTools(sidebarContent) {
                 <i class="fa-solid fa-floppy-disk"></i> 
                 ${activeDesign ? 'Atualizar Projeto' : 'Salvar Novo Projeto'}
             </button>
+            
+            <div style="display:flex; gap:8px; margin-top:12px;">
+                <button id="btn-export-allu" style="flex:1; padding:10px; border-radius:10px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; font-size:0.72rem; font-weight:700; display:flex; align-items:center; justify-content:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='var(--accent)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='var(--glass-border)';">
+                    <i class="fa-solid fa-file-export"></i> Exportar (.allu)
+                </button>
+                <button id="btn-import-allu" style="flex:1; padding:10px; border-radius:10px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; font-size:0.72rem; font-weight:700; display:flex; align-items:center; justify-content:center; gap:6px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'; this.style.borderColor='var(--accent)';" onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='var(--glass-border)';">
+                    <i class="fa-solid fa-file-import"></i> Importar (.allu)
+                </button>
+            </div>
+            <input type="file" id="input-import-allu" accept=".allu,.json" style="display:none;">
+            
             <p style="font-size:.55rem;opacity:.4;margin-top:10px;text-align:center;">${state.canvases.length} página(s) serão salvas.</p>
         `;
 
@@ -124,7 +135,7 @@ export function renderModelsTools(sidebarContent) {
             const mainCanvas = state.canvases[0];
             const thumbScale = 160 / Math.max(mainCanvas.width, mainCanvas.height);
             
-            const pagesData = state.canvases.map(c => c.toJSON(['isBadge', 'badgePresetId', 'badgeShape', 'isAlluCard', 'isAlluTable', 'productData']));
+            const pagesData = state.canvases.map(c => c.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow']));
 
             const designData = {
                 id: state.activeDesignId || ('d-' + Date.now()),
@@ -140,6 +151,67 @@ export function renderModelsTools(sidebarContent) {
             state.activeDesignId = storage.saveDesign(designData);
             notifications.toast('Projeto salvo com sucesso!');
             rebuild();
+        };
+
+        saveCard.querySelector('#btn-export-allu').onclick = () => {
+            const name = saveCard.querySelector('#save-name').value.trim() || 'Sem nome';
+            const mainCanvas = state.canvases[0];
+            if (!mainCanvas) return;
+
+            const pagesData = state.canvases.map(c => c.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow']));
+            
+            const exportData = {
+                version: '1.0',
+                name,
+                width: mainCanvas.width,
+                height: mainCanvas.height,
+                pagesData: pagesData
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportData, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", `${name.replace(/\s+/g, '_') || 'projeto'}.allu`);
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+            notifications.toast('Projeto exportado com sucesso!');
+        };
+
+        const fileInput = saveCard.querySelector('#input-import-allu');
+        saveCard.querySelector('#btn-import-allu').onclick = () => {
+            fileInput.click();
+        };
+
+        fileInput.onchange = (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                try {
+                    const parsed = JSON.parse(event.target.result);
+                    if (!parsed.pagesData || !Array.isArray(parsed.pagesData)) {
+                        throw new Error('Formato de arquivo .allu inválido.');
+                    }
+                    
+                    await loadDesign({
+                        id: 'd-imported-' + Date.now(),
+                        name: parsed.name || 'Projeto Importado',
+                        width: parsed.width || 1080,
+                        height: parsed.height || 1080,
+                        pagesData: parsed.pagesData
+                    });
+                    
+                    notifications.toast('Projeto importado com sucesso!');
+                    rebuild();
+                } catch (err) {
+                    console.error(err);
+                    notifications.alert('Erro ao Importar', 'Não foi possível ler o arquivo. Verifique se é um arquivo .allu ou JSON válido.', 'fa-circle-xmark');
+                }
+            };
+            reader.readAsText(file);
+            fileInput.value = '';
         };
 
         div.appendChild(saveCard);

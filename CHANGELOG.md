@@ -2,6 +2,16 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [0.6.0] - 2026-05-05
+### Adicionado
+- **Sincronização de Propriedades em Tempo Real**: Novo sistema de vinculação bidirecional entre a sidebar de propriedades e o canvas, permitindo feedback instantâneo ao alterar cores, fontes, tamanhos e outros atributos.
+- **Workflow de Ícones Dinâmicos**: Refinamento completo da edição de ícones Lucide, com controles granulares de espessura de traço (`stroke-width`), cores e tamanhos aplicados diretamente no estágio.
+- **Integração de Ativos (Assets Sidebar)**: Nova organização centralizada na sidebar para facilitar o fluxo de trabalho com imagens, logos da marca e ícones.
+
+### Melhorado
+- **Integridade de Projetos (.allu)**: Otimização do motor de serialização para garantir que projetos salvos e restaurados mantenham 100% de fidelidade estrutural, dimensional e estética.
+- **UX de Propriedades**: Agrupamento lógico de controles na sidebar (Tipografia, Aparência, Layout) para uma edição mais intuitiva.
+
 ## [0.5.0] - 2026-05-05
 ### Adicionado
 - **Notificações Branded**: Substituição de alertas nativos do navegador por popups modernos e personalizados integrados à identidade visual da Allu.
