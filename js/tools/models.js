@@ -224,7 +224,42 @@ export function renderModelsTools(sidebarContent) {
         div.appendChild(saveCard);
     }
 
+    function normalizeDesignDimensions(design) {
+        if (!design.width || !design.height) return;
+        const ratio = design.width / design.height;
+        
+        let closestPreset = null;
+        let minDiff = Infinity;
+        
+        const standardPresets = [
+            { w: 1080, h: 1080 }, // Instagram Feed / Carousel
+            { w: 1080, h: 1920 }, // Instagram Stories / WhatsApp Status
+            { w: 1080, h: 1350 }, // WhatsApp Feed
+            { w: 1200, h: 627 },  // LinkedIn Post
+            { w: 1200, h: 675 },  // X Post
+            { w: 600, h: 200 }    // Email Header
+        ];
+        
+        standardPresets.forEach(p => {
+            const pratio = p.w / p.h;
+            const diff = Math.abs(ratio - pratio);
+            if (diff < minDiff) {
+                minDiff = diff;
+                closestPreset = p;
+            }
+        });
+        
+        if (closestPreset && minDiff < 0.1) {
+            design.width = closestPreset.w;
+            design.height = closestPreset.h;
+        } else {
+            design.width = Math.round(design.width);
+            design.height = Math.round(design.height);
+        }
+    }
+
     async function loadDesign(design) {
+        normalizeDesignDimensions(design);
         state.setActivePreset({ w: design.width, h: design.height, name: design.name });
         
         // Atualiza o display de formato no topo
