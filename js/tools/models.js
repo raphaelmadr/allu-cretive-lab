@@ -133,6 +133,9 @@ export function renderModelsTools(sidebarContent) {
             }
 
             const mainCanvas = state.canvases[0];
+            const zoom = mainCanvas.getZoom() || 1;
+            const logicalW = mainCanvas.width / zoom;
+            const logicalH = mainCanvas.height / zoom;
             const thumbScale = 160 / Math.max(mainCanvas.width, mainCanvas.height);
             
             const pagesData = state.canvases.map(c => c.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow', 'fakePriceCard', 'priceCard', 'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge']));
@@ -142,8 +145,8 @@ export function renderModelsTools(sidebarContent) {
                 name,
                 folderId: activeFolderId,
                 isShared,
-                width: mainCanvas.width,
-                height: mainCanvas.height,
+                width: logicalW,
+                height: logicalH,
                 thumbnail: mainCanvas.toDataURL({ format: 'png', quality: 0.6, multiplier: thumbScale }),
                 pagesData: pagesData
             };
@@ -158,13 +161,17 @@ export function renderModelsTools(sidebarContent) {
             const mainCanvas = state.canvases[0];
             if (!mainCanvas) return;
 
+            const zoom = mainCanvas.getZoom() || 1;
+            const logicalW = mainCanvas.width / zoom;
+            const logicalH = mainCanvas.height / zoom;
+
             const pagesData = state.canvases.map(c => c.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow', 'fakePriceCard', 'priceCard', 'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge']));
             
             const exportData = {
                 version: '1.0',
                 name,
-                width: mainCanvas.width,
-                height: mainCanvas.height,
+                width: logicalW,
+                height: logicalH,
                 pagesData: pagesData
             };
 
