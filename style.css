@@ -510,3 +510,53 @@ p.subtitle {
 #btn-add-page:active {
     transform: scale(0.95);
 }
+
+/* Custom Switch Toggle */
+.allu-switch {
+    position: relative;
+    display: inline-block;
+    width: 38px;
+    height: 20px;
+}
+
+.allu-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.allu-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: .3s;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.allu-slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #828392;
+    transition: .3s;
+    border-radius: 50%;
+}
+
+.allu-switch input:checked + .allu-slider {
+    background-color: rgba(39, 174, 96, 0.2);
+    border-color: var(--accent);
+}
+
+.allu-switch input:checked + .allu-slider:before {
+    transform: translateX(18px);
+    background-color: var(--accent);
+}
+

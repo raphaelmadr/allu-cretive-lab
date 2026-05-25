@@ -11,7 +11,7 @@ export const history = {
     save() {
         const canvas = state.getCanvas();
         if (!canvas || this.isProcessing) return;
-        const stateJSON = JSON.stringify(canvas.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow']));
+        const stateJSON = JSON.stringify(canvas.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow', 'fakePriceCard', 'priceCard', 'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge']));
         
         // Evitar duplicatas consecutivas
         if (this.undoStack.length > 0 && this.undoStack[this.undoStack.length - 1] === stateJSON) return;

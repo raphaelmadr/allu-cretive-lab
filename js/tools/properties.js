@@ -151,6 +151,53 @@ export function renderPropertiesTools(sidebarContent) {
         return parseFloat(val.replace(/\./g, '').replace(',', '.')) || 0;
     };
 
+    const updateGroupDiscountBadge = (active, canvas) => {
+        const discountObj = active.getObjects().find(o => o.isDiscountBadgeText === true);
+        const discountBg = active.getObjects().find(o => o.isDiscountBadgeRect === true);
+        if (!discountObj && !discountBg) return;
+
+        const isChecked = active.showDiscountBadge !== false;
+
+        let maxDiscount = -Infinity;
+
+        if (active.currentMode === 'card') {
+            const origObj = active.getObjects().find(o => o.fakePriceCard === true);
+            const finalObj = active.getObjects().find(o => o.priceCard === true);
+            if (origObj && finalObj) {
+                const origVal = parsePrice(origObj.text.replace('De R$ ', '').trim());
+                const finalVal = parsePrice(finalObj.text.replace('R$ ', '').trim());
+                if (origVal > 0 && finalVal > 0 && origVal > finalVal) {
+                    maxDiscount = Math.round((1 - finalVal / origVal) * 100);
+                }
+            }
+        } else if (active.currentMode === 'table-left' || active.currentMode === 'table-top') {
+            [12, 24, 36].forEach(months => {
+                const origObj = active.getObjects().find(o => o.fakePriceMonths === months);
+                const finalObj = active.getObjects().find(o => o.priceMonths === months);
+                if (origObj && finalObj) {
+                    const origVal = parsePrice(origObj.text.replace('De R$ ', '').trim());
+                    const finalVal = parsePrice(finalObj.text.replace('R$ ', '').trim());
+                    if (origVal > 0 && finalVal > 0 && origVal > finalVal) {
+                        const d = Math.round((1 - finalVal / origVal) * 100);
+                        if (d > maxDiscount) maxDiscount = d;
+                    }
+                }
+            });
+        }
+
+        if (isChecked && maxDiscount !== -Infinity && maxDiscount > 0) {
+            if (discountObj) {
+                discountObj.set({ text: `${maxDiscount}% OFF`, visible: true });
+            }
+            if (discountBg) {
+                discountBg.set({ visible: true });
+            }
+        } else {
+            if (discountObj) discountObj.set({ visible: false });
+            if (discountBg) discountBg.set({ visible: false });
+        }
+    };
+
     let propertiesHTML = '';
 
     if (active.productData) {
@@ -259,6 +306,15 @@ export function renderPropertiesTools(sidebarContent) {
                         </div>
                     </div>
 
+                    <!-- Badge Switch Toggle -->
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.05);">
+                        <label class="allu-switch">
+                            <input type="checkbox" id="prop-product-show-badge" ${active.showDiscountBadge !== false ? 'checked' : ''}>
+                            <span class="allu-slider"></span>
+                        </label>
+                        <span style="font-size:0.75rem; color:var(--text-secondary); font-weight:600; cursor:pointer;" onclick="document.getElementById('prop-product-show-badge').click()">Ativar selo com porcentagem do desconto</span>
+                    </div>
+
                 </div>
             `;
         } else if (currentMode === 'card') {
@@ -281,6 +337,14 @@ export function renderPropertiesTools(sidebarContent) {
                                 <input type="number" id="prop-card-discount" value="${discCard || ''}" placeholder="0" style="width:100%; padding:6px 6px; border-radius:6px; border:1px solid var(--glass-border); background:rgba(255,255,255,0.05); color:white; outline:none; text-align:center; font-size:0.75rem;">
                             </div>
                         </div>
+                    </div>
+                    <!-- Badge Switch Toggle -->
+                    <div style="display:flex; align-items:center; gap:10px; margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,0.05);">
+                        <label class="allu-switch">
+                            <input type="checkbox" id="prop-product-show-badge" ${active.showDiscountBadge !== false ? 'checked' : ''}>
+                            <span class="allu-slider"></span>
+                        </label>
+                        <span style="font-size:0.75rem; color:var(--text-secondary); font-weight:600; cursor:pointer;" onclick="document.getElementById('prop-product-show-badge').click()">Ativar selo com porcentagem do desconto</span>
                     </div>
                 </div>
             `;
@@ -588,6 +652,7 @@ export function renderPropertiesTools(sidebarContent) {
 
                     if (origObj) origObj.set('text', formatFakeCurrencyStr(origVal));
                     if (finalObj) finalObj.set('text', formatCurrencyStr(finalVal));
+                    updateGroupDiscountBadge(active, canvas);
                     canvas.renderAll();
                 };
 
@@ -639,6 +704,7 @@ export function renderPropertiesTools(sidebarContent) {
 
                     if (origObj) origObj.set('text', formatFakeCurrencyStr(origVal));
                     if (finalObj) finalObj.set('text', formatCurrencyStr(finalVal));
+                    updateGroupDiscountBadge(active, canvas);
                     canvas.renderAll();
                 };
 
@@ -677,6 +743,16 @@ export function renderPropertiesTools(sidebarContent) {
             setupPriceTableEvents(12);
             setupPriceTableEvents(24);
             setupPriceTableEvents(36);
+        }
+
+        const showBadgeCheckbox = div.querySelector('#prop-product-show-badge');
+        if (showBadgeCheckbox) {
+            showBadgeCheckbox.onchange = (e) => {
+                active.showDiscountBadge = e.target.checked;
+                updateGroupDiscountBadge(active, canvas);
+                canvas.renderAll();
+                history.save();
+            };
         }
     }
 

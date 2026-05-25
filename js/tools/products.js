@@ -288,10 +288,38 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
                 priceCard: true
             });
 
-            const group = new fabric.Group([rect, fabricImg, nameText, fakeText, priceLabel, realPriceText], {
+            const discountPct = Math.round((1 - numericPrice / fakePriceNum) * 100);
+
+            const badgeBg = new fabric.Rect({
+                left: 220,
+                top: 25,
+                width: 95,
+                height: 34,
+                fill: '#F45258',
+                rx: 10,
+                ry: 10,
+                isDiscountBadgeRect: true,
+                visible: discountPct > 0
+            });
+
+            const badgeText = new fabric.Text(`${discountPct}% OFF`, {
+                left: 267,
+                top: 42,
+                originX: 'center',
+                originY: 'center',
+                fontFamily: 'Plus Jakarta Sans',
+                fontSize: 14,
+                fontWeight: '800',
+                fill: '#ffffff',
+                isDiscountBadgeText: true,
+                visible: discountPct > 0
+            });
+
+            const group = new fabric.Group([rect, fabricImg, nameText, fakeText, priceLabel, realPriceText, badgeBg, badgeText], {
                 left: 100,
                 top: 100,
                 isAlluCard: true,
+                showDiscountBadge: true,
                 cornerColor: '#27AE60',
                 cornerStyle: 'circle',
                 transparentCorners: false,
@@ -363,8 +391,36 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
             const col2 = createCol(24, price24, col2Left);
             const col3 = createCol(36, price36, col3Left);
 
-            const group = new fabric.Group([bg, fabricImg, title, ...col1, ...col2, ...col3], { 
+            const initialMaxDiscount = 17; 
+
+            const badgeBg = new fabric.Rect({
+                left: bgWidth - 125,
+                top: 25,
+                width: 95,
+                height: 34,
+                fill: '#F45258',
+                rx: 10,
+                ry: 10,
+                isDiscountBadgeRect: true,
+                visible: initialMaxDiscount > 0
+            });
+
+            const badgeText = new fabric.Text(`${initialMaxDiscount}% OFF`, {
+                left: bgWidth - 125 + 47,
+                top: 42,
+                originX: 'center',
+                originY: 'center',
+                fontFamily: 'Plus Jakarta Sans',
+                fontSize: 14,
+                fontWeight: '800',
+                fill: '#ffffff',
+                isDiscountBadgeText: true,
+                visible: initialMaxDiscount > 0
+            });
+
+            const group = new fabric.Group([bg, fabricImg, title, ...col1, ...col2, ...col3, badgeBg, badgeText], { 
                 left: 100, top: 100, isAlluTable: true,
+                showDiscountBadge: true,
                 cornerColor: '#27AE60', cornerStyle: 'circle', transparentCorners: false,
                 hasControls: true, hasBorders: true, selectable: true
             });
