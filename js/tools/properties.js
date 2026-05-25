@@ -145,11 +145,16 @@ export function renderPropertiesTools(sidebarContent) {
         return;
     }
 
+    const currentMode = active ? active.currentMode : null;
+    const parsePrice = (val) => {
+        if (!val) return 0;
+        return parseFloat(val.replace(/\./g, '').replace(',', '.')) || 0;
+    };
+
     let propertiesHTML = '';
 
     if (active.productData) {
         const p = active.productData;
-        const currentMode = active.currentMode;
 
         let p12 = '', p24 = '', p36 = '';
         let p12Orig = '', p24Orig = '', p36Orig = '';
@@ -177,11 +182,6 @@ export function renderPropertiesTools(sidebarContent) {
             const numP36 = parseFloat(p36.replace(/\./g, '').replace(',', '.')) || 0;
             p36Orig = (numP36 * 1.2).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         }
-
-        const parsePrice = (val) => {
-            if (!val) return 0;
-            return parseFloat(val.replace(/\./g, '').replace(',', '.')) || 0;
-        };
 
         const getDiscountPct = (orig, final) => {
             const o = parsePrice(orig);
