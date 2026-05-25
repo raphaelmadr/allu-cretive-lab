@@ -196,6 +196,7 @@ export function renderPropertiesTools(sidebarContent) {
             if (discountObj) discountObj.set({ visible: false });
             if (discountBg) discountBg.set({ visible: false });
         }
+        active.dirty = true;
     };
 
     let propertiesHTML = '';
@@ -913,6 +914,7 @@ export function renderPropertiesTools(sidebarContent) {
                     o.set('fontSize', initialFontSizes.get(o) * scaleFactor);
                 }
             });
+            active.dirty = true;
         }
         canvas.renderAll();
     };
@@ -941,6 +943,7 @@ export function renderPropertiesTools(sidebarContent) {
                     }
                 }
             }
+            active.dirty = true;
         } else {
             if (type === 'bg') active.set('fill', hex === 'transparent' ? '' : hex);
             if (type === 'border') {
