@@ -225,6 +225,11 @@ body {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+.sidebar-content input {
+    min-width: 0; /* Allow inputs to shrink within flex layouts */
 }
 
 h2 {
@@ -517,6 +522,7 @@ p.subtitle {
     display: inline-block;
     width: 38px;
     height: 20px;
+    flex-shrink: 0; /* Prevent toggle compression in flex containers */
 }
 
 .allu-switch input {
@@ -544,7 +550,7 @@ p.subtitle {
     height: 14px;
     width: 14px;
     left: 2px;
-    bottom: 2px;
+    top: 2px; /* Centered vertically relative to the 20px outer height */
     background-color: #828392;
     transition: .3s;
     border-radius: 50%;

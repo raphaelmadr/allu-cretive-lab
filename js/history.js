@@ -128,6 +128,9 @@ export function setupHistoryEvents() {
     window.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
 
+        const activeCanvas = state.getCanvas();
+        if (!activeCanvas) return;
+
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
             if (e.shiftKey) history.redo();
             else history.undo();
@@ -138,13 +141,57 @@ export function setupHistoryEvents() {
             e.preventDefault();
         }
         
-        // Atalho Delete
+        // Atalho Delete / Backspace
         if (e.key === 'Delete' || e.key === 'Backspace') {
-            const active = canvas.getActiveObject();
+            const active = activeCanvas.getActiveObject();
             if (active && !active.isEditing) {
-                canvas.remove(active);
-                canvas.discardActiveObject();
-                canvas.renderAll();
+                activeCanvas.remove(active);
+                activeCanvas.discardActiveObject();
+                activeCanvas.renderAll();
+            }
+        }
+
+        // Atalho Copiar (Ctrl+C / Cmd+C)
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c') {
+            const active = activeCanvas.getActiveObject();
+            if (active) {
+                active.clone((cloned) => {
+                    window._alluClipboard = cloned;
+                }, ['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow', 'fakePriceCard', 'priceCard', 'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge']);
+            }
+        }
+
+        // Atalho Colar (Ctrl+V / Cmd+V)
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'v') {
+            if (window._alluClipboard) {
+                window._alluClipboard.clone((clonedObj) => {
+                    activeCanvas.discardActiveObject();
+                    
+                    // Deslocamento para não sobrepor completamente o objeto
+                    clonedObj.set({
+                        left: clonedObj.left + 20,
+                        top: clonedObj.top + 20,
+                        evented: true
+                    });
+
+                    if (clonedObj.type === 'activeSelection') {
+                        clonedObj.canvas = activeCanvas;
+                        clonedObj.forEachObject((obj) => {
+                            activeCanvas.add(obj);
+                        });
+                        clonedObj.setCoords();
+                    } else {
+                        activeCanvas.add(clonedObj);
+                    }
+
+                    // Avança a posição no clipboard temporário para a próxima colagem
+                    window._alluClipboard.top += 20;
+                    window._alluClipboard.left += 20;
+
+                    activeCanvas.setActiveObject(clonedObj);
+                    activeCanvas.renderAll();
+                    history.save();
+                }, ['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow', 'fakePriceCard', 'priceCard', 'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge']);
             }
         }
     });
