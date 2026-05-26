@@ -157,8 +157,16 @@ export function renderLayersTools(sidebarContent) {
         btnDelete.onclick = () => {
             const active = canvas.getActiveObject();
             if(active) {
-                canvas.remove(active);
-                canvas.discardActiveObject();
+                if (active.type === 'activeSelection') {
+                    const objects = active.getObjects().slice();
+                    canvas.discardActiveObject();
+                    objects.forEach((obj) => {
+                        canvas.remove(obj);
+                    });
+                } else {
+                    canvas.remove(active);
+                    canvas.discardActiveObject();
+                }
                 canvas.renderAll();
                 sidebarContent.innerHTML = '';
                 renderLayersTools(sidebarContent);

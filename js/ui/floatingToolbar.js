@@ -47,10 +47,10 @@ function closeAllPopups() {
 }
 
 function onSelectionChange(canvas, e) {
-    if (e.selected && e.selected[0]) {
-        const obj = e.selected[0];
-        currentActiveObject = obj;
-        renderToolbar(canvas, obj);
+    const active = canvas.getActiveObject();
+    if (active) {
+        currentActiveObject = active;
+        renderToolbar(canvas, active);
         updateToolbarPosition(canvas);
     } else {
         hideToolbar();
@@ -657,10 +657,42 @@ function renderToolbar(canvas, active) {
         <div class="font-item" id="pop-layer-back"><i class="fa-solid fa-angles-down" style="margin-right:8px;"></i> Enviar ao Fundo</div>
     `;
     setTimeout(() => {
-        layersPopup.querySelector('#pop-layer-front').onclick = () => { canvas.bringToFront(active); canvas.renderAll(); history.save(); };
-        layersPopup.querySelector('#pop-layer-up').onclick = () => { canvas.bringForward(active); canvas.renderAll(); history.save(); };
-        layersPopup.querySelector('#pop-layer-down').onclick = () => { canvas.sendBackwards(active); canvas.renderAll(); history.save(); };
-        layersPopup.querySelector('#pop-layer-back').onclick = () => { canvas.sendToBack(active); canvas.renderAll(); history.save(); };
+        layersPopup.querySelector('#pop-layer-front').onclick = () => {
+            if (active.type === 'activeSelection') {
+                active.forEachObject(obj => canvas.bringToFront(obj));
+            } else {
+                canvas.bringToFront(active);
+            }
+            canvas.renderAll();
+            history.save();
+        };
+        layersPopup.querySelector('#pop-layer-up').onclick = () => {
+            if (active.type === 'activeSelection') {
+                active.forEachObject(obj => canvas.bringForward(obj));
+            } else {
+                canvas.bringForward(active);
+            }
+            canvas.renderAll();
+            history.save();
+        };
+        layersPopup.querySelector('#pop-layer-down').onclick = () => {
+            if (active.type === 'activeSelection') {
+                active.forEachObject(obj => canvas.sendBackwards(obj));
+            } else {
+                canvas.sendBackwards(active);
+            }
+            canvas.renderAll();
+            history.save();
+        };
+        layersPopup.querySelector('#pop-layer-back').onclick = () => {
+            if (active.type === 'activeSelection') {
+                active.forEachObject(obj => canvas.sendToBack(obj));
+            } else {
+                canvas.sendToBack(active);
+            }
+            canvas.renderAll();
+            history.save();
+        };
     }, 50);
     layersBtn.appendChild(layersPopup);
     toolbarElement.appendChild(layersBtn);
@@ -683,7 +715,11 @@ function renderToolbar(canvas, active) {
         range.oninput = (e) => {
             const val = parseFloat(e.target.value);
             valSpan.innerText = Math.round(val * 100) + '%';
-            active.set('opacity', val);
+            if (active.type === 'activeSelection') {
+                active.forEachObject(obj => obj.set('opacity', val));
+            } else {
+                active.set('opacity', val);
+            }
             canvas.renderAll();
         };
         range.onchange = () => history.save();
@@ -704,8 +740,16 @@ function renderToolbar(canvas, active) {
     deleteBtn.classList.add('btn-danger');
     deleteBtn.onclick = (e) => {
         if (e.target.closest('.toolbar-popup')) return;
-        canvas.remove(active);
-        canvas.discardActiveObject();
+        if (active.type === 'activeSelection') {
+            const objects = active.getObjects().slice();
+            canvas.discardActiveObject();
+            objects.forEach((obj) => {
+                canvas.remove(obj);
+            });
+        } else {
+            canvas.remove(active);
+            canvas.discardActiveObject();
+        }
         canvas.renderAll();
         history.save();
     };

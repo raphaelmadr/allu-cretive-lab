@@ -145,9 +145,18 @@ export function setupHistoryEvents() {
         if (e.key === 'Delete' || e.key === 'Backspace') {
             const active = activeCanvas.getActiveObject();
             if (active && !active.isEditing) {
-                activeCanvas.remove(active);
-                activeCanvas.discardActiveObject();
+                if (active.type === 'activeSelection') {
+                    const objects = active.getObjects().slice();
+                    activeCanvas.discardActiveObject();
+                    objects.forEach((obj) => {
+                        activeCanvas.remove(obj);
+                    });
+                } else {
+                    activeCanvas.remove(active);
+                    activeCanvas.discardActiveObject();
+                }
                 activeCanvas.renderAll();
+                history.save();
             }
         }
 
