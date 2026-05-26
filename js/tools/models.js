@@ -16,6 +16,19 @@ export function renderModelsTools(sidebarContent) {
         activeFolderId = storage.getFolders()[0]?.id;
     }
 
+    // Carrega assincronamente os designs da comunidade
+    fetch('/api/designs')
+        .then(res => res.json())
+        .then(data => {
+            if (Array.isArray(data)) {
+                window.communityDesigns = data;
+                rebuild();
+            }
+        })
+        .catch(err => {
+            console.error('Erro ao carregar designs da comunidade:', err);
+        });
+
     function rebuild() {
         div.innerHTML = '';
         
@@ -57,12 +70,30 @@ export function renderModelsTools(sidebarContent) {
         const grid = document.createElement('div');
         grid.style.cssText = 'display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;';
         
-        const designs = storage.getDesigns(activeFolderId);
-        if (designs.length === 0) {
+        const localDesigns = storage.getDesigns(activeFolderId);
+        const communityDesigns = (window.communityDesigns || [])
+            .filter(d => d.folderId === activeFolderId);
+        
+        const mergedDesigns = [...localDesigns];
+        communityDesigns.forEach(cd => {
+            const exists = mergedDesigns.some(ld => ld.id === cd.id);
+            if (!exists) {
+                cd.isShared = true;
+                mergedDesigns.push(cd);
+            } else {
+                const localIdx = mergedDesigns.findIndex(ld => ld.id === cd.id);
+                mergedDesigns[localIdx].isShared = true;
+            }
+        });
+
+        // Ordenar do mais novo para o mais antigo por updatedAt
+        mergedDesigns.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+
+        if (mergedDesigns.length === 0) {
             grid.innerHTML = '<div style="grid-column:span 2;text-align:center;padding:30px;opacity:.3;font-size:.7rem;">Nenhuma arte nesta pasta.</div>';
         }
 
-        designs.forEach(d => {
+        mergedDesigns.forEach(d => {
             const card = document.createElement('div');
             card.style.cssText = 'background:rgba(255,255,255,.03);border:1px solid var(--glass-border);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .2s;position:relative;';
             card.innerHTML = `
@@ -88,7 +119,9 @@ export function renderModelsTools(sidebarContent) {
         div.appendChild(grid);
 
         // 3. Área de Salvamento
-        const activeDesign = state.activeDesignId ? storage.getDesignById(state.activeDesignId) : null;
+        const activeDesign = state.activeDesignId ? 
+            (storage.getDesignById(state.activeDesignId) || (window.communityDesigns || []).find(d => d.id === state.activeDesignId)) : 
+            null;
 
         const saveCard = document.createElement('div');
         saveCard.style.cssText = 'background:rgba(255,255,255,0.02);padding:16px;border-radius:16px;border:1px solid var(--glass-border);';
@@ -140,8 +173,9 @@ export function renderModelsTools(sidebarContent) {
             
             const pagesData = state.canvases.map(c => c.toJSON(['productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow', 'fakePriceCard', 'priceCard', 'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge']));
 
+            const designId = state.activeDesignId || ('d-' + Date.now());
             const designData = {
-                id: state.activeDesignId || ('d-' + Date.now()),
+                id: designId,
                 name,
                 folderId: activeFolderId,
                 isShared,
@@ -151,9 +185,50 @@ export function renderModelsTools(sidebarContent) {
                 pagesData: pagesData
             };
 
-            state.activeDesignId = storage.saveDesign(designData);
-            notifications.toast('Projeto salvo com sucesso!');
-            rebuild();
+            const btn = saveCard.querySelector('#btn-save-final');
+            const originalHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando...';
+
+            try {
+                // Salva localmente primeiro
+                state.activeDesignId = storage.saveDesign(designData);
+
+                // Se marcado para compartilhar, envia ao servidor
+                if (isShared) {
+                    const response = await fetch('/api/designs', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(designData)
+                    });
+
+                    if (!response.ok) {
+                        const errData = await response.json();
+                        throw new Error(errData.error || 'Erro ao sincronizar com o servidor.');
+                    }
+
+                    // Atualiza cache de comunidade
+                    const refreshRes = await fetch('/api/designs');
+                    if (refreshRes.ok) {
+                        const freshData = await refreshRes.json();
+                        if (Array.isArray(freshData)) {
+                            window.communityDesigns = freshData;
+                        }
+                    }
+                }
+
+                notifications.toast('Projeto salvo com sucesso!');
+                rebuild();
+            } catch (error) {
+                console.error(error);
+                notifications.alert('Erro ao Salvar', `Não foi possível salvar na nuvem: ${error.message}. O projeto foi salvo localmente.`, 'fa-circle-exclamation');
+                btn.disabled = false;
+                btn.style.opacity = '1';
+                btn.innerHTML = originalHTML;
+            }
         };
 
         saveCard.querySelector('#btn-export-allu').onclick = () => {
