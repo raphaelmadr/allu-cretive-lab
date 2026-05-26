@@ -88,10 +88,12 @@ function updateToolbarPosition(canvas) {
         toolbarElement.style.top = `${posY}px`;
         toolbarElement.style.left = `${centerX}px`;
         toolbarElement.style.transform = 'translate(-50%, 0)';
+        toolbarElement.dataset.position = 'below';
     } else {
         toolbarElement.style.top = `${posY}px`;
         toolbarElement.style.left = `${centerX}px`;
         toolbarElement.style.transform = 'translate(-50%, -100%)';
+        toolbarElement.dataset.position = 'above';
     }
 
     toolbarElement.classList.add('active');
@@ -1123,18 +1125,17 @@ function createButton(id, innerHTML, title) {
 }
 
 function adjustPopupPosition(popup) {
-    // Restaurar estilo padrão (acima do botão) primeiro
-    popup.style.bottom = '100%';
-    popup.style.top = 'auto';
-    popup.style.marginBottom = '10px';
-    popup.style.marginTop = '0';
+    if (!toolbarElement) return;
+    const position = toolbarElement.dataset.position || 'above';
 
-    // Obter retângulo do popup em relação à viewport
-    const rect = popup.getBoundingClientRect();
-
-    // Se o topo do popup estiver muito próximo do topo da tela (abaixo de 80px),
-    // posiciona-o para abrir abaixo do botão do toolbar para visibilidade completa
-    if (rect.top < 80) {
+    if (position === 'above') {
+        // Toolbar está acima do objeto -> Abre o popup para CIMA (longe do objeto)
+        popup.style.bottom = '100%';
+        popup.style.top = 'auto';
+        popup.style.marginBottom = '10px';
+        popup.style.marginTop = '0';
+    } else {
+        // Toolbar está abaixo do objeto -> Abre o popup para BAIXO (longe do objeto)
         popup.style.bottom = 'auto';
         popup.style.top = '100%';
         popup.style.marginBottom = '0';

@@ -88,16 +88,9 @@ export async function buildIconObject(opts) {
             resolve(group);
         };
 
-        if (SVG_CACHE.has(url)) {
-            const { objects, options } = SVG_CACHE.get(url);
-            // Clonar para evitar mutar o original do cache
-            processSVG(objects.map(o => fabric.util.object.clone(o)), { ...options });
-        } else {
-            fabric.loadSVGFromURL(url, (objects, options) => {
-                SVG_CACHE.set(url, { objects, options });
-                processSVG(objects, options);
-            });
-        }
+        fabric.loadSVGFromURL(url, (objects, options) => {
+            processSVG(objects, options);
+        });
     });
 }
 
