@@ -68,6 +68,74 @@ export const carousel = {
         history.save();
     },
 
+    duplicatePage() {
+        const activeIndex = state.activeCanvasIndex;
+        const activeCanvas = state.getCanvas();
+        if (!activeCanvas) return;
+
+        // Desmarcar objeto ativo no canvas original para não copiar a caixa de seleção
+        activeCanvas.discardActiveObject();
+        activeCanvas.renderAll();
+
+        const activePreset = state.getActivePreset() || { w: 1080, h: 1080 };
+        const currentContainer = activeCanvas.getElement().parentNode;
+
+        // Serializar o canvas ativo com as propriedades customizadas necessárias
+        const serializationProps = [
+            'productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 
+            'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 
+            'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow', 'fakePriceCard', 'priceCard', 
+            'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge'
+        ];
+        const canvasData = activeCanvas.toJSON(serializationProps);
+
+        // Criar elemento canvas no DOM inserindo imediatamente após o atual
+        const canvasId = `canvas-${Date.now()}`;
+        const newCanvasEl = document.createElement('canvas');
+        newCanvasEl.id = canvasId;
+        currentContainer.parentNode.insertBefore(newCanvasEl, currentContainer.nextSibling);
+
+        // Inicializar instância do Fabric.js
+        const newCanvas = new fabric.Canvas(canvasId, {
+            backgroundColor: '#ffffff',
+            preserveObjectStacking: true,
+            width: activePreset.w,
+            height: activePreset.h
+        });
+
+        setupCanvas();
+
+        // Vincular eventos do Fabric.js ao novo canvas
+        newCanvas.on('selection:created', () => this.onSelection(newCanvas));
+        newCanvas.on('selection:updated', () => this.onSelection(newCanvas));
+        newCanvas.on('mouse:down', () => this.onSelection(newCanvas));
+        newCanvas.on('object:modified', () => history.save());
+        newCanvas.on('object:added', () => history.save());
+        newCanvas.on('object:removed', () => history.save());
+
+        // Inserir o novo canvas no array de estado logo após o índice ativo
+        state.canvases.splice(activeIndex + 1, 0, newCanvas);
+        
+        // Selecionar o novo canvas
+        state.setActiveCanvas(activeIndex + 1);
+
+        // Redimensionar e aplicar zoom em todos os canvases
+        resizeCanvas(activePreset.w, activePreset.h);
+
+        // Carregar conteúdo serializado no novo canvas
+        newCanvas.loadFromJSON(canvasData, () => {
+            newCanvas.renderAll();
+
+            setTimeout(() => {
+                const container = newCanvas.getElement().parentNode;
+                container.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            }, 100);
+
+            this.updateUI();
+            history.save();
+        });
+    },
+
     onSelection(canvasInstance) {
         const index = state.canvases.indexOf(canvasInstance);
         if (index !== -1) {
@@ -265,6 +333,9 @@ export const carousel = {
 export function setupCarousel() {
     const btnAddPage = document.getElementById('btn-add-page');
     if (btnAddPage) btnAddPage.onclick = () => carousel.addPage();
+
+    const btnDuplicatePage = document.getElementById('btn-duplicate-page');
+    if (btnDuplicatePage) btnDuplicatePage.onclick = () => carousel.duplicatePage();
 
     const btnPrev = document.getElementById('btn-prev-page');
     const btnNext = document.getElementById('btn-next-page');
