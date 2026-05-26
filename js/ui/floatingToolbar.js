@@ -94,6 +94,12 @@ function updateToolbarPosition(canvas) {
     }
 
     toolbarElement.classList.add('active');
+
+    // Ajustar a posição de qualquer popup ativo se a barra de ferramentas se moveu
+    const activePopup = toolbarElement.querySelector('.toolbar-popup.active');
+    if (activePopup) {
+        adjustPopupPosition(activePopup);
+    }
 }
 
 function renderToolbar(canvas, active) {
@@ -723,11 +729,32 @@ function createButton(id, innerHTML, title) {
             if (!wasActive) {
                 popup.classList.add('active');
                 btn.classList.add('active');
+                adjustPopupPosition(popup);
             }
         }
     });
 
     return btn;
+}
+
+function adjustPopupPosition(popup) {
+    // Restaurar estilo padrão (acima do botão) primeiro
+    popup.style.bottom = '100%';
+    popup.style.top = 'auto';
+    popup.style.marginBottom = '10px';
+    popup.style.marginTop = '0';
+
+    // Obter retângulo do popup em relação à viewport
+    const rect = popup.getBoundingClientRect();
+
+    // Se o topo do popup estiver muito próximo do topo da tela (abaixo de 80px),
+    // posiciona-o para abrir abaixo do botão do toolbar para visibilidade completa
+    if (rect.top < 80) {
+        popup.style.bottom = 'auto';
+        popup.style.top = '100%';
+        popup.style.marginBottom = '0';
+        popup.style.marginTop = '10px';
+    }
 }
 
 function createPopup(id) {
