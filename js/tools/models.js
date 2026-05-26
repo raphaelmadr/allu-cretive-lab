@@ -299,64 +299,63 @@ export function renderModelsTools(sidebarContent) {
         div.appendChild(saveCard);
     }
 
-    function normalizeDesignDimensions(design) {
-        if (!design.width || !design.height) return;
-        const ratio = design.width / design.height;
-        
-        let closestPreset = null;
-        let minDiff = Infinity;
-        
-        const standardPresets = [
-            { w: 1080, h: 1080 }, // Instagram Feed / Carousel
-            { w: 1080, h: 1920 }, // Instagram Stories / WhatsApp Status
-            { w: 1080, h: 1350 }, // WhatsApp Feed
-            { w: 1200, h: 627 },  // LinkedIn Post
-            { w: 1200, h: 675 },  // X Post
-            { w: 600, h: 200 }    // Email Header
-        ];
-        
-        standardPresets.forEach(p => {
-            const pratio = p.w / p.h;
-            const diff = Math.abs(ratio - pratio);
-            if (diff < minDiff) {
-                minDiff = diff;
-                closestPreset = p;
-            }
-        });
-        
-        if (closestPreset && minDiff < 0.1) {
-            design.width = closestPreset.w;
-            design.height = closestPreset.h;
-        } else {
-            design.width = Math.round(design.width);
-            design.height = Math.round(design.height);
-        }
-    }
-
-    async function loadDesign(design) {
-        normalizeDesignDimensions(design);
-        state.setActivePreset({ w: design.width, h: design.height, name: design.name });
-        
-        // Atualiza o display de formato no topo
-        const formatDisplay = document.getElementById('format-display');
-        if (formatDisplay) {
-            formatDisplay.innerText = `${design.name || 'Personalizado'} (${design.width}x${design.height})`;
-        }
-
-        if (design.pagesData && design.pagesData.length > 0) {
-            await carousel.loadPages(design.pagesData, design.width, design.height);
-        } else if (design.canvasData) {
-            await carousel.loadPages([design.canvasData], design.width, design.height);
-        }
-
-        // Garante que o canvas seja redimensionado visualmente para o novo formato
-        import('../canvas.js').then(module => {
-            module.resizeCanvas(design.width, design.height);
-        });
-        
-        state.activeDesignId = design.id;
-        notifications.toast(`Projeto "${design.name}" carregado`);
-    }
-
     rebuild();
+}
+
+export function normalizeDesignDimensions(design) {
+    if (!design.width || !design.height) return;
+    const ratio = design.width / design.height;
+    
+    let closestPreset = null;
+    let minDiff = Infinity;
+    
+    const standardPresets = [
+        { w: 1080, h: 1080 }, // Instagram Feed / Carousel
+        { w: 1080, h: 1920 }, // Instagram Stories / WhatsApp Status
+        { w: 1080, h: 1350 }, // WhatsApp Feed
+        { w: 1200, h: 627 },  // LinkedIn Post
+        { w: 1200, h: 675 },  // X Post
+        { w: 600, h: 200 }    // Email Header
+    ];
+    
+    standardPresets.forEach(p => {
+        const pratio = p.w / p.h;
+        const diff = Math.abs(ratio - pratio);
+        if (diff < minDiff) {
+            minDiff = diff;
+            closestPreset = p;
+        }
+    });
+    
+    if (closestPreset && minDiff < 0.1) {
+        design.width = closestPreset.w;
+        design.height = closestPreset.h;
+    } else {
+        design.width = Math.round(design.width);
+        design.height = Math.round(design.height);
+    }
+}
+
+export async function loadDesign(design) {
+    normalizeDesignDimensions(design);
+    state.setActivePreset({ w: design.width, h: design.height, name: design.name });
+    
+    // Atualiza o display de formato no topo
+    const formatDisplay = document.getElementById('format-display');
+    if (formatDisplay) {
+        formatDisplay.innerText = `${design.name || 'Personalizado'} (${design.width}x${design.height})`;
+    }
+
+    if (design.pagesData && design.pagesData.length > 0) {
+        await carousel.loadPages(design.pagesData, design.width, design.height);
+    } else if (design.canvasData) {
+        await carousel.loadPages([design.canvasData], design.width, design.height);
+    }
+
+    // Garante que o canvas seja redimensionado visualmente para o novo formato
+    const { resizeCanvas } = await import('../canvas.js');
+    resizeCanvas(design.width, design.height);
+    
+    state.activeDesignId = design.id;
+    notifications.toast(`Projeto "${design.name}" carregado`);
 }

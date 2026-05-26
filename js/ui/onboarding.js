@@ -3,8 +3,8 @@ import { presets, networkPresets, templatesList } from '../config.js';
 import { resizeCanvas } from '../canvas.js';
 import { history } from '../history.js';
 import { state } from '../state.js';
-
-// TODO: import loadTemplate when it's moved
+import { loadDesign } from '../tools/models.js';
+import { notifications } from './notifications.js';
 
 export function setupOnboarding() {
     const modal = document.getElementById('onboarding-modal');
@@ -29,6 +29,83 @@ export function setupOnboarding() {
             step2Dot.classList.remove('active');
             step1Dot.classList.add('active');
         };
+    }
+
+    // ── Configurar Importação de arquivo .allu no Onboarding ──
+    const importZone = document.getElementById('onboarding-import-zone');
+    const importInput = document.getElementById('onboarding-import-input');
+
+    if (importZone && importInput) {
+        // Clique na zona ativa a seleção de arquivos
+        importZone.addEventListener('click', () => {
+            importInput.click();
+        });
+
+        // Evento ao selecionar o arquivo manualmente
+        importInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handleImportFile(file);
+            }
+        });
+
+        // Eventos de Drag & Drop
+        importZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            importZone.classList.add('dragover');
+        });
+
+        ['dragleave', 'dragend'].forEach(type => {
+            importZone.addEventListener(type, () => {
+                importZone.classList.remove('dragover');
+            });
+        });
+
+        importZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            importZone.classList.remove('dragover');
+            
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                handleImportFile(file);
+            }
+        });
+    }
+
+    function handleImportFile(file) {
+        // Verificar extensão do arquivo
+        const nameLower = file.name.toLowerCase();
+        if (!nameLower.endsWith('.allu') && !nameLower.endsWith('.json')) {
+            notifications.alert('Arquivo Inválido', 'O arquivo selecionado não é do tipo .allu ou .json.', 'fa-circle-xmark');
+            if (importInput) importInput.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            try {
+                const parsed = JSON.parse(event.target.result);
+                if (!parsed.pagesData || !Array.isArray(parsed.pagesData)) {
+                    throw new Error('Formato de arquivo .allu inválido.');
+                }
+                
+                await loadDesign({
+                    id: 'd-imported-' + Date.now(),
+                    name: parsed.name || 'Projeto Importado',
+                    width: parsed.width || 1080,
+                    height: parsed.height || 1080,
+                    pagesData: parsed.pagesData
+                });
+                
+                notifications.toast('Projeto importado com sucesso!');
+                if (modal) modal.style.display = 'none';
+            } catch (err) {
+                console.error(err);
+                notifications.alert('Erro ao Importar', 'Não foi possível ler o arquivo. Verifique se é um arquivo .allu ou JSON válido.', 'fa-circle-xmark');
+            }
+        };
+        reader.readAsText(file);
+        if (importInput) importInput.value = '';
     }
 
     function showStep2(network) {

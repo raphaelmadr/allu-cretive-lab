@@ -207,6 +207,21 @@
                         <span>Email</span>
                     </button>
                 </div>
+
+                <div class="onboarding-divider" style="display: flex; align-items: center; justify-content: center; margin: 24px 0; gap: 16px;">
+                    <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">ou</span>
+                    <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.1);"></div>
+                </div>
+
+                <div id="onboarding-import-zone" class="import-drop-zone">
+                    <i class="fa-solid fa-file-import" style="font-size: 2rem; color: var(--accent); transition: transform 0.2s ease, color 0.2s ease;"></i>
+                    <div>
+                        <span style="font-size: 0.85rem; font-weight: 700; display: block; color: var(--text-primary);">Importar projeto (.allu)</span>
+                        <span style="font-size: 0.7rem; color: var(--text-secondary); display: block; margin-top: 2px;">Arraste o arquivo aqui ou clique para selecionar</span>
+                    </div>
+                    <input type="file" id="onboarding-import-input" accept=".allu,.json" style="display: none;">
+                </div>
             </div>
 
             <div id="onboarding-step-2" style="display: none;">
