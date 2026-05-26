@@ -28,7 +28,7 @@ const SHAPES = [
 const SVG_CACHE = new Map();
 
 // ── Core Logic ─────────────────────────────────────────────────────────────────
-async function buildIconObject(opts) {
+export async function buildIconObject(opts) {
     const { iconName, shape, iconColor, bgColor, iconSize, strokeWidth, padding } = opts;
     const url = `https://unpkg.com/lucide-static@latest/icons/${iconName}.svg`;
 
@@ -254,7 +254,13 @@ export function renderIconsTools(sidebarContent) {
         div.querySelector('#i-pad').disabled = sel.shape === 'none';
     }
 
-    div.querySelectorAll('.i-btn').forEach(b => b.onclick = () => { sel.iconName = b.dataset.v; updateUIFromState(); queueUpdate(); });
+    div.querySelectorAll('.i-btn').forEach(b => b.onclick = () => {
+        sel.iconName = b.dataset.v;
+        updateUIFromState();
+        const activeObj = canvas ? canvas.getActiveObject() : null;
+        const isIconObj = activeObj && (activeObj.isIcon || (activeObj.get && activeObj.get('isIcon')));
+        updateCanvasIcon(!isIconObj); // If not editing an icon, forceAdd = true!
+    });
     div.querySelectorAll('.ish').forEach(b => b.onclick = () => { sel.shape = b.dataset.v; updateUIFromState(); queueUpdate(); });
     div.querySelector('#i-color-grid').querySelectorAll('[data-hex]').forEach(c => c.onclick = () => { sel.iconColor = c.dataset.hex; updateUIFromState(); queueUpdate(); });
     div.querySelector('#i-bg-grid').querySelectorAll('[data-hex]').forEach(c => c.onclick = () => { sel.bgColor = c.dataset.hex; updateUIFromState(); queueUpdate(); });

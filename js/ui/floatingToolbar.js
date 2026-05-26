@@ -3,6 +3,7 @@ import { state } from '../state.js';
 import { history } from '../history.js';
 import { colors, textColors } from '../config.js';
 import { notifications } from './notifications.js';
+import { buildIconObject } from '../tools/icons.js';
 
 let toolbarElement = null;
 let currentActiveObject = null;
@@ -111,7 +112,8 @@ function renderToolbar(canvas, active) {
     const isText = active.type === 'i-text' || active.type === 'text';
     const isImage = active.type === 'image';
     const isProduct = !!active.productData;
-    const isGroup = active.type === 'group';
+    const isGroup = active.type === 'group' && !active.isIcon && !(active.get && active.get('isIcon'));
+    const isIcon = active.isIcon || (active.get && active.get('isIcon'));
     const isShape = active.type === 'rect' || active.type === 'circle' || active.type === 'triangle' || active.type === 'polygon';
 
     // ── 1. OPÇÕES ESPECÍFICAS DE TEXTO ──────────────────────────────────────────
@@ -505,6 +507,174 @@ function renderToolbar(canvas, active) {
 
         shadowBtn.appendChild(shadowPopup);
         toolbarElement.appendChild(shadowBtn);
+    }
+
+    // ── 2.5. OPÇÕES ESPECÍFICAS DE ÍCONE ────────────────────────────────────────
+    if (isIcon) {
+        // 1. Cor do Ícone
+        const iconColorBtn = createButton('icon-color', `<i class="fa-solid fa-palette" style="color:${active.iconData?.iconColor || '#ffffff'};"></i> Ícone`, 'Cor do Ícone');
+        const iconColorPopup = createPopup('popup-icon-color');
+        
+        let iconColorSwatches = `<div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:6px; width:170px;">`;
+        colors.forEach(c => {
+            const isActive = (active.iconData?.iconColor || '#ffffff').toLowerCase() === c.toLowerCase();
+            iconColorSwatches += `<div class="toolbar-icon-color-swatch" data-color="${c}" style="width:24px; height:24px; border-radius:4px; cursor:pointer; background-color:${c}; border:${isActive ? '2px solid white' : '1px solid rgba(255,255,255,0.1)'};"></div>`;
+        });
+        iconColorSwatches += `</div>`;
+        iconColorPopup.innerHTML = iconColorSwatches;
+        
+        iconColorPopup.querySelectorAll('.toolbar-icon-color-swatch').forEach(swatch => {
+            swatch.onclick = () => {
+                const color = swatch.dataset.color;
+                const iconObj = (active.type === 'group' && active.getObjects().length > 1) ? active.getObjects()[1] : active;
+                iconObj.getObjects().forEach(obj => {
+                    if (obj.stroke) obj.set('stroke', color);
+                    if (obj.fill && obj.fill !== 'none') obj.set('fill', color);
+                });
+                if (active.iconData) active.iconData.iconColor = color;
+                active.dirty = true;
+                canvas.renderAll();
+                history.save();
+                renderToolbar(canvas, active);
+            };
+        });
+        iconColorBtn.appendChild(iconColorPopup);
+        toolbarElement.appendChild(iconColorBtn);
+
+        // 2. Cor do Fundo (se houver forma)
+        if (active.iconData && active.iconData.shape !== 'none') {
+            const bgColorBtn = createButton('icon-bg', `<i class="fa-solid fa-square" style="color:${active.iconData.bgColor || '#27AE60'};"></i> Fundo`, 'Cor do Fundo');
+            const bgColorPopup = createPopup('popup-icon-bg');
+            
+            let bgColorSwatches = `<div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:6px; width:170px;">`;
+            colors.forEach(c => {
+                const isActive = (active.iconData.bgColor || '#27AE60').toLowerCase() === c.toLowerCase();
+                bgColorSwatches += `<div class="toolbar-icon-bg-swatch" data-color="${c}" style="width:24px; height:24px; border-radius:4px; cursor:pointer; background-color:${c}; border:${isActive ? '2px solid white' : '1px solid rgba(255,255,255,0.1)'};"></div>`;
+            });
+            bgColorSwatches += `</div>`;
+            bgColorPopup.innerHTML = bgColorSwatches;
+            
+            bgColorPopup.querySelectorAll('.toolbar-icon-bg-swatch').forEach(swatch => {
+                swatch.onclick = () => {
+                    const color = swatch.dataset.color;
+                    const bgObj = active.getObjects()[0];
+                    if (bgObj) bgObj.set('fill', color);
+                    if (active.iconData) active.iconData.bgColor = color;
+                    active.dirty = true;
+                    canvas.renderAll();
+                    history.save();
+                    renderToolbar(canvas, active);
+                };
+            });
+            bgColorBtn.appendChild(bgColorPopup);
+            toolbarElement.appendChild(bgColorBtn);
+        }
+
+        // 3. Forma de Fundo
+        const shapeBtn = createButton('icon-shape', '<i class="fa-solid fa-icons"></i> Forma', 'Forma de Fundo');
+        const shapePopup = createPopup('popup-icon-shape');
+        const iconShapes = [
+            { id: 'none', label: 'Nenhum', icon: 'fa-ban' },
+            { id: 'circle', label: 'Círculo', icon: 'fa-circle' },
+            { id: 'square', label: 'Quadrado', icon: 'fa-square' },
+            { id: 'rounded', label: 'Arredondado', icon: 'fa-square-check' }
+        ];
+        iconShapes.forEach(s => {
+            const item = document.createElement('div');
+            item.className = `font-item ${active.iconData?.shape === s.id ? 'active' : ''}`;
+            item.innerHTML = `<i class="fa-solid ${s.icon}" style="margin-right:8px;"></i> ${s.label}`;
+            item.onclick = async () => {
+                if (active.iconData) {
+                    active.iconData.shape = s.id;
+                    const newIcon = await buildIconObject(active.iconData);
+                    const { left, top, scaleX, scaleY, angle } = active;
+                    newIcon.set({ left, top, scaleX, scaleY, angle });
+                    canvas.remove(active);
+                    canvas.add(newIcon);
+                    canvas.setActiveObject(newIcon);
+                    canvas.renderAll();
+                    history.save();
+                }
+            };
+            shapePopup.appendChild(item);
+        });
+        shapeBtn.appendChild(shapePopup);
+        toolbarElement.appendChild(shapeBtn);
+
+        // 4. Ajustes do Ícone (Tamanho, Traço, Padding)
+        const settingsBtn = createButton('icon-settings', '<i class="fa-solid fa-sliders"></i> Ajustes', 'Ajustes do Ícone');
+        const settingsPopup = createPopup('popup-icon-settings');
+        settingsPopup.style.width = '200px';
+        
+        const sizeVal = active.iconData?.iconSize || 40;
+        const strokeVal = active.iconData?.strokeWidth || 2;
+        const padVal = active.iconData?.padding || 15;
+        
+        settingsPopup.innerHTML = `
+            <div class="toolbar-popup-column">
+                <div style="display:flex; justify-content:space-between;">
+                    <label>Tamanho</label>
+                    <span id="pop-icon-size-val" style="font-size:0.65rem;">${sizeVal}px</span>
+                </div>
+                <input type="range" id="pop-icon-size" min="12" max="120" value="${sizeVal}" style="width:100%;">
+            </div>
+            <div class="toolbar-popup-column" style="margin-top:8px;">
+                <div style="display:flex; justify-content:space-between;">
+                    <label>Traço</label>
+                    <span id="pop-icon-stroke-val" style="font-size:0.65rem;">${strokeVal}</span>
+                </div>
+                <input type="range" id="pop-icon-stroke" min="0.5" max="5" step="0.5" value="${strokeVal}" style="width:100%;">
+            </div>
+            ${active.iconData?.shape !== 'none' ? `
+            <div class="toolbar-popup-column" style="margin-top:8px;">
+                <div style="display:flex; justify-content:space-between;">
+                    <label>Padding</label>
+                    <span id="pop-icon-pad-val" style="font-size:0.65rem;">${padVal}px</span>
+                </div>
+                <input type="range" id="pop-icon-pad" min="0" max="60" value="${padVal}" style="width:100%;">
+            </div>
+            ` : ''}
+        `;
+
+        setTimeout(() => {
+            const sizeInput = settingsPopup.querySelector('#pop-icon-size');
+            const strokeInput = settingsPopup.querySelector('#pop-icon-stroke');
+            const padInput = settingsPopup.querySelector('#pop-icon-pad');
+            
+            const sizeValSpan = settingsPopup.querySelector('#pop-icon-size-val');
+            const strokeValSpan = settingsPopup.querySelector('#pop-icon-stroke-val');
+            const padValSpan = settingsPopup.querySelector('#pop-icon-pad-val');
+
+            const rebuildIcon = async () => {
+                if (active.iconData) {
+                    active.iconData.iconSize = parseFloat(sizeInput.value);
+                    active.iconData.strokeWidth = parseFloat(strokeInput.value);
+                    if (padInput) active.iconData.padding = parseFloat(padInput.value);
+                    
+                    const newIcon = await buildIconObject(active.iconData);
+                    const { left, top, scaleX, scaleY, angle } = active;
+                    newIcon.set({ left, top, scaleX, scaleY, angle });
+                    canvas.remove(active);
+                    canvas.add(newIcon);
+                    canvas.setActiveObject(newIcon);
+                    canvas.renderAll();
+                }
+            };
+
+            sizeInput.oninput = (e) => { sizeValSpan.innerText = e.target.value + 'px'; };
+            sizeInput.onchange = () => { rebuildIcon(); history.save(); };
+            
+            strokeInput.oninput = (e) => { strokeValSpan.innerText = e.target.value; };
+            strokeInput.onchange = () => { rebuildIcon(); history.save(); };
+
+            if (padInput) {
+                padInput.oninput = (e) => { padValSpan.innerText = e.target.value + 'px'; };
+                padInput.onchange = () => { rebuildIcon(); history.save(); };
+            }
+        }, 50);
+
+        settingsBtn.appendChild(settingsPopup);
+        toolbarElement.appendChild(settingsBtn);
     }
 
     // ── 3. OPÇÕES ESPECÍFICAS DE FORMA ──────────────────────────────────────────
