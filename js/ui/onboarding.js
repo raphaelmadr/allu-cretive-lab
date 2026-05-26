@@ -162,4 +162,27 @@ export function setupOnboarding() {
             onboardingPresets.appendChild(card);
         });
     }
+
+    // Sincronizar dinamicamente a exibição do carousel-manager com a visibilidade do onboarding-modal
+    const manager = document.getElementById('carousel-manager');
+    if (modal && manager) {
+        const updateManagerVisibility = () => {
+            const isShowing = modal.style.display !== 'none';
+            manager.style.display = isShowing ? 'none' : 'flex';
+        };
+
+        // Estado inicial
+        updateManagerVisibility();
+
+        // Monitorar alterações nos atributos (estilo / display) do modal
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                    updateManagerVisibility();
+                }
+            });
+        });
+
+        observer.observe(modal, { attributes: true, attributeFilter: ['style'] });
+    }
 }

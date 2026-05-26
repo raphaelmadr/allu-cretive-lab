@@ -77,8 +77,10 @@ export function resizeCanvas(w, h) {
 
     // O Gerenciador de páginas (carousel) agora está sempre disponível se houver mais de uma página
     const manager = document.getElementById('carousel-manager');
+    const onboardingModal = document.getElementById('onboarding-modal');
+    const isShowingOnboarding = onboardingModal && onboardingModal.style.display !== 'none';
     if (manager) {
-        manager.style.display = 'flex';
+        manager.style.display = isShowingOnboarding ? 'none' : 'flex';
     }
     
     carousel.updateUI();

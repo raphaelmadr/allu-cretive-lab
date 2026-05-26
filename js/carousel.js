@@ -10,8 +10,10 @@ export const carousel = {
     init() {
         this.active = true;
         const manager = document.getElementById('carousel-manager');
+        const onboardingModal = document.getElementById('onboarding-modal');
+        const isShowingOnboarding = onboardingModal && onboardingModal.style.display !== 'none';
         if (manager) {
-            manager.style.display = 'flex';
+            manager.style.display = isShowingOnboarding ? 'none' : 'flex';
         }
         
         const initialCanvas = state.getCanvas();
