@@ -352,9 +352,16 @@ export function renderPropertiesTools(sidebarContent) {
         }
 
         propertiesHTML += `
-            <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:16px; margin-bottom:24px; border:1px solid var(--glass-border); display:flex; flex-direction:column; align-items:center; gap:12px;">
+            <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:16px; margin-bottom:24px; border:1px solid var(--glass-border); display:flex; flex-direction:column; align-items:center; gap:12px; width:100%; box-sizing:border-box;">
                 <img src="${p.local_img}" style="height:80px; object-fit:contain;">
-                <span style="font-size:0.85rem; font-weight:700; text-align:center;">${p.name}</span>
+                <div style="width:100%; display:flex; flex-direction:column; gap:6px; align-self:stretch; box-sizing:border-box;">
+                    <label style="font-size:0.65rem; color:var(--text-secondary); font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px;">Substituir Produto</label>
+                    <select id="prop-product-swap" style="width:100%; padding:8px 12px; border-radius:8px; border:1px solid var(--glass-border); background:#161617; color:white; outline:none; font-size:0.75rem; font-weight:600; cursor:pointer;">
+                        ${window.alluProducts && window.alluProducts.length > 0 ? window.alluProducts.map(prod => `
+                            <option value="${prod.name.replace(/"/g, '&quot;')}" ${prod.name === p.name ? 'selected' : ''}>${prod.name}</option>
+                        `).join('') : `<option value="${p.name.replace(/"/g, '&quot;')}" selected>${p.name}</option>`}
+                    </select>
+                </div>
             </div>
             
             ${priceInputsHTML}
@@ -753,6 +760,33 @@ export function renderPropertiesTools(sidebarContent) {
                 updateGroupDiscountBadge(active, canvas);
                 canvas.renderAll();
                 history.save();
+            };
+        }
+
+        const swapSelect = div.querySelector('#prop-product-swap');
+        if (swapSelect) {
+            swapSelect.onchange = (e) => {
+                const newProductName = e.target.value;
+                const newProduct = window.alluProducts.find(prod => prod.name === newProductName);
+                if (newProduct) {
+                    const mode = active.currentMode || 'solto';
+                    const transform = {
+                        left: active.left,
+                        top: active.top,
+                        scaleX: active.scaleX,
+                        scaleY: active.scaleY,
+                        angle: active.angle
+                    };
+
+                    canvas.remove(active);
+                    canvas.discardActiveObject();
+
+                    import('./products.js').then(module => {
+                        module.addProductToCanvas(newProduct, mode, transform, () => {
+                            updateSidebar('properties');
+                        });
+                    });
+                }
             };
         }
     }

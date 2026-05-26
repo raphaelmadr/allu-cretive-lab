@@ -194,7 +194,7 @@ export function renderProductsTools(sidebarContent) {
 
 }
 
-export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
+export function addProductToCanvas(p, mode = 'solto', initialPos = null, callback = null) {
     const canvas = state.getCanvas();
     if (!canvas) return;
 
@@ -226,8 +226,16 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
             fabricImg.productData = p;
             fabricImg.currentMode = mode;
             canvas.add(fabricImg);
-            if (initialPos) fabricImg.set({ left: initialPos.left, top: initialPos.top });
-            else centerLogical(fabricImg);
+            if (initialPos) {
+                const setProps = { left: initialPos.left, top: initialPos.top };
+                if (initialPos.scaleX !== undefined) setProps.scaleX = initialPos.scaleX;
+                if (initialPos.scaleY !== undefined) setProps.scaleY = initialPos.scaleY;
+                if (initialPos.angle !== undefined) setProps.angle = initialPos.angle;
+                fabricImg.set(setProps);
+                fabricImg.setCoords();
+            } else {
+                centerLogical(fabricImg);
+            }
             canvas.setActiveObject(fabricImg);
         } 
         else if (mode === 'card') {
@@ -330,8 +338,16 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
             group.productData = p;
             group.currentMode = mode;
             canvas.add(group);
-            if (initialPos) group.set({ left: initialPos.left, top: initialPos.top });
-            else centerLogical(group);
+            if (initialPos) {
+                const setProps = { left: initialPos.left, top: initialPos.top };
+                if (initialPos.scaleX !== undefined) setProps.scaleX = initialPos.scaleX;
+                if (initialPos.scaleY !== undefined) setProps.scaleY = initialPos.scaleY;
+                if (initialPos.angle !== undefined) setProps.angle = initialPos.angle;
+                group.set(setProps);
+                group.setCoords();
+            } else {
+                centerLogical(group);
+            }
             canvas.setActiveObject(group);
         }
         else if (mode === 'table-left' || mode === 'table-top') {
@@ -427,13 +443,22 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null) {
             group.productData = p;
             group.currentMode = mode;
             canvas.add(group);
-            if (initialPos) group.set({ left: initialPos.left, top: initialPos.top });
-            else centerLogical(group);
+            if (initialPos) {
+                const setProps = { left: initialPos.left, top: initialPos.top };
+                if (initialPos.scaleX !== undefined) setProps.scaleX = initialPos.scaleX;
+                if (initialPos.scaleY !== undefined) setProps.scaleY = initialPos.scaleY;
+                if (initialPos.angle !== undefined) setProps.angle = initialPos.angle;
+                group.set(setProps);
+                group.setCoords();
+            } else {
+                centerLogical(group);
+            }
             canvas.setActiveObject(group);
         }
 
         canvas.renderAll();
         history.save();
+        if (callback) callback(mode === 'solto' ? fabricImg : group);
     };
 
     imgElement.onerror = function() {
