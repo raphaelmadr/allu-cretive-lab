@@ -11,6 +11,7 @@ import { setupAlignment } from './align.js';
 import { setupZoom } from './zoom.js';
 import { initStorage } from './storage.js';
 import { notifications } from './ui/notifications.js';
+import { initFloatingToolbar } from './ui/floatingToolbar.js';
 
 
 
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupAlignment();
     setupZoom();
     setupHistoryEvents(); // Initializes history tracking and shortcuts
+    initFloatingToolbar(canvas);
     
     // 3. Initialize Multi-page (Carousel) manager for all formats
     carousel.init();
@@ -56,76 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if(activePreset) resizeCanvas(activePreset.w, activePreset.h);
     });
 
-    // Auto-switch to properties tab when ANY object is selected
+    // Auto-switch is disabled to prioritize the new Canva-like floating context toolbar
     canvas.on('selection:created', (e) => {
-        if (e.selected && e.selected[0]) {
-            const obj = e.selected[0];
-            
-            // Redirecionamento para ferramentas especializadas
-            if (obj.isBadge || (obj.get && obj.get('isBadge'))) {
-                const badgeBtn = document.querySelector('.btn-tool[data-tab="badges"]');
-                if (badgeBtn && !badgeBtn.classList.contains('active')) {
-                    badgeBtn.click();
-                }
-                return;
-            }
-
-            if (obj.isIcon || (obj.get && obj.get('isIcon'))) {
-                const iconBtn = document.querySelector('.btn-tool[data-tab="icons"]');
-                if (iconBtn && !iconBtn.classList.contains('active')) {
-                    iconBtn.click();
-                }
-                return;
-            }
-
-            const activeTab = document.querySelector('.btn-tool.active');
-            if (activeTab && activeTab.dataset.tab === 'text' && obj.type === 'i-text') return;
-
-            const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
-            if (propBtn) propBtn.click();
-        }
+        // Redirection to sidebar properties/badges is disabled
     });
-
-
-
 
     canvas.on('selection:updated', (e) => {
-        if (e.selected && e.selected[0]) {
-            const obj = e.selected[0];
-            
-            if (obj.isBadge || (obj.get && obj.get('isBadge'))) {
-                const badgeBtn = document.querySelector('.btn-tool[data-tab="badges"]');
-                if (badgeBtn && !badgeBtn.classList.contains('active')) {
-                    badgeBtn.click();
-                }
-                return;
-            }
-
-            if (obj.isIcon || (obj.get && obj.get('isIcon'))) {
-                const iconBtn = document.querySelector('.btn-tool[data-tab="icons"]');
-                if (iconBtn && !iconBtn.classList.contains('active')) {
-                    iconBtn.click();
-                }
-                return;
-            }
-
-            const activeTab = document.querySelector('.btn-tool.active');
-            if (activeTab && activeTab.dataset.tab === 'text' && obj.type === 'i-text') return;
-
-            const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
-            if (propBtn) propBtn.click();
-        }
+        // Redirection to sidebar properties/badges is disabled
     });
 
-
-
-
     canvas.on('selection:cleared', (e) => {
-        const activeTab = document.querySelector('.btn-tool.active');
-        if (activeTab && (activeTab.dataset.tab === 'badges' || activeTab.dataset.tab === 'icons')) return;
-
-        const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
-        if (propBtn) propBtn.click();
+        // Redirection to sidebar properties/badges is disabled
     });
 
     // Deselect all when clicking on the workspace (grey area)

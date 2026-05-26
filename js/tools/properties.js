@@ -987,7 +987,7 @@ export function renderPropertiesTools(sidebarContent) {
     sidebarContent.appendChild(div);
 }
 
-function startCropping(target, canvas, sidebarContent) {
+export function startCropping(target, canvas, sidebarContent) {
     if (!target || target.type !== 'image') return;
     
     canvas.discardActiveObject();
