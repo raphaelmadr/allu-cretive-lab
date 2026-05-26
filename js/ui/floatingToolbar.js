@@ -325,6 +325,7 @@ function renderToolbar(canvas, active) {
 
     // ── 2. OPÇÕES ESPECÍFICAS DE IMAGEM ─────────────────────────────────────────
     if (isImage) {
+        // 1. Recortar
         const cropBtn = createButton('crop', '<i class="fa-solid fa-crop"></i> Recortar', 'Recortar Imagem');
         cropBtn.onclick = () => {
             import('../tools/properties.js').then(module => {
@@ -334,6 +335,176 @@ function renderToolbar(canvas, active) {
             hideToolbar();
         };
         toolbarElement.appendChild(cropBtn);
+
+        // 2. Arredondar Cantos (Bordas arredondadas)
+        const radiusBtn = createButton('img-radius', '<i class="fa-regular fa-square-minus"></i> Cantos', 'Arredondar Cantos');
+        const radiusPopup = createPopup('popup-img-radius');
+        radiusPopup.style.width = '180px';
+        
+        let currentRadius = 0;
+        if (active.clipPath && active.clipPath.rx !== undefined) {
+            currentRadius = active.clipPath.rx;
+        }
+
+        radiusPopup.innerHTML = `
+            <div class="toolbar-popup-column">
+                <div class="toolbar-popup-row" style="justify-content:space-between;">
+                    <label>Arredondamento</label>
+                    <span id="popup-img-radius-val" style="font-size:0.7rem; color:var(--text-secondary);">${currentRadius}px</span>
+                </div>
+                <input type="range" id="popup-img-radius-range" min="0" max="150" value="${currentRadius}" style="width:100%;">
+            </div>
+        `;
+
+        const radiusInput = radiusPopup.querySelector('#popup-img-radius-range');
+        const radiusVal = radiusPopup.querySelector('#popup-img-radius-val');
+        
+        radiusInput.oninput = (e) => {
+            const val = parseInt(e.target.value);
+            radiusVal.innerText = val + 'px';
+            
+            let clipPath = active.clipPath;
+            if (val > 0) {
+                if (!clipPath || clipPath.type !== 'rect') {
+                    clipPath = new fabric.Rect({
+                        left: -active.width / 2,
+                        top: -active.height / 2,
+                        width: active.width,
+                        height: active.height,
+                        originX: 'left',
+                        originY: 'top'
+                    });
+                    active.set('clipPath', clipPath);
+                }
+                clipPath.set({
+                    rx: val,
+                    ry: val
+                });
+            } else {
+                if (clipPath) {
+                    const isCropped = Math.round(clipPath.width) < Math.round(active.width) || Math.round(clipPath.height) < Math.round(active.height);
+                    if (!isCropped) {
+                        active.set('clipPath', null);
+                    } else {
+                        clipPath.set({
+                            rx: 0,
+                            ry: 0
+                        });
+                    }
+                }
+            }
+            active.dirty = true;
+            canvas.renderAll();
+        };
+        radiusInput.onchange = () => history.save();
+        radiusBtn.appendChild(radiusPopup);
+        toolbarElement.appendChild(radiusBtn);
+
+        // 3. Sombras (Ativar/Desativar Sombras)
+        const shadowBtn = createButton('img-shadow', '<i class="fa-solid fa-circle-half-stroke"></i> Sombra', 'Sombra Projetada');
+        const shadowPopup = createPopup('popup-img-shadow');
+        shadowPopup.style.width = '200px';
+
+        const hasShadow = !!active.shadow;
+        const shadowBlur = active.shadow ? active.shadow.blur : 10;
+        const shadowOffsetX = active.shadow ? active.shadow.offsetX : 5;
+        const shadowOffsetY = active.shadow ? active.shadow.offsetY : 5;
+        const shadowColor = active.shadow ? (typeof active.shadow.color === 'string' ? active.shadow.color : '#000000') : '#000000';
+
+        shadowPopup.innerHTML = `
+            <div class="toolbar-popup-column" style="gap: 10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <input type="checkbox" id="popup-has-shadow" ${hasShadow ? 'checked' : ''} style="width:14px; height:14px; accent-color:var(--accent); cursor:pointer;">
+                    <label for="popup-has-shadow" style="font-size:0.75rem; font-weight:600; color:white; cursor:pointer;">Habilitar Sombra</label>
+                </div>
+                
+                <div id="popup-shadow-details" style="display:${hasShadow ? 'flex' : 'none'}; flex-direction:column; gap:8px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <label style="font-size:0.7rem; color:var(--text-secondary);">Cor</label>
+                        <input type="color" id="popup-shadow-color" value="${shadowColor.startsWith('#') ? shadowColor : '#000000'}" style="border:none; background:transparent; width:26px; height:20px; cursor:pointer;">
+                    </div>
+                    <div class="toolbar-popup-column">
+                        <div style="display:flex; justify-content:space-between;">
+                            <label style="font-size:0.7rem;">Desfoque</label>
+                            <span id="popup-shadow-blur-val" style="font-size:0.65rem; color:var(--text-secondary);">${shadowBlur}px</span>
+                        </div>
+                        <input type="range" id="popup-shadow-blur" min="0" max="50" value="${shadowBlur}" style="width:100%;">
+                    </div>
+                    <div class="toolbar-popup-column">
+                        <div style="display:flex; justify-content:space-between;">
+                            <label style="font-size:0.7rem;">Deslocamento X</label>
+                            <span id="popup-shadow-offsetx-val" style="font-size:0.65rem; color:var(--text-secondary);">${shadowOffsetX}px</span>
+                        </div>
+                        <input type="range" id="popup-shadow-offsetx" min="-30" max="30" value="${shadowOffsetX}" style="width:100%;">
+                    </div>
+                    <div class="toolbar-popup-column">
+                        <div style="display:flex; justify-content:space-between;">
+                            <label style="font-size:0.7rem;">Deslocamento Y</label>
+                            <span id="popup-shadow-offsety-val" style="font-size:0.65rem; color:var(--text-secondary);">${shadowOffsetY}px</span>
+                        </div>
+                        <input type="range" id="popup-shadow-offsety" min="-30" max="30" value="${shadowOffsetY}" style="width:100%;">
+                    </div>
+                </div>
+            </div>
+        `;
+
+        setTimeout(() => {
+            const hasShadowCheck = shadowPopup.querySelector('#popup-has-shadow');
+            const shadowDetails = shadowPopup.querySelector('#popup-shadow-details');
+            const shadowColorInput = shadowPopup.querySelector('#popup-shadow-color');
+            const shadowBlurInput = shadowPopup.querySelector('#popup-shadow-blur');
+            const shadowBlurVal = shadowPopup.querySelector('#popup-shadow-blur-val');
+            const shadowOffsetXInput = shadowPopup.querySelector('#popup-shadow-offsetx');
+            const shadowOffsetXVal = shadowPopup.querySelector('#popup-shadow-offsetx-val');
+            const shadowOffsetYInput = shadowPopup.querySelector('#popup-shadow-offsety');
+            const shadowOffsetYVal = shadowPopup.querySelector('#popup-shadow-offsety-val');
+
+            const applyShadow = () => {
+                if (hasShadowCheck.checked) {
+                    shadowDetails.style.display = 'flex';
+                    active.set('shadow', new fabric.Shadow({
+                        color: shadowColorInput.value,
+                        blur: parseInt(shadowBlurInput.value),
+                        offsetX: parseInt(shadowOffsetXInput.value),
+                        offsetY: parseInt(shadowOffsetYInput.value)
+                    }));
+                } else {
+                    shadowDetails.style.display = 'none';
+                    active.set('shadow', null);
+                }
+                active.dirty = true;
+                canvas.renderAll();
+            };
+
+            hasShadowCheck.onchange = () => {
+                applyShadow();
+                history.save();
+                adjustPopupPosition(shadowPopup);
+            };
+            shadowColorInput.oninput = applyShadow;
+            shadowColorInput.onchange = () => history.save();
+
+            shadowBlurInput.oninput = (e) => {
+                shadowBlurVal.innerText = e.target.value + 'px';
+                applyShadow();
+            };
+            shadowBlurInput.onchange = () => history.save();
+
+            shadowOffsetXInput.oninput = (e) => {
+                shadowOffsetXVal.innerText = e.target.value + 'px';
+                applyShadow();
+            };
+            shadowOffsetXInput.onchange = () => history.save();
+
+            shadowOffsetYInput.oninput = (e) => {
+                shadowOffsetYVal.innerText = e.target.value + 'px';
+                applyShadow();
+            };
+            shadowOffsetYInput.onchange = () => history.save();
+        }, 50);
+
+        shadowBtn.appendChild(shadowPopup);
+        toolbarElement.appendChild(shadowBtn);
     }
 
     // ── 3. OPÇÕES ESPECÍFICAS DE FORMA ──────────────────────────────────────────
