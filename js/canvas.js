@@ -47,13 +47,19 @@ export function resizeCanvas(w, h) {
     wrapper.style.justifyContent = 'flex-start'; // Começa da esquerda
     wrapper.style.overflowX = 'auto';
     wrapper.style.overflowY = 'auto';
-    wrapper.style.padding = '100px';
     wrapper.style.gap = '80px'; // Espaço generoso entre as telas
 
     const padding = 120; 
     const availableW = wrapper.clientWidth - padding;
     const availableH = wrapper.clientHeight - padding;
     const scale = Math.min(availableW / w, availableH / h, 1);
+
+    const canvasWidth = Math.round(w * scale);
+    const horizontalPadding = Math.max(100, Math.round((wrapper.clientWidth - canvasWidth) / 2));
+    wrapper.style.paddingLeft = `${horizontalPadding}px`;
+    wrapper.style.paddingRight = `${horizontalPadding}px`;
+    wrapper.style.paddingTop = '100px';
+    wrapper.style.paddingBottom = '100px';
     
     // Aplicar a todos os canvases no estado
     state.canvases.forEach(canvas => {

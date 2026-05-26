@@ -141,6 +141,13 @@ export const carousel = {
         if (index !== -1) {
             state.setActiveCanvas(index);
             this.updateUI();
+            
+            // Centralizar a página ativa no viewport do canvas
+            const container = canvasInstance.getElement().parentNode;
+            if (container) {
+                container.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            }
+
             const propBtn = document.querySelector('.btn-tool[data-tab="properties"]');
             if (propBtn) propBtn.click();
         }
@@ -281,7 +288,7 @@ export const carousel = {
                 container.style.outline = '1px solid rgba(255,255,255,0.1)';
                 container.style.outlineOffset = '8px';
                 container.style.boxShadow = 'none';
-                container.style.opacity = '0.5';
+                container.style.opacity = '0.2';
             }
             container.style.display = 'block';
             container.style.marginBottom = '0'; // Remove margem vertical
