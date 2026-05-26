@@ -17,28 +17,9 @@ function getActivePreset() {
     return Object.values(presets).find(p => p.name === formatStr) || { w: 1080, h: 1080 };
 }
 
-function getAnchor(anchor) {
-    const wrapper = document.getElementById('canvas-wrapper');
-    if (!wrapper) return null;
-    
-    const rect = wrapper.getBoundingClientRect();
-    
-    const target = anchor || mouseClientPos;
-    if (target && 
-        target.clientX >= rect.left && target.clientX <= rect.right &&
-        target.clientY >= rect.top && target.clientY <= rect.bottom) {
-        return target;
-    }
-    
-    return {
-        clientX: rect.left + rect.width / 2,
-        clientY: rect.top + rect.height / 2
-    };
-}
-
 /**
  * Aplica o zoom centralizando no ponto `anchor` (coordenadas de tela clientX/clientY).
- * Se `anchor` não for fornecido, usa o cursor do mouse ou o centro do wrapper.
+ * Se `anchor` for 'center', centraliza o zoom no canvas ativo.
  */
 function applyZoom(newScale, anchor) {
     if (state.canvases.length === 0) return;
@@ -49,47 +30,74 @@ function applyZoom(newScale, anchor) {
 
     if (wrapper) {
         const currentScale = state.canvases[0].getZoom();
-        const pt = getAnchor(anchor);
         const wrapperRect = wrapper.getBoundingClientRect();
-
-        const containers = Array.from(wrapper.querySelectorAll('.canvas-container'));
-        const targetContainer = containers.find(c => {
-            const r = c.getBoundingClientRect();
-            return pt.clientX >= r.left && pt.clientX <= r.right &&
-                   pt.clientY >= r.top && pt.clientY <= r.bottom;
-        }) || containers[0];
-
-        if (targetContainer) {
-            const idx = containers.indexOf(targetContainer);
-            const containerRect = targetContainer.getBoundingClientRect();
-            
-            const mouseXInContainer = pt.clientX - containerRect.left;
-            const mouseYInContainer = pt.clientY - containerRect.top;
-
-            const newMouseXInContainer = mouseXInContainer * (newScale / currentScale);
-            const newMouseYInContainer = mouseYInContainer * (newScale / currentScale);
-
-            // Aplicar dimensões e zoom em todos os canvases
-            state.canvases.forEach(canvas => {
-                canvas.setDimensions(
-                    { width: w * newScale, height: h * newScale },
-                    { backstoreOnly: false }
-                );
-                canvas.setZoom(newScale);
-
-                const container = canvas.getElement().parentNode;
-                container.style.width  = Math.round(w * newScale) + 'px';
-                container.style.height = Math.round(h * newScale) + 'px';
-
-                drawSafeGuides(canvas, w, h, newScale);
-                canvas.renderAll();
-            });
-
-            // Ajustar o scroll para manter o ponto sob o cursor
-            const fixedOffset = 100 + idx * 80;
-            wrapper.scrollLeft = fixedOffset + idx * w * newScale - pt.clientX + newMouseXInContainer + wrapperRect.left;
-            wrapper.scrollTop  = 100 - pt.clientY + wrapperRect.top + newMouseYInContainer;
+        
+        let pt = null;
+        if (anchor && anchor !== 'center') {
+            pt = anchor;
+        } else {
+            const activeCanvas = state.getCanvas();
+            if (activeCanvas) {
+                const activeContainer = activeCanvas.getElement().parentNode;
+                if (activeContainer) {
+                    const r = activeContainer.getBoundingClientRect();
+                    pt = {
+                        clientX: r.left + r.width / 2,
+                        clientY: r.top + r.height / 2
+                    };
+                }
+            }
         }
+
+        if (!pt) {
+            pt = {
+                clientX: wrapperRect.left + wrapperRect.width / 2,
+                clientY: wrapperRect.top + wrapperRect.height / 2
+            };
+        }
+
+        // 1. Obter padding atual do wrapper
+        const style = window.getComputedStyle(wrapper);
+        const currentPaddingLeft = parseFloat(style.paddingLeft) || 0;
+        const currentPaddingTop = parseFloat(style.paddingTop) || 0;
+
+        // 2. Calcular coordenada relativa ao início do conteúdo (após padding)
+        const xInContent = wrapper.scrollLeft + pt.clientX - wrapperRect.left - currentPaddingLeft;
+        const yInContent = wrapper.scrollTop + pt.clientY - wrapperRect.top - currentPaddingTop;
+
+        // 3. Aplicar dimensões e zoom em todos os canvases
+        state.canvases.forEach(canvas => {
+            canvas.setDimensions(
+                { width: w * newScale, height: h * newScale },
+                { backstoreOnly: false }
+            );
+            canvas.setZoom(newScale);
+
+            const container = canvas.getElement().parentNode;
+            container.style.width  = Math.round(w * newScale) + 'px';
+            container.style.height = Math.round(h * newScale) + 'px';
+
+            drawSafeGuides(canvas, w, h, newScale);
+            canvas.renderAll();
+        });
+
+        // 4. Calcular o novo padding horizontal dinâmico
+        const canvasWidth = Math.round(w * newScale);
+        const newPaddingLeft = Math.max(100, Math.round((wrapper.clientWidth - canvasWidth) / 2));
+        
+        wrapper.style.paddingLeft = `${newPaddingLeft}px`;
+        wrapper.style.paddingRight = `${newPaddingLeft}px`;
+        wrapper.style.paddingTop = '100px';
+        wrapper.style.paddingBottom = '100px';
+
+        // 5. Escalonar coordenadas e adicionar novo padding
+        const scaleFactor = newScale / currentScale;
+        const newXInContent = xInContent * scaleFactor + newPaddingLeft;
+        const newYInContent = yInContent * scaleFactor + 100; // paddingTop é fixo em 100px
+
+        // 6. Definir novos offsets de rolagem para alinhar o ponto sob o cursor
+        wrapper.scrollLeft = newXInContent - (pt.clientX - wrapperRect.left);
+        wrapper.scrollTop  = newYInContent - (pt.clientY - wrapperRect.top);
     } else {
         // Fallback sem wrapper
         state.canvases.forEach(canvas => {
@@ -134,12 +142,12 @@ function fitToScreen() {
         1
     );
     // Fit centraliza — não usa âncora
-    applyZoom(scale, null);
+    applyZoom(scale, 'center');
 }
 
 function resetZoom() {
-    // 100% centralizado no cursor atual
-    applyZoom(1.0, mouseClientPos);
+    // 100% centralizado no active canvas
+    applyZoom(1.0, 'center');
 }
 
 export function setupZoom() {
@@ -158,11 +166,11 @@ export function setupZoom() {
     const btnZoomFit = document.getElementById('btn-zoom-fit');
     const zoomDisplay = document.getElementById('zoom-display');
 
-    if (btnZoomIn)  btnZoomIn.onclick  = () => stepZoomIn(mouseClientPos);
-    if (btnZoomOut) btnZoomOut.onclick = () => stepZoomOut(mouseClientPos);
+    if (btnZoomIn)  btnZoomIn.onclick  = () => stepZoomIn('center');
+    if (btnZoomOut) btnZoomOut.onclick = () => stepZoomOut('center');
     if (btnZoomFit) btnZoomFit.onclick = fitToScreen;
-
-    // Clique no percentual → 100% centrado no mouse
+ 
+    // Clique no percentual → 100% centrado no active canvas
     // Duplo clique → fit to screen
     if (zoomDisplay) {
         zoomDisplay.style.cursor = 'pointer';
@@ -170,47 +178,47 @@ export function setupZoom() {
         zoomDisplay.onclick    = resetZoom;
         zoomDisplay.ondblclick = fitToScreen;
     }
-
+ 
     // ── Scroll do mouse / trackpad com Cmd/Ctrl → zoom para o cursor ───────
     if (wrapper) {
         wrapper.addEventListener('wheel', (e) => {
             if (!e.ctrlKey && !e.metaKey) return;
             e.preventDefault();
             if (state.canvases.length === 0) return;
-
+ 
             const anchor = {
                 clientX: e.clientX,
                 clientY: e.clientY,
             };
-
+ 
             const current = state.canvases[0].getZoom();
             // Scroll suave: quanto mais zoomed-in, menor o passo
             const factor = e.deltaY < 0 ? 1.08 : 0.93;
             applyZoom(current * factor, anchor);
         }, { passive: false });
     }
-
+ 
     // ── Atalhos de teclado ─────────────────────────────────────────────────
-    // ⌘ =  /  ⌘ +  → Zoom In  (âncora = última posição do mouse)
-    // ⌘ -          → Zoom Out (âncora = última posição do mouse)
+    // ⌘ =  /  ⌘ +  → Zoom In  (âncora = centro do documento)
+    // ⌘ -          → Zoom Out (âncora = centro do documento)
     // ⌘ 0          → Fit to screen
-    // ⌘ 1          → 100% centrado no mouse
+    // ⌘ 1          → 100% centrado no active canvas
     document.addEventListener('keydown', (e) => {
         const isMod = e.metaKey || e.ctrlKey;
         if (!isMod) return;
-
+ 
         const tag = document.activeElement?.tagName?.toLowerCase();
         if (tag === 'input' || tag === 'textarea') return;
-
+ 
         switch (e.key) {
             case '=':
             case '+':
                 e.preventDefault();
-                stepZoomIn(mouseClientPos);
+                stepZoomIn('center');
                 break;
             case '-':
                 e.preventDefault();
-                stepZoomOut(mouseClientPos);
+                stepZoomOut('center');
                 break;
             case '0':
                 e.preventDefault();

@@ -2,6 +2,14 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [0.7.0] - 2026-05-26
+### Adicionado
+- **Duplicação de Canva (Página)**: Novo botão compacto de duplicar página no rodapé da plataforma, clonando instantaneamente o canva atual com todos os seus elementos e metadados.
+- **Substituição Dinâmica de Produtos**: Dropdown "Substituir Produto" na barra lateral de propriedades, permitindo trocar o produto selecionado mantendo a posição, escala e ângulo originais.
+- **Centralização Automática e Destaque de Canva**: Ajuste dinâmico de padding no wrapper para centralizar perfeitamente a página em edição e aplicação de opacidade de `0.2` nas páginas inativas para foco visual.
+- **Barra de Ferramentas Flutuante (Estilo Canva)**: Barra horizontal de contexto sobre o objeto ativo para atalhos de formatação rápidos.
+- **Importação de Arquivos .allu**: Drag & drop ou seleção manual de arquivos de projeto na tela inicial de onboarding.
+
 ## [0.6.0] - 2026-05-05
 ### Adicionado
 - **Sincronização de Propriedades em Tempo Real**: Novo sistema de vinculação bidirecional entre a sidebar de propriedades e o canvas, permitindo feedback instantâneo ao alterar cores, fontes, tamanhos e outros atributos.
