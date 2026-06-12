@@ -201,7 +201,7 @@ async function generateFourFormats(creative) {
     }
     
     carousel.switchPage(0);
-    notifications.toast('Iniciando IA Diretor de Arte... Analisando Referência...', 5000);
+    notifications.toast('🤖 Smart Picker: Puxando layout da base de dados histórica...', 'info');
 
     // 2. Carregar a Knowledge Base (Design System)
     let aiLayout = null;
@@ -340,14 +340,16 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
     // 3. Texts
     if (layout.texts && layout.texts.length > 0) {
         layout.texts.forEach(t => {
-            if (!t.content) return;
+            // Mapeia o texto do Notion para este slot baseado no role (hook, body, cta, etc)
+            const textContent = creative[t.role];
+            if (!textContent) return;
             
             let effects = t.effects || {};
             let fontSize = (t.fontSizeRatio || 0.05) * H;
             // Limitar max font size para nao estourar
             if (fontSize > 150) fontSize = 150;
             
-            const textObj = new fabric.IText(t.content, {
+            const textObj = new fabric.IText(textContent, {
                 left: W * (t.position.x || 0.5),
                 top: H * (t.position.y || 0.5),
                 originX: t.textAlign === 'left' ? 'left' : (t.textAlign === 'right' ? 'right' : 'center'),
