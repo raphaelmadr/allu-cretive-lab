@@ -217,70 +217,38 @@ async function generateFourFormats(creative) {
         const dbResp = await fetch('assets/design_system.json');
         if (dbResp.ok) {
             const knowledgeBase = await dbResp.json();
+            const availableStyles = Object.keys(knowledgeBase);
             
-            // Verifica se o estilo existe
-            // Precisamos do layout correto para CADA formato, mas na estrutura do motor 
-            // `aiLayout` é passado para o `renderAILayout` que ajusta baseado na proporção,
-            // ou podemos usar a versão específica do formato se existir.
-            // Para manter compatibilidade com o formato da API, extraímos a versão base ('').
-            if (knowledgeBase[baseFilename] && knowledgeBase[baseFilename].formats['']) {
-                aiLayout = knowledgeBase[baseFilename].formats[''];
-                console.log("[Knowledge Base] Estilo carregado instantaneamente da base de conhecimento!");
+            if (availableStyles.length > 0) {
+                // 1. Tentar match exato
+                if (knowledgeBase[baseFilename] && knowledgeBase[baseFilename].formats['']) {
+                    aiLayout = knowledgeBase[baseFilename].formats[''];
+                    console.log("[Smart Picker] Estilo exato encontrado:", baseFilename);
+                } else {
+                    // 2. Tentar match parcial pelo nome do produto
+                    const productStr = (creative.product || creative.name || '').toLowerCase().split(' ')[0];
+                    let matchedStyle = availableStyles.find(style => style.toLowerCase().includes(productStr));
+                    
+                    // 3. Fallback: Escolher um estilo aleatório da nossa Base de Conhecimento
+                    if (!matchedStyle) {
+                        matchedStyle = availableStyles[Math.floor(Math.random() * availableStyles.length)];
+                    }
+                    
+                    if (knowledgeBase[matchedStyle].formats['']) {
+                        aiLayout = knowledgeBase[matchedStyle].formats[''];
+                        console.log(`[Smart Picker] Estilo automático escolhido: ${matchedStyle} (Baseado no histórico)`);
+                    }
+                }
             }
         }
     } catch (e) {
-        console.log("Knowledge base local não encontrada. Caindo pro Fallback API.");
+        console.log("Knowledge base local não encontrada.");
     }
 
-    // 3. Se a Knowledge Base não tiver o estilo, chamar a IA dinâmica (API Serverless)
-    if (!aiLayout && baseFilename) {
-        console.log("[Dynamic API] Estilo não encontrado na Knowledge Base, extraindo layout em tempo real...");
-        const primaryPath = `REFERENCIAS/${baseFilename}.png`;
-        
-        const base64Image = await new Promise((resolve) => {
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
-            img.onload = () => {
-                const canvasObj = document.createElement('canvas');
-                canvasObj.width = img.width;
-                canvasObj.height = img.height;
-                const ctx = canvasObj.getContext('2d');
-                ctx.drawImage(img, 0, 0);
-                resolve(canvasObj.toDataURL('image/png'));
-            };
-            img.onerror = () => resolve(null);
-            img.src = primaryPath;
-        });
-
-        if (base64Image) {
-            try {
-                const response = await fetch('/api/generate', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        imageBase64: base64Image,
-                        creativeData: creative,
-                        dimensions: targetFormats[0]
-                    })
-                });
-                if (response.ok) {
-                    aiLayout = await response.json();
-                } else {
-                    const errData = await response.json();
-                    hasApiError = true;
-                    errorMessage = errData.error || 'Erro desconhecido na API.';
-                    console.error("AI Error:", errData);
-                }
-            } catch(e) {
-                hasApiError = true;
-                errorMessage = e.message;
-                console.error("Fetch AI failed:", e);
-            }
-        } else {
-            console.error(`Imagem base não encontrada no disco: ${primaryPath}`);
-            hasApiError = true;
-            errorMessage = `A imagem de referência (${primaryPath}) não foi encontrada na sua pasta REFERENCIAS.`;
-        }
+    // Se a IA falhou em achar qualquer coisa
+    if (!aiLayout) {
+        hasApiError = true;
+        errorMessage = `A Base de Conhecimento da Allu está vazia ou inacessível. Rode o Ingestor de IA primeiro.`;
     }
 
     // Se falhou e for API Key faltando
