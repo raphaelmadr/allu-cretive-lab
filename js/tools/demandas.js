@@ -168,7 +168,7 @@ async function generateFourFormats(creative) {
         // Tentar carregar background
         if (creative.filename) {
             // Check Se tem extensão, senao adiciona .png
-            let imagePath = \`assets/templates/\${creative.filename}\`;
+            let imagePath = `assets/templates/${creative.filename}`;
             if(!imagePath.endsWith('.png') && !imagePath.endsWith('.jpg')) {
                 imagePath += '.png';
             }
