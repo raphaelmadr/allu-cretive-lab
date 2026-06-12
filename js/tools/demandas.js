@@ -167,41 +167,57 @@ async function generateFourFormats(creative) {
         
         // Tentar carregar background
         if (creative.filename) {
-            // Check Se tem extensão, senao adiciona .png
-            let imagePath = `assets/templates/${creative.filename}`;
-            if(!imagePath.endsWith('.png') && !imagePath.endsWith('.jpg')) {
-                imagePath += '.png';
-            }
+            let baseFilename = creative.filename;
+            if(baseFilename.endsWith('.png')) baseFilename = baseFilename.slice(0, -4);
+            if(baseFilename.endsWith('.jpg')) baseFilename = baseFilename.slice(0, -4);
 
-            fabric.Image.fromURL(imagePath, (img) => {
-                if (img) {
-                    const scaleX = currentCanvas.originalW / img.width;
-                    const scaleY = currentCanvas.originalH / img.height;
-                    const scale = Math.max(scaleX, scaleY);
-                    
-                    img.set({
-                        originX: 'center',
-                        originY: 'center',
-                        left: currentCanvas.originalW / 2,
-                        top: currentCanvas.originalH / 2,
-                        scaleX: scale,
-                        scaleY: scale,
-                        selectable: false,
-                        evented: false
-                    });
-                    currentCanvas.add(img);
-                    currentCanvas.sendToBack(img);
-                }
+            const suffix = i === 0 ? '' : `-${i}`;
+            const primaryPath = `assets/templates/${baseFilename}${suffix}.png`;
+            const fallbackPath = `assets/templates/${baseFilename}.png`;
 
-                // Injetar Textos via Magic Resize Simples
-                injectTexts(currentCanvas, creative, targetFormats[i]);
-                currentCanvas.renderAll();
-                
-                if (i === targetFormats.length - 1) {
-                    resizeCanvas();
-                    carousel.updateUI();
-                }
-            }, { crossOrigin: 'anonymous' });
+            const loadAndApplyImage = (path, isFallback = false) => {
+                fabric.Image.fromURL(path, (img) => {
+                    if (img) {
+                        const scaleX = currentCanvas.originalW / img.width;
+                        const scaleY = currentCanvas.originalH / img.height;
+                        const scale = Math.max(scaleX, scaleY);
+                        
+                        img.set({
+                            originX: 'center',
+                            originY: 'center',
+                            left: currentCanvas.originalW / 2,
+                            top: currentCanvas.originalH / 2,
+                            scaleX: scale,
+                            scaleY: scale,
+                            selectable: false,
+                            evented: false
+                        });
+                        currentCanvas.add(img);
+                        currentCanvas.sendToBack(img);
+                        
+                        injectTexts(currentCanvas, creative, targetFormats[i]);
+                        currentCanvas.renderAll();
+                        
+                        if (i === targetFormats.length - 1) {
+                            resizeCanvas();
+                            carousel.updateUI();
+                        }
+                    } else if (!isFallback && suffix !== '') {
+                        // Tentar fallback se falhou a imagem específica
+                        loadAndApplyImage(fallbackPath, true);
+                    } else {
+                        // Nenhuma imagem encontrada (nem específica, nem fallback)
+                        injectTexts(currentCanvas, creative, targetFormats[i]);
+                        currentCanvas.renderAll();
+                        if (i === targetFormats.length - 1) {
+                            resizeCanvas();
+                            carousel.updateUI();
+                        }
+                    }
+                }, { crossOrigin: 'anonymous' });
+            };
+
+            loadAndApplyImage(primaryPath);
         } else {
             injectTexts(currentCanvas, creative, targetFormats[i]);
             if (i === targetFormats.length - 1) {
