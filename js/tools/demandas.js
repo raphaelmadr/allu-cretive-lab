@@ -156,9 +156,54 @@ async function generateFourFormats(creative) {
     const { resizeCanvas } = await import('../canvas.js');
     const { notifications } = await import('../ui/notifications.js');
     
-    notifications.toast('Iniciando Inteligência Artificial... (isso pode levar uns segundos)', 5000);
+    // 1. Criar os 4 quadros imediatamente com Skeletons de Carregamento
+    for (let i = 0; i < targetFormats.length; i++) {
+        let currentCanvas = state.canvases[i];
+        if (!currentCanvas) {
+            carousel.addPage(targetFormats[i].w, targetFormats[i].h);
+            currentCanvas = state.canvases[i];
+        } else {
+            currentCanvas.setDimensions({ width: targetFormats[i].w, height: targetFormats[i].h });
+            currentCanvas.originalW = targetFormats[i].w;
+            currentCanvas.originalH = targetFormats[i].h;
+            currentCanvas.clear();
+        }
 
-    // 1. Encontrar a imagem base e converter para Base64
+        currentCanvas.formatName = targetFormats[i].name;
+        currentCanvas.backgroundColor = '#F7F7F9'; // Fundo Skeleton
+        
+        // Desenhar Skeletons
+        const W = targetFormats[i].w;
+        const H = targetFormats[i].h;
+        
+        const skeletonImg = new fabric.Rect({
+            left: W/2, top: H/2, originX: 'center', originY: 'center',
+            width: W * 0.6, height: W * 0.6, rx: 20, ry: 20, fill: '#E0E0E0'
+        });
+        
+        const skeletonTitle = new fabric.Rect({
+            left: W/2, top: H * 0.2, originX: 'center', originY: 'center',
+            width: W * 0.8, height: 40, rx: 8, ry: 8, fill: '#E0E0E0'
+        });
+
+        const skeletonBody = new fabric.Rect({
+            left: W/2, top: H * 0.8, originX: 'center', originY: 'center',
+            width: W * 0.7, height: 20, rx: 8, ry: 8, fill: '#E0E0E0'
+        });
+
+        currentCanvas.add(skeletonImg, skeletonTitle, skeletonBody);
+        currentCanvas.renderAll();
+        
+        if (i === targetFormats.length - 1) {
+            resizeCanvas();
+            carousel.updateUI();
+        }
+    }
+    
+    carousel.switchPage(0);
+    notifications.toast('Iniciando IA Diretor de Arte... Analisando Referência...', 5000);
+
+    // 2. Encontrar a imagem base e converter para Base64
     let base64Image = null;
     if (creative.filename) {
         let baseFilename = creative.filename;
@@ -182,8 +227,11 @@ async function generateFourFormats(creative) {
         });
     }
 
-    // 2. Chamar a IA (API Serverless) apenas 1 vez (usando o formato base como referência)
+    // 3. Chamar a IA (API Serverless)
     let aiLayout = null;
+    let hasApiError = false;
+    let errorMessage = '';
+
     if (base64Image) {
         try {
             const response = await fetch('/api/generate', {
@@ -198,46 +246,47 @@ async function generateFourFormats(creative) {
             if (response.ok) {
                 aiLayout = await response.json();
             } else {
-                console.error("AI Error:", await response.text());
-                notifications.toast("Erro na IA, usando fallback padrão.", 3000);
+                const errData = await response.json();
+                hasApiError = true;
+                errorMessage = errData.error || 'Erro desconhecido na API.';
+                console.error("AI Error:", errData);
             }
         } catch(e) {
+            hasApiError = true;
+            errorMessage = e.message;
             console.error("Fetch AI failed:", e);
         }
     }
 
-    // 3. Montar os 4 quadros usando a semântica da IA ou Fallback
+    // Se falhou e for API Key faltando
+    if (hasApiError) {
+        if (errorMessage.includes('GEMINI_API_KEY')) {
+            await notifications.alert("Falta de Configuração ⚠️", "A Inteligência Artificial precisa da chave 'GEMINI_API_KEY' na Vercel para funcionar. Configure lá e rode um novo Deploy!");
+        } else {
+            await notifications.alert("Falha na IA ❌", "A IA não conseguiu processar este layout. Código do erro: " + errorMessage);
+        }
+    }
+
+    // 4. Limpar Skeletons e Montar os 4 quadros finais
     for (let i = 0; i < targetFormats.length; i++) {
         let currentCanvas = state.canvases[i];
-        if (!currentCanvas) {
-            carousel.addPage(targetFormats[i].w, targetFormats[i].h);
-            currentCanvas = state.canvases[i];
-        } else {
-            currentCanvas.setDimensions({ width: targetFormats[i].w, height: targetFormats[i].h });
-            currentCanvas.originalW = targetFormats[i].w;
-            currentCanvas.originalH = targetFormats[i].h;
-            currentCanvas.clear();
-            currentCanvas.backgroundColor = '#ffffff';
-        }
+        currentCanvas.clear();
+        currentCanvas.backgroundColor = '#ffffff';
 
-        currentCanvas.formatName = targetFormats[i].name;
-        
-        if (aiLayout) {
+        if (aiLayout && !hasApiError) {
             await renderAILayout(currentCanvas, aiLayout, targetFormats[i], creative);
         } else {
-            // Fallback original caso a IA falhe ou imagem não exista
+            // Fallback
             injectTexts(currentCanvas, creative, targetFormats[i]);
             currentCanvas.renderAll();
         }
         
         if (i === targetFormats.length - 1) {
             resizeCanvas();
-            carousel.updateUI();
         }
     }
     
-    carousel.switchPage(0);
-    notifications.toast('Magic Resize & AI Layout completos! 4 formatos gerados.');
+    notifications.toast('Processo finalizado!', 'success');
 }
 
 async function renderAILayout(canvas, layout, formatConfig, creative) {
