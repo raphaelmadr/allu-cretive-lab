@@ -279,7 +279,7 @@ async function generateFourFormats(creative) {
         } else {
             console.error(`Imagem base não encontrada no disco: ${primaryPath}`);
             hasApiError = true;
-            errorMessage = `A imagem de referência (${primaryPath}) não foi encontrada na sua pasta assets/templates.`;
+            errorMessage = `A imagem de referência (${primaryPath}) não foi encontrada na sua pasta REFERENCIAS.`;
         }
     }
 
