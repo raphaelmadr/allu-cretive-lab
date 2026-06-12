@@ -91,7 +91,10 @@ REGRAS CRÍTICAS:
                             }
                         }
                     ]
-                }]
+                }],
+                generationConfig: {
+                    responseMimeType: "application/json"
+                }
             })
         });
 
@@ -104,12 +107,13 @@ REGRAS CRÍTICAS:
 
         let jsonText = data.candidates[0].content.parts[0].text;
         
-        // Limpar possíveis formatações markdown do gemini
-        jsonText = jsonText.replace(/^```json/mi, '').replace(/```$/m, '').trim();
-        
-        const parsedLayout = JSON.parse(jsonText);
-        
-        return res.status(200).json(parsedLayout);
+        try {
+            const parsedLayout = JSON.parse(jsonText);
+            return res.status(200).json(parsedLayout);
+        } catch (parseError) {
+            console.error("Erro ao parsear JSON da IA:", jsonText);
+            return res.status(500).json({ error: "IA retornou formato inválido" });
+        }
         
     } catch (error) {
         console.error('Error connecting to Gemini:', error);
