@@ -44,14 +44,20 @@ export function renderDemandasTools(sidebarContent) {
                     const copySection = copySectionParts.length > 1 ? copySectionParts[1] : blockText;
 
                     const extractCopyBlock = (keyword) => {
-                        const regex = new RegExp(`\\\\*\\\\*${keyword}[^\\\\*]*\\\\*\\\\*:\\s*([\\\\s\\\\S]*?)(?=\\\\*\\\\*|$)`, 'i');
+                        // Tentar extrair considerando que pode ter ou não negrito, e os dois pontos podem estar dentro ou fora do negrito
+                        const regex = new RegExp(`(?:\\*\\*)?${keyword}[^:]*:(?:\\*\\*)?\\s*([\\s\\S]*?)(?=(?:\\*\\*)?(?:Hook|Body|CTA|Visual)[^:]*:|$)`, 'i');
                         let match = copySection.match(regex);
                         if (!match) {
-                            // Fallback sem negrito na chave
-                            const fallbackRegex = new RegExp(`${keyword} recomendado[^:]*:\\s*([\\\\s\\\\S]*?)(?=\\n\\n|$)`, 'i');
+                            // Fallback caso não encontre
+                            const fallbackRegex = new RegExp(`${keyword}[^:]*:\\s*([\\s\\S]*?)(?=\\n\\n|$)`, 'i');
                             match = copySection.match(fallbackRegex);
                         }
-                        return match ? match[1].trim() : '';
+                        
+                        let result = match ? match[1].trim() : '';
+                        // Limpar eventuais "**" ou ">" residuais no início/fim
+                        result = result.replace(/^\\*\\*|\\*\\*$/g, '').trim();
+                        result = result.replace(/^>\\s*/gm, '').trim();
+                        return result;
                     };
 
                     data.hook = extractCopyBlock('Hook');
@@ -176,37 +182,42 @@ async function generateFourFormats(creative) {
             const fallbackPath = `assets/templates/${baseFilename}.png`;
 
             const loadAndApplyImage = (path, isFallback = false) => {
-                fabric.Image.fromURL(path, (img) => {
-                    if (img) {
-                        const scaleX = currentCanvas.originalW / img.width;
-                        const scaleY = currentCanvas.originalH / img.height;
-                        const scale = Math.max(scaleX, scaleY);
-                        
-                        img.set({
-                            originX: 'center',
-                            originY: 'center',
-                            left: currentCanvas.originalW / 2,
-                            top: currentCanvas.originalH / 2,
-                            scaleX: scale,
-                            scaleY: scale,
-                            selectable: false,
-                            evented: false
-                        });
-                        currentCanvas.add(img);
-                        currentCanvas.sendToBack(img);
-                        
-                        injectTexts(currentCanvas, creative, targetFormats[i]);
-                        currentCanvas.renderAll();
-                        
-                        if (i === targetFormats.length - 1) {
-                            resizeCanvas();
-                            carousel.updateUI();
-                        }
-                    } else if (!isFallback && suffix !== '') {
-                        // Tentar fallback se falhou a imagem específica
+                const nativeImg = new Image();
+                nativeImg.crossOrigin = 'anonymous';
+                
+                nativeImg.onload = () => {
+                    const img = new fabric.Image(nativeImg);
+                    const scaleX = currentCanvas.originalW / img.width;
+                    const scaleY = currentCanvas.originalH / img.height;
+                    const scale = Math.max(scaleX, scaleY);
+                    
+                    img.set({
+                        originX: 'center',
+                        originY: 'center',
+                        left: currentCanvas.originalW / 2,
+                        top: currentCanvas.originalH / 2,
+                        scaleX: scale,
+                        scaleY: scale,
+                        selectable: false,
+                        evented: false
+                    });
+                    currentCanvas.add(img);
+                    currentCanvas.sendToBack(img);
+                    
+                    injectTexts(currentCanvas, creative, targetFormats[i]);
+                    currentCanvas.renderAll();
+                    
+                    if (i === targetFormats.length - 1) {
+                        resizeCanvas();
+                        carousel.updateUI();
+                    }
+                };
+
+                nativeImg.onerror = () => {
+                    if (!isFallback && suffix !== '') {
                         loadAndApplyImage(fallbackPath, true);
                     } else {
-                        // Nenhuma imagem encontrada (nem específica, nem fallback)
+                        // Nenhuma imagem encontrada
                         injectTexts(currentCanvas, creative, targetFormats[i]);
                         currentCanvas.renderAll();
                         if (i === targetFormats.length - 1) {
@@ -214,7 +225,9 @@ async function generateFourFormats(creative) {
                             carousel.updateUI();
                         }
                     }
-                }, { crossOrigin: 'anonymous' });
+                };
+
+                nativeImg.src = path;
             };
 
             loadAndApplyImage(primaryPath);
