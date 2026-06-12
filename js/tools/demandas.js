@@ -154,7 +154,59 @@ async function generateFourFormats(creative) {
     }
 
     const { resizeCanvas } = await import('../canvas.js');
+    const { notifications } = await import('../ui/notifications.js');
+    
+    notifications.toast('Iniciando Inteligência Artificial... (isso pode levar uns segundos)', 5000);
 
+    // 1. Encontrar a imagem base e converter para Base64
+    let base64Image = null;
+    if (creative.filename) {
+        let baseFilename = creative.filename;
+        if(baseFilename.endsWith('.png')) baseFilename = baseFilename.slice(0, -4);
+        if(baseFilename.endsWith('.jpg')) baseFilename = baseFilename.slice(0, -4);
+        const primaryPath = `assets/templates/${baseFilename}.png`;
+        
+        base64Image = await new Promise((resolve) => {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = () => {
+                const canvasObj = document.createElement('canvas');
+                canvasObj.width = img.width;
+                canvasObj.height = img.height;
+                const ctx = canvasObj.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                resolve(canvasObj.toDataURL('image/png'));
+            };
+            img.onerror = () => resolve(null);
+            img.src = primaryPath;
+        });
+    }
+
+    // 2. Chamar a IA (API Serverless) apenas 1 vez (usando o formato base como referência)
+    let aiLayout = null;
+    if (base64Image) {
+        try {
+            const response = await fetch('/api/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    imageBase64: base64Image,
+                    creativeData: creative,
+                    dimensions: targetFormats[0]
+                })
+            });
+            if (response.ok) {
+                aiLayout = await response.json();
+            } else {
+                console.error("AI Error:", await response.text());
+                notifications.toast("Erro na IA, usando fallback padrão.", 3000);
+            }
+        } catch(e) {
+            console.error("Fetch AI failed:", e);
+        }
+    }
+
+    // 3. Montar os 4 quadros usando a semântica da IA ou Fallback
     for (let i = 0; i < targetFormats.length; i++) {
         let currentCanvas = state.canvases[i];
         if (!currentCanvas) {
@@ -168,82 +220,118 @@ async function generateFourFormats(creative) {
             currentCanvas.backgroundColor = '#ffffff';
         }
 
-        // Metadado para exportação
         currentCanvas.formatName = targetFormats[i].name;
         
-        // Tentar carregar background
-        if (creative.filename) {
-            let baseFilename = creative.filename;
-            if(baseFilename.endsWith('.png')) baseFilename = baseFilename.slice(0, -4);
-            if(baseFilename.endsWith('.jpg')) baseFilename = baseFilename.slice(0, -4);
-
-            const suffix = i === 0 ? '' : `-${i}`;
-            const primaryPath = `assets/templates/${baseFilename}${suffix}.png`;
-            const fallbackPath = `assets/templates/${baseFilename}.png`;
-
-            const loadAndApplyImage = (path, isFallback = false) => {
-                const nativeImg = new Image();
-                nativeImg.crossOrigin = 'anonymous';
-                
-                nativeImg.onload = () => {
-                    const img = new fabric.Image(nativeImg);
-                    const scaleX = currentCanvas.originalW / img.width;
-                    const scaleY = currentCanvas.originalH / img.height;
-                    const scale = Math.max(scaleX, scaleY);
-                    
-                    img.set({
-                        originX: 'center',
-                        originY: 'center',
-                        left: currentCanvas.originalW / 2,
-                        top: currentCanvas.originalH / 2,
-                        scaleX: scale,
-                        scaleY: scale,
-                        selectable: false,
-                        evented: false
-                    });
-                    currentCanvas.add(img);
-                    currentCanvas.sendToBack(img);
-                    
-                    injectTexts(currentCanvas, creative, targetFormats[i]);
-                    currentCanvas.renderAll();
-                    
-                    if (i === targetFormats.length - 1) {
-                        resizeCanvas();
-                        carousel.updateUI();
-                    }
-                };
-
-                nativeImg.onerror = () => {
-                    if (!isFallback && suffix !== '') {
-                        loadAndApplyImage(fallbackPath, true);
-                    } else {
-                        // Nenhuma imagem encontrada
-                        injectTexts(currentCanvas, creative, targetFormats[i]);
-                        currentCanvas.renderAll();
-                        if (i === targetFormats.length - 1) {
-                            resizeCanvas();
-                            carousel.updateUI();
-                        }
-                    }
-                };
-
-                nativeImg.src = path;
-            };
-
-            loadAndApplyImage(primaryPath);
+        if (aiLayout) {
+            await renderAILayout(currentCanvas, aiLayout, targetFormats[i], creative);
         } else {
+            // Fallback original caso a IA falhe ou imagem não exista
             injectTexts(currentCanvas, creative, targetFormats[i]);
-            if (i === targetFormats.length - 1) {
-                resizeCanvas();
-                carousel.updateUI();
-            }
+            currentCanvas.renderAll();
+        }
+        
+        if (i === targetFormats.length - 1) {
+            resizeCanvas();
+            carousel.updateUI();
         }
     }
     
-    // Voltar para a primeira página
     carousel.switchPage(0);
-    const { notifications } = await import('../ui/notifications.js');
-    notifications.toast('Magic Resize completo! 4 formatos gerados.');
+    notifications.toast('Magic Resize & AI Layout completos! 4 formatos gerados.');
+}
+
+async function renderAILayout(canvas, layout, formatConfig, creative) {
+    const W = formatConfig.w;
+    const H = formatConfig.h;
+    
+    // 1. Background
+    if (layout.background) {
+        if (layout.background.type === 'solid') {
+            canvas.backgroundColor = layout.background.color1 || '#ffffff';
+        } else if (layout.background.type === 'gradient') {
+            const grad = new fabric.Gradient({
+                type: 'linear',
+                coords: { x1: 0, y1: 0, x2: 0, y2: H }, // Simulando 90deg bottom
+                colorStops: [
+                    { offset: 0, color: layout.background.color1 || '#ffffff' },
+                    { offset: 1, color: layout.background.color2 || '#000000' }
+                ]
+            });
+            canvas.backgroundColor = grad;
+        }
+    }
+
+    // 2. Product Image
+    if (layout.productImage && creative.product) {
+        // Encontrar no catálogo local de produtos para ter o recorte transparente
+        const { getProductsFromAllugator } = await import('./products.js');
+        const apiProds = await getProductsFromAllugator();
+        
+        // Tentar buscar similar
+        let match = apiProds.find(p => creative.product.toLowerCase().includes(p.name.toLowerCase()));
+        if (!match) match = apiProds[0]; // fallback
+        
+        if (match && match.images && match.images.length > 0) {
+            await new Promise(resolve => {
+                fabric.Image.fromURL(match.images[0], (img) => {
+                    if (img) {
+                        const targetW = W * (layout.productImage.scalePercent || 0.6);
+                        const scale = targetW / img.width;
+                        
+                        img.set({
+                            originX: 'center',
+                            originY: 'center',
+                            left: W * (layout.productImage.position.x || 0.5),
+                            top: H * (layout.productImage.position.y || 0.5),
+                            scaleX: scale,
+                            scaleY: scale,
+                            angle: layout.productImage.rotation || 0
+                        });
+                        canvas.add(img);
+                    }
+                    resolve();
+                }, { crossOrigin: 'anonymous' });
+            });
+        }
+    }
+
+    // 3. Texts
+    if (layout.texts && layout.texts.length > 0) {
+        layout.texts.forEach(t => {
+            if (!t.content) return;
+            
+            let effects = t.effects || {};
+            let fontSize = (t.fontSizeRatio || 0.05) * H;
+            // Limitar max font size para nao estourar
+            if (fontSize > 150) fontSize = 150;
+            
+            const textObj = new fabric.IText(t.content, {
+                left: W * (t.position.x || 0.5),
+                top: H * (t.position.y || 0.5),
+                originX: t.textAlign === 'left' ? 'left' : (t.textAlign === 'right' ? 'right' : 'center'),
+                originY: 'center',
+                fontFamily: t.fontFamily || 'Plus Jakarta Sans',
+                fontSize: fontSize,
+                fontWeight: t.fontWeight || 'bold',
+                fill: t.fill || '#0F190A',
+                textAlign: t.textAlign || 'center',
+                shadow: effects.innerShadow ? new fabric.Shadow({
+                    color: effects.innerShadowColor || 'rgba(0,0,0,0.5)',
+                    blur: effects.innerShadowBlur || 10,
+                    offsetX: 2,
+                    offsetY: 2
+                }) : null
+            });
+            
+            if (t.textAlign === 'left') {
+                textObj.left = W * 0.1; // Margem de 10%
+            }
+
+            canvas.add(textObj);
+        });
+    }
+
+    canvas.renderAll();
 }
 
 function injectTexts(canvas, creative, formatConfig) {
