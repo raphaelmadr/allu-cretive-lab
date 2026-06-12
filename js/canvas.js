@@ -36,48 +36,60 @@ export function setupCanvas() {
     };
 }
 
-export function resizeCanvas(w, h) {
+export function resizeCanvas() {
     const wrapper = document.getElementById('canvas-wrapper');
+    const activeCanvas = state.getCanvas();
+    const activePreset = state.getActivePreset();
+    
+    // Dimensão alvo do viewport baseia-se no activeCanvas ou fallback no preset global
+    const targetW = (activeCanvas && activeCanvas.originalW) ? activeCanvas.originalW : (activePreset ? activePreset.w : 1080);
+    const targetH = (activeCanvas && activeCanvas.originalH) ? activeCanvas.originalH : (activePreset ? activePreset.h : 1080);
+
     if (!wrapper) return;
 
-    // Layout horizontal (Lado a Lado) conforme solicitado
+    // Layout horizontal (Lado a Lado)
     wrapper.style.display = 'flex';
     wrapper.style.flexDirection = 'row';
     wrapper.style.alignItems = 'center';
-    wrapper.style.justifyContent = 'flex-start'; // Começa da esquerda
+    wrapper.style.justifyContent = 'flex-start';
     wrapper.style.overflowX = 'auto';
     wrapper.style.overflowY = 'auto';
-    wrapper.style.gap = '80px'; // Espaço generoso entre as telas
+    wrapper.style.gap = '80px'; 
 
     const padding = 120; 
     const availableW = wrapper.clientWidth - padding;
     const availableH = wrapper.clientHeight - padding;
-    const scale = Math.min(availableW / w, availableH / h, 1);
+    
+    // A escala do zoom é pautada pelo canvas ativo no momento
+    const scale = Math.min(availableW / targetW, availableH / targetH, 1);
 
-    const canvasWidth = Math.round(w * scale);
+    const canvasWidth = Math.round(targetW * scale);
     const horizontalPadding = Math.max(100, Math.round((wrapper.clientWidth - canvasWidth) / 2));
     wrapper.style.paddingLeft = `${horizontalPadding}px`;
     wrapper.style.paddingRight = `${horizontalPadding}px`;
     wrapper.style.paddingTop = '100px';
     wrapper.style.paddingBottom = '100px';
     
-    // Aplicar a todos os canvases no estado
+    // Aplicar a escala para TODOS os canvases proporcionalmente às suas PRÓPRIAS dimensões
     state.canvases.forEach(canvas => {
+        const cw = canvas.originalW || targetW;
+        const ch = canvas.originalH || targetH;
+        
         canvas.setDimensions({ 
-            width: w * scale, 
-            height: h * scale 
+            width: cw * scale, 
+            height: ch * scale 
         }, { backstoreOnly: false });
         
         canvas.setZoom(scale);
         
         const container = canvas.getElement().parentNode;
         if (container && container.classList.contains('canvas-container')) {
-            container.style.width = Math.round(w * scale) + 'px';
-            container.style.height = Math.round(h * scale) + 'px';
+            container.style.width = Math.round(cw * scale) + 'px';
+            container.style.height = Math.round(ch * scale) + 'px';
             container.style.flexShrink = '0';
             
-            // Redesenhar guias de segurança
-            drawSafeGuides(canvas, w, h, scale);
+            // Redesenhar guias de segurança baseado na dimensão DELE
+            drawSafeGuides(canvas, cw, ch, scale);
         }
     });
 

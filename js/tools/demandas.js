@@ -1,14 +1,16 @@
 import { state } from '../state.js';
+import { carousel } from '../carousel.js';
+import { presets } from '../config.js';
 
 export function renderDemandasTools(sidebarContent) {
     const div = document.createElement('div');
     div.className = 'animate-fade';
     div.innerHTML = `
         <div class="smart-paste-container" style="background:rgba(255,255,255,0.02); padding:16px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:20px;">
-            <p style="font-size:0.75rem; font-weight:800; margin-bottom:10px; color:white; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent);"></i> Allu Smart Paste</p>
-            <textarea id="notion-paste-area" placeholder="Cole a descrição da task do Notion aqui (Ctrl+V)..." style="width:100%; height:80px; background:rgba(0,0,0,0.2); border:1px solid var(--glass-border); border-radius:8px; padding:10px; color:white; font-size:0.75rem; outline:none; resize:vertical; margin-bottom:10px; font-family:inherit; transition:all 0.2s;" onfocus="this.style.borderColor='var(--accent)';" onblur="this.style.borderColor='var(--glass-border)';"></textarea>
+            <p style="font-size:0.75rem; font-weight:800; margin-bottom:10px; color:white; display:flex; align-items:center; gap:6px;"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent);"></i> Smart Paste (Multi-Criativos)</p>
+            <textarea id="notion-paste-area" placeholder="Cole a demanda completa do Notion aqui. Ela pode conter vários criativos..." style="width:100%; height:80px; background:rgba(0,0,0,0.2); border:1px solid var(--glass-border); border-radius:8px; padding:10px; color:white; font-size:0.75rem; outline:none; resize:vertical; margin-bottom:10px; font-family:inherit; transition:all 0.2s;" onfocus="this.style.borderColor='var(--accent)';" onblur="this.style.borderColor='var(--glass-border)';"></textarea>
             <button id="btn-parse-notion" class="btn-primary" style="width:100%; padding:10px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; font-weight:700; font-size:0.8rem; display:flex; justify-content:center; align-items:center; gap:8px; transition:all 0.2s;">
-                <i class="fa-solid fa-magnifying-glass"></i> Analisar Texto
+                <i class="fa-solid fa-magnifying-glass"></i> Analisar Demanda
             </button>
             <div id="parsed-results" style="display:none; margin-top:15px; border-top:1px solid var(--glass-border); padding-top:15px; flex-direction:column; gap:10px;">
             </div>
@@ -27,81 +29,249 @@ export function renderDemandasTools(sidebarContent) {
             btnParse.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processando...';
             
             setTimeout(async () => {
-                const data = { filename: '', hook: '', body: '', cta: '' };
+                // Split by "## " which usually denotes a new creative in the user's format
+                const blocks = rawText.split(/(?=## \d+\.)|(?=## IMG_)/i).filter(b => b.trim().length > 20);
                 
-                const filenameMatch = rawText.match(/Nome do arquivo final =\s*[\`']?([^(\`'\n]+)[\`']?/i);
-                if (filenameMatch) data.filename = filenameMatch[1].trim();
+                const creatives = [];
+                
+                blocks.forEach((blockText, index) => {
+                    const data = { id: index + 1, filename: '', hook: '', body: '', cta: '' };
+                    
+                    const filenameMatch = blockText.match(/Nome do arquivo final =\s*[\`']?([^(\`'\n]+)[\`']?/i);
+                    if (filenameMatch) data.filename = filenameMatch[1].trim();
 
-                const copySectionParts = rawText.split(/### Copy aprovada/i);
-                const copySection = copySectionParts.length > 1 ? copySectionParts[1] : rawText;
+                    const copySectionParts = blockText.split(/### Copy aprovada/i);
+                    const copySection = copySectionParts.length > 1 ? copySectionParts[1] : blockText;
 
-                const extractCopyBlock = (keyword) => {
-                    const regex = new RegExp(`\\\\*\\\\*${keyword}[^\\\\*]*\\\\*\\\\*:\\s*([\\\\s\\\\S]*?)(?=\\\\*\\\\*|$)`, 'i');
-                    const match = copySection.match(regex);
-                    return match ? match[1].trim() : '';
-                };
+                    const extractCopyBlock = (keyword) => {
+                        const regex = new RegExp(`\\\\*\\\\*${keyword}[^\\\\*]*\\\\*\\\\*:\\s*([\\\\s\\\\S]*?)(?=\\\\*\\\\*|$)`, 'i');
+                        let match = copySection.match(regex);
+                        if (!match) {
+                            // Fallback sem negrito na chave
+                            const fallbackRegex = new RegExp(`${keyword} recomendado[^:]*:\\s*([\\\\s\\\\S]*?)(?=\\n\\n|$)`, 'i');
+                            match = copySection.match(fallbackRegex);
+                        }
+                        return match ? match[1].trim() : '';
+                    };
 
-                data.hook = extractCopyBlock('Hook');
-                data.body = extractCopyBlock('Body');
-                data.cta = extractCopyBlock('CTA');
-
-                if (data.filename) {
-                    const filenameInput = document.getElementById('export-filename');
-                    if (filenameInput) filenameInput.value = data.filename;
-                    const { notifications } = await import('../ui/notifications.js');
-                    notifications.toast('Nome do arquivo configurado!');
-                }
+                    data.hook = extractCopyBlock('Hook');
+                    data.body = extractCopyBlock('Body');
+                    data.cta = extractCopyBlock('CTA');
+                    
+                    if (data.filename || data.hook || data.body || data.cta) {
+                        creatives.push(data);
+                    }
+                });
 
                 const resultsDiv = document.getElementById('parsed-results');
                 resultsDiv.style.display = 'flex';
-                resultsDiv.innerHTML = '<p style="font-size:0.65rem; color:var(--text-secondary); margin-bottom:5px;">Clique em um bloco para adicionar à arte:</p>';
+                resultsDiv.innerHTML = `<p style="font-size:0.7rem; color:var(--accent); font-weight:700; margin-bottom:5px;">${creatives.length} Criativo(s) Encontrado(s)</p>`;
 
-                const createBlock = (title, content, size, weight) => {
-                    if (!content) return;
-                    const block = document.createElement('div');
-                    block.style.cssText = 'background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:8px; padding:10px; cursor:pointer; transition:all 0.2s; position:relative;';
-                    block.onmouseover = () => { block.style.borderColor = 'var(--accent)'; block.style.background = 'rgba(255,255,255,0.08)'; };
-                    block.onmouseout = () => { block.style.borderColor = 'var(--glass-border)'; block.style.background = 'rgba(255,255,255,0.05)'; };
+                creatives.forEach((creative, idx) => {
+                    const card = document.createElement('div');
+                    card.style.cssText = 'background:rgba(0,0,0,0.3); border:1px solid var(--glass-border); border-radius:8px; overflow:hidden;';
                     
-                    block.innerHTML = `
-                        <div style="font-size:0.6rem; color:var(--accent); font-weight:800; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.05em;">${title}</div>
-                        <div style="font-size:0.75rem; color:white; line-height:1.4;">${content.replace(/\n/g, '<br>')}</div>
-                        <div style="position:absolute; top:10px; right:10px; opacity:0.3;"><i class="fa-solid fa-plus"></i></div>
-                    `;
+                    const header = document.createElement('div');
+                    header.style.cssText = 'padding:10px; background:rgba(255,255,255,0.05); cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; font-weight:700;';
+                    header.innerHTML = `<span><i class="fa-solid fa-folder-open" style="margin-right:6px; color:var(--text-secondary);"></i> Criativo ${idx + 1}</span> <i class="fa-solid fa-chevron-down" style="font-size:0.6rem;"></i>`;
                     
-                    block.onclick = () => {
-                        const activeCanvas = state.getCanvas();
-                        if (!activeCanvas) return;
-                        const center = activeCanvas.getVpCenter();
-                        const textObj = new window.fabric.IText(content, {
-                            left: center.x,
-                            top: center.y,
-                            originX: 'center',
-                            originY: 'center',
-                            fontFamily: 'Plus Jakarta Sans',
-                            fill: '#0F190A', // default preto-allu
-                            fontSize: size,
-                            fontWeight: weight,
-                            textAlign: 'center'
-                        });
-                        activeCanvas.add(textObj);
-                        activeCanvas.setActiveObject(textObj);
-                        activeCanvas.renderAll();
-                        import('../history.js').then(h => h.history.save());
+                    const content = document.createElement('div');
+                    content.style.cssText = 'padding:10px; display:none; flex-direction:column; gap:8px; border-top:1px solid rgba(255,255,255,0.05);';
+                    
+                    // Toggle accordion
+                    header.onclick = () => {
+                        const isHidden = content.style.display === 'none';
+                        content.style.display = isHidden ? 'flex' : 'none';
+                        header.querySelector('.fa-chevron-down').style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
                     };
-                    resultsDiv.appendChild(block);
-                };
 
-                createBlock('Hook (Headline)', data.hook, 66, 'bold');
-                createBlock('Body / Prova', data.body, 36, '400');
-                createBlock('CTA', data.cta, 26, 'bold');
+                    // Action Button: Auto-Gerar 4 Formatos
+                    const btnGenerate = document.createElement('button');
+                    btnGenerate.className = 'btn-primary';
+                    btnGenerate.style.cssText = 'width:100%; padding:8px; border-radius:6px; background:#27AE60; color:white; border:none; cursor:pointer; font-weight:700; font-size:0.7rem; margin-bottom:10px; transition:all 0.2s;';
+                    btnGenerate.innerHTML = '<i class="fa-solid fa-layer-group"></i> Montar 4 Formatos';
+                    
+                    btnGenerate.onclick = async (e) => {
+                        e.stopPropagation();
+                        await generateFourFormats(creative);
+                    };
 
-                if (!data.hook && !data.body && !data.cta) {
-                    resultsDiv.innerHTML = '<div style="font-size:0.7rem; color:var(--text-secondary); text-align:center;">Não foi possível encontrar blocos formatados de copy (Hook/Body/CTA) no texto colado. Verifique o padrão da Task.</div>';
+                    content.appendChild(btnGenerate);
+
+                    // Display blocks for manual insertion
+                    const createMiniBlock = (title, text) => {
+                        if (!text) return;
+                        const blk = document.createElement('div');
+                        blk.style.cssText = 'background:rgba(255,255,255,0.03); border:1px dashed var(--glass-border); border-radius:6px; padding:8px;';
+                        blk.innerHTML = `<div style="font-size:0.6rem; color:var(--accent); font-weight:800; text-transform:uppercase; margin-bottom:4px;">${title}</div>
+                                         <div style="font-size:0.7rem; color:white;">${text.replace(/\n/g, '<br>')}</div>`;
+                        content.appendChild(blk);
+                    };
+
+                    createMiniBlock('Filename', creative.filename);
+                    createMiniBlock('Hook', creative.hook);
+                    createMiniBlock('Body', creative.body);
+                    createMiniBlock('CTA', creative.cta);
+
+                    card.appendChild(header);
+                    card.appendChild(content);
+                    resultsDiv.appendChild(card);
+                });
+
+                if (creatives.length === 0) {
+                    resultsDiv.innerHTML = '<div style="font-size:0.7rem; color:var(--text-secondary); text-align:center;">Não foi possível processar a task. Verifique se as marcações "## 1. IMG_..." e "### Copy aprovada" estão presentes.</div>';
+                } else {
+                    const { notifications } = await import('../ui/notifications.js');
+                    notifications.toast(`${creatives.length} criativos processados com sucesso!`);
                 }
                 
                 btnParse.innerHTML = btnOriginal;
             }, 300);
         };
+    }
+}
+
+async function generateFourFormats(creative) {
+    const targetFormats = [
+        { name: 'Feed', w: 1080, h: 1080 },
+        { name: 'Stories', w: 1080, h: 1920 },
+        { name: 'Google H', w: 1200, h: 628 },
+        { name: 'Google V', w: 1200, h: 1500 }
+    ];
+
+    carousel.reset(); 
+    
+    // Configura filename globalmente
+    const filenameInput = document.getElementById('export-filename');
+    if (filenameInput && creative.filename) {
+        filenameInput.value = creative.filename;
+    }
+
+    const { resizeCanvas } = await import('../canvas.js');
+
+    for (let i = 0; i < targetFormats.length; i++) {
+        let currentCanvas = state.canvases[i];
+        if (!currentCanvas) {
+            carousel.addPage(targetFormats[i].w, targetFormats[i].h);
+            currentCanvas = state.canvases[i];
+        } else {
+            currentCanvas.setDimensions({ width: targetFormats[i].w, height: targetFormats[i].h });
+            currentCanvas.originalW = targetFormats[i].w;
+            currentCanvas.originalH = targetFormats[i].h;
+            currentCanvas.clear();
+            currentCanvas.backgroundColor = '#ffffff';
+        }
+
+        // Metadado para exportação
+        currentCanvas.formatName = targetFormats[i].name;
+        
+        // Tentar carregar background
+        if (creative.filename) {
+            // Check Se tem extensão, senao adiciona .png
+            let imagePath = \`assets/templates/\${creative.filename}\`;
+            if(!imagePath.endsWith('.png') && !imagePath.endsWith('.jpg')) {
+                imagePath += '.png';
+            }
+
+            fabric.Image.fromURL(imagePath, (img) => {
+                if (img) {
+                    const scaleX = currentCanvas.originalW / img.width;
+                    const scaleY = currentCanvas.originalH / img.height;
+                    const scale = Math.max(scaleX, scaleY);
+                    
+                    img.set({
+                        originX: 'center',
+                        originY: 'center',
+                        left: currentCanvas.originalW / 2,
+                        top: currentCanvas.originalH / 2,
+                        scaleX: scale,
+                        scaleY: scale,
+                        selectable: false,
+                        evented: false
+                    });
+                    currentCanvas.add(img);
+                    currentCanvas.sendToBack(img);
+                }
+
+                // Injetar Textos via Magic Resize Simples
+                injectTexts(currentCanvas, creative, targetFormats[i]);
+                currentCanvas.renderAll();
+                
+                if (i === targetFormats.length - 1) {
+                    resizeCanvas();
+                    carousel.updateUI();
+                }
+            }, { crossOrigin: 'anonymous' });
+        } else {
+            injectTexts(currentCanvas, creative, targetFormats[i]);
+            if (i === targetFormats.length - 1) {
+                resizeCanvas();
+                carousel.updateUI();
+            }
+        }
+    }
+    
+    // Voltar para a primeira página
+    carousel.switchPage(0);
+    const { notifications } = await import('../ui/notifications.js');
+    notifications.toast('Magic Resize completo! 4 formatos gerados.');
+}
+
+function injectTexts(canvas, creative, formatConfig) {
+    const W = formatConfig.w;
+    const H = formatConfig.h;
+    
+    // Posições baseadas no aspecto
+    const isHorizontal = W > H;
+    const isStories = H / W > 1.7; // 1080x1920
+
+    // Hook
+    if (creative.hook) {
+        const textHook = new window.fabric.IText(creative.hook, {
+            left: W / 2,
+            top: isStories ? H * 0.15 : H * 0.20,
+            originX: 'center',
+            originY: 'center',
+            fontFamily: 'Plus Jakarta Sans',
+            fill: '#0F190A',
+            fontSize: isHorizontal ? 56 : 66,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            width: W * 0.8
+        });
+        canvas.add(textHook);
+    }
+
+    // Body
+    if (creative.body) {
+        const textBody = new window.fabric.IText(creative.body, {
+            left: W / 2,
+            top: isStories ? H * 0.60 : H * 0.65,
+            originX: 'center',
+            originY: 'center',
+            fontFamily: 'Plus Jakarta Sans',
+            fill: '#0F190A',
+            fontSize: isHorizontal ? 26 : 36,
+            fontWeight: '400',
+            textAlign: 'center',
+            width: W * 0.7
+        });
+        canvas.add(textBody);
+    }
+
+    // CTA
+    if (creative.cta) {
+        const textCta = new window.fabric.IText(creative.cta, {
+            left: W / 2,
+            top: isStories ? H * 0.85 : H * 0.85,
+            originX: 'center',
+            originY: 'center',
+            fontFamily: 'Plus Jakarta Sans',
+            fill: '#0F190A',
+            fontSize: 26,
+            fontWeight: 'bold',
+            textAlign: 'center'
+        });
+        canvas.add(textCta);
     }
 }

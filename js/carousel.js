@@ -30,8 +30,11 @@ export const carousel = {
         this.updateUI();
     },
     
-    addPage() {
+    addPage(w, h) {
         const activePreset = state.getActivePreset() || { w: 1080, h: 1080 };
+        const pageW = w || activePreset.w;
+        const pageH = h || activePreset.h;
+        
         const wrapper = document.getElementById('canvas-wrapper');
         if (!wrapper) return;
 
@@ -43,9 +46,12 @@ export const carousel = {
         const newCanvas = new fabric.Canvas(canvasId, {
             backgroundColor: '#ffffff',
             preserveObjectStacking: true,
-            width: activePreset.w,
-            height: activePreset.h
+            width: pageW,
+            height: pageH
         });
+        
+        newCanvas.originalW = pageW;
+        newCanvas.originalH = pageH;
 
         setupCanvas(); 
 
@@ -58,7 +64,7 @@ export const carousel = {
         newCanvas.on('object:removed', () => history.save());
 
         state.addCanvas(newCanvas);
-        resizeCanvas(activePreset.w, activePreset.h);
+        resizeCanvas();
         
         setTimeout(() => {
             newCanvasEl.parentNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
@@ -89,6 +95,10 @@ export const carousel = {
         ];
         const canvasData = activeCanvas.toJSON(serializationProps);
 
+        // Manter o mesmo tamanho da página original
+        const pageW = activeCanvas.originalW || activePreset.w;
+        const pageH = activeCanvas.originalH || activePreset.h;
+
         // Criar elemento canvas no DOM inserindo imediatamente após o atual
         const canvasId = `canvas-${Date.now()}`;
         const newCanvasEl = document.createElement('canvas');
@@ -99,9 +109,11 @@ export const carousel = {
         const newCanvas = new fabric.Canvas(canvasId, {
             backgroundColor: '#ffffff',
             preserveObjectStacking: true,
-            width: activePreset.w,
-            height: activePreset.h
+            width: pageW,
+            height: pageH
         });
+        newCanvas.originalW = pageW;
+        newCanvas.originalH = pageH;
 
         setupCanvas();
 
@@ -120,7 +132,7 @@ export const carousel = {
         state.setActiveCanvas(activeIndex + 1);
 
         // Redimensionar e aplicar zoom em todos os canvases
-        resizeCanvas(activePreset.w, activePreset.h);
+        resizeCanvas();
 
         // Carregar conteúdo serializado no novo canvas
         newCanvas.loadFromJSON(canvasData, () => {
@@ -206,21 +218,30 @@ export const carousel = {
                     multiplier: 4 // Alta resolução (4x)
                 });
 
-                
                 const link = document.createElement('a');
                 
                 const filenameInput = document.getElementById('export-filename');
                 let baseName = (filenameInput && filenameInput.value.trim() !== '') ? filenameInput.value.trim() : 'Allu_Creative_Lab_Page';
                 
                 let finalName = baseName;
-                const match = baseName.match(/(.*[#_])(\d+)$/);
-                if (match) {
-                    const prefix = match[1];
-                    const numLen = match[2].length;
-                    const paddedNum = String(i + 1).padStart(numLen, '0');
-                    finalName = `${prefix}${paddedNum}`;
-                } else if (state.canvases.length > 1) {
-                    finalName = `${baseName}_${i + 1}`;
+                
+                // Remover extensões se colado sem querer
+                if(finalName.endsWith('.png')) finalName = finalName.slice(0, -4);
+                if(finalName.endsWith('.jpg')) finalName = finalName.slice(0, -4);
+
+                if (canvas.formatName) {
+                    // Adiciona o nome do formato como sufixo final (ex: IMG_..._#001_Feed)
+                    finalName = `${finalName}_${canvas.formatName.replace(/\s+/g, '')}`;
+                } else {
+                    const match = finalName.match(/(.*[#_])(\d+)$/);
+                    if (match) {
+                        const prefix = match[1];
+                        const numLen = match[2].length;
+                        const paddedNum = String(i + 1).padStart(numLen, '0');
+                        finalName = `${prefix}${paddedNum}`;
+                    } else if (state.canvases.length > 1) {
+                        finalName = `${finalName}_${i + 1}`;
+                    }
                 }
 
                 link.download = `${finalName}.${format}`;
@@ -330,17 +351,21 @@ export const carousel = {
                 const canvas = state.getCanvas();
                 await new Promise(resolve => {
                     canvas.loadFromJSON(pagesData[i], () => {
-                        canvas.setDimensions({ width, height });
+                        // Resgatar originalW salvo no state ou do preset atual
+                        const w = canvas.originalW || width;
+                        const h = canvas.originalH || height;
+                        canvas.originalW = w;
+                        canvas.originalH = h;
+                        canvas.setDimensions({ width: w, height: h });
                         canvas.renderAll();
                         resolve();
                     });
                 });
             } else {
-                this.addPage();
+                this.addPage(width, height);
                 const canvas = state.getCanvas();
                 await new Promise(resolve => {
                     canvas.loadFromJSON(pagesData[i], () => {
-                        canvas.setDimensions({ width, height });
                         canvas.renderAll();
                         resolve();
                     });
@@ -348,6 +373,7 @@ export const carousel = {
             }
         }
         state.setActiveCanvas(0);
+        resizeCanvas();
         this.updateUI();
     }
 };
