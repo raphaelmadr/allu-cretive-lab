@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { INGESTOR_PROMPT } from '../IA_PROMPTS.js';
 
 // Utilizando fetch nativo do Node.js (v18+)
 const API_KEY = process.env.GEMINI_API_KEY;
@@ -14,45 +15,6 @@ const FORMAT_MAP = {
     '-3': { w: 1200, h: 1500, name: 'Google V' }
 };
 
-const promptTemplate = `Você é um Diretor de Arte Sênior especializado em Design Systems.
-Analise esta imagem que é um template de anúncio de performance ({FORMAT_NAME} - {W}x{H}).
-O anúncio sempre terá:
-- Título/Hook
-- Texto de Corpo (Body)
-- Chamada para Ação (CTA)
-- Imagem do Produto (no centro ou na lateral)
-
-Mapeie o Layout exato dessa imagem em um schema JSON ESTRITO.
-Retorne APENAS o JSON válido, sem backticks (\`\`\`), sem explicações.
-
-Schema:
-{
-  "background": {
-    "type": "solid" | "gradient",
-    "color1": "#HEX",
-    "color2": "#HEX"
-  },
-  "productImage": {
-    "scalePercent": 0.8, // Escala (0 a 1) relativa à largura
-    "position": { "x": 0.5, "y": 0.5 } // Relativo a W e H
-  },
-  "texts": [
-    {
-      "role": "hook" | "body" | "cta",
-      "fontFamily": "Plus Jakarta Sans",
-      "fontWeight": "bold" | "400",
-      "fill": "#HEX",
-      "fontSizeRatio": 0.08, // Tamanho relativo à altura da imagem
-      "position": { "x": 0.5, "y": 0.15 },
-      "textAlign": "center" | "left",
-      "effects": {
-        "innerShadow": true | false
-      }
-    }
-  ]
-}
-`;
-
 async function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -61,7 +23,7 @@ async function analyzeImage(filePath, baseName, suffix) {
     if (!API_KEY) throw new Error("GEMINI_API_KEY não configurada no ambiente. Rode o comando com GEMINI_API_KEY=sua_chave node scripts/art_director.js");
     
     const formatInfo = FORMAT_MAP[suffix] || { w: 1080, h: 1080, name: 'Custom' };
-    const prompt = promptTemplate
+    const prompt = INGESTOR_PROMPT
         .replace('{FORMAT_NAME}', formatInfo.name)
         .replace('{W}', formatInfo.w)
         .replace('{H}', formatInfo.h);
@@ -70,7 +32,7 @@ async function analyzeImage(filePath, baseName, suffix) {
 
     console.log(`[Art Director] Analisando: ${baseName}${suffix} (${formatInfo.name})`);
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${API_KEY}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
