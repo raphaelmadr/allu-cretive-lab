@@ -5,30 +5,55 @@ export const notifications = {
     /**
      * Mostra um toast rápido no canto inferior
      */
-    toast(message, type = 'success') {
+    toast(message, type = 'success', duration = 4000) {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            container.style.cssText = `
+                position: fixed; top: 20px; right: 20px; z-index: 10000;
+                display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+                pointer-events: none;
+            `;
+            document.body.appendChild(container);
+        }
+
         const toast = document.createElement('div');
         toast.style.cssText = `
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
             background: ${type === 'success' ? 'var(--accent)' : 'rgba(255,68,68,0.9)'};
-            color: white; padding: 12px 24px; border-radius: 50px; font-size: .85rem; font-weight: 700;
-            z-index: 10000; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-            display: flex; align-items: center; gap: 10px; pointer-events: none;
+            color: white; padding: 12px 24px; border-radius: 12px; font-size: .85rem; font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+            display: flex; align-items: center; gap: 10px; pointer-events: auto;
+            transform: translateX(120%); opacity: 0; cursor: pointer;
         `;
         const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
         toast.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${message}</span>`;
-        document.body.appendChild(toast);
+        
+        // Clicar para fechar mais rápido
+        toast.onclick = () => {
+            toast.style.transform = 'translateX(120%)';
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 400);
+        };
+
+        container.appendChild(toast);
 
         // Animação de entrada
         requestAnimationFrame(() => {
-            toast.style.transform = 'translateX(-50%) translateY(0)';
+            requestAnimationFrame(() => {
+                toast.style.transform = 'translateX(0)';
+                toast.style.opacity = '1';
+            });
         });
 
-        // Saída
+        // Saída automática
         setTimeout(() => {
-            toast.style.transform = 'translateX(-50%) translateY(100px)';
-            toast.style.opacity = '0';
-            setTimeout(() => toast.remove(), 400);
-        }, 3000);
+            if(toast.parentElement) {
+                toast.style.transform = 'translateX(120%)';
+                toast.style.opacity = '0';
+                setTimeout(() => { if(toast.parentElement) toast.remove(); }, 400);
+            }
+        }, duration);
     },
 
     /**
