@@ -89,7 +89,7 @@ Você deve retornar ESTRITAMENTE um objeto JSON com o schema abaixo (NENHUM TEXT
 Schema JSON:
 {
   "background": {
-    "type": "solid" | "gradient",
+    "type": "solid" | "linear_gradient" | "radial_gradient",
     "color1": "#HEX",
     "color2": "#HEX",
     "gradientAngle": 90
@@ -104,17 +104,33 @@ Schema JSON:
       "content": "String", // O texto exato da copy que você recebeu
       "role": "hook" | "body" | "cta",
       "fontFamily": "Plus Jakarta Sans",
-      "fontWeight": "bold" | "400" | "700",
+      "fontWeight": "400" | "700" | "800",
       "fill": "#HEX",
       "fontSizeRatio": 0.08,
       "position": { "x": 0.5, "y": 0.15 },
       "textAlign": "center" | "left",
+      "richTextTemplate": "Se o texto contiver palavras em destaque, aplique Markdown de Negrito no 'content'. Ex: 'O **iPhone 16** chegou.'",
+      "highlightColor": "#HEX",
       "effects": {
         "innerShadow": true | false,
         "innerShadowColor": "rgba(255,255,255,0.8)",
         "innerShadowBlur": 10
       }
     }
+  ],
+  "badges": [
+     {
+        "type": "discount" | "info" | "price",
+        "position": { "x": 0.8, "y": 0.2 },
+        "widthRatio": 0.3,
+        "heightRatio": 0.05,
+        "borderRadius": 20,
+        "backgroundColor": "#02AE57",
+        "textColor": "#FFFFFF",
+        "fontSizeRatio": 0.03,
+        "fontWeight": "bold",
+        "textAlign": "center"
+     }
   ]
 }
 

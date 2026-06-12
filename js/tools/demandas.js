@@ -34,8 +34,9 @@ export function renderDemandasTools(sidebarContent) {
                 
                 const creatives = [];
                 
-                blocks.forEach((blockText, index) => {
-                    const data = { id: index + 1, filename: '', hook: '', body: '', cta: '' };
+                for (let index = 0; index < blocks.length; index++) {
+                    const blockText = blocks[index];
+                    const data = { id: index + 1, filename: '', hook: '', body: '', cta: '', productName: '' };
                     
                     const filenameMatch = blockText.match(/Nome do arquivo final =\s*[\`']?([^(\`'\n]+)[\`']?/i);
                     if (filenameMatch) data.filename = filenameMatch[1].trim();
@@ -43,31 +44,30 @@ export function renderDemandasTools(sidebarContent) {
                     const copySectionParts = blockText.split(/### Copy aprovada/i);
                     const copySection = copySectionParts.length > 1 ? copySectionParts[1] : blockText;
 
-                    const extractCopyBlock = (keyword) => {
-                        // Tentar extrair considerando que pode ter ou não negrito, e os dois pontos podem estar dentro ou fora do negrito
-                        const regex = new RegExp(`(?:\\*\\*)?${keyword}[^:]*:(?:\\*\\*)?\\s*([\\s\\S]*?)(?=(?:\\*\\*)?(?:Hook|Body|CTA|Visual)[^:]*:|$)`, 'i');
-                        let match = copySection.match(regex);
-                        if (!match) {
-                            // Fallback caso não encontre
-                            const fallbackRegex = new RegExp(`${keyword}[^:]*:\\s*([\\s\\S]*?)(?=\\n\\n|$)`, 'i');
-                            match = copySection.match(fallbackRegex);
-                        }
+                    try {
+                        const response = await fetch('/api/parse-copy', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ rawText: copySection })
+                        });
                         
-                        let result = match ? match[1].trim() : '';
-                        // Limpar eventuais "**" ou ">" residuais no início/fim
-                        result = result.replace(/^\\*\\*|\\*\\*$/g, '').trim();
-                        result = result.replace(/^>\\s*/gm, '').trim();
-                        return result;
-                    };
-
-                    data.hook = extractCopyBlock('Hook');
-                    data.body = extractCopyBlock('Body');
-                    data.cta = extractCopyBlock('CTA');
+                        if (response.ok) {
+                            const parsedAi = await response.json();
+                            data.hook = parsedAi.hook || '';
+                            data.body = parsedAi.body || '';
+                            data.cta = parsedAi.cta || '';
+                            data.productName = parsedAi.productName || '';
+                        }
+                    } catch (e) {
+                        console.error('Falha ao usar AI para parsear copy:', e);
+                        // Fallback extremamente básico
+                        data.body = copySection.substring(0, 200) + '...';
+                    }
                     
                     if (data.filename || data.hook || data.body || data.cta) {
                         creatives.push(data);
                     }
-                });
+                }
 
                 const resultsDiv = document.getElementById('parsed-results');
                 resultsDiv.style.display = 'flex';
@@ -115,6 +115,7 @@ export function renderDemandasTools(sidebarContent) {
                     };
 
                     createMiniBlock('Filename', creative.filename);
+                    createMiniBlock('Product', creative.productName);
                     createMiniBlock('Hook', creative.hook);
                     createMiniBlock('Body', creative.body);
                     createMiniBlock('CTA', creative.cta);
@@ -226,7 +227,7 @@ async function generateFourFormats(creative) {
                     console.log("[Smart Picker] Estilo exato encontrado:", baseFilename);
                 } else {
                     // 2. Tentar match parcial pelo nome do produto
-                    const productStr = (creative.product || creative.name || '').toLowerCase().split(' ')[0];
+                    const productStr = (creative.productName || creative.product || creative.name || '').toLowerCase().split(' ')[0];
                     let matchedStyle = availableStyles.find(style => style.toLowerCase().includes(productStr));
                     
                     // 3. Fallback: Escolher um estilo aleatório da nossa Base de Conhecimento
@@ -317,14 +318,14 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
     }
 
     // 2. Product Image
-    if (layout.productImage && creative.product) {
+    if (layout.productImage && creative.productName) {
         // Encontrar no catálogo local de produtos para ter o recorte transparente
         const { getProductsFromAllugator } = await import('./products.js');
         const apiProds = await getProductsFromAllugator();
         
         // Tentar buscar similar
-        let match = apiProds.find(p => creative.product.toLowerCase().includes(p.name.toLowerCase()));
-        if (!match) match = apiProds[0]; // fallback
+        let match = apiProds.find(p => creative.productName.toLowerCase().includes(p.name.toLowerCase()));
+        if (!match) match = apiProds.find(p => p.name.toLowerCase().includes('iphone')); // fallback para iphone se nao achar
         
         if (match && match.images && match.images.length > 0) {
             await new Promise(resolve => {
