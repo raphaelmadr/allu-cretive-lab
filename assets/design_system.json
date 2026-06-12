@@ -1,0 +1,1327 @@
+{
+  "CRS_allu-ads_samsung_aparelho-antigo_carrossel-apelativo_perene_h1_v01_#001": {
+    "formats": {
+      "-1": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 0.2,
+          "position": {
+            "x": 0.24,
+            "y": 0.395
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "bold",
+            "fill": "#6B6B6B",
+            "fontSizeRatio": 0.078,
+            "position": {
+              "x": 0.324,
+              "y": 0.445
+            },
+            "textAlign": "left",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.031,
+            "position": {
+              "x": 0.324,
+              "y": 0.495
+            },
+            "textAlign": "left",
+            "effects": {
+              "innerShadow": false
+            }
+          }
+        ],
+        "badges": []
+      },
+      "-2": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 0.08,
+          "position": {
+            "x": 0.25,
+            "y": 0.47
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#7A7A7A",
+            "fontSizeRatio": 0.111,
+            "position": {
+              "x": 0.208,
+              "y": 0.573
+            },
+            "textAlign": "left",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#333333",
+            "fontSizeRatio": 0.055,
+            "position": {
+              "x": 0.208,
+              "y": 0.685
+            },
+            "textAlign": "left",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": []
+      },
+      "-3": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 0.125,
+          "position": {
+            "x": 0.25,
+            "y": 0.37
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#737373",
+            "fontSizeRatio": 0.08,
+            "position": {
+              "x": 0.5,
+              "y": 0.5
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.033,
+            "position": {
+              "x": 0.5,
+              "y": 0.57
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          }
+        ],
+        "badges": []
+      },
+      "-4": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF",
+          "color2": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 0.72,
+          "position": {
+            "x": 0.5,
+            "y": 0.7
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "bold",
+            "fill": "#27AE60",
+            "fontSizeRatio": 0.1,
+            "position": {
+              "x": 0.5,
+              "y": 0.2
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": true,
+              "innerShadowColor": "rgba(255,255,255,0.6)",
+              "innerShadowBlur": 2
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.04,
+            "position": {
+              "x": 0.5,
+              "y": 0.32
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.04,
+            "position": {
+              "x": 0.5,
+              "y": 0.4
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "novelty",
+            "position": {
+              "x": 0.85,
+              "y": 0.78
+            },
+            "text": "novidade na allu.",
+            "color": "#161617"
+          }
+        ]
+      },
+      "-5": {
+        "background": {
+          "type": "solid",
+          "color1": "#F7F7F7",
+          "color2": "#F7F7F7"
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "bold",
+            "fill": "#27AE60",
+            "fontSizeRatio": 0.08,
+            "position": {
+              "x": 0.18,
+              "y": 0.28
+            },
+            "textAlign": "left",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.026,
+            "position": {
+              "x": 0.18,
+              "y": 0.52
+            },
+            "textAlign": "left",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.026,
+            "position": {
+              "x": 0.18,
+              "y": 0.57
+            },
+            "textAlign": "left",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.026,
+            "position": {
+              "x": 0.18,
+              "y": 0.62
+            },
+            "textAlign": "left",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.03,
+            "position": {
+              "x": 0.5,
+              "y": 0.75
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "info",
+            "position": {
+              "x": 0.3,
+              "y": 0.4
+            },
+            "text": "Frete grátis",
+            "color": "#161617"
+          },
+          {
+            "type": "info",
+            "position": {
+              "x": 0.5,
+              "y": 0.4
+            },
+            "text": "Proteção inclusa",
+            "color": "#161617"
+          },
+          {
+            "type": "info",
+            "position": {
+              "x": 0.7,
+              "y": 0.4
+            },
+            "text": "+50 mil assinantes",
+            "color": "#161617"
+          }
+        ]
+      },
+      "": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF",
+          "color2": null
+        },
+        "productImage": {
+          "scalePercent": 0.85,
+          "position": {
+            "x": 0.53,
+            "y": 0.65
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.035,
+            "position": {
+              "x": 0.5,
+              "y": 0.3
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": null,
+              "innerShadowBlur": null
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#4D4D4D",
+            "fontSizeRatio": 0.065,
+            "position": {
+              "x": 0.5,
+              "y": 0.39
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": null,
+              "innerShadowBlur": null
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.02,
+            "position": {
+              "x": 0.5,
+              "y": 0.475
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": null,
+              "innerShadowBlur": null
+            }
+          }
+        ],
+        "badges": []
+      }
+    }
+  },
+  "IMG_allu-ads_acer_comparacao-mensal_product-shot_perene_h1_v01_#001": {
+    "formats": {
+      "-1": {
+        "background": {
+          "type": "solid",
+          "color1": "#F5F5F5",
+          "color2": "#F5F5F5"
+        },
+        "productImage": {
+          "scalePercent": 0.74,
+          "position": {
+            "x": 0.5,
+            "y": 0.42
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.026,
+            "position": {
+              "x": 0.5,
+              "y": 0.095
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "bold",
+            "fill": "#FF473B",
+            "fontSizeRatio": 0.047,
+            "position": {
+              "x": 0.5,
+              "y": 0.16
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": true,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.024,
+            "position": {
+              "x": 0.5,
+              "y": 0.7
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.021,
+            "position": {
+              "x": 0.5,
+              "y": 0.83
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.75,
+              "y": 0.5
+            },
+            "text": "5%OFF USANDO O CUPOM: SOCIAL5",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 0.79,
+          "position": {
+            "x": 0.5,
+            "y": 0.486
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.028,
+            "position": {
+              "x": 0.5,
+              "y": 0.134
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#FB8C00",
+            "fontSizeRatio": 0.093,
+            "position": {
+              "x": 0.5,
+              "y": 0.231
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.019,
+            "position": {
+              "x": 0.5,
+              "y": 0.75
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#161617",
+            "fontSizeRatio": 0.023,
+            "position": {
+              "x": 0.5,
+              "y": 0.847
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.727,
+              "y": 0.555
+            },
+            "text": "% 5%OFF USANDO O CUPOM: SOCIAL5",
+            "color": "#FFFFFF"
+          }
+        ]
+      }
+    }
+  },
+  "IMG_allu-ads_acerheliosneo_assinar-mais-inteligente_banner-offer_perene_h1_v01_#001": {
+    "formats": {
+      "-1": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 0.8,
+          "position": {
+            "x": 0.55,
+            "y": 0.67
+          },
+          "rotation": 35
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#5F3D8C",
+            "fontSizeRatio": 0.08,
+            "position": {
+              "x": 0.5,
+              "y": 0.15
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.028,
+            "position": {
+              "x": 0.5,
+              "y": 0.3
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#161617",
+            "fontSizeRatio": 0.02,
+            "position": {
+              "x": 0.5,
+              "y": 0.45
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.25,
+              "y": 0.4
+            },
+            "text": "5% OFF USANDO O CUPOM: SOCIAL5",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF",
+          "color2": ""
+        },
+        "productImage": {
+          "scalePercent": 0.9,
+          "position": {
+            "x": 0.5,
+            "y": 0.69
+          },
+          "rotation": 22
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#6F3E9F",
+            "fontSizeRatio": 0.065,
+            "position": {
+              "x": 0.5,
+              "y": 0.15
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.032,
+            "position": {
+              "x": 0.5,
+              "y": 0.31
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.032,
+            "position": {
+              "x": 0.5,
+              "y": 0.46
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.77,
+              "y": 0.88
+            },
+            "text": "5% OFF USANDO O CUPOM: SOCIAL5",
+            "color": "#7D3ECF"
+          }
+        ]
+      }
+    }
+  },
+  "IMG_allu-ads_acerheliosneo_comparacao-mensal_product-shot_perene_h1_v01_#001": {
+    "formats": {
+      "-1": {
+        "background": {
+          "type": "solid",
+          "color1": "#F5F6F7",
+          "color2": "#F5F6F7"
+        },
+        "productImage": {
+          "scalePercent": 0.83,
+          "position": {
+            "x": 0.5,
+            "y": 0.48
+          },
+          "rotation": 5
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "bold",
+            "fill": "#1E6C84",
+            "fontSizeRatio": 0.06,
+            "position": {
+              "x": 0.5,
+              "y": 0.15
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "bold",
+            "fill": "#1E6C84",
+            "fontSizeRatio": 0.05,
+            "position": {
+              "x": 0.5,
+              "y": 0.23
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#474747",
+            "fontSizeRatio": 0.02,
+            "position": {
+              "x": 0.5,
+              "y": 0.35
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#474747",
+            "fontSizeRatio": 0.026,
+            "position": {
+              "x": 0.5,
+              "y": 0.75
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.02,
+            "position": {
+              "x": 0.5,
+              "y": 0.86
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.27,
+              "y": 0.38
+            },
+            "text": "5% OFF USANDO O CUPOM:\nSOCIAL5",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      "": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF",
+          "color2": null
+        },
+        "productImage": {
+          "scalePercent": 0.8,
+          "position": {
+            "x": 0.5,
+            "y": 0.55
+          },
+          "rotation": 15
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#2F7C9F",
+            "fontSizeRatio": 0.07,
+            "position": {
+              "x": 0.5,
+              "y": 0.15
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.026,
+            "position": {
+              "x": 0.5,
+              "y": 0.265
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.026,
+            "position": {
+              "x": 0.5,
+              "y": 0.755
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.02,
+            "position": {
+              "x": 0.5,
+              "y": 0.87
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.25,
+              "y": 0.45
+            },
+            "text": "5% OFF USANDO O CUPOM: SOCIAL5",
+            "color": "#161617"
+          }
+        ]
+      }
+    }
+  },
+  "IMG_allu-ads_acerheliosneo_compra-vs-assinar_product-shot_perene_h1_v01_#001": {
+    "formats": {
+      "-1": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF",
+          "color2": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 1.1,
+          "position": {
+            "x": 0.5,
+            "y": 0.8
+          },
+          "rotation": -18
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "bold",
+            "fill": "#6A22B8",
+            "fontSizeRatio": 0.08,
+            "position": {
+              "x": 0.5,
+              "y": 0.16
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.035,
+            "position": {
+              "x": 0.5,
+              "y": 0.28
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.035,
+            "position": {
+              "x": 0.5,
+              "y": 0.48
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.5,
+              "y": 0.4
+            },
+            "text": "5%OFF USANDO O CUPOM: SOCIAL5",
+            "color": "#6A22B8"
+          }
+        ]
+      },
+      "": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF",
+          "color2": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 0.75,
+          "position": {
+            "x": 0.5,
+            "y": 0.75
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "bold",
+            "fill": "#7E45B4",
+            "fontSizeRatio": 0.074,
+            "position": {
+              "x": 0.5,
+              "y": 0.25
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.037,
+            "position": {
+              "x": 0.5,
+              "y": 0.425
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.046,
+            "position": {
+              "x": 0.5,
+              "y": 0.57
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": []
+      }
+    }
+  },
+  "IMG_allu-ads_acerheliosneo_comprar-vs-assinar_product-shot_perene_h1_v01_#001": {
+    "formats": {}
+  },
+  "IMG_allu-ads_acerheliosneo_comprar-vs-assinar_tabela-comp_perene_h1_v01_#001": {
+    "formats": {}
+  },
+  "IMG_allu-ads_acerheliosneo_falta-performance_product-shot_perene_h1_v01_#001": {
+    "formats": {}
+  },
+  "IMG_allu-ads_acerheliosneo_numero-clientes_product-shot_perene_h1_v01_#001": {
+    "formats": {
+      "-1": {
+        "background": {
+          "type": "solid",
+          "color1": "#F5F5F5",
+          "color2": null
+        },
+        "productImage": {
+          "scalePercent": 0.74,
+          "position": {
+            "x": 0.5,
+            "y": 0.55
+          },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#4E5B6D",
+            "fontSizeRatio": 0.07,
+            "position": {
+              "x": 0.5,
+              "y": 0.13
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#444444",
+            "fontSizeRatio": 0.026,
+            "position": {
+              "x": 0.5,
+              "y": 0.3
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.028,
+            "position": {
+              "x": 0.5,
+              "y": 0.38
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false,
+              "innerShadowColor": "rgba(255,255,255,0.8)",
+              "innerShadowBlur": 10
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.5,
+              "y": 0.88
+            },
+            "text": "5% OFF USANDO O CUPOM: SOCIAL5",
+            "color": "#161617"
+          }
+        ]
+      }
+    }
+  },
+  "IMG_allu-ads_acerheliosneo_produto-caro-demais_product-shot_perene_h1_v01_#001": {
+    "formats": {
+      "": {
+        "background": {
+          "type": "solid",
+          "color1": "#FFFFFF"
+        },
+        "productImage": {
+          "scalePercent": 0.85,
+          "position": {
+            "x": 0.55,
+            "y": 0.65
+          },
+          "rotation": 15
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.035,
+            "position": {
+              "x": 0.5,
+              "y": 0.15
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#27AE60",
+            "fontSizeRatio": 0.08,
+            "position": {
+              "x": 0.5,
+              "y": 0.22
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.035,
+            "position": {
+              "x": 0.5,
+              "y": 0.28
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.025,
+            "position": {
+              "x": 0.9,
+              "y": 0.8
+            },
+            "textAlign": "right",
+            "effects": {
+              "innerShadow": false
+            }
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#161617",
+            "fontSizeRatio": 0.035,
+            "position": {
+              "x": 0.5,
+              "y": 0.9
+            },
+            "textAlign": "center",
+            "effects": {
+              "innerShadow": false
+            }
+          }
+        ],
+        "badges": [
+          {
+            "type": "discount",
+            "position": {
+              "x": 0.25,
+              "y": 0.4
+            },
+            "text": "5%OFF USANDO O CUPOM: SOCIAL5",
+            "color": "#161617"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -32,7 +32,7 @@ async function analyzeImage(filePath, baseName, suffix) {
 
     console.log(`[Art Director] Analisando: ${baseName}${suffix} (${formatInfo.name})`);
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=${API_KEY}`, {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -112,8 +112,8 @@ async function main() {
                 console.log(`[+] Mapeamento salvo para ${styleKey} (Formato: ${suffix || 'Feed'})`);
             }
             
-            // Pausa de 3 segundos para não estourar Rate Limit da API do Gemini
-            await delay(3000);
+            // Pausa de 4.5 segundos para não estourar Rate Limit da API do Gemini (15 RPM no Free Tier)
+            await delay(4500);
         }
     }
 
