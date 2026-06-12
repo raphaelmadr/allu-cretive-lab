@@ -57,6 +57,8 @@ export function renderDemandasTools(sidebarContent) {
                             data.body = parsedAi.body || '';
                             data.cta = parsedAi.cta || '';
                             data.productName = parsedAi.productName || '';
+                        } else {
+                            throw new Error('API retornou status ' + response.status);
                         }
                     } catch (e) {
                         console.error('Falha ao usar AI para parsear copy:', e);
