@@ -203,15 +203,41 @@ async function generateFourFormats(creative) {
     carousel.switchPage(0);
     notifications.toast('Iniciando IA Diretor de Arte... Analisando Referência...', 5000);
 
-    // 2. Encontrar a imagem base e converter para Base64
-    let base64Image = null;
-    if (creative.filename) {
-        let baseFilename = creative.filename;
-        if(baseFilename.endsWith('.png')) baseFilename = baseFilename.slice(0, -4);
-        if(baseFilename.endsWith('.jpg')) baseFilename = baseFilename.slice(0, -4);
-        const primaryPath = `assets/templates/${baseFilename}.png`;
+    // 2. Carregar a Knowledge Base (Design System)
+    let aiLayout = null;
+    let hasApiError = false;
+    let errorMessage = '';
+
+    let baseFilename = creative.filename || '';
+    if(baseFilename.endsWith('.png')) baseFilename = baseFilename.slice(0, -4);
+    if(baseFilename.endsWith('.jpg')) baseFilename = baseFilename.slice(0, -4);
+    
+    // Tentar ler da Knowledge Base Rápida
+    try {
+        const dbResp = await fetch('assets/design_system.json');
+        if (dbResp.ok) {
+            const knowledgeBase = await dbResp.json();
+            
+            // Verifica se o estilo existe
+            // Precisamos do layout correto para CADA formato, mas na estrutura do motor 
+            // `aiLayout` é passado para o `renderAILayout` que ajusta baseado na proporção,
+            // ou podemos usar a versão específica do formato se existir.
+            // Para manter compatibilidade com o formato da API, extraímos a versão base ('').
+            if (knowledgeBase[baseFilename] && knowledgeBase[baseFilename].formats['']) {
+                aiLayout = knowledgeBase[baseFilename].formats[''];
+                console.log("[Knowledge Base] Estilo carregado instantaneamente da base de conhecimento!");
+            }
+        }
+    } catch (e) {
+        console.log("Knowledge base local não encontrada. Caindo pro Fallback API.");
+    }
+
+    // 3. Se a Knowledge Base não tiver o estilo, chamar a IA dinâmica (API Serverless)
+    if (!aiLayout && baseFilename) {
+        console.log("[Dynamic API] Estilo não encontrado na Knowledge Base, extraindo layout em tempo real...");
+        const primaryPath = `REFERENCIAS/${baseFilename}.png`;
         
-        base64Image = await new Promise((resolve) => {
+        const base64Image = await new Promise((resolve) => {
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.onload = () => {
@@ -225,36 +251,35 @@ async function generateFourFormats(creative) {
             img.onerror = () => resolve(null);
             img.src = primaryPath;
         });
-    }
 
-    // 3. Chamar a IA (API Serverless)
-    let aiLayout = null;
-    let hasApiError = false;
-    let errorMessage = '';
-
-    if (base64Image) {
-        try {
-            const response = await fetch('/api/generate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    imageBase64: base64Image,
-                    creativeData: creative,
-                    dimensions: targetFormats[0]
-                })
-            });
-            if (response.ok) {
-                aiLayout = await response.json();
-            } else {
-                const errData = await response.json();
+        if (base64Image) {
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        imageBase64: base64Image,
+                        creativeData: creative,
+                        dimensions: targetFormats[0]
+                    })
+                });
+                if (response.ok) {
+                    aiLayout = await response.json();
+                } else {
+                    const errData = await response.json();
+                    hasApiError = true;
+                    errorMessage = errData.error || 'Erro desconhecido na API.';
+                    console.error("AI Error:", errData);
+                }
+            } catch(e) {
                 hasApiError = true;
-                errorMessage = errData.error || 'Erro desconhecido na API.';
-                console.error("AI Error:", errData);
+                errorMessage = e.message;
+                console.error("Fetch AI failed:", e);
             }
-        } catch(e) {
+        } else {
+            console.error(`Imagem base não encontrada no disco: ${primaryPath}`);
             hasApiError = true;
-            errorMessage = e.message;
-            console.error("Fetch AI failed:", e);
+            errorMessage = `A imagem de referência (${primaryPath}) não foi encontrada na sua pasta assets/templates.`;
         }
     }
 
