@@ -1,5 +1,6 @@
 // js/ui/sidebar.js
-// Importing tool renderers (We'll create these later, they can be dummy for now or just import)
+// Importing tool renderers
+import { renderDemandasTools } from '../tools/demandas.js';
 import { renderProductsTools } from '../tools/products.js';
 import { renderShapesTools } from '../tools/shapes.js';
 import { renderLogosTools } from '../tools/logos.js';
@@ -25,10 +26,10 @@ export function setupSidebar() {
         });
     });
 
-    // Inicializar na aba de Produtos
-    const defaultTab = document.querySelector('.btn-tool[data-tab="products"]');
+    // Inicializar na aba de Demandas
+    const defaultTab = document.querySelector('.btn-tool[data-tab="demandas"]');
     if(defaultTab) defaultTab.classList.add('active');
-    updateSidebar('products', sidebarTitle, sidebarContent);
+    updateSidebar('demandas', sidebarTitle, sidebarContent);
 }
 
 export function updateSidebar(tab, sidebarTitle, sidebarContent) {
@@ -39,6 +40,11 @@ export function updateSidebar(tab, sidebarTitle, sidebarContent) {
     sidebarContent.innerHTML = '';
     
     switch(tab) {
+        case 'demandas':
+            sidebarTitle.innerText = 'Demandas (Tasks)';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Smart Paste do Notion';
+            renderDemandasTools(sidebarContent);
+            break;
         case 'products':
             sidebarTitle.innerText = 'Produtos';
             if(sidebarSubtitle) sidebarSubtitle.innerText = 'Gerencie o catálogo Allu';

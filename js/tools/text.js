@@ -58,7 +58,7 @@ export function renderTextTools(sidebarContent) {
                 originX: 'center',
                 originY: 'center',
                 fontFamily: 'Plus Jakarta Sans',
-                fill: '#000000',
+                fill: '#0F190A', // default preto-allu
                 fontSize: size,
                 fontWeight: weight
             });
@@ -66,7 +66,7 @@ export function renderTextTools(sidebarContent) {
             activeCanvas.add(text);
             activeCanvas.setActiveObject(text);
             activeCanvas.renderAll();
-            history.save();
+            import('../history.js').then(h => h.history.save());
         };
     });
 
