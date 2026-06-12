@@ -18,7 +18,10 @@ export function renderModelsTools(sidebarContent) {
 
     // Carrega assincronamente os designs da comunidade
     fetch('/api/designs')
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) throw new Error('API not available, fallback to local file');
+            return res.json();
+        })
         .then(data => {
             if (Array.isArray(data)) {
                 window.communityDesigns = data;
@@ -26,7 +29,18 @@ export function renderModelsTools(sidebarContent) {
             }
         })
         .catch(err => {
-            console.error('Erro ao carregar designs da comunidade:', err);
+            console.log('Tentando carregar templates via arquivo local (fallback)...');
+            fetch('/data/community-designs.json')
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        window.communityDesigns = data;
+                        rebuild();
+                    }
+                })
+                .catch(localErr => {
+                    console.error('Erro ao carregar designs da comunidade e fallback local:', localErr);
+                });
         });
 
     function rebuild() {

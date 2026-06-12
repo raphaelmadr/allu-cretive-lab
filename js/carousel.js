@@ -208,7 +208,22 @@ export const carousel = {
 
                 
                 const link = document.createElement('a');
-                link.download = `Allu_Creative_Lab_Page_${i + 1}.${format}`;
+                
+                const filenameInput = document.getElementById('export-filename');
+                let baseName = (filenameInput && filenameInput.value.trim() !== '') ? filenameInput.value.trim() : 'Allu_Creative_Lab_Page';
+                
+                let finalName = baseName;
+                const match = baseName.match(/(.*[#_])(\d+)$/);
+                if (match) {
+                    const prefix = match[1];
+                    const numLen = match[2].length;
+                    const paddedNum = String(i + 1).padStart(numLen, '0');
+                    finalName = `${prefix}${paddedNum}`;
+                } else if (state.canvases.length > 1) {
+                    finalName = `${baseName}_${i + 1}`;
+                }
+
+                link.download = `${finalName}.${format}`;
                 link.href = dataURL;
                 link.click();
             } catch (err) {

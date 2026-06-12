@@ -7,6 +7,7 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 - **Duplicação de Canva (Página)**: Novo botão compacto de duplicar página no rodapé da plataforma, clonando instantaneamente o canva atual com todos os seus elementos e metadados.
 - **Substituição Dinâmica de Produtos**: Dropdown "Substituir Produto" na barra lateral de propriedades, permitindo trocar o produto selecionado mantendo a posição, escala e ângulo originais.
 - **Centralização Automática e Destaque de Canva**: Ajuste dinâmico de padding no wrapper para centralizar perfeitamente a página em edição e aplicação de opacidade de `0.2` nas páginas inativas para foco visual.
+- **Comportamento de Zoom Inteligente**: Zoom via scroll (Cmd/Ctrl) que acompanha precisamente a posição do mouse (mouse track), e zoom via botões da barra superior/atalhos que centraliza no documento ativo.
 - **Barra de Ferramentas Flutuante (Estilo Canva)**: Barra horizontal de contexto sobre o objeto ativo para atalhos de formatação rápidos.
 - **Importação de Arquivos .allu**: Drag & drop ou seleção manual de arquivos de projeto na tela inicial de onboarding.
 

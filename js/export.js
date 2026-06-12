@@ -76,7 +76,9 @@ export function setupExport() {
                             format: [canvas.width, canvas.height]
                         });
                         pdf.addImage(dataURL, 'JPEG', 0, 0, canvas.width, canvas.height);
-                        pdf.save('Allu_Creative_Lab_Design.pdf');
+                        const filenameInput = document.getElementById('export-filename');
+                        const baseName = (filenameInput && filenameInput.value.trim() !== '') ? filenameInput.value.trim() : 'Allu_Creative_Lab_Design';
+                        pdf.save(`${baseName}.pdf`);
                     } else {
                         // Tentar gerar o DataURL com QUALIDADE MÁXIMA
                         let dataURL;
@@ -95,7 +97,9 @@ export function setupExport() {
                         }
                         
                         const link = document.createElement('a');
-                        link.download = `Allu_Creative_Lab_Design.${format}`;
+                        const filenameInput = document.getElementById('export-filename');
+                        const baseName = (filenameInput && filenameInput.value.trim() !== '') ? filenameInput.value.trim() : 'Allu_Creative_Lab_Design';
+                        link.download = `${baseName}.${format}`;
                         link.href = dataURL;
                         link.click();
                     }
