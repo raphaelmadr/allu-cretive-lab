@@ -290,10 +290,23 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
     if (layout.background) {
         if (layout.background.type === 'solid') {
             canvas.backgroundColor = layout.background.color1 || '#ffffff';
-        } else if (layout.background.type === 'gradient') {
+        } else if (layout.background.type === 'linear_gradient' || layout.background.type === 'gradient') {
             const grad = new fabric.Gradient({
                 type: 'linear',
-                coords: { x1: 0, y1: 0, x2: 0, y2: H }, // Simulando 90deg bottom
+                coords: { x1: 0, y1: 0, x2: 0, y2: H }, // Fixo top-bottom por enquanto, pode ser expandido com gradientAngle
+                colorStops: [
+                    { offset: 0, color: layout.background.color1 || '#ffffff' },
+                    { offset: 1, color: layout.background.color2 || '#000000' }
+                ]
+            });
+            canvas.backgroundColor = grad;
+        } else if (layout.background.type === 'radial_gradient') {
+            const grad = new fabric.Gradient({
+                type: 'radial',
+                coords: { 
+                    x1: W/2, y1: H/2, r1: 0, 
+                    x2: W/2, y2: H/2, r2: Math.max(W, H)/1.5 
+                },
                 colorStops: [
                     { offset: 0, color: layout.background.color1 || '#ffffff' },
                     { offset: 1, color: layout.background.color2 || '#000000' }
@@ -349,7 +362,10 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
             // Limitar max font size para nao estourar
             if (fontSize > 150) fontSize = 150;
             
-            const textObj = new fabric.IText(textContent, {
+            const { plainText, styles } = parseMarkdownToFabric(textContent, t.fill || '#0F190A', t.highlightColor || t.fill || '#0F190A', t.fontWeight || '400');
+            
+            const textObj = new fabric.Textbox(plainText, {
+                width: W * 0.8,
                 left: W * (t.position.x || 0.5),
                 top: H * (t.position.y || 0.5),
                 originX: t.textAlign === 'left' ? 'left' : (t.textAlign === 'right' ? 'right' : 'center'),
@@ -359,6 +375,7 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                 fontWeight: t.fontWeight || 'bold',
                 fill: t.fill || '#0F190A',
                 textAlign: t.textAlign || 'center',
+                styles: styles,
                 shadow: effects.innerShadow ? new fabric.Shadow({
                     color: effects.innerShadowColor || 'rgba(0,0,0,0.5)',
                     blur: effects.innerShadowBlur || 10,
@@ -375,7 +392,85 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         });
     }
 
+    // 4. Badges (Selos Geométricos)
+    if (layout.badges && layout.badges.length > 0) {
+        layout.badges.forEach(b => {
+            const bWidth = W * (b.widthRatio || 0.2);
+            const bHeight = H * (b.heightRatio || 0.05);
+            
+            const rect = new fabric.Rect({
+                width: bWidth,
+                height: bHeight,
+                fill: b.backgroundColor || '#27AE60',
+                rx: b.borderRadius || 0,
+                ry: b.borderRadius || 0,
+                originX: 'center',
+                originY: 'center'
+            });
+            
+            const label = new fabric.IText(b.text || "SELO", {
+                fontFamily: 'Plus Jakarta Sans',
+                fontSize: H * (b.fontSizeRatio || 0.02),
+                fontWeight: b.fontWeight || 'bold',
+                fill: b.textColor || '#ffffff',
+                originX: 'center',
+                originY: 'center'
+            });
+            
+            const group = new fabric.Group([rect, label], {
+                left: W * (b.position.x || 0.8),
+                top: H * (b.position.y || 0.2),
+                originX: 'center',
+                originY: 'center'
+            });
+            canvas.add(group);
+        });
+    }
+
     canvas.renderAll();
+}
+
+function parseMarkdownToFabric(text, baseColor, highlightColor, baseWeight) {
+    const lines = text.split('\n');
+    let plainTextArray = [];
+    let styles = {};
+
+    for (let l = 0; l < lines.length; l++) {
+        let line = lines[l];
+        let plainLine = "";
+        let lineStyles = {};
+        
+        let isBold = false;
+        let charIndex = 0;
+        
+        // Match `**` parts
+        const parts = line.split('**');
+        for (let p = 0; p < parts.length; p++) {
+            const part = parts[p];
+            if (p % 2 === 1) { // Inside ** **
+                for (let c = 0; c < part.length; c++) {
+                    lineStyles[charIndex + c] = { 
+                        fontWeight: 'bold', // Forçar negrito no destaque
+                        fill: highlightColor
+                    };
+                }
+            } else {
+                for (let c = 0; c < part.length; c++) {
+                    lineStyles[charIndex + c] = { 
+                        fontWeight: baseWeight,
+                        fill: baseColor
+                    };
+                }
+            }
+            plainLine += part;
+            charIndex += part.length;
+        }
+        
+        plainTextArray.push(plainLine);
+        styles[l] = lineStyles;
+    }
+
+    return { plainText: plainTextArray.join('\n'), styles };
 }
 
 function injectTexts(canvas, creative, formatConfig) {

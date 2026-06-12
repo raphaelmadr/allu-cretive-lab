@@ -1,4 +1,74 @@
 {
+  "iphone_semantic_demo": {
+    "formats": {
+      "": {
+        "semanticRules": {
+          "theme": "dark_glassmorphism",
+          "typographyRhythm": "Headline centralizada destacando o iPhone, com badges de preço.",
+          "backgroundStrategy": "Fundo escuro radial para simular premium"
+        },
+        "background": {
+          "type": "radial_gradient",
+          "color1": "#2c2c2c",
+          "color2": "#000000"
+        },
+        "productImage": {
+          "scalePercent": 0.8,
+          "position": { "x": 0.5, "y": 0.5 },
+          "rotation": 0
+        },
+        "texts": [
+          {
+            "role": "hook",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "800",
+            "fill": "#FFFFFF",
+            "fontSizeRatio": 0.08,
+            "position": { "x": 0.5, "y": 0.15 },
+            "textAlign": "center",
+            "richTextTemplate": "**iPhone 16** a partir de R$10",
+            "highlightColor": "#27AE60",
+            "effects": {
+              "innerShadow": true,
+              "innerShadowColor": "rgba(255,255,255,0.4)",
+              "innerShadowBlur": 5
+            }
+          },
+          {
+            "role": "body",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "400",
+            "fill": "#AAAAAA",
+            "fontSizeRatio": 0.04,
+            "position": { "x": 0.5, "y": 0.25 },
+            "textAlign": "center"
+          },
+          {
+            "role": "cta",
+            "fontFamily": "Plus Jakarta Sans",
+            "fontWeight": "700",
+            "fill": "#FFFFFF",
+            "fontSizeRatio": 0.03,
+            "position": { "x": 0.5, "y": 0.85 },
+            "textAlign": "center"
+          }
+        ],
+        "badges": [
+           {
+              "type": "price",
+              "position": { "x": 0.8, "y": 0.3 },
+              "widthRatio": 0.25,
+              "heightRatio": 0.06,
+              "borderRadius": 8,
+              "backgroundColor": "#27AE60",
+              "textColor": "#FFFFFF",
+              "fontSizeRatio": 0.025,
+              "fontWeight": "bold"
+           }
+        ]
+      }
+    }
+  },
   "CRS_allu-ads_samsung_aparelho-antigo_carrossel-apelativo_perene_h1_v01_#001": {
     "formats": {
       "-1": {

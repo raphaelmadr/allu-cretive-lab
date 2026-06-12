@@ -2,24 +2,32 @@
 
 export const INGESTOR_PROMPT = `Você é um Diretor de Arte Sênior especializado em Design Systems da marca 'Allu' (aluguel de eletrônicos).
 Analise esta imagem que é um template de anúncio de performance ({FORMAT_NAME} - {W}x{H}).
-O anúncio sempre terá:
-- Título/Hook
-- Texto de Corpo (Body)
-- Chamada para Ação (CTA)
-- Imagem do Produto (no centro ou na lateral)
+Seu objetivo é extrair a MATEMÁTICA GEOMÉTRICA e as REGRAS SEMÂNTICAS de estilo.
 
-Mapeie o Layout exato dessa imagem em um schema JSON ESTRITO.
-Retorne APENAS o JSON válido, sem backticks (\`\`\`), sem explicações.
+Você deve extrair com máxima precisão:
+1. O Fundo (Background) - Identifique se é sólido, gradiente ou se possui brilhos e texturas.
+2. A Tipografia - Identifique qual palavra ganha destaque (Negrito/Cor diferente). Use marcações em Markdown no "content" (ex: "Não fique preso a **uma parcela**").
+3. A Fotografia - Analise onde o designer posicionou o produto, qual a escala.
+4. Badges (Selos) - Identifique se há etiquetas de preço, descontos ou informações isoladas em caixas com cor de fundo.
+
+Mapeie o Layout ESTRITAMENTE no schema JSON abaixo. Retorne APENAS o JSON válido.
 
 Schema:
 {
+  "semanticRules": {
+    "theme": "dark_glassmorphism" | "clean_light" | "colorful_abstract",
+    "typographyRhythm": "Ex: Headline grande à esquerda, body pequeno logo abaixo",
+    "backgroundStrategy": "Ex: Fundo neutro com luz focada no produto",
+    "badgesUsage": "Ex: Usado no topo direito para chamar atenção para o desconto"
+  },
   "background": {
-    "type": "solid" | "gradient",
+    "type": "solid" | "linear_gradient" | "radial_gradient",
     "color1": "#HEX",
-    "color2": "#HEX"
+    "color2": "#HEX", // opcional
+    "gradientAngle": 90 // apenas para linear
   },
   "productImage": {
-    "scalePercent": 0.8, // Escala (0 a 1) relativa à largura
+    "scalePercent": 0.8, // Escala relativa à largura
     "position": { "x": 0.5, "y": 0.5 }, // Relativo a W e H
     "rotation": 0
   },
@@ -27,11 +35,13 @@ Schema:
     {
       "role": "hook" | "body" | "cta",
       "fontFamily": "Plus Jakarta Sans",
-      "fontWeight": "bold" | "400" | "700",
+      "fontWeight": "400" | "700" | "800", // Peso padrão do texto
       "fill": "#HEX",
       "fontSizeRatio": 0.08, // Tamanho relativo à altura da imagem
       "position": { "x": 0.5, "y": 0.15 },
       "textAlign": "center" | "left" | "right",
+      "richTextTemplate": "Se o texto contiver palavras em destaque na imagem, mostre como fica usando Markdown de Negrito. Ex: 'Alugue um **iPhone 16** hoje.' Se não houver destaque, deixe nulo.",
+      "highlightColor": "#HEX", // Cor aplicada apenas nas palavras em negrito (se houver)
       "effects": {
         "innerShadow": true | false,
         "innerShadowColor": "rgba(255,255,255,0.8)",
@@ -40,19 +50,26 @@ Schema:
     }
   ],
   "badges": [
-     // Caso identifique selos ou tags visuais (Ex: -20%)
+     // Caso identifique selos ou tags visuais
      {
-        "type": "discount",
+        "type": "discount" | "info" | "price",
         "position": { "x": 0.8, "y": 0.2 },
-        "text": "-20%",
-        "color": "#02AE57"
+        "widthRatio": 0.3, // Largura do selo em relacao ao canvas
+        "heightRatio": 0.05,
+        "borderRadius": 20,
+        "backgroundColor": "#02AE57",
+        "textColor": "#FFFFFF",
+        "fontSizeRatio": 0.03,
+        "fontWeight": "bold",
+        "textAlign": "center"
      }
   ]
 }
 
 REGRAS:
-- Seja extremamente fiel às cores e posições da imagem de referência.
+- Seja um Cirurgião do Design. Capte a paleta de cores perfeitamente.
 - A Allu usa cores baseadas no verde (#27AE60) e escuro (#161617).
+- Se o título da imagem tiver palavras com cores ou espessuras diferentes, isso é CRÍTICO. Preencha o "richTextTemplate" com a estrutura em Markdown e defina o "highlightColor".
 `;
 
 export const FALLBACK_API_PROMPT = `Você é um Diretor de Arte Sênior da Allu especializado em anúncios de performance para redes sociais.
