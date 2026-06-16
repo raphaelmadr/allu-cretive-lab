@@ -372,40 +372,7 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         });
     });
 
-    // 2. Product Image
-    if (layout.productImage && creative.productName) {
-        // Encontrar no catálogo local de produtos para ter o recorte transparente
-        const apiProds = window.alluProducts || [];
-        
-        // Tentar buscar similar
-        let match = apiProds.find(p => creative.productName.toLowerCase().includes(p.name.toLowerCase()));
-        if (!match) match = apiProds.find(p => p.name.toLowerCase().includes('iphone')); // fallback para iphone se nao achar
-        
-        if (match && (match.local_img || match.img)) {
-            const imgSrc = (match.local_img && match.local_img.startsWith('./')) ? match.local_img.substring(2) : (match.local_img || match.img);
-            await new Promise(resolve => {
-                fabric.Image.fromURL(imgSrc, (img) => {
-                    if (img) {
-                        const targetW = W * (layout.productImage.scalePercent || 0.6);
-                        const scale = targetW / img.width;
-                        
-                        img.set({
-                            originX: 'center',
-                            originY: 'top',
-                            left: W * (layout.productImage.position.x || 0.5),
-                            top: H * 0.65, // Inicia a imagem em 65% do Canvas (empurrando para a posição negativa/corte)
-                            scaleX: scale,
-                            scaleY: scale,
-                            angle: layout.productImage.rotation || 0
-                        });
-                        canvas.add(img);
-                    }
-                    resolve();
-                }, { crossOrigin: 'anonymous' });
-            });
-        }
-    }
-
+    // O Produto foi movido para o final do fluxo para posicionamento dinâmico
     // 3. Flow Layout Engine (Textos e Badges)
     let flowY = H * 0.12; // Começa abaixo da logo
 
@@ -491,7 +458,44 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         });
     }
 
-    // 4. Badges (Selos Geométricos) - Posicionamento flutuante absoluto
+    // 4. Product Image (Renderizado dinamicamente após o fluxo de texto)
+    let productTopY = flowY + 20; // Default: Logo abaixo do último elemento (CTA ou Texto)
+    
+    if (layout.productImage && creative.productName) {
+        const apiProds = window.alluProducts || [];
+        let match = apiProds.find(p => creative.productName.toLowerCase().includes(p.name.toLowerCase()));
+        if (!match) match = apiProds.find(p => p.name.toLowerCase().includes('iphone')); 
+        
+        if (match && (match.local_img || match.img)) {
+            const imgSrc = (match.local_img && match.local_img.startsWith('./')) ? match.local_img.substring(2) : (match.local_img || match.img);
+            await new Promise(resolve => {
+                fabric.Image.fromURL(imgSrc, (img) => {
+                    if (img) {
+                        // Se o fluxo terminou muito em cima, definimos um limite razoável (ex: 45% da tela)
+                        let finalTopY = Math.max(productTopY, H * 0.45);
+                        productTopY = finalTopY; // Atualiza para o selo usar
+                        
+                        const targetW = W * (layout.productImage.scalePercent || 0.6);
+                        const scale = targetW / img.width;
+                        
+                        img.set({
+                            originX: 'center',
+                            originY: 'top',
+                            left: W * (layout.productImage.position.x || 0.5),
+                            top: finalTopY, // Posição calculada com precisão para não engolir o texto nem desaparecer
+                            scaleX: scale,
+                            scaleY: scale,
+                            angle: layout.productImage.rotation || 0
+                        });
+                        canvas.add(img);
+                    }
+                    resolve();
+                }, { crossOrigin: 'anonymous' });
+            });
+        }
+    }
+
+    // 5. Badges (Selos Geométricos) - Posicionamento relativo ao produto
     if (layout.badges && layout.badges.length > 0) {
         layout.badges.forEach(b => {
             const bWidth = W * (b.widthRatio || 0.2);
@@ -517,8 +521,8 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
             });
             
             const group = new fabric.Group([rect, label], {
-                left: W * (b.position.x || 0.75), // Posição do prompt
-                top: H * (b.position.y || 0.65),  // Posição do prompt
+                left: W * (b.position.x || 0.75), 
+                top: productTopY + 50,  // Flutuando perfeitamente ao lado do produto
                 originX: 'center',
                 originY: 'center'
             });
