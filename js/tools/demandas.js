@@ -237,19 +237,20 @@ async function generateFourFormats(creative) {
                     const productStr = (creative.productName || creative.product || creative.name || '').toLowerCase().split(' ')[0];
                     let matchedStyle = availableStyles.find(style => style.toLowerCase().includes(productStr));
                     
-                    // 3. Fallback: Escolher um estilo aleatório da nossa Base de Conhecimento
-                    if (!matchedStyle) {
-                        matchedStyle = availableStyles[Math.floor(Math.random() * availableStyles.length)];
-                    }
-                    
-                    if (knowledgeBase[matchedStyle].formats['']) {
+                    // Se não houver match na base local, não faça fallback aleatório. Deixe para a IA gerar!
+                    if (matchedStyle && knowledgeBase[matchedStyle] && knowledgeBase[matchedStyle].formats['']) {
                         aiLayout = knowledgeBase[matchedStyle].formats[''];
-                        console.log(`[Smart Picker] Estilo automático escolhido: ${matchedStyle} (Baseado no histórico)`);
+                        console.log(`[Smart Picker] Estilo exato encontrado: ${matchedStyle}`);
+                    } else {
+                        console.log(`[Smart Picker] Estilo não encontrado localmente. Acionando IA.`);
                     }
                 }
             }
         }
     } catch (e) {
+        console.log("Knowledge base local não encontrada ou erro:", e);
+    }
+
     // Se a IA falhou em achar qualquer coisa no banco local, vamos GERAR dinamicamente!
     if (!aiLayout) {
         notifications.toast('✨ Gerando layout dinâmico com IA... Aguarde.', 'info');
