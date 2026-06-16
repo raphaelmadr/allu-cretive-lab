@@ -58,12 +58,17 @@ export function renderDemandasTools(sidebarContent) {
                             data.cta = parsedAi.cta || '';
                             data.productName = parsedAi.productName || '';
                         } else {
-                            throw new Error('API retornou status ' + response.status);
+                            const errData = await response.json().catch(() => ({}));
+                            throw new Error(errData.error || 'Erro ' + response.status);
                         }
                     } catch (e) {
                         console.error('Falha ao usar AI para parsear copy:', e);
-                        // Fallback extremamente básico
-                        data.body = copySection.substring(0, 200) + '...';
+                        const { notifications } = await import('../ui/notifications.js');
+                        await notifications.alert("Falha ao iniciar IA", "Ocorreu um erro ao ler a sua demanda do Notion. Motivo: " + e.message);
+                        
+                        // Aborta o processo. Não cria nada se a IA falhou.
+                        btnParse.innerHTML = btnOriginal;
+                        return; 
                     }
                     
                     if (data.filename || data.hook || data.body || data.cta) {
@@ -245,12 +250,9 @@ async function generateFourFormats(creative) {
             }
         }
     } catch (e) {
-        console.log("Knowledge base local não encontrada.");
-    }
-
     // Se a IA falhou em achar qualquer coisa no banco local, vamos GERAR dinamicamente!
     if (!aiLayout) {
-        notifications.toast('✨ Gerando layout dinâmico com IA...', 'info');
+        notifications.toast('✨ Gerando layout dinâmico com IA... Aguarde.', 'info');
         try {
             const response = await fetch('/api/generate-from-notion', {
                 method: 'POST',
@@ -262,8 +264,10 @@ async function generateFourFormats(creative) {
                 aiLayout = await response.json();
                 hasApiError = false;
                 errorMessage = '';
+                notifications.toast('✅ Layout gerado com sucesso pela IA!', 'success');
             } else {
-                throw new Error('Falha no endpoint generate-from-notion');
+                const errData = await response.json();
+                throw new Error(errData.error || 'Falha no endpoint generate-from-notion');
             }
         } catch (e) {
             hasApiError = true;
@@ -276,23 +280,26 @@ async function generateFourFormats(creative) {
         if (errorMessage.includes('GEMINI_API_KEY')) {
             await notifications.alert("Falta de Configuração ⚠️", "A Inteligência Artificial precisa da chave 'GEMINI_API_KEY' na Vercel para funcionar. Configure lá e rode um novo Deploy!");
         } else {
-            await notifications.alert("Falha na IA ❌", "A IA não conseguiu gerar o layout dinâmico. Código do erro: " + errorMessage);
+            await notifications.alert("Falha na IA ❌", "A IA não conseguiu gerar o layout dinâmico. Motivo: " + errorMessage);
         }
+        
+        // Limpar Skeletons e abortar para não renderizar nada zoado
+        for (let i = 0; i < targetFormats.length; i++) {
+            let currentCanvas = state.canvases[i];
+            currentCanvas.clear();
+            currentCanvas.backgroundColor = '#ffffff';
+            currentCanvas.renderAll();
+        }
+        return; // Aborta a continuação do script
     }
 
-    // 4. Limpar Skeletons e Montar os 4 quadros finais
+    // 4. Limpar Skeletons e Montar os 4 quadros finais (Sucesso)
     for (let i = 0; i < targetFormats.length; i++) {
         let currentCanvas = state.canvases[i];
         currentCanvas.clear();
         currentCanvas.backgroundColor = '#ffffff';
 
-        if (aiLayout && !hasApiError) {
-            await renderAILayout(currentCanvas, aiLayout, targetFormats[i], creative);
-        } else {
-            // Fallback
-            injectTexts(currentCanvas, creative, targetFormats[i]);
-            currentCanvas.renderAll();
-        }
+        await renderAILayout(currentCanvas, aiLayout, targetFormats[i], creative);
         
         if (i === targetFormats.length - 1) {
             resizeCanvas();
