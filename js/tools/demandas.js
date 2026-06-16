@@ -248,10 +248,27 @@ async function generateFourFormats(creative) {
         console.log("Knowledge base local não encontrada.");
     }
 
-    // Se a IA falhou em achar qualquer coisa
+    // Se a IA falhou em achar qualquer coisa no banco local, vamos GERAR dinamicamente!
     if (!aiLayout) {
-        hasApiError = true;
-        errorMessage = `A Base de Conhecimento da Allu está vazia ou inacessível. Rode o Ingestor de IA primeiro.`;
+        notifications.toast('✨ Gerando layout dinâmico com IA...', 'info');
+        try {
+            const response = await fetch('/api/generate-from-notion', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ creativeData: creative, dimensions: { w: 1080, h: 1080 } })
+            });
+            
+            if (response.ok) {
+                aiLayout = await response.json();
+                hasApiError = false;
+                errorMessage = '';
+            } else {
+                throw new Error('Falha no endpoint generate-from-notion');
+            }
+        } catch (e) {
+            hasApiError = true;
+            errorMessage = e.message;
+        }
     }
 
     // Se falhou e for API Key faltando
@@ -259,7 +276,7 @@ async function generateFourFormats(creative) {
         if (errorMessage.includes('GEMINI_API_KEY')) {
             await notifications.alert("Falta de Configuração ⚠️", "A Inteligência Artificial precisa da chave 'GEMINI_API_KEY' na Vercel para funcionar. Configure lá e rode um novo Deploy!");
         } else {
-            await notifications.alert("Falha na IA ❌", "A IA não conseguiu processar este layout. Código do erro: " + errorMessage);
+            await notifications.alert("Falha na IA ❌", "A IA não conseguiu gerar o layout dinâmico. Código do erro: " + errorMessage);
         }
     }
 
