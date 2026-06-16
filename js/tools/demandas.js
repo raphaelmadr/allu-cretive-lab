@@ -344,6 +344,21 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         }
     }
 
+    // 1.5 Logo da Allu
+    const logoColor = (layout.background && layout.background.type === 'solid' && (layout.background.color1.toLowerCase() === '#000000' || layout.background.color1.toLowerCase() === '#1d1d1f' || layout.background.color1.toLowerCase() === '#161617')) ? '#ffffff' : '#1D1D1F';
+    const logoText = new fabric.IText("allu.", {
+        left: W / 2,
+        top: H * 0.06,
+        originX: 'center',
+        originY: 'center',
+        fontFamily: 'Plus Jakarta Sans',
+        fontSize: Math.max(H * 0.035, 24),
+        fontWeight: '900',
+        fill: logoColor
+    });
+    logoText.setSelectionStyles({ fill: '#27AE60' }, 0, 4); // O ponto final verde
+    canvas.add(logoText);
+
     // 2. Product Image
     if (layout.productImage && creative.productName) {
         // Encontrar no catálogo local de produtos para ter o recorte transparente
@@ -392,6 +407,40 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
             
             const { plainText, styles } = parseMarkdownToFabric(textContent, t.fill || '#0F190A', t.highlightColor || t.fill || '#0F190A', t.fontWeight || '400');
             
+            if (t.role === 'cta') {
+                const btnWidth = W * 0.45;
+                const btnHeight = Math.max(H * 0.07, 50);
+                const isDarkBg = (layout.background && layout.background.type === 'solid' && (layout.background.color1.toLowerCase() === '#000000' || layout.background.color1.toLowerCase() === '#1d1d1f' || layout.background.color1.toLowerCase() === '#161617'));
+                const btnFill = isDarkBg ? '#ffffff' : '#1D1D1F';
+                const textFill = isDarkBg ? '#1D1D1F' : '#ffffff';
+                
+                const rect = new fabric.Rect({
+                    width: btnWidth,
+                    height: btnHeight,
+                    fill: btnFill,
+                    rx: btnHeight / 2,
+                    ry: btnHeight / 2,
+                    originX: 'center',
+                    originY: 'center'
+                });
+                const btnText = new fabric.Text(plainText, {
+                    fontFamily: t.fontFamily || 'Plus Jakarta Sans',
+                    fontSize: btnHeight * 0.35,
+                    fontWeight: '800',
+                    fill: textFill,
+                    originX: 'center',
+                    originY: 'center'
+                });
+                const group = new fabric.Group([rect, btnText], {
+                    left: W * (t.position.x || 0.5),
+                    top: H * (t.position.y || 0.88),
+                    originX: 'center',
+                    originY: 'center'
+                });
+                canvas.add(group);
+                return;
+            }
+
             const textObj = new fabric.Textbox(plainText, {
                 width: W * 0.8,
                 left: W * (t.position.x || 0.5),
