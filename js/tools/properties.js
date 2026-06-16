@@ -86,7 +86,8 @@ export function renderPropertiesTools(sidebarContent) {
 
         // Cartões de cor de fundo (apenas as 6 cores aprovadas)
         const bgGrid = div.querySelector('#prop-bg-grid');
-        const currentBg = (canvas.backgroundColor || '#ffffff').toUpperCase();
+        const bgColor = canvas.backgroundColor;
+        const currentBg = (typeof bgColor === 'string' ? bgColor : '#ffffff').toUpperCase();
 
         const updateCardStates = (selectedHex) => {
             bgGrid.querySelectorAll('.prop-bg-card').forEach(card => {

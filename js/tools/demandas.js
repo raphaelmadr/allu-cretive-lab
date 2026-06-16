@@ -347,8 +347,7 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
     // 2. Product Image
     if (layout.productImage && creative.productName) {
         // Encontrar no catálogo local de produtos para ter o recorte transparente
-        const { getProductsFromAllugator } = await import('./products.js');
-        const apiProds = await getProductsFromAllugator();
+        const apiProds = window.alluProducts || [];
         
         // Tentar buscar similar
         let match = apiProds.find(p => creative.productName.toLowerCase().includes(p.name.toLowerCase()));
