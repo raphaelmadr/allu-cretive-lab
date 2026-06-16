@@ -345,7 +345,12 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
     }
 
     // 1.5 Logo da Allu (SVG Oficial)
-    const isDarkBgForLogo = (layout.background && layout.background.type === 'solid' && (layout.background.color1.toLowerCase() === '#000000' || layout.background.color1.toLowerCase() === '#1d1d1f' || layout.background.color1.toLowerCase() === '#161617'));
+    const isDarkBgForLogo = layout.background && (
+        layout.background.color1.toLowerCase() === '#000000' || 
+        layout.background.color1.toLowerCase() === '#1d1d1f' || 
+        layout.background.color1.toLowerCase() === '#161617' ||
+        layout.background.color1.toLowerCase() === '#2c2c2c'
+    );
     const logoSrc = isDarkBgForLogo ? './assets/logos/Primario.svg' : './assets/logos/Primario-2.svg';
     
     await new Promise(resolve => {
@@ -386,9 +391,9 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                         
                         img.set({
                             originX: 'center',
-                            originY: 'bottom',
+                            originY: 'top',
                             left: W * (layout.productImage.position.x || 0.5),
-                            top: H * 1.0, // FORÇA NA BASE: 100% da altura da imagem para liberar todo o topo
+                            top: H * 0.65, // Inicia a imagem em 65% do Canvas (empurrando para a posição negativa/corte)
                             scaleX: scale,
                             scaleY: scale,
                             angle: layout.productImage.rotation || 0
