@@ -377,10 +377,11 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                         const scale = targetW / img.width;
                         
                         img.set({
+                        img.set({
                             originX: 'center',
-                            originY: 'center',
+                            originY: 'bottom',
                             left: W * (layout.productImage.position.x || 0.5),
-                            top: H * (layout.productImage.position.y || 0.5),
+                            top: H * (layout.productImage.position.y || 0.95),
                             scaleX: scale,
                             scaleY: scale,
                             angle: layout.productImage.rotation || 0
@@ -439,11 +440,12 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                 });
                 const group = new fabric.Group([rect, btnText], {
                     left: W * (t.position.x || 0.5),
-                    top: H * 0.88, // Ancorado fixo na base inferior
+                    top: flowY + (btnHeight / 2) + 20, // Na ordem do fluxo, logo abaixo do texto
                     originX: 'center',
                     originY: 'center'
                 });
                 canvas.add(group);
+                flowY += btnHeight + 40; // Atualiza o fluxo
                 return;
             }
 
@@ -463,12 +465,7 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                 fill: t.fill || '#0F190A',
                 textAlign: t.textAlign || 'center',
                 styles: styles,
-                shadow: effects.innerShadow ? new fabric.Shadow({
-                    color: effects.innerShadowColor || 'rgba(0,0,0,0.5)',
-                    blur: effects.innerShadowBlur || 10,
-                    offsetX: 2,
-                    offsetY: 2
-                }) : null
+                shadow: null // Removendo sombras para garantir design flat conforme solicitado
             });
             
             if (t.textAlign === 'left') {
@@ -482,10 +479,8 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         });
     }
 
-    // 4. Badges (Selos Geométricos) - Colocado logo abaixo do Body Text para evitar sobreposição
+    // 4. Badges (Selos Geométricos) - Posicionamento flutuante absoluto
     if (layout.badges && layout.badges.length > 0) {
-        flowY += 30; // Margem acima do selo
-        
         layout.badges.forEach(b => {
             const bWidth = W * (b.widthRatio || 0.2);
             const bHeight = H * (b.heightRatio || 0.05);
@@ -510,14 +505,13 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
             });
             
             const group = new fabric.Group([rect, label], {
-                left: W / 2, // Centraliza obrigatoriamente
-                top: flowY,
+                left: W * (b.position.x || 0.75), // Posição do prompt
+                top: H * (b.position.y || 0.65),  // Posição do prompt
                 originX: 'center',
-                originY: 'top' // Ancora no topo para fluir
+                originY: 'center'
             });
             
             canvas.add(group);
-            flowY += group.getScaledHeight() + 15;
         });
     }
 

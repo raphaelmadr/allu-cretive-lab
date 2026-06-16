@@ -156,13 +156,13 @@ Sua missão é gerar um layout de altíssima conversão em formato JSON para o n
 
 **[Regras de Estilo, Espaçamento e Composição]**
 - **Logotipo:** Já é inserido automaticamente no topo (Y = 0.05). Não se preocupe com ele.
-- **Tipografia e Espaçamento VERTICAL RIGOROSO (Evite Sobreposições):**
-  - **Hook (Headline):** Deve ser enorme (fontSizeRatio ~0.08 a 0.1), BOLD/BLACK. **Obrigatório posicionar em Y: 0.15 a 0.20**.
-  - **Body (Subheadline):** Texto de apoio menor (fontSizeRatio ~0.03 a 0.04), Regular. **Obrigatório posicionar bem abaixo do Hook, em Y: 0.35 a 0.40**.
-  - **CTA (Botão):** O motor criará um botão em formato de pílula. **Obrigatório posicionar na base, em Y: 0.85 a 0.90**.
-- **Herói (Produto):** O produto deve dominar o centro inferior (Y entre 0.60 e 0.75), em escala gigante (scalePercent entre 0.8 e 1.2). Ele ficará entre o Body e o CTA.
+- **Tipografia FLAT (Design Limpo):** Não utilize sombras nos textos.
+- **Hook (Headline):** Tamanho ajustado (fontSizeRatio ~0.046 que equivale a 50px). BOLD/BLACK. 
+- **Body (Subheadline):** Texto de apoio pequeno (fontSizeRatio ~0.02 que equivale a 22px). Regular.
+- **CTA (Botão):** Será colocado automaticamente pelo motor logo abaixo do texto de apoio.
+- **Herói (Produto):** O produto deve ficar em posição negativa/base (Y = 0.95, pois seu eixo inferior tocará o rodapé da imagem). Escala gigante (scalePercent entre 0.8 e 1.2).
 - **Cores:** Use preto (#1D1D1F) para textos se o fundo for claro. Fundo padrão é off-white (#F5F5F7). Se o fundo for escuro (#1D1D1F), use textos brancos (#FFFFFF).
-- **Elementos Flutuantes:** Adicione um selo (badge) verde (#27AE60) no meio/direita indicando "Novidade" ou destaque se aplicável.
+- **Elementos Flutuantes:** Adicione um selo (badge) verde (#27AE60) posicionado à direita da imagem de produto (X: 0.75, Y: 0.65).
 
 Retorne **ESTRITAMENTE** um objeto JSON no schema abaixo. NENHUM texto fora do JSON.
 
@@ -176,7 +176,7 @@ Schema JSON:
   },
   "productImage": {
     "scalePercent": 1.0,
-    "position": { "x": 0.5, "y": 0.65 },
+    "position": { "x": 0.5, "y": 0.95 },
     "rotation": 0
   },
   "texts": [
@@ -186,8 +186,8 @@ Schema JSON:
       "fontFamily": "Plus Jakarta Sans",
       "fontWeight": "800",
       "fill": "#1D1D1F",
-      "fontSizeRatio": 0.09,
-      "position": { "x": 0.5, "y": 0.18 },
+      "fontSizeRatio": 0.046,
+      "position": { "x": 0.5, "y": 0.15 },
       "textAlign": "center",
       "richTextTemplate": "Se quiser destacar, use **Negrito**. Ex: 'O **iPhone 16** chegou.'",
       "highlightColor": "#27AE60",
@@ -199,8 +199,8 @@ Schema JSON:
       "fontFamily": "Plus Jakarta Sans",
       "fontWeight": "400",
       "fill": "#828392",
-      "fontSizeRatio": 0.035,
-      "position": { "x": 0.5, "y": 0.38 },
+      "fontSizeRatio": 0.02,
+      "position": { "x": 0.5, "y": 0.25 },
       "textAlign": "center"
     },
     {
@@ -209,8 +209,8 @@ Schema JSON:
       "fontFamily": "Plus Jakarta Sans",
       "fontWeight": "800",
       "fill": "#FFFFFF",
-      "fontSizeRatio": 0.03,
-      "position": { "x": 0.5, "y": 0.88 },
+      "fontSizeRatio": 0.025,
+      "position": { "x": 0.5, "y": 0.35 },
       "textAlign": "center"
     }
   ],
