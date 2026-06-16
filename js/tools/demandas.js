@@ -393,16 +393,22 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         }
     }
 
-    // 3. Texts
+    // 3. Flow Layout Engine (Textos e Badges)
+    let flowY = H * 0.12; // Começa abaixo da logo
+
     if (layout.texts && layout.texts.length > 0) {
-        layout.texts.forEach(t => {
-            // Mapeia o texto do Notion para este slot baseado no role (hook, body, cta, etc)
+        // Ordena para desenhar na ordem lógica: hook -> body -> cta
+        const sortedTexts = [...layout.texts].sort((a, b) => {
+            const order = { 'hook': 1, 'body': 2, 'cta': 3 };
+            return (order[a.role] || 99) - (order[b.role] || 99);
+        });
+
+        sortedTexts.forEach(t => {
             const textContent = creative[t.role];
             if (!textContent) return;
             
             let effects = t.effects || {};
             let fontSize = (t.fontSizeRatio || 0.05) * H;
-            // Limitar max font size para nao estourar
             if (fontSize > 150) fontSize = 150;
             
             const { plainText, styles } = parseMarkdownToFabric(textContent, t.fill || '#0F190A', t.highlightColor || t.fill || '#0F190A', t.fontWeight || '400');
@@ -433,7 +439,7 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                 });
                 const group = new fabric.Group([rect, btnText], {
                     left: W * (t.position.x || 0.5),
-                    top: H * (t.position.y || 0.88),
+                    top: H * 0.88, // Ancorado fixo na base inferior
                     originX: 'center',
                     originY: 'center'
                 });
@@ -441,12 +447,16 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                 return;
             }
 
+            // Normal text (Hook / Body)
+            const textMarginTop = t.role === 'hook' ? 30 : 20;
+            flowY += textMarginTop;
+
             const textObj = new fabric.Textbox(plainText, {
                 width: W * 0.8,
                 left: W * (t.position.x || 0.5),
-                top: H * (t.position.y || 0.5),
+                top: flowY,
                 originX: t.textAlign === 'left' ? 'left' : (t.textAlign === 'right' ? 'right' : 'center'),
-                originY: 'center',
+                originY: 'top', // Força ancoragem no topo para crescer para baixo
                 fontFamily: t.fontFamily || 'Plus Jakarta Sans',
                 fontSize: fontSize,
                 fontWeight: t.fontWeight || 'bold',
@@ -462,15 +472,20 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
             });
             
             if (t.textAlign === 'left') {
-                textObj.left = W * 0.1; // Margem de 10%
+                textObj.left = W * 0.1;
             }
 
             canvas.add(textObj);
+            
+            // Atualiza o Y com a altura real que o texto ocupou (lidando com quebras de linha)
+            flowY += textObj.getScaledHeight();
         });
     }
 
-    // 4. Badges (Selos Geométricos)
+    // 4. Badges (Selos Geométricos) - Colocado logo abaixo do Body Text para evitar sobreposição
     if (layout.badges && layout.badges.length > 0) {
+        flowY += 30; // Margem acima do selo
+        
         layout.badges.forEach(b => {
             const bWidth = W * (b.widthRatio || 0.2);
             const bHeight = H * (b.heightRatio || 0.05);
@@ -495,12 +510,14 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
             });
             
             const group = new fabric.Group([rect, label], {
-                left: W * (b.position.x || 0.8),
-                top: H * (b.position.y || 0.2),
+                left: W / 2, // Centraliza obrigatoriamente
+                top: flowY,
                 originX: 'center',
-                originY: 'center'
+                originY: 'top' // Ancora no topo para fluir
             });
+            
             canvas.add(group);
+            flowY += group.getScaledHeight() + 15;
         });
     }
 
