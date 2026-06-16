@@ -377,7 +377,6 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                         const scale = targetW / img.width;
                         
                         img.set({
-                        img.set({
                             originX: 'center',
                             originY: 'bottom',
                             left: W * (layout.productImage.position.x || 0.5),
