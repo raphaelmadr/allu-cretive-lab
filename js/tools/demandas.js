@@ -353,9 +353,10 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         let match = apiProds.find(p => creative.productName.toLowerCase().includes(p.name.toLowerCase()));
         if (!match) match = apiProds.find(p => p.name.toLowerCase().includes('iphone')); // fallback para iphone se nao achar
         
-        if (match && match.images && match.images.length > 0) {
+        if (match && (match.local_img || match.img)) {
+            const imgSrc = (match.local_img && match.local_img.startsWith('./')) ? match.local_img.substring(2) : (match.local_img || match.img);
             await new Promise(resolve => {
-                fabric.Image.fromURL(match.images[0], (img) => {
+                fabric.Image.fromURL(imgSrc, (img) => {
                     if (img) {
                         const targetW = W * (layout.productImage.scalePercent || 0.6);
                         const scale = targetW / img.width;
