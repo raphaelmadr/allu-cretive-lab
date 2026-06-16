@@ -344,20 +344,28 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         }
     }
 
-    // 1.5 Logo da Allu
-    const logoColor = (layout.background && layout.background.type === 'solid' && (layout.background.color1.toLowerCase() === '#000000' || layout.background.color1.toLowerCase() === '#1d1d1f' || layout.background.color1.toLowerCase() === '#161617')) ? '#ffffff' : '#1D1D1F';
-    const logoText = new fabric.IText("allu.", {
-        left: W / 2,
-        top: H * 0.06,
-        originX: 'center',
-        originY: 'center',
-        fontFamily: 'Plus Jakarta Sans',
-        fontSize: Math.max(H * 0.035, 24),
-        fontWeight: '900',
-        fill: logoColor
+    // 1.5 Logo da Allu (SVG Oficial)
+    const isDarkBgForLogo = (layout.background && layout.background.type === 'solid' && (layout.background.color1.toLowerCase() === '#000000' || layout.background.color1.toLowerCase() === '#1d1d1f' || layout.background.color1.toLowerCase() === '#161617'));
+    const logoSrc = isDarkBgForLogo ? './assets/logos/Primario.svg' : './assets/logos/Primario-2.svg';
+    
+    await new Promise(resolve => {
+        fabric.Image.fromURL(logoSrc, (img) => {
+            if (img) {
+                const targetW = Math.max(W * 0.12, 70);
+                const scale = targetW / img.width;
+                img.set({
+                    left: W / 2,
+                    top: H * 0.06,
+                    originX: 'center',
+                    originY: 'center',
+                    scaleX: scale,
+                    scaleY: scale
+                });
+                canvas.add(img);
+            }
+            resolve();
+        });
     });
-    logoText.setSelectionStyles({ fill: '#27AE60' }, 0, 4); // O ponto final verde
-    canvas.add(logoText);
 
     // 2. Product Image
     if (layout.productImage && creative.productName) {
@@ -380,7 +388,7 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                             originX: 'center',
                             originY: 'bottom',
                             left: W * (layout.productImage.position.x || 0.5),
-                            top: H * (layout.productImage.position.y || 0.95),
+                            top: H * 1.0, // FORÇA NA BASE: 100% da altura da imagem para liberar todo o topo
                             scaleX: scale,
                             scaleY: scale,
                             angle: layout.productImage.rotation || 0
