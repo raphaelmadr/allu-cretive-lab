@@ -402,7 +402,7 @@ export function renderPropertiesTools(sidebarContent) {
     let currentFontSize = 100;
     let isGroup = active.type === 'group';
 
-    if (active.type === 'i-text' || active.type === 'text') {
+    if (active.type === 'i-text' || active.type === 'text' || active.type === 'textbox') {
         currentColor = active.fill || '#ffffff';
         currentBg = active.backgroundColor || '#000000';
         currentBorder = active.stroke || '#000000';
@@ -413,7 +413,7 @@ export function renderPropertiesTools(sidebarContent) {
             currentBg = bgRect.fill || '#161617';
             currentBorder = bgRect.stroke || '#000000';
         }
-        const firstText = active.getObjects().find(o => o.type === 'text' || o.type === 'i-text');
+        const firstText = active.getObjects().find(o => o.type === 'text' || o.type === 'i-text' || o.type === 'textbox');
         if (firstText) currentColor = firstText.fill;
         currentFontSize = 100; 
     } else {
@@ -443,7 +443,7 @@ export function renderPropertiesTools(sidebarContent) {
                 <div id="prop-text-color-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:8px;"></div>
             </div>
 
-            ${(active.type !== 'i-text' && active.type !== 'text') ? `
+            ${(active.type !== 'i-text' && active.type !== 'text' && active.type !== 'textbox') ? `
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <label style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Cor do Fundo</label>
                 ${generateColorSwatches('bg', currentBg)}
@@ -458,7 +458,7 @@ export function renderPropertiesTools(sidebarContent) {
     `;
 
     let textEffectsHTML = '';
-    if (active.type === 'i-text' || active.type === 'text') {
+    if (active.type === 'i-text' || active.type === 'text' || active.type === 'textbox') {
         const hasShadow = !!active.shadow;
         const shadowBlur = active.shadow ? active.shadow.blur : 10;
         const shadowOffsetX = active.shadow ? active.shadow.offsetX : 5;
@@ -793,7 +793,7 @@ export function renderPropertiesTools(sidebarContent) {
     }
 
     // Wiring Text Effects
-    if (active.type === 'i-text' || active.type === 'text') {
+    if (active.type === 'i-text' || active.type === 'text' || active.type === 'textbox') {
         const charSpacingInput = div.querySelector('#prop-char-spacing');
         const charSpacingVal = div.querySelector('#prop-char-spacing-val');
         if (charSpacingInput) {
@@ -932,7 +932,7 @@ export function renderPropertiesTools(sidebarContent) {
     const initialFontSizes = new Map();
     if (isGroup) {
         active.getObjects().forEach(o => {
-            if (o.type === 'text' || o.type === 'i-text') initialFontSizes.set(o, o.fontSize);
+            if (o.type === 'text' || o.type === 'i-text' || o.type === 'textbox') initialFontSizes.set(o, o.fontSize);
         });
     }
 
@@ -940,12 +940,12 @@ export function renderPropertiesTools(sidebarContent) {
         const val = parseInt(e.target.value);
         sizeVal.innerText = val + (isGroup ? '%' : 'px');
         
-        if (active.type === 'i-text' || active.type === 'text') {
+        if (active.type === 'i-text' || active.type === 'text' || active.type === 'textbox') {
             active.set('fontSize', val);
         } else if (isGroup) {
             const scaleFactor = val / 100;
             active.getObjects().forEach(o => {
-                if ((o.type === 'text' || o.type === 'i-text') && initialFontSizes.has(o)) {
+                if ((o.type === 'text' || o.type === 'i-text' || o.type === 'textbox') && initialFontSizes.has(o)) {
                     o.set('fontSize', initialFontSizes.get(o) * scaleFactor);
                 }
             });
@@ -955,7 +955,7 @@ export function renderPropertiesTools(sidebarContent) {
     };
 
     const applyColor = (type, hex) => {
-        if (active.type === 'i-text' || active.type === 'text') {
+        if (active.type === 'i-text' || active.type === 'text' || active.type === 'textbox') {
             if (type === 'text') active.set('fill', hex === 'transparent' ? '' : hex);
             if (type === 'bg') active.set('backgroundColor', hex === 'transparent' ? '' : hex);
             if (type === 'border') {
@@ -965,7 +965,7 @@ export function renderPropertiesTools(sidebarContent) {
         } else if (isGroup) {
             if (type === 'text') {
                 active.getObjects().forEach(o => {
-                    if (o.type === 'text' || o.type === 'i-text') o.set('fill', hex === 'transparent' ? '' : hex);
+                    if (o.type === 'text' || o.type === 'i-text' || o.type === 'textbox') o.set('fill', hex === 'transparent' ? '' : hex);
                 });
             }
             if (type === 'bg' || type === 'border') {
