@@ -14,7 +14,7 @@
         },
         "productImage": {
           "scalePercent": 0.8,
-          "position": { "x": 0.5, "y": 0.5 },
+          "position": { "x": 0.5, "y": 0.95 },
           "rotation": 0
         },
         "texts": [
@@ -23,15 +23,13 @@
             "fontFamily": "Plus Jakarta Sans",
             "fontWeight": "800",
             "fill": "#FFFFFF",
-            "fontSizeRatio": 0.08,
+            "fontSizeRatio": 0.046,
             "position": { "x": 0.5, "y": 0.15 },
             "textAlign": "center",
             "richTextTemplate": "**iPhone 16** a partir de R$10",
             "highlightColor": "#27AE60",
             "effects": {
-              "innerShadow": true,
-              "innerShadowColor": "rgba(255,255,255,0.4)",
-              "innerShadowBlur": 5
+              "innerShadow": false
             }
           },
           {
@@ -39,7 +37,7 @@
             "fontFamily": "Plus Jakarta Sans",
             "fontWeight": "400",
             "fill": "#AAAAAA",
-            "fontSizeRatio": 0.04,
+            "fontSizeRatio": 0.02,
             "position": { "x": 0.5, "y": 0.25 },
             "textAlign": "center"
           },
