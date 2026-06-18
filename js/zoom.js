@@ -21,17 +21,28 @@ function getActivePreset() {
  * Aplica o zoom centralizando no ponto `anchor` (coordenadas de tela clientX/clientY).
  * Se `anchor` for 'center', centraliza o zoom no canvas ativo.
  */
+function getCanvasLogical(canvas) {
+    // Use per-canvas stored dimensions (set by generateFourFormats / carousel)
+    // Fallback to active preset for single-canvas mode
+    if (canvas.originalW && canvas.originalH) {
+        return { w: canvas.originalW, h: canvas.originalH };
+    }
+    return getActivePreset();
+}
+
 function applyZoom(newScale, anchor) {
     if (state.canvases.length === 0) return;
     newScale = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, newScale));
 
     const wrapper = document.getElementById('canvas-wrapper');
-    const { w, h } = getActivePreset();
+
+    // Max logical width across all canvases — used for centering the wrapper
+    const maxLogicalW = Math.max(...state.canvases.map(c => getCanvasLogical(c).w));
 
     if (wrapper) {
         const currentScale = state.canvases[0].getZoom();
         const wrapperRect = wrapper.getBoundingClientRect();
-        
+
         let pt = null;
         if (anchor && anchor !== 'center') {
             pt = anchor;
@@ -65,26 +76,27 @@ function applyZoom(newScale, anchor) {
         const xInContent = wrapper.scrollLeft + pt.clientX - wrapperRect.left - currentPaddingLeft;
         const yInContent = wrapper.scrollTop + pt.clientY - wrapperRect.top - currentPaddingTop;
 
-        // 3. Aplicar dimensões e zoom em todos os canvases
+        // 3. Aplicar dimensões e zoom em cada canvas usando suas próprias dimensões lógicas
         state.canvases.forEach(canvas => {
+            const { w: cw, h: ch } = getCanvasLogical(canvas);
             canvas.setDimensions(
-                { width: w * newScale, height: h * newScale },
+                { width: cw * newScale, height: ch * newScale },
                 { backstoreOnly: false }
             );
             canvas.setZoom(newScale);
 
             const container = canvas.getElement().parentNode;
-            container.style.width  = Math.round(w * newScale) + 'px';
-            container.style.height = Math.round(h * newScale) + 'px';
+            container.style.width  = Math.round(cw * newScale) + 'px';
+            container.style.height = Math.round(ch * newScale) + 'px';
 
-            drawSafeGuides(canvas, w, h, newScale);
+            drawSafeGuides(canvas, cw, ch, newScale);
             canvas.renderAll();
         });
 
-        // 4. Calcular o novo padding horizontal dinâmico
-        const canvasWidth = Math.round(w * newScale);
+        // 4. Calcular o novo padding horizontal dinâmico baseado no canvas mais largo
+        const canvasWidth = Math.round(maxLogicalW * newScale);
         const newPaddingLeft = Math.max(100, Math.round((wrapper.clientWidth - canvasWidth) / 2));
-        
+
         wrapper.style.paddingLeft = `${newPaddingLeft}px`;
         wrapper.style.paddingRight = `${newPaddingLeft}px`;
         wrapper.style.paddingTop = '100px';
@@ -101,15 +113,16 @@ function applyZoom(newScale, anchor) {
     } else {
         // Fallback sem wrapper
         state.canvases.forEach(canvas => {
+            const { w: cw, h: ch } = getCanvasLogical(canvas);
             canvas.setDimensions(
-                { width: w * newScale, height: h * newScale },
+                { width: cw * newScale, height: ch * newScale },
                 { backstoreOnly: false }
             );
             canvas.setZoom(newScale);
             const container = canvas.getElement().parentNode;
-            container.style.width  = Math.round(w * newScale) + 'px';
-            container.style.height = Math.round(h * newScale) + 'px';
-            drawSafeGuides(canvas, w, h, newScale);
+            container.style.width  = Math.round(cw * newScale) + 'px';
+            container.style.height = Math.round(ch * newScale) + 'px';
+            drawSafeGuides(canvas, cw, ch, newScale);
             canvas.renderAll();
         });
     }
@@ -134,14 +147,13 @@ function stepZoomOut(anchor) {
 function fitToScreen() {
     const wrapper = document.getElementById('canvas-wrapper');
     if (!wrapper || state.canvases.length === 0) return;
-    const { w, h } = getActivePreset();
+    // Use widest canvas width for horizontal fit; no vertical constraint (user can scroll)
+    const maxW = Math.max(...state.canvases.map(c => getCanvasLogical(c).w));
     const padding = 120;
     const scale = Math.min(
-        (wrapper.clientWidth  - padding) / w,
-        (wrapper.clientHeight - padding) / h,
+        (wrapper.clientWidth - padding) / maxW,
         1
     );
-    // Fit centraliza — não usa âncora
     applyZoom(scale, 'center');
 }
 
