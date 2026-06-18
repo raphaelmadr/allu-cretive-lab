@@ -2,6 +2,128 @@ import { state } from '../state.js';
 import { carousel } from '../carousel.js';
 import { presets } from '../config.js';
 
+// =====================================================================
+// ALLU BRAND LAYOUT ENGINE
+// Motor determinístico de layout baseado no Repertório Visual da allu.
+// Não depende de IA — garante output 100% fiel à identidade da marca.
+// =====================================================================
+
+function isColorDark(hex) {
+    if (!hex || !hex.startsWith('#') || hex.length < 7) return false;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return (0.299 * r + 0.587 * g + 0.114 * b) < 128;
+}
+
+function fuzzyMatchProduct(productName, products) {
+    if (!productName || !products || !products.length) return null;
+    const normalize = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9\s]/g, '');
+    const query = normalize(productName);
+    const words = query.split(/\s+/).filter(w => w.length > 2);
+    let best = null, bestScore = 0;
+    for (const p of products) {
+        const name = normalize(p.name || '');
+        const score = words.reduce((acc, w) => acc + (name.includes(w) ? 1 : 0), 0);
+        if (score > bestScore) { bestScore = score; best = p; }
+    }
+    return bestScore >= 1 ? best : null;
+}
+
+function detectProductScale(productName) {
+    const n = (productName || '').toLowerCase();
+    if (/watch|forerunner|fenix|vivoactive|vivosmart|band|pulseira|galaxy watch|apple watch/.test(n)) return 0.62;
+    if (/airpods|fone|headphone|earbuds|buds|wh-|wf-|soundlink|charge|flip|boombox|caixa/.test(n)) return 0.60;
+    if (/macbook|notebook|laptop|predator|rog|helios|ideapad|thinkpad|aspire|vivobook/.test(n)) return 0.82;
+    if (/ipad|tab s|galaxy tab|surface/.test(n)) return 0.76;
+    if (/drone|dji/.test(n)) return 0.65;
+    if (/tv |monitor|tela/.test(n)) return 0.80;
+    return 0.72;
+}
+
+function detectBackground(creative) {
+    const all = ((creative.hook || '') + ' ' + (creative.body || '') + ' ' + (creative.productName || '')).toLowerCase();
+    if (/iphone\s*(1[5-9]|[2-9]\d)/.test(all)) {
+        return { type: 'linear_gradient', color1: '#1D1D1F', color2: '#2C2C2C', gradientAngle: 180 };
+    }
+    return { type: 'solid', color1: '#F5F5F7' };
+}
+
+function buildBrandLayout(creative, formatConfig) {
+    const W = formatConfig.w;
+    const H = formatConfig.h;
+    const isStories = H / W > 1.5;
+    const isHorizontal = W > H;
+
+    const bg = detectBackground(creative);
+    const isDark = bg.type !== 'solid' || isColorDark(bg.color1);
+    const productScale = detectProductScale(creative.productName);
+
+    const hook = creative.hook || '';
+    const hookLen = hook.replace(/\*\*/g, '').replace(/\n/g, ' ').length;
+
+    // Tamanho alvo em px por formato, escalado pelo comprimento do hook
+    const hookTargetPx = isHorizontal ? 54 : isStories ? 68 : 50;
+    const fontScale = hookLen <= 35 ? 1.20 : hookLen <= 55 ? 1.05 : hookLen <= 80 ? 1.00 : hookLen <= 110 ? 0.85 : 0.70;
+    const hookFontSizeRatio = (hookTargetPx / H) * fontScale;
+    const bodyFontSizeRatio = isHorizontal ? 28 / H : isStories ? 26 / H : 22 / H;
+
+    let cfg;
+    if (isHorizontal) {
+        cfg = {
+            hookPos: { x: 0.22, y: 0.18 }, hookAlign: 'left',
+            bodyPos: { x: 0.22, y: 0.58 }, bodyAlign: 'left',
+            ctaPos: { x: 0.22, y: 0.75 }, ctaAlign: 'left',
+            productPos: { x: 0.72, y: 0.50 }, productScale: productScale * 1.4,
+            badgePos: { x: 0.87, y: 0.62 }
+        };
+    } else {
+        cfg = {
+            hookPos: { x: 0.5, y: isStories ? 0.10 : 0.14 }, hookAlign: 'center',
+            bodyPos: { x: 0.5, y: isStories ? 0.26 : 0.30 }, bodyAlign: 'center',
+            ctaPos: { x: 0.5, y: isStories ? 0.36 : 0.42 }, ctaAlign: 'center',
+            productPos: { x: 0.5, y: 0.95 }, productScale: isStories ? productScale * 0.92 : productScale,
+            badgePos: { x: 0.77, y: isStories ? 0.62 : 0.65 }
+        };
+    }
+
+    return {
+        background: bg,
+        productImage: { scalePercent: cfg.productScale, position: cfg.productPos, rotation: 0 },
+        texts: [
+            {
+                role: 'hook', fontFamily: 'Plus Jakarta Sans', fontWeight: '800',
+                fill: isDark ? '#FFFFFF' : '#1D1D1F',
+                fontSizeRatio: hookFontSizeRatio,
+                position: cfg.hookPos, textAlign: cfg.hookAlign,
+                richTextTemplate: hook, highlightColor: '#27AE60',
+                effects: { innerShadow: false }
+            },
+            {
+                role: 'body', fontFamily: 'Plus Jakarta Sans', fontWeight: '400',
+                fill: isDark ? 'rgba(255,255,255,0.72)' : '#828392',
+                fontSizeRatio: bodyFontSizeRatio,
+                position: cfg.bodyPos, textAlign: cfg.bodyAlign,
+                effects: { innerShadow: false }
+            },
+            {
+                role: 'cta', fontFamily: 'Plus Jakarta Sans', fontWeight: '800',
+                fill: '#FFFFFF', fontSizeRatio: isHorizontal ? 40 / H : 0.025,
+                position: cfg.ctaPos, textAlign: cfg.ctaAlign,
+                effects: { innerShadow: false }
+            }
+        ],
+        badges: [{
+            type: 'info', text: 'novidade na allu.',
+            position: cfg.badgePos,
+            widthRatio: 0.22, heightRatio: 0.055, borderRadius: 100,
+            backgroundColor: isDark ? '#F5F5F7' : '#1D1D1F',
+            textColor: isDark ? '#1D1D1F' : '#FFFFFF',
+            fontSizeRatio: 0.018, fontWeight: 'bold', textAlign: 'center'
+        }]
+    };
+}
+
 export function renderDemandasTools(sidebarContent) {
     const div = document.createElement('div');
     div.className = 'animate-fade';
@@ -209,105 +331,27 @@ async function generateFourFormats(creative) {
     }
     
     carousel.switchPage(0);
-    notifications.toast('🤖 Smart Picker: Puxando layout da base de dados histórica...', 'info');
+    notifications.toast('⚡ Aplicando layout da marca...', 'info');
 
-    // 2. Carregar a Knowledge Base (Design System)
-    let aiLayout = null;
-    let hasApiError = false;
-    let errorMessage = '';
+    // Garantir CTA padrão caso não venha na demanda
+    creative.cta = creative.cta || 'Assina agora';
 
-    let baseFilename = creative.filename || '';
-    if(baseFilename.endsWith('.png')) baseFilename = baseFilename.slice(0, -4);
-    if(baseFilename.endsWith('.jpg')) baseFilename = baseFilename.slice(0, -4);
-    
-    // Tentar ler da Knowledge Base Rápida
-    try {
-        const dbResp = await fetch('assets/design_system.json');
-        if (dbResp.ok) {
-            const knowledgeBase = await dbResp.json();
-            const availableStyles = Object.keys(knowledgeBase);
-            
-            if (availableStyles.length > 0) {
-                // 1. Tentar match exato
-                if (knowledgeBase[baseFilename] && knowledgeBase[baseFilename].formats['']) {
-                    aiLayout = knowledgeBase[baseFilename].formats[''];
-                    console.log("[Smart Picker] Estilo exato encontrado:", baseFilename);
-                } else {
-                    // 2. Tentar match parcial pelo nome do produto
-                    const productStr = (creative.productName || creative.product || creative.name || '').toLowerCase().split(' ')[0];
-                    let matchedStyle = availableStyles.find(style => style.toLowerCase().includes(productStr));
-                    
-                    // Se não houver match na base local, não faça fallback aleatório. Deixe para a IA gerar!
-                    if (matchedStyle && knowledgeBase[matchedStyle] && knowledgeBase[matchedStyle].formats['']) {
-                        aiLayout = knowledgeBase[matchedStyle].formats[''];
-                        console.log(`[Smart Picker] Estilo exato encontrado: ${matchedStyle}`);
-                    } else {
-                        console.log(`[Smart Picker] Estilo não encontrado localmente. Acionando IA.`);
-                    }
-                }
-            }
-        }
-    } catch (e) {
-        console.log("Knowledge base local não encontrada ou erro:", e);
-    }
-
-    // Se a IA falhou em achar qualquer coisa no banco local, vamos GERAR dinamicamente!
-    if (!aiLayout) {
-        notifications.toast('✨ Gerando layout dinâmico com IA... Aguarde.', 'info');
-        try {
-            const response = await fetch('/api/generate-from-notion', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ creativeData: creative, dimensions: { w: 1080, h: 1080 } })
-            });
-            
-            if (response.ok) {
-                aiLayout = await response.json();
-                hasApiError = false;
-                errorMessage = '';
-                notifications.toast('✅ Layout gerado com sucesso pela IA!', 'success');
-            } else {
-                const errData = await response.json();
-                throw new Error(errData.error || 'Falha no endpoint generate-from-notion');
-            }
-        } catch (e) {
-            hasApiError = true;
-            errorMessage = e.message;
-        }
-    }
-
-    // Se falhou e for API Key faltando
-    if (hasApiError) {
-        if (errorMessage.includes('GEMINI_API_KEY')) {
-            await notifications.alert("Falta de Configuração ⚠️", "A Inteligência Artificial precisa da chave 'GEMINI_API_KEY' na Vercel para funcionar. Configure lá e rode um novo Deploy!");
-        } else {
-            await notifications.alert("Falha na IA ❌", "A IA não conseguiu gerar o layout dinâmico. Motivo: " + errorMessage);
-        }
-        
-        // Limpar Skeletons e abortar para não renderizar nada zoado
-        for (let i = 0; i < targetFormats.length; i++) {
-            let currentCanvas = state.canvases[i];
-            currentCanvas.clear();
-            currentCanvas.backgroundColor = '#ffffff';
-            currentCanvas.renderAll();
-        }
-        return; // Aborta a continuação do script
-    }
-
-    // 4. Limpar Skeletons e Montar os 4 quadros finais (Sucesso)
+    // 2. Limpar Skeletons e Montar os 4 quadros com layout da marca
     for (let i = 0; i < targetFormats.length; i++) {
         let currentCanvas = state.canvases[i];
         currentCanvas.clear();
         currentCanvas.backgroundColor = '#ffffff';
 
-        await renderAILayout(currentCanvas, aiLayout, targetFormats[i], creative);
-        
+        // Layout determinístico por formato — sem IA, 100% fiel ao design system
+        const formatLayout = buildBrandLayout(creative, targetFormats[i]);
+        await renderAILayout(currentCanvas, formatLayout, targetFormats[i], creative);
+
         if (i === targetFormats.length - 1) {
             resizeCanvas();
         }
     }
-    
-    notifications.toast('Processo finalizado!', 'success');
+
+    notifications.toast('✅ Criativos gerados!', 'success');
 }
 
 async function renderAILayout(canvas, layout, formatConfig, creative) {
@@ -344,15 +388,13 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         }
     }
 
-    // 1.5 Logo da Allu (SVG Oficial)
+    // 1.5 Logo da Allu (SVG Oficial) — detecção por luminância, não por hex exato
     const isDarkBgForLogo = layout.background && (
-        layout.background.color1.toLowerCase() === '#000000' || 
-        layout.background.color1.toLowerCase() === '#1d1d1f' || 
-        layout.background.color1.toLowerCase() === '#161617' ||
-        layout.background.color1.toLowerCase() === '#2c2c2c'
+        layout.background.type !== 'solid' ||
+        isColorDark(layout.background.color1 || '#ffffff')
     );
     const logoSrc = isDarkBgForLogo ? './assets/logos/Primario.svg' : './assets/logos/Primario-2.svg';
-    
+
     await new Promise(resolve => {
         fabric.Image.fromURL(logoSrc, (img) => {
             if (img) {
@@ -364,7 +406,9 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                     originX: 'center',
                     originY: 'center',
                     scaleX: scale,
-                    scaleY: scale
+                    scaleY: scale,
+                    selectable: true,
+                    evented: true
                 });
                 canvas.add(img);
             }
@@ -393,13 +437,15 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
             
             const { plainText, styles } = parseMarkdownToFabric(textContent, t.fill || '#0F190A', t.highlightColor || t.fill || '#0F190A', t.fontWeight || '400');
             
+            const isHoriz = W > H;
+
             if (t.role === 'cta') {
-                const btnWidth = W * 0.45;
+                const btnWidth = isHoriz ? W * 0.32 : W * 0.45;
                 const btnHeight = Math.max(H * 0.07, 50);
-                const isDarkBg = (layout.background && layout.background.type === 'solid' && (layout.background.color1.toLowerCase() === '#000000' || layout.background.color1.toLowerCase() === '#1d1d1f' || layout.background.color1.toLowerCase() === '#161617'));
+                const isDarkBg = isColorDark(layout.background?.color1 || '#ffffff') || layout.background?.type !== 'solid';
                 const btnFill = isDarkBg ? '#ffffff' : '#1D1D1F';
                 const textFill = isDarkBg ? '#1D1D1F' : '#ffffff';
-                
+
                 const rect = new fabric.Rect({
                     width: btnWidth,
                     height: btnHeight,
@@ -409,7 +455,8 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                     originX: 'center',
                     originY: 'center'
                 });
-                const btnText = new fabric.Text(plainText, {
+                const arrowText = plainText.includes('→') ? plainText : plainText + ' →';
+                const btnText = new fabric.Text(arrowText, {
                     fontFamily: t.fontFamily || 'Plus Jakarta Sans',
                     fontSize: btnHeight * 0.35,
                     fontWeight: '800',
@@ -417,14 +464,17 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                     originX: 'center',
                     originY: 'center'
                 });
+                const ctaLeft = isHoriz ? W * 0.22 : W * (t.position?.x || 0.5);
                 const group = new fabric.Group([rect, btnText], {
-                    left: W * (t.position.x || 0.5),
-                    top: flowY + (btnHeight / 2) + 20, // Na ordem do fluxo, logo abaixo do texto
-                    originX: 'center',
-                    originY: 'center'
+                    left: ctaLeft,
+                    top: flowY + (btnHeight / 2) + 20,
+                    originX: isHoriz ? 'left' : 'center',
+                    originY: 'center',
+                    selectable: true,
+                    evented: true
                 });
                 canvas.add(group);
-                flowY += btnHeight + 40; // Atualiza o fluxo
+                flowY += btnHeight + 40;
                 return;
             }
 
@@ -432,61 +482,81 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
             const textMarginTop = t.role === 'hook' ? 30 : 20;
             flowY += textMarginTop;
 
+            const textWidth = isHoriz ? W * 0.38 : W * 0.82;
+            const textLeft = isHoriz ? W * 0.10 : W * (t.position?.x || 0.5);
+            const originX = isHoriz ? 'left' : (t.textAlign === 'right' ? 'right' : 'center');
+
             const textObj = new fabric.Textbox(plainText, {
-                width: W * 0.8,
-                left: W * (t.position.x || 0.5),
+                width: textWidth,
+                left: textLeft,
                 top: flowY,
-                originX: t.textAlign === 'left' ? 'left' : (t.textAlign === 'right' ? 'right' : 'center'),
-                originY: 'top', // Força ancoragem no topo para crescer para baixo
+                originX: originX,
+                originY: 'top',
                 fontFamily: t.fontFamily || 'Plus Jakarta Sans',
                 fontSize: fontSize,
                 fontWeight: t.fontWeight || 'bold',
                 fill: t.fill || '#0F190A',
-                textAlign: t.textAlign || 'center',
+                textAlign: isHoriz ? 'left' : (t.textAlign || 'center'),
                 styles: styles,
-                shadow: null // Removendo sombras para garantir design flat conforme solicitado
+                shadow: null,
+                selectable: true,
+                evented: true
             });
-            
-            if (t.textAlign === 'left') {
-                textObj.left = W * 0.1;
-            }
 
             canvas.add(textObj);
-            
-            // Atualiza o Y com a altura real que o texto ocupou (lidando com quebras de linha)
             flowY += textObj.getScaledHeight();
         });
     }
 
-    // 4. Product Image (Renderizado dinamicamente após o fluxo de texto)
-    let productTopY = flowY + 20; // Default: Logo abaixo do último elemento (CTA ou Texto)
-    
+    // 4. Product Image — match fuzzy + posicionamento por formato
+    const isHorizontalCanvas = W > H;
+    let productTopY = flowY + 20;
+
     if (layout.productImage && creative.productName) {
         const apiProds = window.alluProducts || [];
-        let match = apiProds.find(p => creative.productName.toLowerCase().includes(p.name.toLowerCase()));
-        if (!match) match = apiProds.find(p => p.name.toLowerCase().includes('iphone')); 
-        
+        const match = fuzzyMatchProduct(creative.productName, apiProds);
+
         if (match && (match.local_img || match.img)) {
-            const imgSrc = (match.local_img && match.local_img.startsWith('./')) ? match.local_img.substring(2) : (match.local_img || match.img);
+            const imgSrc = (match.local_img && match.local_img.startsWith('./'))
+                ? match.local_img.substring(2)
+                : (match.local_img || match.img);
+
             await new Promise(resolve => {
                 fabric.Image.fromURL(imgSrc, (img) => {
                     if (img) {
-                        // Se o fluxo terminou muito em cima, definimos um limite razoável (ex: 45% da tela)
-                        let finalTopY = Math.max(productTopY, H * 0.45);
-                        productTopY = finalTopY; // Atualiza para o selo usar
-                        
                         const targetW = W * (layout.productImage.scalePercent || 0.6);
                         const scale = targetW / img.width;
-                        
-                        img.set({
-                            originX: 'center',
-                            originY: 'top',
-                            left: W * (layout.productImage.position.x || 0.5),
-                            top: finalTopY, // Posição calculada com precisão para não engolir o texto nem desaparecer
-                            scaleX: scale,
-                            scaleY: scale,
-                            angle: layout.productImage.rotation || 0
-                        });
+
+                        if (isHorizontalCanvas) {
+                            // Horizontal: produto centralizado na metade direita
+                            img.set({
+                                originX: 'center',
+                                originY: 'center',
+                                left: W * (layout.productImage.position?.x || 0.72),
+                                top: H * 0.50,
+                                scaleX: scale,
+                                scaleY: scale,
+                                angle: layout.productImage.rotation || 0,
+                                selectable: true,
+                                evented: true
+                            });
+                            productTopY = H * 0.30; // referência para o badge no horizontal
+                        } else {
+                            // Vertical: produto na base, abaixo do fluxo de texto
+                            let finalTopY = Math.max(productTopY, H * 0.45);
+                            productTopY = finalTopY;
+                            img.set({
+                                originX: 'center',
+                                originY: 'top',
+                                left: W * (layout.productImage.position?.x || 0.5),
+                                top: finalTopY,
+                                scaleX: scale,
+                                scaleY: scale,
+                                angle: layout.productImage.rotation || 0,
+                                selectable: true,
+                                evented: true
+                            });
+                        }
                         canvas.add(img);
                     }
                     resolve();
@@ -495,23 +565,23 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
         }
     }
 
-    // 5. Badges (Selos Geométricos) - Posicionamento relativo ao produto
+    // 5. Badges — posição absoluta via b.position.y (respeitado agora)
     if (layout.badges && layout.badges.length > 0) {
         layout.badges.forEach(b => {
             const bWidth = W * (b.widthRatio || 0.2);
             const bHeight = H * (b.heightRatio || 0.05);
-            
+
             const rect = new fabric.Rect({
                 width: bWidth,
                 height: bHeight,
-                fill: b.backgroundColor || '#27AE60',
-                rx: b.borderRadius || 0,
-                ry: b.borderRadius || 0,
+                fill: b.backgroundColor || '#1D1D1F',
+                rx: b.borderRadius || 20,
+                ry: b.borderRadius || 20,
                 originX: 'center',
                 originY: 'center'
             });
-            
-            const label = new fabric.IText(b.text || "SELO", {
+
+            const label = new fabric.IText(b.text || 'allu.', {
                 fontFamily: 'Plus Jakarta Sans',
                 fontSize: H * (b.fontSizeRatio || 0.02),
                 fontWeight: b.fontWeight || 'bold',
@@ -519,14 +589,19 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
                 originX: 'center',
                 originY: 'center'
             });
-            
+
+            // Usa b.position.y se definido; caso contrário, flutua ao lado do produto
+            const badgeTop = b.position?.y ? H * b.position.y : productTopY + 50;
+
             const group = new fabric.Group([rect, label], {
-                left: W * (b.position.x || 0.75), 
-                top: productTopY + 50,  // Flutuando perfeitamente ao lado do produto
+                left: W * (b.position?.x || 0.77),
+                top: badgeTop,
                 originX: 'center',
-                originY: 'center'
+                originY: 'center',
+                selectable: true,
+                evented: true
             });
-            
+
             canvas.add(group);
         });
     }

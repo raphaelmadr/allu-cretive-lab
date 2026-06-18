@@ -7,23 +7,29 @@ export default async function handler(req, res) {
 
     const { rawText } = req.body;
 
-    const prompt = `Você é um Copywriter Sênior da Allu.
-Sua missão é pegar esse texto bruto copiado de uma tabela do Notion e estruturá-lo em JSON.
-O texto provavelmente contém um Hook (Título chamativo), um Body (Texto descritivo / argumentos) e um CTA (Chamada para Ação).
-Além disso, identifique qual PRODUTO o anúncio está vendendo (ex: "iPhone 16", "S24 Ultra", "Macbook Air M2").
-Se houver palavras que merecem DESTAQUE visual (como o nome do produto ou uma dor forte), coloque essas palavras em **negrito** (Markdown).
+    const prompt = `Você é um Copywriter Sênior da Allu — marca de assinatura de eletrônicos.
+Sua missão: pegar o texto bruto abaixo e estruturá-lo em JSON.
+
+REGRAS:
+1. "hook" = a frase mais chamativa e impactante (max 2 linhas). Separe linhas com \\n.
+2. "body" = texto descritivo com nome do produto e preço por mês. Ex: "Smartwatch Garmin Forerunner 165 na allu.\\nA partir de R$170,91/mês."
+3. "cta" = a chamada para ação. Se não houver, use "Assina agora".
+4. "productName" = nome comercial exato do produto (ex: "iPhone 17 256GB", "Garmin Forerunner 165 Music").
+5. No campo "hook", coloque em **negrito** (Markdown) a palavra ou frase que representa a DOR ou o BENEFÍCIO mais forte.
+   Exemplos de destaque: "Você treina.\\n**Seu relógio não acompanha.**" / "**Todo mundo trocou** de celular. Menos você."
+6. Preserve quebras de linha originais no hook se fizerem sentido visual.
 
 TEXTO BRUTO:
 """
 ${rawText}
 """
 
-Retorne APENAS um JSON válido no seguinte formato:
+Retorne APENAS JSON válido:
 {
-  "hook": "Sua chance de ter um **iPhone**",
-  "body": "Não fique preso em contratos longos. Assine hoje mesmo.",
-  "cta": "Assinar agora",
-  "productName": "iPhone 17"
+  "hook": "Você treina.\\n**Seu relógio não acompanha.**",
+  "body": "Smartwatch Garmin Forerunner 165 Music na allu.\\nA partir de R$170,91/mês.",
+  "cta": "Assina agora",
+  "productName": "Garmin Forerunner 165 Music"
 }`;
 
     try {
