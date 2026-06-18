@@ -15,19 +15,26 @@ export function renderProductsTools(sidebarContent) {
         if (!products || products.length === 0) {
             return `<div style="text-align:center; padding:20px; color:var(--text-secondary); font-size:0.8rem;">Nenhum produto encontrado.</div>`;
         }
-        
+
         const toShow = products.slice(0, limit);
         let listHTML = '<div id="products-list" class="preset-grid">';
         toShow.forEach(p => {
+            const price = p.price_36 || p.price || '';
+            const desc = p.description ? `<span style="font-size:0.6rem; color:var(--text-secondary); line-height:1.2; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${p.description}</span>` : '';
+            // Encode img URLs to avoid breaking the onerror attribute
+            const imgSrc = (p.img || p.local_img || '').replace(/'/g, '%27');
+            const imgFallback = (p.local_img || '').replace(/'/g, '%27');
             listHTML += `
-                <div class="preset-card product-draggable" data-product='${JSON.stringify(p).replace(/'/g, "&#39;")}' style="padding:12px; display:flex; flex-direction:column; gap:8px; cursor:pointer;">
-                    <div style="height:100px; width:100%; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-                        <img src="${p.img || p.local_img}"
-                             onerror="this.onerror=null; this.src='${p.local_img}';"
+                <div class="preset-card product-draggable" data-product='${JSON.stringify(p).replace(/'/g, "&#39;")}' style="padding:12px; display:flex; flex-direction:column; gap:6px; cursor:pointer;">
+                    <div style="height:90px; width:100%; background:#fff; border-radius:10px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                        <img src="${imgSrc}"
+                             onerror="this.onerror=null; this.src='${imgFallback}';"
                              style="max-height:85%; max-width:85%; object-fit:contain;">
                     </div>
-                    <span style="font-size:0.7rem; font-weight:700; color:white; line-height:1.2; text-align:center;">${p.name}</span>
-                    <div style="background:rgba(255,255,255,0.1); color:white; text-align:center; padding:6px; border-radius:6px; font-size:0.7rem; font-weight:700; margin-top:4px; border:1px solid var(--glass-border);">
+                    <span style="font-size:0.65rem; font-weight:700; color:white; line-height:1.2; text-align:center;">${p.name}</span>
+                    ${desc}
+                    ${price ? `<span style="font-size:0.65rem; color:var(--accent); font-weight:700; text-align:center;">A partir de ${price}/mês</span>` : ''}
+                    <div style="background:rgba(255,255,255,0.1); color:white; text-align:center; padding:5px; border-radius:6px; font-size:0.65rem; font-weight:700; border:1px solid var(--glass-border);">
                         <i class="fa-solid fa-plus"></i> Inserir
                     </div>
                 </div>
@@ -37,7 +44,7 @@ export function renderProductsTools(sidebarContent) {
 
         if (products.length > limit) {
             listHTML += `
-                <button id="btn-load-more" style="width:100%; margin-top:20px; padding:10px; background:rgba(255,255,255,0.05); border:1px dashed var(--glass-border); color:var(--text-secondary); border-radius:8px; cursor:pointer; font-size:0.75rem; font-weight:600; transition:all 0.2s;">
+                <button id="btn-load-more" style="width:100%; margin-top:20px; padding:10px; background:rgba(255,255,255,0.05); border:1px dashed var(--glass-border); color:var(--text-secondary); border-radius:8px; cursor:pointer; font-size:0.75rem; font-weight:600;">
                     Mostrar mais (${products.length - limit} restantes)
                 </button>
             `;
@@ -64,50 +71,41 @@ export function renderProductsTools(sidebarContent) {
         }
     };
 
-    let headerHTML = '';
-    let searchHTML = '';
+    const count = window.alluProducts ? window.alluProducts.length : 0;
+    const statusBadge = count > 0
+        ? `<span style="font-size:0.7rem; color:var(--accent); background:rgba(39,174,96,0.2); padding:2px 8px; border-radius:10px;"><i class="fa-solid fa-check-circle"></i> ${count} produtos</span>`
+        : `<span style="font-size:0.7rem; color:#ff4444; background:rgba(255,68,68,0.2); padding:2px 8px; border-radius:10px;"><i class="fa-solid fa-triangle-exclamation"></i> Desatualizado</span>`;
 
-    if (window.alluProducts && window.alluProducts.length > 0) {
-        headerHTML = `
-            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:20px; border:1px solid var(--glass-border);">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Status do Banco</span>
-                    <span style="font-size:0.7rem; color:var(--accent); background:rgba(39, 174, 96, 0.2); padding:2px 8px; border-radius:10px;"><i class="fa-solid fa-check-circle"></i> Atualizado</span>
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4;">
-                    Última checagem: Hoje às ${new Date().toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'})}<br>
-                    Produtos em estoque: <b>${window.alluProducts.length} itens</b>
-                </div>
-            </div>`;
+    const hasNewFields = count > 0 && window.alluProducts.some(p => p.price_36);
 
-        searchHTML = `
-            <div style="position:relative; margin-bottom:20px;">
-                <input type="text" id="product-search" placeholder="Buscar produto..." style="width:100%; padding:12px 12px 12px 40px; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:10px; color:white; font-size:0.85rem; outline:none; transition:all 0.2s;">
-                <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:14px; top:50%; transform:translateY(-50%); color:var(--text-secondary); font-size:0.9rem;"></i>
+    div.innerHTML = `
+        <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:16px; border:1px solid var(--glass-border);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Catálogo</span>
+                ${statusBadge}
             </div>
-            <p class="subtitle">Produtos Disponíveis</p>
-            <div id="products-container">
-                ${renderList(window.alluProducts, displayedItems)}
-            </div>`;
-    } else {
-        headerHTML = `
-            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:12px; margin-bottom:20px; border:1px solid var(--glass-border);">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-                    <span style="font-size:0.8rem; font-weight:600; color:var(--text-secondary);">Status do Banco</span>
-                    <span style="font-size:0.7rem; color:#ff4444; background:rgba(255, 68, 68, 0.2); padding:2px 8px; border-radius:10px;"><i class="fa-solid fa-triangle-exclamation"></i> Desatualizado</span>
-                </div>
-                <div style="font-size:0.75rem; color:var(--text-secondary); line-height:1.4;">
-                    Nenhum produto carregado na sessão.<br>
-                    Clique em "Atualizar Catálogo" no menu superior.
-                </div>
-            </div>`;
-    }
+            <div style="font-size:0.72rem; color:var(--text-secondary); line-height:1.5;">
+                Preços 12/24/36 meses${hasNewFields ? ' <span style="color:var(--accent)">✓</span>' : ''}<br>
+                Descrição do produto${hasNewFields ? ' <span style="color:var(--accent)">✓</span>' : ''}<br>
+                Imagem principal${count > 0 ? ' <span style="color:var(--accent)">✓</span>' : ''}
+            </div>
+        </div>
 
-    const footerHTML = `
-        <button class="btn-primary" id="btn-sync-catalog" style="width:100%; margin-top:20px; padding:12px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;">
-            <i class="fa-solid fa-arrows-rotate"></i> Atualizar Detalhes
+        <button id="btn-sync-full" style="width:100%; padding:13px; border-radius:10px; background:var(--accent); color:white; border:none; cursor:pointer; font-size:0.82rem; font-weight:700; display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:8px;">
+            <i class="fa-solid fa-arrows-rotate"></i> Atualizar Produtos
         </button>
-        <div style="margin-top:30px; border-top:1px solid var(--glass-border); padding-top:20px;">
+        <div id="sync-status" style="font-size:0.7rem; color:var(--text-secondary); text-align:center; min-height:18px; margin-bottom:16px;"></div>
+
+        ${count > 0 ? `
+        <div style="position:relative; margin-bottom:16px;">
+            <input type="text" id="product-search" placeholder="Buscar produto..." style="width:100%; padding:10px 10px 10px 36px; background:rgba(255,255,255,0.05); border:1px solid var(--glass-border); border-radius:10px; color:white; font-size:0.82rem; outline:none;">
+            <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--text-secondary); font-size:0.85rem;"></i>
+        </div>
+        <p class="subtitle">Produtos Disponíveis</p>
+        <div id="products-container">${renderList(window.alluProducts, displayedItems)}</div>
+        ` : `<div style="text-align:center; padding:30px 0; color:var(--text-secondary); font-size:0.8rem;">Clique em "Atualizar Produtos" para carregar o catálogo.</div>`}
+
+        <div style="margin-top:24px; border-top:1px solid var(--glass-border); padding-top:20px;">
             <p class="subtitle">Selos e Ofertas</p>
             <div style="display:grid; grid-template-columns: 1fr; gap:10px;">
                 <button class="btn-tool" onclick="addPriceStamp()" style="width:100%; height:auto; padding:12px; border:1px solid var(--glass-border); justify-content:flex-start; gap:10px;">
@@ -120,7 +118,6 @@ export function renderProductsTools(sidebarContent) {
         </div>
     `;
 
-    div.innerHTML = headerHTML + searchHTML + footerHTML;
     sidebarContent.appendChild(div);
 
     const containerEl = div.querySelector('#products-container');
@@ -130,8 +127,11 @@ export function renderProductsTools(sidebarContent) {
     if (searchInput && containerEl) {
         searchInput.oninput = () => {
             const query = searchInput.value.toLowerCase();
-            currentFilterResults = window.alluProducts.filter(p => p.name.toLowerCase().includes(query));
-            displayedItems = 20; // Reseta paginação na busca
+            currentFilterResults = window.alluProducts.filter(p =>
+                p.name.toLowerCase().includes(query) ||
+                (p.description || '').toLowerCase().includes(query)
+            );
+            displayedItems = 20;
             containerEl.innerHTML = renderList(currentFilterResults, displayedItems);
             attachEvents(containerEl);
         };
@@ -139,59 +139,46 @@ export function renderProductsTools(sidebarContent) {
         searchInput.onblur = () => searchInput.style.borderColor = 'var(--glass-border)';
     }
 
+    const btnSync = div.querySelector('#btn-sync-full');
+    const syncStatus = div.querySelector('#sync-status');
 
-    const btnSync = div.querySelector('#btn-sync-catalog');
     if (btnSync) {
         btnSync.onclick = async () => {
-            const originalHTML = btnSync.innerHTML;
-            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Atualizando Detalhes...';
-            btnSync.style.opacity = '0.7';
+            btnSync.disabled = true;
+            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Atualizando...';
+            syncStatus.textContent = 'Buscando dados da API...';
 
-            // Sincronização rápida de preços no navegador (Foco em detalhes)
-            const count = await syncProductsWithAPI();
-
-            btnSync.innerHTML = originalHTML;
-            btnSync.style.opacity = '1';
-
-            if (count > 0 && containerEl) {
-                containerEl.innerHTML = renderList(window.alluProducts);
-                attachEvents(containerEl);
-                alert(`✅ Detalhes e preços de ${count} produtos atualizados com sucesso!`);
-            } else {
-                alert("✨ Os detalhes dos produtos já estão atualizados.");
+            // Passo 1: atualizar window.alluProducts ao vivo via API
+            try {
+                const liveCount = await syncProductsWithAPI();
+                if (liveCount > 0 && containerEl) {
+                    currentFilterResults = window.alluProducts;
+                    containerEl.innerHTML = renderList(window.alluProducts, displayedItems);
+                    attachEvents(containerEl);
+                }
+                syncStatus.textContent = `${liveCount} produtos atualizados ao vivo.`;
+            } catch (e) {
+                syncStatus.textContent = 'Erro na atualização ao vivo.';
             }
+
+            // Passo 2: disparar GitHub Actions para baixar imagens + commitar
+            syncStatus.textContent = 'Acionando sync completo no GitHub...';
+            try {
+                const res = await fetch('/api/sync', { method: 'POST' });
+                if (res.ok) {
+                    syncStatus.innerHTML = '✅ Sync iniciado! Imagens e preços novos estarão disponíveis em ~3 min após o deploy automático.';
+                } else {
+                    const err = await res.json().catch(() => ({}));
+                    syncStatus.textContent = err.error || 'Erro ao acionar GitHub Actions.';
+                }
+            } catch (e) {
+                syncStatus.textContent = 'Não foi possível acionar o GitHub Actions.';
+            }
+
+            btnSync.disabled = false;
+            btnSync.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Atualizar Produtos';
         };
     }
-
-    // Botão secundário para correção de fotos (Dispara Action no GitHub)
-    const btnFixImages = document.createElement('button');
-    btnFixImages.className = 'btn-tool';
-    btnFixImages.style.width = '100%';
-    btnFixImages.style.marginTop = '10px';
-    btnFixImages.style.fontSize = '0.7rem';
-    btnFixImages.style.border = '1px dashed var(--allu-828392)';
-    btnFixImages.innerHTML = '<i class="fa-solid fa-image"></i> Sincronizar Galeria (Baixar Fotos)';
-    btnFixImages.onclick = async () => {
-        const originalHTML = btnFixImages.innerHTML;
-        btnFixImages.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Solicitando download...';
-        
-        try {
-            const res = await fetch('/api/sync', { method: 'POST' });
-            if (res.ok) {
-                alert("🚀 Solicitação enviada! O servidor começará a baixar as imagens em segundo plano. Elas estarão disponíveis em alguns minutos após o término do processo no GitHub.");
-            } else {
-                alert("❌ Erro ao solicitar sincronização. Verifique as configurações do servidor.");
-            }
-        } catch (e) {
-            console.error(e);
-            alert("❌ Falha na conexão com o servidor de sincronização.");
-        } finally {
-            btnFixImages.innerHTML = originalHTML;
-        }
-    };
-    div.appendChild(btnFixImages);
-
-
 }
 
 export function addProductToCanvas(p, mode = 'solto', initialPos = null, callback = null) {
@@ -478,33 +465,86 @@ export function addProductToCanvas(p, mode = 'solto', initialPos = null, callbac
 }
 
 export async function syncProductsWithAPI() {
+    const formatBRL = (v) => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const fetchPage = async (pageIndex) => {
+        const url = `https://api-gateway.dev.digital.allugator.com/api/public/v1/products?pageIndex=${pageIndex}&pageSize=500&sortOrder=asc&includeCommercialTags=false&includePhotos=true&soldOutLast=false&excludeSoldOut=false`;
+        const r = await fetch(url);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+    };
+
     try {
-        const url = 'https://api-gateway.dev.digital.allugator.com/api/public/v1/products?pageIndex=0&pageSize=1000&page=1&limit=10&sortOrder=asc&includeCommercialTags=false&includePhotos=false&soldOutLast=false&excludeSoldOut=false';
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const result = await response.json();
-        
-        if (result && result.data && Array.isArray(result.data)) {
-            let count = 0;
-            if (window.alluProducts && window.alluProducts.length > 0) {
-                window.alluProducts.forEach(prod => {
-                    const match = result.data.find(item => 
-                        item.name.toLowerCase().trim() === prod.name.toLowerCase().trim() ||
-                        item.slug.toLowerCase().trim() === prod.name.toLowerCase().replace(/\s+/g, '-').trim()
-                    );
-                    
-                    if (match && match.skus && match.skus.length > 0) {
-                        const validSku = match.skus.find(s => s.installment_value && parseFloat(s.installment_value) > 0);
-                        if (validSku) {
-                            const numericVal = parseFloat(validSku.installment_value);
-                            prod.price = "R$ " + numericVal.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-                            count++;
-                        }
-                    }
+        // Buscar todas as páginas
+        const page0 = await fetchPage(0);
+        let allItems = page0.data || [];
+        if (page0.pagination?.can_next_page) {
+            const page1 = await fetchPage(1);
+            allItems = allItems.concat(page1.data || []);
+        }
+
+        // Indexar por nome normalizado
+        const byName = {};
+        allItems.forEach(item => {
+            byName[item.name.toLowerCase().trim()] = item;
+        });
+
+        let count = 0;
+        if (!window.alluProducts) window.alluProducts = [];
+
+        // Adicionar produtos novos que ainda não estão na lista local
+        const localNames = new Set(window.alluProducts.map(p => p.name.toLowerCase().trim()));
+        allItems.forEach(item => {
+            if (item.archived) return;
+            const key = item.name.toLowerCase().trim();
+            if (!localNames.has(key)) {
+                const mainPhoto = (item.product_photos || []).find(p => p.main) || (item.product_photos || [])[0];
+                window.alluProducts.push({
+                    name: item.name,
+                    description: item.technical_details || '',
+                    price: 'Consulte',
+                    price_12: 'Consulte',
+                    price_24: 'Consulte',
+                    price_36: 'Consulte',
+                    img: mainPhoto?.url || '',
+                    local_img: `./assets/products/${item.slug}.png`,
                 });
             }
-            return count;
-        }
+        });
+
+        // Atualizar campos em todos os produtos locais
+        window.alluProducts.forEach(prod => {
+            const match = byName[prod.name.toLowerCase().trim()];
+            if (!match) return;
+
+            // Descrição
+            if (match.technical_details) prod.description = match.technical_details;
+
+            // Foto principal
+            const mainPhoto = (match.product_photos || []).find(p => p.main) || (match.product_photos || [])[0];
+            if (mainPhoto?.url) prod.img = mainPhoto.url;
+
+            // Preços: menor installment_value disponível = base (36 meses)
+            const values = (match.skus || [])
+                .filter(s => s.site_availability && !s.sold_out)
+                .map(s => parseFloat(s.installment_value))
+                .filter(v => v > 0);
+
+            const allValues = (match.skus || [])
+                .map(s => parseFloat(s.installment_value))
+                .filter(v => v > 0);
+
+            const base = values.length ? Math.min(...values) : (allValues.length ? Math.min(...allValues) : null);
+            if (base) {
+                prod.price = formatBRL(base);
+                prod.price_36 = formatBRL(base);
+                prod.price_24 = formatBRL(Math.round(base * 1.05263 * 100) / 100);
+                prod.price_12 = formatBRL(Math.round(base * 1.10526 * 100) / 100);
+                count++;
+            }
+        });
+
+        return count;
     } catch (err) {
         console.error('Erro ao sincronizar com API da Allu:', err);
     }

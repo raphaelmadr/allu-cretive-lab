@@ -1,12 +1,11 @@
 """
-Sincroniza produtos da API oficial da Allugator.
+Sincroniza produtos via API oficial da Allugator.
 API: api-gateway.dev.digital.allugator.com/api/public/v1/products
-Sem necessidade de Playwright/scraping — dados completos via JSON.
+Campos exportados: name, description, price_36, price_24, price_12, img, local_img
 """
 
 import os
 import json
-import time
 import requests
 
 API_BASE = "https://api-gateway.dev.digital.allugator.com/api/public/v1/products"
@@ -30,10 +29,8 @@ HEADERS = {
 
 
 def fetch_all_products():
-    """Busca todos os produtos paginando a API."""
     all_items = []
     page = 0
-
     while True:
         params = {**API_PARAMS, "pageIndex": page}
         print(f"   Buscando página {page}...")
@@ -48,8 +45,7 @@ def fetch_all_products():
         items = body.get("data") or []
         pagination = body.get("pagination") or {}
         all_items.extend(items)
-
-        print(f"   → {len(items)} produtos (total acumulado: {len(all_items)})")
+        print(f"   → {len(items)} produtos (total: {len(all_items)})")
 
         if not pagination.get("can_next_page"):
             break
@@ -58,24 +54,48 @@ def fetch_all_products():
     return all_items
 
 
-def best_price(skus):
-    """Retorna o menor preço parcelado válido entre os SKUs."""
+def extract_prices(skus):
+    """
+    Retorna (price_36, price_24, price_12) em reais.
+    A API fornece apenas installment_value sem campo de duração.
+    O menor valor disponível é o plano de 36 meses (mais barato);
+    12 e 24 meses são calculados com os mesmos multiplicadores usados no canvas.
+    """
     values = []
     for sku in skus:
-        v = sku.get("installment_value")
         try:
-            fv = float(v)
-            if fv > 0:
-                values.append(fv)
+            v = float(sku.get("installment_value") or 0)
+            if v > 0 and sku.get("site_availability"):
+                values.append(v)
         except (TypeError, ValueError):
             continue
+
+    # Fallback: aceitar SKUs sold_out se nenhum disponível
     if not values:
-        return None
-    return min(values)
+        for sku in skus:
+            try:
+                v = float(sku.get("installment_value") or 0)
+                if v > 0:
+                    values.append(v)
+            except (TypeError, ValueError):
+                continue
+
+    if not values:
+        return None, None, None
+
+    price_36 = min(values)
+    price_24 = round(price_36 * 1.05263, 2)
+    price_12 = round(price_36 * 1.10526, 2)
+    return price_36, price_24, price_12
+
+
+def format_brl(value):
+    if value is None:
+        return "Consulte"
+    return "R$ " + f"{value:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
 def main_photo_url(product_photos):
-    """Retorna a URL da foto principal (ou primeira disponível)."""
     if not product_photos:
         return None
     main = next((p for p in product_photos if p.get("main")), product_photos[0])
@@ -97,7 +117,6 @@ def safe_filename(name):
 def sync_products():
     print("🚀 Sincronizando produtos via API oficial da Allugator...")
 
-    # Carregar banco existente (preserva imagens já baixadas)
     db = {}
     if os.path.exists(JSON_OUTPUT):
         try:
@@ -110,17 +129,15 @@ def sync_products():
 
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-    # Buscar todos os produtos da API
     print("🔗 Conectando à API...")
     raw_products = fetch_all_products()
-    print(f"✅ {len(raw_products)} produtos recebidos da API.\n")
+    print(f"✅ {len(raw_products)} produtos recebidos.\n")
 
     new_count = 0
     updated_count = 0
     skip_count = 0
 
     for item in raw_products:
-        # Ignorar produtos arquivados
         if item.get("archived"):
             skip_count += 1
             continue
@@ -130,54 +147,51 @@ def sync_products():
             skip_count += 1
             continue
 
-        # Preço parcelado
-        price_val = best_price(item.get("skus") or [])
-        if price_val:
-            price_str = "R$ " + f"{price_val:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
-        else:
-            price_str = "Consulte"
+        # Descrição curta
+        description = (item.get("technical_details") or "").strip()
 
-        # URL da foto
+        # Preços 12/24/36 meses
+        price_36, price_24, price_12 = extract_prices(item.get("skus") or [])
+
+        # URL da imagem principal
         img_url = main_photo_url(item.get("product_photos") or [])
         if not img_url:
             skip_count += 1
             continue
 
-        # Caminho local
         filename = f"{safe_filename(name)}.png"
         filepath = os.path.join(OUTPUT_DIR, filename)
         local_path = f"./assets/products/{filename}"
 
-        # Baixar imagem se necessário
-        needs_download = name not in db or not os.path.exists(filepath)
-        if needs_download:
+        # Baixar imagem se nova ou ausente no disco
+        if name not in db or not os.path.exists(filepath):
             try:
                 res = requests.get(img_url, headers=HEADERS, timeout=15)
                 if res.status_code == 200:
                     with open(filepath, "wb") as f:
                         f.write(res.content)
-                    if name not in db:
-                        new_count += 1
-                    else:
-                        updated_count += 1
-                    print(f"   ✅ {name} ({price_str})")
+                    action = "novo" if name not in db else "atualizado"
+                    new_count += (1 if action == "novo" else 0)
+                    updated_count += (1 if action == "atualizado" else 0)
+                    print(f"   ✅ [{action}] {name} — {format_brl(price_36)}/mês")
                 else:
-                    print(f"   ⚠️ Imagem não encontrada ({res.status_code}): {name}")
-                    img_url = None
+                    print(f"   ⚠️ Imagem indisponível ({res.status_code}): {name}")
             except Exception as e:
                 print(f"   ⚠️ Erro ao baixar {name}: {e}")
         else:
-            # Atualizar apenas preço e img URL (mantém local_img existente)
             updated_count += 1
 
         db[name] = {
             "name": name,
-            "price": price_str,
-            "img": img_url or db.get(name, {}).get("img", ""),
+            "description": description,
+            "price": format_brl(price_36),      # preço base (36 meses)
+            "price_12": format_brl(price_12),
+            "price_24": format_brl(price_24),
+            "price_36": format_brl(price_36),
+            "img": img_url,
             "local_img": local_path,
         }
 
-    # Salvar JSON e JS
     final_list = list(db.values())
     with open(JSON_OUTPUT, "w", encoding="utf-8") as f:
         json.dump(final_list, f, indent=4, ensure_ascii=False)

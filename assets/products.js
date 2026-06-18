@@ -97,13 +97,21 @@ window.alluProducts = [
     },
     {
         "name": "Nintendo Switch V2",
+        "description": "O Nintendo Switch V2 é uma versão refinada do console híbrido original, com o mesmo design versátil que permite jogar no modo portátil ou conectado à TV via dock.",
         "price": "R$ 128,16",
+        "price_12": "R$ 141,65",
+        "price_24": "R$ 134,91",
+        "price_36": "R$ 128,16",
         "img": "https://images.digital.allugator.com/products/sw1.png",
         "local_img": "./assets/products/nintendo-switch-v2.png"
     },
     {
         "name": "Esteira Ergométrica ZiYou 150-S",
+        "description": "<p>A Esteira ZiYou 150-S é compacta, dobrável e silenciosa, ideal para uso doméstico. Suporta usuários de até 100kg e 2m de altura, com velocidade de até 16km/h e inclinação manual em 3 níveis. Possui painel com dados de treino, sensores cardíacos, atalhos nos braços e 18 programas de treinamento. Leve, fácil de mover e perfeita para caminhar ou correr em casa.</p>",
         "price": "R$ 189,05",
+        "price_12": "R$ 208,95",
+        "price_24": "R$ 199,00",
+        "price_36": "R$ 189,05",
         "img": "https://images.digital.allugator.com/products/ziesteira1.png",
         "local_img": "./assets/products/esteira-ergométrica-ziyou-150-s.png"
     },
@@ -115,13 +123,21 @@ window.alluProducts = [
     },
     {
         "name": "AirPods Max USB-C Noise Cancelling Spatial Audio",
+        "description": "<p>Chip: Apple H1 (em cada earcup) Driver: Dynamic driver 40mm com duplo ímã de neodímio Cancelamento de ruído: Active Noise Cancellation (ANC) pró-level Microfones: 3 microfones com beamforming para chamadas Áudio: Spatial Audio com head tracking, Adaptive EQ, Dolby Atmos Bluetooth: 5.0 Carregamento: USB-C (carga rápida: 5 min = 1,5h de uso) Bateria: até 20h (ANC ativo) Controles: Digital Crown + botão de controle de ruído Materiais: Alumínio anodizado, aço inoxidável, malha de tricô PN: MWW43BE/A</p>",
         "price": "R$ 474,90",
+        "price_12": "R$ 524,89",
+        "price_24": "R$ 499,89",
+        "price_36": "R$ 474,90",
         "img": "https://images.digital.allugator.com/products/airpods-max-usb-c-1.png",
         "local_img": "./assets/products/airpods-max-usb-c-noise-cancelling-spatial-audio.png"
     },
     {
         "name": "AirPods Pro 2 ANC Bluetooth Spatial Audio USB-C",
+        "description": "<p>Chip: Apple H2 Design: In-ear com ponteiras de silicone (XS, S, M, L) Bluetooth: 5.3 Cancelamento de ruído: Active Noise Cancellation (2x mais eficaz que geração anterior) Recursos: Adaptive Audio, Transparency Mode, Conversation Awareness, Spatial Audio com head tracking, Dolby Atmos, DSEE Extreme Saúde auditiva: Hearing Protection, Hearing Test, Hearing Aid (FDA) Bateria: até 6h por carga (ANC ativo) / até 30h com estojo MagSafe Carga rápida: 5 min = 1h de uso Carregamento: USB-C, MagSafe, Qi, carregador Apple Watch Resistência: IP54 (fones + estojo) Peso por fone: 5,3g PN: MXK23BZ/A</p>",
         "price": "R$ 194,66",
+        "price_12": "R$ 215,15",
+        "price_24": "R$ 204,90",
+        "price_36": "R$ 194,66",
         "img": "https://images.digital.allugator.com/products/airpods-pro-2-1.png",
         "local_img": "./assets/products/airpods-pro-2-anc-bluetooth-spatial-audio-usb-c.png"
     },
@@ -157,7 +173,11 @@ window.alluProducts = [
     },
     {
         "name": "Bike Spinning ZiYou 250-S",
+        "description": "A Bike Spinning ZiYou 250-S é ideal para treinos intensos em casa, oferecendo estrutura robusta, resistência magnética ajustável, funcionamento silencioso e suporte para até 2m de altura e 140kg. Possui ajustes ergonômicos, painel com dados em tempo real, suporte para celular/tablet e rodinhas para facilitar o transporte.",
         "price": "R$ 236,55",
+        "price_12": "R$ 261,45",
+        "price_24": "R$ 249,00",
+        "price_36": "R$ 236,55",
         "img": "https://images.digital.allugator.com/products/zibike1.png",
         "local_img": "./assets/products/bike-spinning-ziyou-250-s.png"
     },
@@ -187,7 +207,11 @@ window.alluProducts = [
     },
     {
         "name": "Console Rog Xbox Ally Asus Ryzen Z2 WHT",
+        "description": "<p>CONSOLE ROG XBOX ALLY ASUS RYZEN Z2 WHT Sistema Operacional: Windows 11 Home Tela: LCD LED de 7\", Sensível ao Toque, nível IPS, FHD, 120 Hz Processador: AMD® Ryzen™ Z2 A Placa de Vídeo: AMD Radeon™ Graphics Memória RAM: 16 GB LPDDR5X Armazenamento: 512 GB SSD PCIe® NVMe M.2 Conectividade: Wi-Fi 6E Nome completo do Modelo - RC73YA-NH003W Part Number - 90NV00G1-M00050</p>",
         "price": "R$ 351,40",
+        "price_12": "R$ 388,39",
+        "price_24": "R$ 369,89",
+        "price_36": "R$ 351,40",
         "img": "https://images.digital.allugator.com/products/Console-Rog-Xbox-Ally-Asus-Ryzen-Z2-WHT-1.png",
         "local_img": "./assets/products/console-rog-xbox-ally-asus-ryzen-z2-wht.png"
     },
@@ -199,13 +223,21 @@ window.alluProducts = [
     },
     {
         "name": "Câmera DJI Osmo Pocket 3 4K/120fps Gimbal 3 Eixos 1\" CMOS",
+        "description": "<p>Sensor: CMOS 1 polegada, foco rápido full-pixel (PDAF) Vídeo: 4K/120fps (slow motion), 4K/60fps, Full HD Estabilização: Gimbal mecânico de 3 eixos Tela: 2\" OLED rotativa touchscreen (horizontal e vertical) Cor: 10-bit D-Log M e 10-bit HLG Rastreamento: ActiveTrack 6.0, Face Auto-Detect, Dynamic Framing Áudio: 3 microfones integrados + compatível com DJI Mic 2 via OsmoAudio Bateria: 1300mAh, até 166 minutos / carga rápida 80% em 16 minutos Conectividade: Wi-Fi, Bluetooth, USB-C Armazenamento: Cartão microSD (não incluso, mín. UHS-I Speed Grade 3) PN: DJI209</p>",
         "price": "R$ 455,90",
+        "price_12": "R$ 503,89",
+        "price_24": "R$ 479,89",
+        "price_36": "R$ 455,90",
         "img": "https://images.digital.allugator.com/products/Câmera DJI Osmo Pocket 3 Standard BR - DJI209-1.png",
         "local_img": "./assets/products/câmera-dji-osmo-pocket-3-4k-120fps-gimbal-3-eixos-1-cmos.png"
     },
     {
         "name": "Câmera Mirrorless Sony ZV-E10 II 26MP 4K60p + Lente E PZ 16-50mm",
+        "description": "<p>Sensor: APS-C 26MP Exmor R CMOS BSI Processador: BIONZ XR Vídeo: 4K 60p (5.6K oversampling), 4K 10-bit 4:2:2, Full HD 120p (slow motion 5x) Foco: 759 pontos fase híbrida, Real-Time Eye AF (humanos, animais, pássaros) ISO: 100-32000 (expansível até 102400) Tela: 3.0\" LCD touchscreen articulado com suporte vertical Disparo contínuo: até 11 fps com AF/AE Lente inclusa: E PZ 16-50mm f/3.5-5.6 OSS II (equiv. 24-75mm) Áudio: Microfone direcional 3 cápsulas + entrada 3.5mm + saída fone Conectividade: Wi-Fi 5 GHz, USB-C, Micro-HDMI Montura: Sony E-mount PN: ZVE10M2KB</p>",
         "price": "R$ 731,41",
+        "price_12": "R$ 808,40",
+        "price_24": "R$ 769,90",
+        "price_36": "R$ 731,41",
         "img": "https://images.digital.allugator.com/products/Câmera Sony ZV-E10 II Mirrorless com lente 16-50mm-1.png",
         "local_img": "./assets/products/câmera-mirrorless-sony-zv-e10-ii-26mp-4k60p-+-lente-e-pz-16-50mm.png"
     },
@@ -217,7 +249,11 @@ window.alluProducts = [
     },
     {
         "name": "Fone Bose QuietComfort Ultra 2ª Geração ANC Bluetooth Wireless",
+        "description": "<p>Cancelamento de ruído: ActiveSense ANC adaptativo + 10 microfones Bluetooth: 5.4, aptX Adaptive, AAC, SBC Áudio com fio: USB-C, áudio lossless até 24-bit/48kHz Áudio espacial: Immersive Audio (Still, Motion, Cinema) Modo ambiente: Aware Mode com ActiveSense Bateria: até 30h (ANC ativo) / até 45h (ANC desativo) / até 23h (Immersive Audio) Carga rápida: 15 min = 2,5h de uso Carregamento: USB-C Controles: botões físicos + touch strip no earcup direito App: Bose (iOS e Android) com EQ 3 bandas e atalhos personalizáveis Design: dobrável, almofadas de memória, 250g Cores: Black, White Smoke, Midnight Violet, Driftwood Sand, Desert Gold</p>",
         "price": "R$ 370,40",
+        "price_12": "R$ 409,39",
+        "price_24": "R$ 389,89",
+        "price_36": "R$ 370,40",
         "img": "https://images.digital.allugator.com/products/Bose QuietComfort Ultra Headphones-1.png",
         "local_img": "./assets/products/fone-bose-quietcomfort-ultra-2ª-geração-anc-bluetooth-wireless.png"
     },
@@ -235,31 +271,51 @@ window.alluProducts = [
     },
     {
         "name": "MacBook Neo 13 256GB",
+        "description": "<p>O MacBook Neo tem estrutura resistente em alumínio, tela Liquid Retina brilhante de 13 polegadas1, chip A18 Pro pensado para IA e Apple Intelligence2 e até 16 horas de bateria3.&nbsp;Código: MHFA4BZ/A&nbsp;</p>",
         "price": "R$ 332,40",
+        "price_12": "R$ 367,39",
+        "price_24": "R$ 349,89",
+        "price_36": "R$ 332,40",
         "img": "https://images.digital.allugator.com/products/Frame 633703.png",
         "local_img": "./assets/products/macbook-neo-13-256gb.png"
     },
     {
         "name": "MacBook Neo 13 512GB",
+        "description": "<p>O MacBook Neo tem estrutura resistente em alumínio, tela Liquid Retina brilhante de 13 polegadas1, chip A18 Pro pensado para IA e Apple Intelligence2 e até 16 horas de bateria3. Código MHFC4BZ/A</p>",
         "price": "R$ 446,41",
+        "price_12": "R$ 493,40",
+        "price_24": "R$ 469,90",
+        "price_36": "R$ 446,41",
         "img": "https://images.digital.allugator.com/products/macbook-neo-1.png",
         "local_img": "./assets/products/macbook-neo-13-512gb.png"
     },
     {
         "name": "Mesa Digitalizadora Wacom Intuos Média Bluetooth 4096 Níveis",
+        "description": "<p>Área ativa: 21,6 x 13,5 cm (10 polegadas) Sensibilidade à pressão: 4096 níveis (caneta Wacom Pen 4K) Tecnologia: EMR (Electro-Magnetic Resonance) — caneta sem bateria Resolução: 2540 lpi (100 linhas/mm) ExpressKeys: 4 teclas de atalho programáveis Conectividade: Bluetooth 4.2 + USB Compatibilidade: Windows, macOS, Chromebook, Android (OTG) Espessura: 8,8mm Peso: 410g Softwares inclusos (mediante registro): Clip Studio Paint Pro (2 anos), Boris FX Optics (12 meses), Skylum Luminar Neo, Skillshare PN: CTL6100WLK0</p>",
         "price": "R$ 170,91",
+        "price_12": "R$ 188,90",
+        "price_24": "R$ 179,90",
+        "price_36": "R$ 170,91",
         "img": "https://images.digital.allugator.com/products/Mesa Digitalizadora Tablet Wacom Intuos Média-Bluetooth-1.png",
         "local_img": "./assets/products/mesa-digitalizadora-wacom-intuos-média-bluetooth-4096-níveis.png"
     },
     {
         "name": "Monitor Gamer UltraGear 24\" LG Full HD 144Hz",
+        "description": "Monitor gamer de 24” com resolução Full HD (1920×1080) e painel IPS, que oferece cores mais precisas e amplo ângulo de visão. Possui taxa de atualização de 144Hz e tempo de resposta de 1ms, garantindo imagens fluidas e rápidas para jogos.",
         "price": "R$ 56,90",
+        "price_12": "R$ 62,89",
+        "price_24": "R$ 59,89",
+        "price_36": "R$ 56,90",
         "img": "https://images.digital.allugator.com/products/Monitor-LG-UltraGear™-G4---144Hz---24'-1.png",
         "local_img": "./assets/products/monitor-gamer-ultragear-24-lg-full-hd-144hz.png"
     },
     {
         "name": "Monitor Gamer UltraGear 27\" LG Full HD 144Hz",
+        "description": "Monitor Gamer UltraGear™ 27\" LG Full HD, 144Hz, 1ms com 15000:1 de Contraste - 27G411A-B",
         "price": "R$ 62,61",
+        "price_12": "R$ 69,20",
+        "price_24": "R$ 65,91",
+        "price_36": "R$ 62,61",
         "img": "https://images.digital.allugator.com/products/Monitor-LG-UltraGear™-G4---144Hz---27'-1.png",
         "local_img": "./assets/products/monitor-gamer-ultragear-27-lg-full-hd-144hz.png"
     },
@@ -343,13 +399,21 @@ window.alluProducts = [
     },
     {
         "name": "Playstation VR2",
+        "description": "Mergulhe em experiências de realidade virtual ainda mais imersivas com o PlayStation VR2 Sense. Conte com áudio 3D, rastreamento ocular inteligente, resposta tátil, gatilhos adaptáveis e detecção de toque para sentir cada detalhe do jogo",
         "price": "R$ 170,91",
+        "price_12": "R$ 188,90",
+        "price_24": "R$ 179,90",
+        "price_36": "R$ 170,91",
         "img": "https://images.digital.allugator.com/products/PlayStation-VR2-1.png",
         "local_img": "./assets/products/playstation-vr2.png"
     },
     {
         "name": "Polar Grit X2",
+        "description": "O Polar Grit X2 é um smartwatch robusto para esportes e aventuras ao ar livre, com GPS de alta precisão, resistência militar e bateria de longa duração. Ideal para quem busca performance e durabilidade em qualquer terreno.",
         "price": "R$ 161,41",
+        "price_12": "R$ 178,40",
+        "price_24": "R$ 169,91",
+        "price_36": "R$ 161,41",
         "img": "https://images.digital.allugator.com/products/grit-1.png",
         "local_img": "./assets/products/polar-grit-x2.png"
     },
@@ -415,19 +479,31 @@ window.alluProducts = [
     },
     {
         "name": "Bike Spinning ZiYou 150-S",
+        "description": "A Bike Spinning ZiYou 150-S é silenciosa, resistente e ajustável, ideal para treinos em casa. Com estrutura ergonômica, suporta usuários de até 110kg e entre 1,50m e 1,85m. Possui ajuste manual de carga, painel com dados de desempenho e rodinhas para fácil transporte.",
         "price": "R$ 160,55",
+        "price_12": "R$ 177,45",
+        "price_24": "R$ 169,00",
+        "price_36": "R$ 160,55",
         "img": "https://images.digital.allugator.com/products/ziyou1501.png",
         "local_img": "./assets/products/bike-spinning-ziyou-150-s.png"
     },
     {
         "name": "POLAR Pacer Pro",
+        "description": "O Polar Pacer Pro é um smartwatch premium para corrida, com GPS avançado, métricas detalhadas de treino, barômetro integrado e design ultraleve para máxima performance.",
         "price": "R$ 151,91",
+        "price_12": "R$ 167,90",
+        "price_24": "R$ 159,91",
+        "price_36": "R$ 151,91",
         "img": "https://images.digital.allugator.com/products/pp1.png",
         "local_img": "./assets/products/polar-pacer-pro.png"
     },
     {
         "name": "POLAR Pacer",
+        "description": "O Polar Pacer é um smartwatch leve e potente, desenvolvido para corredores, com GPS de alta precisão, monitoramento completo de treinos e design leve que garante conforto em qualquer distância.",
         "price": "R$ 118,66",
+        "price_12": "R$ 131,15",
+        "price_24": "R$ 124,91",
+        "price_36": "R$ 118,66",
         "img": "https://images.digital.allugator.com/products/pacer1.png",
         "local_img": "./assets/products/polar-pacer.png"
     },
@@ -439,19 +515,31 @@ window.alluProducts = [
     },
     {
         "name": "POLAR Grit X2 Pro",
+        "description": "O Polar Grit X2 Pro é um smartwatch robusto para esportes outdoor, com GPS preciso, resistência militar, barômetro e bateria de longa duração. Feito para aventuras extremas e treinos avançados em qualquer terreno.",
         "price": "R$ 256,40",
+        "price_12": "R$ 283,39",
+        "price_24": "R$ 269,89",
+        "price_36": "R$ 256,40",
         "img": "https://images.digital.allugator.com/products/pro1.png",
         "local_img": "./assets/products/polar-grit-x2-pro.png"
     },
     {
         "name": "POLAR Ignite 3 Preto",
+        "description": "O Polar Ignite 3 é um smartwatch elegante e leve, com GPS integrado, monitoramento de sono e bem-estar, ideal para treinos e uso no dia a dia.",
         "price": "R$ 147,16",
+        "price_12": "R$ 162,65",
+        "price_24": "R$ 154,91",
+        "price_36": "R$ 147,16",
         "img": "https://images.digital.allugator.com/products/igp1.png",
         "local_img": "./assets/products/polar-ignite-3-preto.png"
     },
     {
         "name": "POLAR Vantage M3",
+        "description": "O Polar Vantage M3 é um smartwatch multiesportivo com GPS, design leve e recursos avançados de treino, ideal para quem busca desempenho e monitoramento completo.",
         "price": "R$ 161,41",
+        "price_12": "R$ 178,40",
+        "price_24": "R$ 169,91",
+        "price_36": "R$ 161,41",
         "img": "https://images.digital.allugator.com/products/vant-1.png",
         "local_img": "./assets/products/polar-vantage-m3.png"
     },
@@ -493,7 +581,11 @@ window.alluProducts = [
     },
     {
         "name": "PlayStation 5 Slim Edição Digital",
+        "description": "Design mais fino, mesma potência da nova geração. Jogos em 4K, SSD ultrarrápido e experiência totalmente digital, sem mídia física.",
         "price": "R$ 250,70",
+        "price_12": "R$ 277,09",
+        "price_24": "R$ 263,89",
+        "price_36": "R$ 250,70",
         "img": "https://images.digital.allugator.com/products/ps5-slim-digital.png",
         "local_img": "./assets/products/playstation-5-slim-edição-digital.png"
     },
@@ -559,13 +651,21 @@ window.alluProducts = [
     },
     {
         "name": "PlayStation 5 Pro",
+        "description": "O PlayStation®5 Pro oferece recursos avançados como ray tracing aprimorado, imagem ultra nítida em TVs 4K e jogabilidade  super fluida com alta taxa de quadros.",
         "price": "R$ 394,15",
+        "price_12": "R$ 435,64",
+        "price_24": "R$ 414,89",
+        "price_36": "R$ 394,15",
         "img": "https://images.digital.allugator.com/products/ps5-pro-1.png",
         "local_img": "./assets/products/playstation-5-pro.png"
     },
     {
         "name": "Playstation 5 Edição Disk",
+        "description": "A potência da nova geração em 4K. Gráficos ultrarrealistas, carregamento quase instantâneo e leitor de discos Blu-ray pra você jogar e assistir como quiser.",
         "price": "R$ 251,65",
+        "price_12": "R$ 278,14",
+        "price_24": "R$ 264,89",
+        "price_36": "R$ 251,65",
         "img": "https://images.digital.allugator.com/products/ps5-disk-1.png",
         "local_img": "./assets/products/playstation-5-edição-disk.png"
     },
@@ -577,13 +677,21 @@ window.alluProducts = [
     },
     {
         "name": "Cadeira Acer Gamer Predator",
+        "description": "Cadeira Gamer Predator 3ª Geração, Couro PU, Espuma D55, Pistão Class 3 (10cm), Suporte Lombar, Ajustável, Suporta até 120kg",
         "price": "R$ 60,72",
+        "price_12": "R$ 67,11",
+        "price_24": "R$ 63,92",
+        "price_36": "R$ 60,72",
         "img": "https://images.digital.allugator.com/products/cad1.png",
         "local_img": "./assets/products/cadeira-acer-gamer-predator.png"
     },
     {
         "name": "Chromebook Acer 311 Intel Celeron 4GB",
+        "description": "Chrome OS, Processador Intel Celeron N4500 Série N, 4GB Ram DDR4, 32GB Armazenamento, Tela 11.6\" HD (1366x768), Segurança Chip TPM H1, CO731-C6NN",
         "price": "R$ 97,95",
+        "price_12": "R$ 108,26",
+        "price_24": "R$ 103,11",
+        "price_36": "R$ 97,95",
         "img": "https://images.digital.allugator.com/products/cb1.png",
         "local_img": "./assets/products/chromebook-acer-311-intel-celeron-4gb.png"
     },
@@ -595,13 +703,21 @@ window.alluProducts = [
     },
     {
         "name": "Chromebook Acer Touch Intel Celeron 4GB",
+        "description": "Chrome OS, Processador Intel Celeron N4500 Série N, 32GB Armazenamento,4 GB RAM LPDDR4X SDRAM de até 2933MHz (memória soldada na placa mãe não expansível),  Tela 11.6\" HD (1366x768), Segurança Chip TPM H1, C734T-C23A",
         "price": "R$ 137,66",
+        "price_12": "R$ 152,15",
+        "price_24": "R$ 144,91",
+        "price_36": "R$ 137,66",
         "img": "https://images.digital.allugator.com/products/chrome1touch.png",
         "local_img": "./assets/products/chromebook-acer-touch-intel-celeron-4gb.png"
     },
     {
         "name": "Esteira Ergométrica ZiYou 250-S",
+        "description": "A Esteira ZiYou 250-S suporta até 120kg, tem área ampla de corrida, inclinação eletrônica, motor silencioso e painel intuitivo com atalhos e monitoramento. Dobrável e fácil de guardar, oferece programas variados para treinos intensos em casa.",
         "price": "R$ 265,05",
+        "price_12": "R$ 292,95",
+        "price_24": "R$ 279,00",
+        "price_36": "R$ 265,05",
         "img": "https://images.digital.allugator.com/products/zisteira1.png",
         "local_img": "./assets/products/esteira-ergométrica-ziyou-250-s.png"
     },
@@ -613,7 +729,11 @@ window.alluProducts = [
     },
     {
         "name": "Monitor Acer 24.5” Full HD 120hz",
+        "description": "Visual fluido em Full HD com 120 Hz, ideal pra jogar e trabalhar com mais conforto.",
         "price": "R$ 41,72",
+        "price_12": "R$ 46,11",
+        "price_24": "R$ 43,92",
+        "price_36": "R$ 41,72",
         "img": "https://images.digital.allugator.com/products/a1.png",
         "local_img": "./assets/products/monitor-acer-24.5”-full-hd-120hz.png"
     },
@@ -625,43 +745,71 @@ window.alluProducts = [
     },
     {
         "name": "Monitor Acer Nitro 27\" 240hz",
+        "description": "Monitor 27\" Full HD (1920x1080), Painel LED VA Super Sharpness 240HZ 1ms FreeSync Premium ED270 X2bmiipx",
         "price": "R$ 90,16",
+        "price_12": "R$ 99,65",
+        "price_24": "R$ 94,91",
+        "price_36": "R$ 90,16",
         "img": "https://images.digital.allugator.com/products/monitoracernitroaa.png",
         "local_img": "./assets/products/monitor-acer-nitro-27-240hz.png"
     },
     {
         "name": "Monitor Acer Nitro 31.5\" 240hz",
+        "description": "Monitor 31.5\" Full HD (1920 x 1080), Painel LED VA 240hz 1ms FreeSync Premium™ ED320Q X2bmiipx",
         "price": "R$ 113,91",
+        "price_12": "R$ 125,90",
+        "price_24": "R$ 119,91",
+        "price_36": "R$ 113,91",
         "img": "https://images.digital.allugator.com/products/monit1.png",
         "local_img": "./assets/products/monitor-acer-nitro-31.5-240hz.png"
     },
     {
         "name": "Monitor Acer Ultrawide 34\" 180hz",
+        "description": "Tela de 34\" curva, 3440x1440px Quad HD 21:9 Ultra Wide, 180Hz, AMD Free Sync Premium XZ342CU S3bmiipphx",
         "price": "R$ 156,66",
+        "price_12": "R$ 173,15",
+        "price_24": "R$ 164,91",
+        "price_36": "R$ 156,66",
         "img": "https://images.digital.allugator.com/products/ultrawide1.png",
         "local_img": "./assets/products/monitor-acer-ultrawide-34-180hz.png"
     },
     {
         "name": "Monitor Gamer Acer Nitro Series 23.8” Full HD 200hz",
+        "description": "Monitor Gamer Acer Nitro Series VG240Y X1biip 23.8” Full HD 200 Hz IPS 1ms HDMI UM.QV0AA.102",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/monitoracer2001.png",
         "local_img": "./assets/products/monitor-gamer-acer-nitro-series-23.8”-full-hd-200hz.png"
     },
     {
         "name": "Monitor Gamer Acer Ultrawide 34\" QHD 100hz",
+        "description": "Tela curva ultrawide Quad HDHD de 34” e 100 Hz, imersão total em jogos e multitarefas.",
         "price": "R$ 102,52",
+        "price_12": "R$ 113,31",
+        "price_24": "R$ 107,92",
+        "price_36": "R$ 102,52",
         "img": "https://images.digital.allugator.com/products/ult1.png",
         "local_img": "./assets/products/monitor-gamer-acer-ultrawide-34-qhd-100hz.png"
     },
     {
         "name": "Monitor Portátil Acer 15.6\" Full HD",
+        "description": "Leve e prático, com 15,6” Full HD, perfeito pra levar produtividade e entretenimento pra qualquer lugar.",
         "price": "R$ 45,52",
+        "price_12": "R$ 50,31",
+        "price_24": "R$ 47,92",
+        "price_36": "R$ 45,52",
         "img": "https://images.digital.allugator.com/products/port1.png",
         "local_img": "./assets/products/monitor-portátil-acer-15.6-full-hd.png"
     },
     {
         "name": "Notebook Acer Swift GO AI",
+        "description": "Processador Intel Ultra 5 AI, 16GB RAM DDR5, 512GB SSD, Tela 14\", Windows 11 HOME SFG14-73T-54KB",
         "price": "R$ 384,65",
+        "price_12": "R$ 425,14",
+        "price_24": "R$ 404,89",
+        "price_36": "R$ 384,65",
         "img": "https://images.digital.allugator.com/products/Acer%20Swift%20GO%20AI%20SFG14-73T-54KB-image-01.png",
         "local_img": "./assets/products/notebook-acer-swift-go-ai.png"
     },
@@ -679,13 +827,21 @@ window.alluProducts = [
     },
     {
         "name": "Projetor ACER 4.800 ANSI Lumens",
+        "description": "4.800 ANSI Lumens, 1920 x 1200, projeção 51\" a 2m de distância, projeção DLP e correção de ângulo de imagem X1228H",
         "price": "R$ 132,05",
+        "price_12": "R$ 145,95",
+        "price_24": "R$ 139,00",
+        "price_36": "R$ 132,05",
         "img": "https://images.digital.allugator.com/products/pppp4.png",
         "local_img": "./assets/products/projetor-acer-4.800-ansi-lumens.png"
     },
     {
         "name": "Projetor ACER 5.000 ANSI Lumens",
+        "description": "5000 ANSI lumens, WXGA (1920x1200), HDMI, projeção de 60\" a 2m Preto - MR.JX611.013",
         "price": "R$ 146,30",
+        "price_12": "R$ 161,70",
+        "price_24": "R$ 154,00",
+        "price_36": "R$ 146,30",
         "img": "https://images.digital.allugator.com/products/pppp4.png",
         "local_img": "./assets/products/projetor-acer-5.000-ansi-lumens.png"
     },
@@ -697,37 +853,61 @@ window.alluProducts = [
     },
     {
         "name": "Mac Mini M4 10CPU 10GPU 24GB RAM 512GB SSD",
+        "description": "<p>Mac mini conta com o chip Apple M4 (CPU 10 núcleos e GPU 10 núcleos), 24GB de memória unificada e SSD de 512GB. Oferece alto desempenho para multitarefas, edição e produtividade avançada, com baixo consumo energético. Conta com portas Thunderbolt 4/USB-C, HDMI, Ethernet, Wi-Fi 6E e Bluetooth 5.3 em um design compacto e silencioso. Código: MCYT4BZ/A</p>",
         "price": "R$ 636,40",
+        "price_12": "R$ 703,39",
+        "price_24": "R$ 669,89",
+        "price_36": "R$ 636,40",
         "img": "https://images.digital.allugator.com/products/Mac-mini,-M4,-24GB-1.png",
         "local_img": "./assets/products/mac-mini-m4-10cpu-10gpu-24gb-ram-512gb-ssd.png"
     },
     {
         "name": "MacBook Pro M4 14",
+        "description": "O MacBook Pro de 14 polegadas com chip M4 oferece desempenho espetacular em um notebook extremamente potente. Com até 24 horas de bateria1 e tela Liquid Retina XDR impressionante com até 1600 nits de pico de brilho, ele é Pro em todos os sentidos.",
         "price": "R$ 864,03",
+        "price_12": "R$ 954,98",
+        "price_24": "R$ 909,50",
+        "price_36": "R$ 864,03",
         "img": "https://images.digital.allugator.com/products/pm1.png",
         "local_img": "./assets/products/macbook-pro-m4-14.png"
     },
     {
         "name": "Monitor Gamer Agon G42 24\" AOC Full HD 200Hz",
+        "description": "Resolução Máxima: Full HD Tamanho da Tela: 24 Brilho: 300 a 500 nits Ângulo de Visão: 178°/178° Tempo de Resposta: 0,1ms - 1ms GTG NVIDIA G-Sync IPS HDR10",
         "price": "R$ 56,90",
+        "price_12": "R$ 62,89",
+        "price_24": "R$ 59,89",
+        "price_36": "R$ 56,90",
         "img": "https://images.digital.allugator.com/products/MONITOR-AGON-G42-24P-1.png",
         "local_img": "./assets/products/monitor-gamer-agon-g42-24-aoc-full-hd-200hz.png"
     },
     {
         "name": "Monitor Gamer Agon G42 27\" AOC Full HD 200Hz",
+        "description": "Vídeo Resolução Máxima: Full HD Tamanho da Tela: 27 Brilho: 300 a 500 nits Ângulo de Visão: 178°/178° Tempo de Resposta: 0,3 ms NVIDIA G-Sync IPS HDR10",
         "price": "R$ 62,61",
+        "price_12": "R$ 69,20",
+        "price_24": "R$ 65,91",
+        "price_36": "R$ 62,61",
         "img": "https://images.digital.allugator.com/products/MONITOR-AGON-G42-24P-1.png",
         "local_img": "./assets/products/monitor-gamer-agon-g42-27-aoc-full-hd-200hz.png"
     },
     {
         "name": "Notebook ASUS Vivobook 15AMD Ryzen7 16GB 512GB SSD W11 15,6\"FHD",
+        "description": "Máximo desempenho com o processador AMD Ryzen 7. Exclusiva proteção antibacteriana ASUS. Tela NanoEdge Full HD de 15,6 Polegadas - Perfeita para seus olhos. Certificação militar de Resistência US-MIL-STD 810H Processador: AMD Ryzen 7 5825 Sistema Operacional: Memória: 16 GB HD: 512 GB SSD Tipo de Tela: NanoEdge Tamanho da Tela: 15,6 Resolução da Tela: Full HD",
         "price": "R$ 237,41",
+        "price_12": "R$ 262,40",
+        "price_24": "R$ 249,90",
+        "price_36": "R$ 237,41",
         "img": "https://images.digital.allugator.com/products/vivobook15.png",
         "local_img": "./assets/products/notebook-asus-vivobook-15amd-ryzen7-16gb-512gb-ssd-w11-15,6fhd.png"
     },
     {
         "name": "Notebook Asus Tuf Gaming A15 AMD Ryzen7 16GB 512GB SSD 15,6\"",
+        "description": "Processador: AMD Ryzen 7 Sistema Operacional: Windows 11 Home Memória: 16GB HD: 512GB SSD Tela: Tamanho da Tela: 15,6 Polegadas Resolução da Tela: Full HD Placa de Vídeo: RTX 3050",
         "price": "R$ 303,91",
+        "price_12": "R$ 335,90",
+        "price_24": "R$ 319,90",
+        "price_36": "R$ 303,91",
         "img": "https://images.digital.allugator.com/products/asustuf.png",
         "local_img": "./assets/products/notebook-asus-tuf-gaming-a15-amd-ryzen7-16gb-512gb-ssd-15,6.png"
     },
@@ -829,7 +1009,11 @@ window.alluProducts = [
     },
     {
         "name": "Desktop Gamer Predator Orion RTX 3070",
+        "description": "NVIDIA® GeForce® RTX 3070 8 GB GDDR6 - 1TB SSD - 16 GB DDR4 3200mhz - Intel® Core™ i7-11700 11ª geração - PO5-620-BR13",
         "price": "R$ 436,05",
+        "price_12": "R$ 481,95",
+        "price_24": "R$ 459,00",
+        "price_36": "R$ 436,05",
         "img": "https://images.digital.allugator.com/products/ORION1.png",
         "local_img": "./assets/products/desktop-gamer-predator-orion-rtx-3070.png"
     },
@@ -841,7 +1025,11 @@ window.alluProducts = [
     },
     {
         "name": "MacBook Pro M2 13\" 256GB 8GB",
+        "description": "Com potência, portabilidade, design elegante, bateria de longa duração e toda a experiência macOS em um só dispositivo, o MacBook Pro M2 13\" oferece desempenho rápido e eficiente para trabalho, estudo ou criação.",
         "price": "R$ 522,40",
+        "price_12": "R$ 577,39",
+        "price_24": "R$ 549,89",
+        "price_36": "R$ 522,40",
         "img": "https://images.digital.allugator.com/products/macbook-pro-2.png",
         "local_img": "./assets/products/macbook-pro-m2-13-256gb-8gb.png"
     },
@@ -859,37 +1047,61 @@ window.alluProducts = [
     },
     {
         "name": "Apple Watch S6 40MM + CELL",
+        "description": "Apple Watch S6 40MM + CELL",
         "price": "R$ 204,49",
+        "price_12": "R$ 226,01",
+        "price_24": "R$ 215,25",
+        "price_36": "R$ 204,49",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20S6%2040MM.png",
         "local_img": "./assets/products/apple-watch-s6-40mm-+-cell.png"
     },
     {
         "name": "Controle PS5 Dualsense",
+        "description": "O Controle DualSense proporciona uma experiência de jogo avançada, com bateria de íon-lítio recarregável, dimensões compactas e de peso leve, ergonomicamente desenhado para conforto durante longas sessões de jogo.",
         "price": "R$ 32,97",
+        "price_12": "R$ 36,44",
+        "price_24": "R$ 34,71",
+        "price_36": "R$ 32,97",
         "img": "https://images.digital.allugator.com/products/manete-1.png",
         "local_img": "./assets/products/controle-ps5-dualsense.png"
     },
     {
         "name": "MacBook Air M4 13”256GB 16GB",
+        "description": "O MacBook Air M4 13″ é ultrafino, potente com chip M4, tem tela Liquid Retina brilhante e bateria de até 18 horas.",
         "price": "R$ 604,70",
+        "price_12": "R$ 668,35",
+        "price_24": "R$ 636,53",
+        "price_36": "R$ 604,70",
         "img": "https://images.digital.allugator.com/products/mba1.png",
         "local_img": "./assets/products/macbook-air-m4-13”256gb-16gb.png"
     },
     {
         "name": "MacBook Pro M5 14 512GB 16GB RAM",
+        "description": "O MacBook Pro de 14 polegadas com chip M5 traz velocidade de última geração e recursos poderosos de IA para suas tarefas pessoais, profissionais e criativas. Com até 24 horas de bateria e tela Liquid Retina XDR1.",
         "price": "R$ 712,40",
+        "price_12": "R$ 787,39",
+        "price_24": "R$ 749,89",
+        "price_36": "R$ 712,40",
         "img": "https://images.digital.allugator.com/products/Macbook Pro M5.png",
         "local_img": "./assets/products/macbook-pro-m5-14-512gb-16gb-ram.png"
     },
     {
         "name": "Monitor Acer 21.5\"",
+        "description": "Monitor 21.5” Full HD (1920 x 1080) LCD B227Q E3BMIPRZX",
         "price": "R$ 36,68",
+        "price_12": "R$ 40,54",
+        "price_24": "R$ 38,61",
+        "price_36": "R$ 36,68",
         "img": "https://images.digital.allugator.com/products/PACK%20-%201.jpg",
         "local_img": "./assets/products/monitor-acer-21.5.png"
     },
     {
         "name": "Monitor Portátil Acer 15.6” Full HD 60Hz",
+        "description": "O Monitor Portátil Acer 15.6” Full HD 60Hz é leve, compacto e ideal pra quem precisa de uma segunda tela em qualquer lugar. Com resolução Full HD, garante imagens nítidas e cores vivas. A conexão é simples via USB-C, sem complicação. Perfeito pra produtividade, estudos ou entretenimento com praticidade.",
         "price": "R$ 58,88",
+        "price_12": "R$ 65,08",
+        "price_24": "R$ 61,98",
+        "price_36": "R$ 58,88",
         "img": "https://images.digital.allugator.com/products/PACK - 2.jpg",
         "local_img": "./assets/products/monitor-portátil-acer-15.6”-full-hd-60hz.png"
     },
@@ -901,13 +1113,21 @@ window.alluProducts = [
     },
     {
         "name": "Polar Vantage V3 Smartwatch Multiesportivo GPS",
+        "description": "O Polar Vantage V3 é um smartwatch multiesportivo premium com GPS integrado, design leve e bateria de longa duração. Desenvolvido para treinos avançados, oferece métricas completas de desempenho e monitoramento de saúde.",
         "price": "R$ 246,90",
+        "price_12": "R$ 272,89",
+        "price_24": "R$ 259,89",
+        "price_36": "R$ 246,90",
         "img": "https://images.digital.allugator.com/products/Polar Vantage M3-fix.png",
         "local_img": "./assets/products/polar-vantage-v3-smartwatch-multiesportivo-gps.png"
     },
     {
         "name": "Pulseira Inteligente Sem Tela Polar Loop",
+        "description": "O Polar Loop é uma pulseira leve e discreta que monitora sono, frequência cardíaca e atividades 24h por dia, sem tela ou notificações. Ajuda a melhorar a saúde e o bem-estar de forma simples e sem distrações.",
         "price": "R$ 67,18",
+        "price_12": "R$ 74,25",
+        "price_24": "R$ 70,72",
+        "price_36": "R$ 67,18",
         "img": "https://images.digital.allugator.com/products/loop-1.png",
         "local_img": "./assets/products/pulseira-inteligente-sem-tela-polar-loop.png"
     },
@@ -919,7 +1139,11 @@ window.alluProducts = [
     },
     {
         "name": "Geladeira Samsung",
+        "description": "462L, Inverse, Inox, Digital Inverter, SmartThings",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/gela1.png",
         "local_img": "./assets/products/geladeira-samsung.png"
     },
@@ -931,7 +1155,11 @@ window.alluProducts = [
     },
     {
         "name": "ASUS ROG Ally",
+        "description": "Um portátil gamer poderoso com Windows 11. Tela Full HD de 120 Hz, processador Ryzen Z1 Extreme e desempenho de console na palma da sua mão.",
         "price": "R$ 158,46",
+        "price_12": "R$ 175,14",
+        "price_24": "R$ 166,80",
+        "price_36": "R$ 158,46",
         "img": "https://images.digital.allugator.com/products/ASUS-ROG-Ally.png",
         "local_img": "./assets/products/asus-rog-ally.png"
     },
@@ -943,7 +1171,11 @@ window.alluProducts = [
     },
     {
         "name": "Samsung TV 75\"",
+        "description": "75\" UHD 4K, Crystal 4K, Tizen, assistente de voz",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/tv1.png",
         "local_img": "./assets/products/samsung-tv-75.png"
     },
@@ -955,2995 +1187,4991 @@ window.alluProducts = [
     },
     {
         "name": "AirPods 2",
+        "description": "Bluetooth, 15hrs de Bateria",
         "price": "R$ 332,50",
+        "price_12": "R$ 367,50",
+        "price_24": "R$ 350,00",
+        "price_36": "R$ 332,50",
         "img": "https://images.digital.allugator.com/products/Airpods%202.png",
         "local_img": "./assets/products/airpods-2.png"
     },
     {
         "name": "AirPods 4 com Cancelamento Ativo de Ruído",
+        "description": "<p>Chip H2, ANC, Áudio Adaptativo e Áudio Espacial. Resistência IP54 e estojo com carregamento sem fio. Chip: Apple H2 Design: Open-ear (sem ponteiras de silicone) Bluetooth: 5.3 Áudio: Driver de baixa distorção + amplificador de alto range dinâmico Recursos: Spatial Audio Personalizado com head tracking, Dolby Atmos, Siri por voz e gestos de cabeça Cancelamento de ruído: Não incluso (versão padrão) Bateria: até 5h por carga / até 30h com estojo (versão padrão) Carga rápida: 5 min = 1h de uso Carregamento: USB-C Resistência: IPX4 (respingos e suor) PN: MXP63BZ/A</p>",
         "price": "R$ 151,91",
+        "price_12": "R$ 167,90",
+        "price_24": "R$ 159,91",
+        "price_36": "R$ 151,91",
         "img": "https://images.digital.allugator.com/products/Apple AirPods 4 - 1.png",
         "local_img": "./assets/products/airpods-4-com-cancelamento-ativo-de-ruído.png"
     },
     {
         "name": "AirPods Pro 3",
+        "description": "<p>ANC potente com chip H2, monitoramento cardíaco e tradução ao vivo. Áudio Espacial Personalizado e maior autonomia.&nbsp;</p>",
         "price": "R$ 199,41",
+        "price_12": "R$ 220,40",
+        "price_24": "R$ 209,90",
+        "price_36": "R$ 199,41",
         "img": "https://images.digital.allugator.com/products/Apple AirPods 3 - 1.png",
         "local_img": "./assets/products/airpods-pro-3.png"
     },
     {
         "name": "Apple Pencil Pro",
+        "description": "Preço sujeito à variação cambial*",
         "price": "R$ 712,50",
+        "price_12": "R$ 787,50",
+        "price_24": "R$ 750,00",
+        "price_36": "R$ 712,50",
         "img": "https://images.digital.allugator.com/products/Apple Pencil Pro - 1.png",
         "local_img": "./assets/products/apple-pencil-pro.png"
     },
     {
         "name": "Apple Watch S5 40MM",
+        "description": "Apple Watch S5 40MM",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20S5%2040MM.png",
         "local_img": "./assets/products/apple-watch-s5-40mm.png"
     },
     {
         "name": "Apple Watch S5 40MM + CELL",
+        "description": "Apple Watch S5 40MM + CELL",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20S5%2040MM.png",
         "local_img": "./assets/products/apple-watch-s5-40mm-+-cell.png"
     },
     {
         "name": "Apple Watch S5 44MM",
+        "description": "Apple Watch S5 44MM",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20S5%2044MM.png",
         "local_img": "./assets/products/apple-watch-s5-44mm.png"
     },
     {
         "name": "Apple Watch S5 44MM + CELL",
+        "description": "Apple Watch S5 44MM + CELL",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20S5%2044MM.png",
         "local_img": "./assets/products/apple-watch-s5-44mm-+-cell.png"
     },
     {
         "name": "Apple Watch S6 44MM + CELL",
+        "description": "Apple Watch S6 44MM + CELL",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20S6%2044MM.png",
         "local_img": "./assets/products/apple-watch-s6-44mm-+-cell.png"
     },
     {
         "name": "Apple Watch S7 GPS 41MM",
+        "description": "A caixa de alumínio é leve e feita com uma liga de alumínio aeroespacial 100% reciclado.  A pulseira esportiva é feita de fluorelastômero resistente e surpreendentemente macio e vem com um fecho inovador, em forma de pino.",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20S7%2041MM.png",
         "local_img": "./assets/products/apple-watch-s7-gps-41mm.png"
     },
     {
         "name": "Apple Watch S7 GPS 45MM",
+        "description": "A caixa de alumínio é leve e feita com uma liga de alumínio aeroespacial 100% reciclado.  A pulseira esportiva é feita de fluorelastômero resistente e surpreendentemente macio e vem com um fecho inovador, em forma de pino.",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20S7%2045MM.png",
         "local_img": "./assets/products/apple-watch-s7-gps-45mm.png"
     },
     {
         "name": "Apple Watch SE 3 40mm GPS Alumínio watchOS",
+        "description": "<p>Chip: Apple S10 (dual-core 64-bit + Neural Engine 4 núcleos) Caixa: Alumínio 40mm Display: LTPO OLED Always-On Retina, 324x394px, vidro Ion-X Armazenamento: 64GB Conectividade: GPS, Wi-Fi, Bluetooth 5.3 Sensores: Frequência cardíaca óptica (2ª geração), temperatura da pele, acelerômetro, giroscópio, bússola, altímetro Saúde: Notificações de arritmia, apneia do sono, frequência cardíaca alta/baixa, score de sono, app Vitals Bateria: até 18h / até 32h (modo de baixo consumo) Carga rápida: 15 min = 8h de uso Resistência: 50m (natação) Sistema Operacional: watchOS Peso: 26,3g</p>",
         "price": "R$ 208,91",
+        "price_12": "R$ 230,90",
+        "price_24": "R$ 219,90",
+        "price_36": "R$ 208,91",
         "img": "https://images.digital.allugator.com/products/apple-watch-se-40mm-1.png",
         "local_img": "./assets/products/apple-watch-se-3-40mm-gps-alumínio-watchos.png"
     },
     {
         "name": "Apple Watch SE 3 44mm GPS Alumínio watchOS",
+        "description": "<p>Chip: Apple S10 (dual-core 64-bit + Neural Engine 4 núcleos) Caixa: Alumínio 44mm Display: LTPO OLED Always-On Retina, 368x448px, vidro Ion-X Armazenamento: 64GB Conectividade: GPS, Wi-Fi, Bluetooth 5.3 Sensores: Frequência cardíaca óptica (2ª geração), temperatura da pele, acelerômetro, giroscópio, bússola, altímetro Saúde: Notificações de arritmia, apneia do sono, frequência cardíaca alta/baixa, score de sono, app Vitals Bateria: até 18h / até 32h (modo de baixo consumo) Carga rápida: 15 min = 8h de uso Resistência: 50m (natação) Sistema Operacional: watchOS Peso: 32,9g</p>",
         "price": "R$ 223,16",
+        "price_12": "R$ 246,65",
+        "price_24": "R$ 234,90",
+        "price_36": "R$ 223,16",
         "img": "https://images.digital.allugator.com/products/apple-watch-se-44mm-1.png",
         "local_img": "./assets/products/apple-watch-se-3-44mm-gps-alumínio-watchos.png"
     },
     {
         "name": "Apple Watch SE 40MM + CELL",
+        "description": "-",
         "price": "R$ 165,89",
+        "price_12": "R$ 183,35",
+        "price_24": "R$ 174,62",
+        "price_36": "R$ 165,89",
         "img": "https://images.digital.allugator.com/products/apple-watch-se-40mm-1.png",
         "local_img": "./assets/products/apple-watch-se-40mm-+-cell.png"
     },
     {
         "name": "Apple Watch SE 44MM",
+        "description": "-",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%20SE%2044MM.png",
         "local_img": "./assets/products/apple-watch-se-44mm.png"
     },
     {
         "name": "Apple Watch SE 44MM + CELL",
+        "description": "-",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/apple-watch-se-44mm-1.png",
         "local_img": "./assets/products/apple-watch-se-44mm-+-cell.png"
     },
     {
         "name": "Apple Watch Series 11 42mm GPS Alumínio watchOS",
+        "description": "<p>Chip: Apple S10 (dual-core 64-bit + Neural Engine 4 núcleos) Caixa: Alumínio 42mm Display: LTPO3 OLED Always-On Retina wide-angle, 374x446px, até 2000 nits, vidro Ion-X Armazenamento: 64GB Conectividade: GPS, Wi-Fi, Bluetooth 5.3, Ultra Wideband Sensores: ECG, oxímetro, temperatura da pele, frequência cardíaca óptica (3ª geração), acelerômetro, giroscópio, bússola, altímetro Saúde: Notificações de hipertensão, arritmia, apneia do sono, frequência cardíaca, score de sono Bateria: até 24h / até 38h (modo de baixo consumo) Resistência: 50m (natação), IP6X (poeira) Sistema Operacional: watchOS Peso: 30,3g</p>",
         "price": "R$ 327,65",
+        "price_12": "R$ 362,14",
+        "price_24": "R$ 344,89",
+        "price_36": "R$ 327,65",
         "img": "https://images.digital.allugator.com/products/w42-1.png",
         "local_img": "./assets/products/apple-watch-series-11-42mm-gps-alumínio-watchos.png"
     },
     {
         "name": "Apple Watch Series 11 46mm GPS Alumínio watchOS",
+        "description": "<p>Chip: Apple S10 (dual-core 64-bit + Neural Engine 4 núcleos) Caixa: Alumínio 46mm Display: LTPO3 OLED Always-On Retina wide-angle, 416x496px, até 2000 nits, vidro Ion-X Armazenamento: 64GB Conectividade: GPS, Wi-Fi, Bluetooth 5.3, Ultra Wideband Sensores: ECG, oxímetro, temperatura da pele, frequência cardíaca óptica (3ª geração), acelerômetro, giroscópio, bússola, altímetro Saúde: Notificações de hipertensão, arritmia, apneia do sono, frequência cardíaca, score de sono Bateria: até 24h / até 38h (modo de baixo consumo) Resistência: 50m (natação), IP6X (poeira) Sistema Operacional: watchOS Peso: 37,8g</p>",
         "price": "R$ 351,40",
+        "price_12": "R$ 388,39",
+        "price_24": "R$ 369,89",
+        "price_36": "R$ 351,40",
         "img": "https://images.digital.allugator.com/products/w46-1.png",
         "local_img": "./assets/products/apple-watch-series-11-46mm-gps-alumínio-watchos.png"
     },
     {
         "name": "Apple Watch Series 5",
+        "description": "44mm, 32GB",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%205%2044mm.png",
         "local_img": "./assets/products/apple-watch-series-5.png"
     },
     {
         "name": "Apple Watch Series 5 4G",
+        "description": "44mm, 4G, GPS",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%205%204g.png",
         "local_img": "./assets/products/apple-watch-series-5-4g.png"
     },
     {
         "name": "Apple Watch Series 6 4G- 40mm",
+        "description": "40mm, GPS, Resistente à água (50m)",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/WATCH4MM.png",
         "local_img": "./assets/products/apple-watch-series-6-4g--40mm.png"
     },
     {
         "name": "Apple Watch Series 6 4G - 44mm",
+        "description": "44mm, GPS, Resistente à água (50m)",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple%20Watch%206%2044.png",
         "local_img": "./assets/products/apple-watch-series-6-4g---44mm.png"
     },
     {
         "name": "Assassin's Creed Origins - PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/assassins%20creed.jpg",
         "local_img": "./assets/products/assassins-creed-origins---ps4.png"
     },
     {
         "name": "Astrobot para PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/810iCXpEQtL._SL1500_.jpg",
         "local_img": "./assets/products/astrobot-para-ps4.png"
     },
     {
         "name": "Asus Vivobook Go 15 i3 8GB 512 SSD W11 Home FHD",
+        "description": "Intel® Core™ i3 - N305,  Velocidade do Processador: 1,8 GHz,  Cache: 6 MB, Geração: 12ª, Windows 11 Home, 8GB DDR4, 512 GB SSD HD, Tipo de Tela: LED-backlit Anti-Glare, Tamanho da Tela: 15,6\",  Resolução da Tela: 1920x1080, Placa de Vídeo UHD Graphics, Conexão Wireless Wi-Fi 5 (802.11ac) (Dual band) 1*1 Bluetooth 5.1",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Asus Vivobook Go 15 i3 8GB 512 SSD W11 Home FHD-1.png",
         "local_img": "./assets/products/asus-vivobook-go-15-i3-8gb-512-ssd-w11-home-fhd.png"
     },
     {
         "name": "Babá Eletrônica Peek a Boo Dual Monitor e APP Multikids",
+        "description": "<p>Babá eletrônica com monitor duplo, conexão via aplicativo e transmissão em tempo real. Permite acompanhar o ambiente com áudio e vídeo direto pelo monitor ou smartphone. BB491</p>",
         "price": "R$ 113,91",
+        "price_12": "R$ 125,90",
+        "price_24": "R$ 119,91",
+        "price_36": "R$ 113,91",
         "img": "https://images.digital.allugator.com/products/copy_CE9AD683-A1D1-40D2-A4E6-C074E03E9D30.png",
         "local_img": "./assets/products/babá-eletrônica-peek-a-boo-dual-monitor-e-app-multikids.png"
     },
     {
         "name": "Barraca 4 Pessoas",
+        "description": "1,30 m x 2,10 m x 2,10 m / Varetas em Fibra de Vidro",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Barraca.jpg",
         "local_img": "./assets/products/barraca-4-pessoas.png"
     },
     {
         "name": "Bastão de LED RGB YN 360",
+        "description": "Full RGB, 3200 a 5600k, 19W",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Bast%C3%A3o%20LED%20YN360.png",
         "local_img": "./assets/products/bastão-de-led-rgb-yn-360.png"
     },
     {
         "name": "Bastão de Selfie para GoPro",
+        "description": "90cm / Regulável",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Bast%C3%A3o+de+Selfie.jpg",
         "local_img": "./assets/products/bastão-de-selfie-para-gopro.png"
     },
     {
         "name": "Bastão Flutuante para GoPro",
+        "description": "Bastão de baixa densidade",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Basta%CC%83o%2BFlutuante.jpg",
         "local_img": "./assets/products/bastão-flutuante-para-gopro.png"
     },
     {
         "name": "Bateria Extra LP-E17 (T6i, Sl2, T7i)",
+        "description": "LP-E17",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/bateria%20t6i.jpg",
         "local_img": "./assets/products/bateria-extra-lp-e17-(t6i,-sl2,-t7i).png"
     },
     {
         "name": "Bateria Extra LP-E6N (6D, 7D, 80D)",
+        "description": "Bateria LP-E6N para Canon",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Bateria%20Extra%206D.png",
         "local_img": "./assets/products/bateria-extra-lp-e6n-(6d,-7d,-80d).png"
     },
     {
         "name": "Battlefield 1",
+        "description": "1 Jogador / De 8 a 64 Jogadores Online / Mínimo 85GB / Dualshock 4 / Voz em EN-PT / Legendas em EN-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Battlefield1.jpg",
         "local_img": "./assets/products/battlefield-1.png"
     },
     {
         "name": "Bicicleta Goper Smart Bike",
+        "description": "Tela 21\", Bluetooth, aulas ao vivo/on-demand, resistência magnética",
         "price": "R$ 95,00",
+        "price_12": "R$ 105,00",
+        "price_24": "R$ 100,00",
+        "price_36": "R$ 95,00",
         "img": "https://images.digital.allugator.com/products/Bicicleta-Goper-SmartBike-1.png",
         "local_img": "./assets/products/bicicleta-goper-smart-bike.png"
     },
     {
         "name": "Bike Spinning ZiYou 150-S com Tablet Android HD 10.1”",
+        "description": "A Bike Spinning ZiYou 150-S é silenciosa, resistente e ajustável, ideal para treinos em casa. Com estrutura ergonômica, suporta usuários de até 110kg e entre 1,50m e 1,85m. Possui ajuste manual de carga, painel com dados de desempenho e rodinhas para fácil transporte.",
         "price": "R$ 208,05",
+        "price_12": "R$ 229,95",
+        "price_24": "R$ 219,00",
+        "price_36": "R$ 208,05",
         "img": "https://images.digital.allugator.com/products/ziyou1502.png",
         "local_img": "./assets/products/bike-spinning-ziyou-150-s-com-tablet-android-hd-10.1”.png"
     },
     {
         "name": "Bike Spinning ZiYou 250-S com Tablet Android HD 10.1”",
+        "description": "A Bike Spinning ZiYou 250-S é ideal para treinos intensos em casa, oferecendo estrutura robusta, resistência magnética ajustável, funcionamento silencioso e suporte para até 2m de altura e 140kg. Possui ajustes ergonômicos, painel com dados em tempo real, suporte para celular/tablet e rodinhas para facilitar o transporte.",
         "price": "R$ 284,05",
+        "price_12": "R$ 313,95",
+        "price_24": "R$ 299,00",
+        "price_36": "R$ 284,05",
         "img": "https://images.digital.allugator.com/products/zibike2.png",
         "local_img": "./assets/products/bike-spinning-ziyou-250-s-com-tablet-android-hd-10.1”.png"
     },
     {
         "name": "Bloodborne",
+        "description": "1 Jogador / Mínimo 41GB / Online Opcional / Dualshock 4 / Saída de Vídeo em HD",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Bloodborne.jpg",
         "local_img": "./assets/products/bloodborne.png"
     },
     {
         "name": "Bundle 4 Jogos de PS4",
+        "description": "4 jogos",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Bundle%20jogos.jpg",
         "local_img": "./assets/products/bundle-4-jogos-de-ps4.png"
     },
     {
         "name": "Bundle - Game of The Year - PS4",
+        "description": "Singleplayer, Multiplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Game%20Awards%20Bundle.jpg",
         "local_img": "./assets/products/bundle---game-of-the-year---ps4.png"
     },
     {
         "name": "Caixa de Som",
+        "description": "Caixa Portátil Omf-450 Oneal / Falante 15\" / 120w / Bateria Interna / Bluetooth / Usb / Fm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/CaixaDeSom.jpg",
         "local_img": "./assets/products/caixa-de-som.png"
     },
     {
         "name": "Caixa de Som Bluetooth Portátil JBL Boombox 4 210W IP68 34h",
+        "description": "Caixa de som portátil com 210W de potência, dois woofers, dois tweeters e três radiadores passivos para graves profundos e som limpo em alto volume. AI Sound Boost analisa o áudio em tempo real e ajusta o som para maior potência com menos distorção. Certificação IP68 contra água e poeira, autonomia de até 34 horas de reprodução e bateria substituível. Suporte a áudio lossless, conexão Auracast para parear múltiplas caixas e reforço de graves ajustável. Conectividade Bluetooth e USB. Peso de 5,87 kg e dimensões de 262,9 × 212,9 × 506,4 mm",
         "price": "R$ 265,90",
+        "price_12": "R$ 293,89",
+        "price_24": "R$ 279,89",
+        "price_36": "R$ 265,90",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F429ebae9-6fbd-4f86-8083-1956764af263%2Fgeneral-1781013485213-caixa-de-som-bluetooth-port_til-jbl-boombox-4-210w-ip68-34-horas-3.png",
         "local_img": "./assets/products/caixa-de-som-bluetooth-portátil-jbl-boombox-4-210w-ip68-34h.png"
     },
     {
         "name": "Caixa de Som Bluetooth Portátil LG XBoom Go XG9S 120W IP67 24h",
+        "description": "Caixa de som portátil com 120W RMS (80W + 40W), dois woofers de 4.5 polegadas e tweeter de compressão de 1 polegada. Certificação IP67 contra água e poeira, autonomia de até 24 horas e função Power Bank para carregar dispositivos. Iluminação de palco multicolorida com 16 milhões de cores sincronizada com a música. Bluetooth 5.1 com multiponto para dois dispositivos, modo duplo e conexão de até 10 caixas simultaneamente. Compatível com o aplicativo XBOOM para personalização de EQ e iluminação. Peso de 7,1 kg e dimensões de 524 × 245 × 190 mm",
         "price": "R$ 175,66",
+        "price_12": "R$ 194,15",
+        "price_24": "R$ 184,90",
+        "price_36": "R$ 175,66",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F5213c1c2-46d1-40c0-96f0-5495868ced74%2Fgeneral-1780949657562-caixa-de-som-bluetooth-port_til-lg-xboom-go-xg9s-120w-ip67-24-horas-_2_-3.png",
         "local_img": "./assets/products/caixa-de-som-bluetooth-portátil-lg-xboom-go-xg9s-120w-ip67-24h.png"
     },
     {
         "name": "Caixa de Som Bluetooth Portátil LG XBoom Grab 30W IP67 20h",
+        "description": "Caixa de som portátil com 30W RMS, tweeter de cúpula Peerless de 16 mm e woofer de 80 × 45 mm. Som AI que ajusta automaticamente o perfil de áudio ao gênero musical com Space Calibration para adaptação ao ambiente. Certificação IP67 e aprovação nos 7 testes do padrão militar MIL-STD-810H. Autonomia de até 20 horas com carga via USB-C e Bluetooth 5.4 com multiponto e Auracast. Compatível com o aplicativo LG ThinQ. Peso de 700 g",
         "price": "R$ 94,91",
+        "price_12": "R$ 104,90",
+        "price_24": "R$ 99,91",
+        "price_36": "R$ 94,91",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2Fad0cf1ec-6b4d-4aca-a610-805c222cced4%2Fgeneral-1780940402807-caixa-de-som-bluetooth-port_til-lg-xboom-grab-30w-ip67-20-horas-1.png",
         "local_img": "./assets/products/caixa-de-som-bluetooth-portátil-lg-xboom-grab-30w-ip67-20h.png"
     },
     {
         "name": "Caixa De Som Boombox Plus AIWA BBS-01-B 200W Bluetooth 30H IP66",
+        "description": "<p>Com potência de 200W, conexão Bluetooth e bateria com até 30 horas de reprodução, a Aiwa Boombox Plus entrega som potente para ambientes internos e externos. Conta com certificação IP66 contra água e poeira e entrada USB para reprodução de músicas.</p>",
         "price": "R$ 208,91",
+        "price_12": "R$ 230,90",
+        "price_24": "R$ 219,90",
+        "price_36": "R$ 208,91",
         "img": "https://images.digital.allugator.com/products/copy_092B85A3-7EE6-4156-AB86-3DDF7BAB3866.png",
         "local_img": "./assets/products/caixa-de-som-boombox-plus-aiwa-bbs-01-b-200w-bluetooth-30h-ip66.png"
     },
     {
         "name": "Caixa de Som JBL Charge 5 Wi-Fi Bluetooth IP67 20h Powerbank",
+        "description": "<p>Potência: 40W Drivers: Woofer de longo curso + tweeter dedicado + 2 radiadores passivos de graves Wi-Fi: Dual-band Wi-Fi 6, AirPlay 2, Chromecast built-in, Alexa Multi-Room Music, Spotify Connect Bluetooth: 5.3, LE Audio, Auracast (stereo pair e multi-speaker) Bateria: até 20h de autonomia Powerbank: porta USB-A para carregar dispositivos Resistência: IP67 (água e poeira) Auto-tuning: microfones integrados para otimização de áudio por ambiente App: JBL One (EQ, configurações e serviços de música) Carregamento: USB-C Materiais: plástico e tecido reciclados pós-consumo</p>",
         "price": "R$ 189,91",
+        "price_12": "R$ 209,90",
+        "price_24": "R$ 199,90",
+        "price_36": "R$ 189,91",
         "img": "https://images.digital.allugator.com/products/JBL Charge 5 Wi-Fi-1.png",
         "local_img": "./assets/products/caixa-de-som-jbl-charge-5-wi-fi-bluetooth-ip67-20h-powerbank.png"
     },
     {
         "name": "Caixa de Som Speaker AIWA SP-05-LB 30W Bluetooth IPX5",
+        "description": "Caixa de som portátil com potência de 30W, conexão Bluetooth e certificação IPX5 contra respingos de água. Conta com bateria recarregável para reprodução sem fio em ambientes internos e externos, além de design compacto e portátil para transporte facilitado.",
         "price": "R$ 66,41",
+        "price_12": "R$ 73,40",
+        "price_24": "R$ 69,91",
+        "price_36": "R$ 66,41",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2Fbc6cf4f0-21fb-468d-8562-e4c5ceceae29%2Fgeneral-1779999987754-caixa-de-som-speaker-aiwa-sp-2.png",
         "local_img": "./assets/products/caixa-de-som-speaker-aiwa-sp-05-lb-30w-bluetooth-ipx5.png"
     },
     {
         "name": "Caixa Estanque para GoPro Hero 6 e 7",
+        "description": "A prova d'água, resistente à impacto",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/caixa%20estanque%20gopro%20hero%206.jpg",
         "local_img": "./assets/products/caixa-estanque-para-gopro-hero-6-e-7.png"
     },
     {
         "name": "Call Of Duty - WW II",
+        "description": "De 1 a 2 Jogadores / De 2 a 18 Jogadores Online / Mínimo 80GB / Uso Online Opcional / Dualshock 4 / Voz EN-PT / Legendas em EN-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/CallofDutyWWII.jpg",
         "local_img": "./assets/products/call-of-duty---ww-ii.png"
     },
     {
         "name": "Câmera de Ação DJI Osmo Action 4 Standard Combo 4K",
+        "description": "<p>Sensor CMOS de 1/1.3\" com 10-bit e D-Log M. Vídeo 4K até 120fps e 2.7K até 120fps. Estabilização HorizonSteady (360°) e RockSteady 3.0. Lente com FOV de 155°. Resistência à água até 18m sem caixa (60m com caixa). Microfone com cancelamento de ruído. Bateria de 1.770mAh com até 160min de gravação. Tela frontal de 1.4\" e traseira de 2.25\" (touchscreen). Sistema de fixação magnético rápido.&nbsp;</p>",
         "price": "R$ 246,90",
+        "price_12": "R$ 272,89",
+        "price_24": "R$ 259,89",
+        "price_36": "R$ 246,90",
         "img": "https://images.digital.allugator.com/products/DJI Osmo Action 4 Standard - 1.png",
         "local_img": "./assets/products/câmera-de-ação-dji-osmo-action-4-standard-combo-4k.png"
     },
     {
         "name": "Câmera Instantânea Instax Mini 12",
+        "description": "Câmera instantânea compacta com impressão rápida de fotos em filme Instax Mini. Conta com exposição automática, modo close-up e flash integrado para registros mais práticos em diferentes ambientes. Possui design portátil e operação simplificada para fotos instantâneas no dia a dia.",
         "price": "R$ 75,91",
+        "price_12": "R$ 83,90",
+        "price_24": "R$ 79,91",
+        "price_36": "R$ 75,91",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F436a78c7-f5b5-416a-95ae-6dbc20e88804%2Fgeneral-1780000182277-ca__mera-instax-mini-12-4.png",
         "local_img": "./assets/products/câmera-instantânea-instax-mini-12.png"
     },
     {
         "name": "Canon 60D",
+        "description": "18 MP, LCD Articulada",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2060D.png",
         "local_img": "./assets/products/canon-60d.png"
     },
     {
         "name": "Canon 6D (Fullframe) + Lente 50mm",
+        "description": "Premium, 20MP, Fullframe",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%206D%20%2B%2050mm%20v1.png",
         "local_img": "./assets/products/canon-6d-(fullframe)-+-lente-50mm.png"
     },
     {
         "name": "Canon 6D Mark II (Fullframe) + Lente 50mm",
+        "description": "Premium, Fullframe",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%206D%20Mark%20II%20%2B%2050mm.png",
         "local_img": "./assets/products/canon-6d-mark-ii-(fullframe)-+-lente-50mm.png"
     },
     {
         "name": "Canon 70D + Lente 50mm f1.8 Canon",
+        "description": "20.2 MP, 19 pontos AF",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2070D%20%2B%2050mm.png",
         "local_img": "./assets/products/canon-70d-+-lente-50mm-f1.8-canon.png"
     },
     {
         "name": "Canon 7D + Lente 18-55mm e 18-135mm",
+        "description": "Sensor CMOS, 5360 x 3515 pixels",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%207D.png",
         "local_img": "./assets/products/canon-7d-+-lente-18-55mm-e-18-135mm.png"
     },
     {
         "name": "Canon 7D Mark II com Lente 18-200mm",
+        "description": "20MP,  Sensor CMOS, 65 Pontos de AF",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%207D%20Mark%20II.png",
         "local_img": "./assets/products/canon-7d-mark-ii-com-lente-18-200mm.png"
     },
     {
         "name": "Canon 80D",
+        "description": "24MP, 45 Pontos de AF, 60FPS a 1080p",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2080D.png",
         "local_img": "./assets/products/canon-80d.png"
     },
     {
         "name": "Canon 80D (Assinatura)",
+        "description": "24MP, APSC, 1080p60fps, 45AFP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2080D.png",
         "local_img": "./assets/products/canon-80d-(assinatura).png"
     },
     {
         "name": "Canon SL2",
+        "description": "24MP, Wi-Fi",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%20Sl2.png",
         "local_img": "./assets/products/canon-sl2.png"
     },
     {
         "name": "Canon SL2 (Assinatura)",
+        "description": "24MP, APSC",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%20Sl2.png",
         "local_img": "./assets/products/canon-sl2-(assinatura).png"
     },
     {
         "name": "Canon T5",
+        "description": "18 MP, Lente 18-55mm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/canon%20t5%20v2.png",
         "local_img": "./assets/products/canon-t5.png"
     },
     {
         "name": "Canon T5i",
+        "description": "18 MP, Wi-Fi, Lente 18-55mm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/canon%20t5i%201.jpg",
         "local_img": "./assets/products/canon-t5i.png"
     },
     {
         "name": "Canon T5i + Lente 18mm-135mm f/3.5-5.6",
+        "description": "24MP, Wi-fi",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%20t5i%20%2B%2018-135mm.png",
         "local_img": "./assets/products/canon-t5i-+-lente-18mm-135mm-f-3.5-5.6.png"
     },
     {
         "name": "Canon T6",
+        "description": "18MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%20t6%20v1.png",
         "local_img": "./assets/products/canon-t6.png"
     },
     {
         "name": "Canon T6i",
+        "description": "Lente 18-55mm / 24 MegaPixels / Wi-Fi",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%20t6i.png",
         "local_img": "./assets/products/canon-t6i.png"
     },
     {
         "name": "Canon T6i (Assinatura)",
+        "description": "24MP, APSC",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%20t6i.png",
         "local_img": "./assets/products/canon-t6i-(assinatura).png"
     },
     {
         "name": "Canon T7",
+        "description": "24MP,",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%20T7.png",
         "local_img": "./assets/products/canon-t7.png"
     },
     {
         "name": "Canon T7i",
+        "description": "24.2 MP, 45 Pontos de AF",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%20T7i.png",
         "local_img": "./assets/products/canon-t7i.png"
     },
     {
         "name": "Chromebook Acer 511  Intel Celeron 4GB",
+        "description": "Chrome OS, Processador Intel Celeron N4500 Série N, 4GB Ram DDR4, 32GB Armazenamento, Tela 11.6\" HD (1366x768), Segurança Chip TPM H1, C734-C6E8",
         "price": "R$ 123,41",
+        "price_12": "R$ 136,40",
+        "price_24": "R$ 129,91",
+        "price_36": "R$ 123,41",
         "img": "https://images.digital.allugator.com/products/cb1.png",
         "local_img": "./assets/products/chromebook-acer-511--intel-celeron-4gb.png"
     },
     {
         "name": "Colchão Inflável Casal",
+        "description": "Casal, Bomba Interna",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/colch%C3%A3o%20infl%C3%A1vel.jpg",
         "local_img": "./assets/products/colchão-inflável-casal.png"
     },
     {
         "name": "Conjunto de Bateria Canon T6i",
+        "description": "Bateria LP-e17",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/bateria%20extra.jpg",
         "local_img": "./assets/products/conjunto-de-bateria-canon-t6i.png"
     },
     {
         "name": "Conjunto de Baterias para GoPro Hero 5, 6 e 7",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/carregador%20e%20baterias%20extras%20GoPro.jpg",
         "local_img": "./assets/products/conjunto-de-baterias-para-gopro-hero-5,-6-e-7.png"
     },
     {
         "name": "Console Nintendo Switch 2 256GB 4K 120FPS",
+        "description": "<p>Processador: CPU/GPU customizado NVIDIA (arquitetura Ampere) Armazenamento: 256GB UFS (expansível via microSD Express) Tela: LCD 7,9\" touchscreen, 1080p, 120Hz, HDR10, VRR Resolução TV: até 4K 60FPS / 1080p e 1440p até 120FPS Conectividade: Wi-Fi 6, Bluetooth, 2x USB-C Bateria: 5220 mAh, até 6,5h de autonomia Modos de uso: Portátil, Mesa e TV (Dock incluso) Controles: Joy-Con 2 magnéticos inclusos Retrocompatibilidade: Jogos Nintendo Switch Microfone: Integrado com cancelamento de ruído Peso: 534g (com Joy-Con 2)</p>",
         "price": "R$ 384,65",
+        "price_12": "R$ 425,14",
+        "price_24": "R$ 404,89",
+        "price_36": "R$ 384,65",
         "img": "https://images.digital.allugator.com/products/Nintendo Switch 2-1.png",
         "local_img": "./assets/products/console-nintendo-switch-2-256gb-4k-120fps.png"
     },
     {
         "name": "Console Portátil ASUS ROG Ally X 1TB 120Hz FHD Windows 11",
+        "description": "<p>Processador: AMD Ryzen Z1 Extreme (Zen 4, 4nm, 8 núcleos/16 threads, até 5.10 GHz) GPU: AMD Radeon RDNA 3 (12 CUs, até 8.6 TFLOPS) Memória RAM: 24GB LPDDR5X-7500 Armazenamento: 1TB SSD NVMe PCIe 4.0 M.2 2280 Tela: 7\" IPS FHD 1920x1080, 120Hz, VRR, FreeSync Premium, touchscreen Sistema Operacional: Windows 11 Home Bateria: 80Wh, carga rápida 0-50% em 30 minutos Conectividade: Wi-Fi 6E, Bluetooth 5.3, 2x USB-C Áudio: Alto-falantes duplos frontais com Dolby Atmos Peso: 678g</p>",
         "price": "R$ 750,40",
+        "price_12": "R$ 829,39",
+        "price_24": "R$ 789,89",
+        "price_36": "R$ 750,40",
         "img": "https://images.digital.allugator.com/products/Console-Rog-Xbox-Ally-Asus-Ryzen-Z2-WHT-1.png",
         "local_img": "./assets/products/console-portátil-asus-rog-ally-x-1tb-120hz-fhd-windows-11.png"
     },
     {
         "name": "Console Portátil Valve Steam Deck OLED 512GB 90Hz HDR",
+        "description": "<p>Processador: AMD APU 6nm, CPU Zen 2 (4 núcleos/8 threads, 2.4-3.5 GHz) GPU: AMD RDNA 2 (8 CUs, 1.6 GHz, 1.6 TFLOPS) Memória RAM: 16GB LPDDR5 (6400 MT/s) Armazenamento: 512GB NVMe SSD + slot microSD UHS-I Tela: 7.4\" OLED HDR, 1280x800, 90Hz, 1000 nits (HDR) / 600 nits (SDR), &lt;0.1ms resposta Sistema Operacional: SteamOS 3.0 (baseado em Arch Linux) Bateria: 50Wh, 3-12h de autonomia Conectividade: Wi-Fi 6E, Bluetooth 5.3, USB-C (DisplayPort, USB 3.2 Gen 2) Saída de vídeo: até 8K @60Hz ou 4K @120Hz via USB-C Peso: 640g</p>",
         "price": "R$ 569,90",
+        "price_12": "R$ 629,89",
+        "price_24": "R$ 599,89",
+        "price_36": "R$ 569,90",
         "img": "https://images.digital.allugator.com/products/Steam Deck OLED 512GB-1.png",
         "local_img": "./assets/products/console-portátil-valve-steam-deck-oled-512gb-90hz-hdr.png"
     },
     {
         "name": "Console Xbox Series X 1TB 4K 120FPS",
+        "description": "<p>Processador: AMD Zen 2, 8 núcleos a 3.8 GHz (3.6 GHz com SMT) GPU: AMD RDNA 2, 12 teraflops Memória RAM: 16GB GDDR6 Armazenamento: 1TB Custom NVMe SSD Resolução: Até 4K nativo (suporte a 8K HDR) Taxa de atualização: Até 120 FPS Leitor óptico: 4K UHD Blu-Ray Conectividade: HDMI 2.1, 3x USB 3.1 Gen 1, Wi-Fi 5 dual band, Bluetooth Compatibilidade retroativa: 4 gerações de Xbox Cor: Carbon Black PN: 899-00588-01</p>",
         "price": "R$ 569,90",
+        "price_12": "R$ 629,89",
+        "price_24": "R$ 599,89",
+        "price_36": "R$ 569,90",
         "img": "https://images.digital.allugator.com/products/Xbox Series X 1TB-1.png",
         "local_img": "./assets/products/console-xbox-series-x-1tb-4k-120fps.png"
     },
     {
         "name": "Controle PS4",
+        "description": "1 Controle Dualshock / Bateria Recarregável / Acompanha Cabo USB",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Gamepad1.jpg",
         "local_img": "./assets/products/controle-ps4.png"
     },
     {
         "name": "Controle Xbox Series S",
+        "description": "Sem Fio",
         "price": "R$ 33,55",
+        "price_12": "R$ 37,08",
+        "price_24": "R$ 35,32",
+        "price_36": "R$ 33,55",
         "img": "https://images.digital.allugator.com/products/Controle%20Xbox.png",
         "local_img": "./assets/products/controle-xbox-series-s.png"
     },
     {
         "name": "Crash Bandicoot N'sane Trilogy",
+        "description": "1 Jogador / Mínimo 30GB / Dualshock 4 / Voz em EN-FR-IT-DE-SP-JA",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Crash.jpg",
         "local_img": "./assets/products/crash-bandicoot-nsane-trilogy.png"
     },
     {
         "name": "Dark Souls III",
+        "description": "1 Jogador / De 2 a 6 Jogadors Online / No mínimo 20Gb / Dualshock 4",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/box+dark+souls+3.jpg",
         "local_img": "./assets/products/dark-souls-iii.png"
     },
     {
         "name": "Desktop Acer Orion I5 RTX 3060 16GB Linux",
+        "description": "NVIDIA® GeForce® RTX 3060 12 GB GDDR6 - 512 GB SSD - 16 GB DDR4 3200mhz - Intel® Core™ i5-11400 11ª geração - PO5-620-BR12",
         "price": "R$ 405,98",
+        "price_12": "R$ 448,71",
+        "price_24": "R$ 427,35",
+        "price_36": "R$ 405,98",
         "img": "https://images.digital.allugator.com/products/acer%20orion%202.png",
         "local_img": "./assets/products/desktop-acer-orion-i5-rtx-3060-16gb-linux.png"
     },
     {
         "name": "Desktop Acer Orion I5 RTX 3060 16GB Windows",
+        "description": "NVIDIA® GeForce® RTX 3060 12 GB GDDR6 - 512 GB SSD - 16 GB DDR4 3200mhz - Intel® Core™ i5-11400 11ª geração - PO5-620-BR12",
         "price": "R$ 405,98",
+        "price_12": "R$ 448,71",
+        "price_24": "R$ 427,35",
+        "price_36": "R$ 405,98",
         "img": "https://images.digital.allugator.com/products/acer%20orion%202.png",
         "local_img": "./assets/products/desktop-acer-orion-i5-rtx-3060-16gb-windows.png"
     },
     {
         "name": "Desktop Acer Orion I7 RTX 3060 16GB",
+        "description": "NVIDIA® GeForce® RTX 3060 12 GB GDDR6 - 1 TB SSD - 16 GB DDR4 3200mhz - Intel® Core™ i7-11700 11ª geração - PO5-620-BR15",
         "price": "R$ 313,36",
+        "price_12": "R$ 346,34",
+        "price_24": "R$ 329,85",
+        "price_36": "R$ 313,36",
         "img": "https://images.digital.allugator.com/products/acer%20orion%203.png",
         "local_img": "./assets/products/desktop-acer-orion-i7-rtx-3060-16gb.png"
     },
     {
         "name": "Desktop Acer Orion I7 RTX 3060 16GB Windows",
+        "description": "NVIDIA® GeForce® RTX 3060 12 GB GDDR6 - 1 TB SSD - 16 GB DDR4 3200mhz - Intel® Core™ i7-11700 11ª geração - PO5-620-BR15",
         "price": "R$ 313,36",
+        "price_12": "R$ 346,34",
+        "price_24": "R$ 329,85",
+        "price_36": "R$ 313,36",
         "img": "https://images.digital.allugator.com/products/acer%20orion%203.png",
         "local_img": "./assets/products/desktop-acer-orion-i7-rtx-3060-16gb-windows.png"
     },
     {
         "name": "Desktop Acer Orion I7 RTX 3080 32GB",
+        "description": "NVIDIA® GeForce® RTX 3080 10 GB GDDR6 - 1 TB SSD - 32 GB RAM - Intel® Core™ i7-11700 11ª geração - PO5-620-BR14",
         "price": "R$ 455,05",
+        "price_12": "R$ 502,95",
+        "price_24": "R$ 479,00",
+        "price_36": "R$ 455,05",
         "img": "https://images.digital.allugator.com/products/acer%20orion%201.webp",
         "local_img": "./assets/products/desktop-acer-orion-i7-rtx-3080-32gb.png"
     },
     {
         "name": "Desktop Acer Orion I7 RTX 3080 32GB Linux",
+        "description": "NVIDIA® GeForce® RTX 3080 10 GB GDDR6 - 1 TB SSD - 32 GB RAM - Intel® Core™ i7-11700 11ª geração - PO5-620-BR14",
         "price": "R$ 455,06",
+        "price_12": "R$ 502,96",
+        "price_24": "R$ 479,01",
+        "price_36": "R$ 455,06",
         "img": "https://images.digital.allugator.com/products/acer%20orion%201.webp",
         "local_img": "./assets/products/desktop-acer-orion-i7-rtx-3080-32gb-linux.png"
     },
     {
         "name": "Desktop Gamer Predator Orion RTX 3070 Linux",
+        "description": "NVIDIA® GeForce® RTX 3070 8 GB GDDR6 - 1TB SSD - 16 GB DDR4 3200mhz - Intel® Core™ i7-11700 11ª geração - PO5-620-BR13",
         "price": "R$ 356,11",
+        "price_12": "R$ 393,59",
+        "price_24": "R$ 374,85",
+        "price_36": "R$ 356,11",
         "img": "https://images.digital.allugator.com/products/acer%20orion%201.png",
         "local_img": "./assets/products/desktop-gamer-predator-orion-rtx-3070-linux.png"
     },
     {
         "name": "Destiny 2 para PS4",
+        "description": "Multiplayer, Online",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/destiny%202.jpg",
         "local_img": "./assets/products/destiny-2-para-ps4.png"
     },
     {
         "name": "Detroit Become Human - PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/detroit%20become%20human.jpg",
         "local_img": "./assets/products/detroit-become-human---ps4.png"
     },
     {
         "name": "DJI Osmo Action",
+        "description": "4K, 240fps, RAW",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/DJI%20Osmo%20Action.png",
         "local_img": "./assets/products/dji-osmo-action.png"
     },
     {
         "name": "DJI Osmo Mobile 2",
+        "description": "Estabilizador para celulares, carga máxima: 485g",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/dji-osmo-mobile-2-r-80300-a-vista-D_NQ_NP_784964-MLB27734159392_072018-F%20%282%29.png",
         "local_img": "./assets/products/dji-osmo-mobile-2.png"
     },
     {
         "name": "DJI Osmo Pocket (Câmera 4k Estabilizada)",
+        "description": "4K, 60fps, Estabilização Total",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dji%20Osmo%20Pocket.png",
         "local_img": "./assets/products/dji-osmo-pocket-(câmera-4k-estabilizada).png"
     },
     {
         "name": "Dome Shoot para GoPro Hero 6 e 7",
+        "description": "6 polegadas",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dome%20Shoot.jpg",
         "local_img": "./assets/products/dome-shoot-para-gopro-hero-6-e-7.png"
     },
     {
         "name": "Dome Telesin para GoPro Hero 6 e 7",
+        "description": "A prova d'água",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/dome%20GoPro.jpg",
         "local_img": "./assets/products/dome-telesin-para-gopro-hero-6-e-7.png"
     },
     {
         "name": "Doom 2016 - PS4",
+        "description": "multiplayer online",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/doom.jpg",
         "local_img": "./assets/products/doom-2016---ps4.png"
     },
     {
         "name": "Dragon Ball Fighter Z",
+        "description": "De 1 a 2 Jogadores / De 2 a 6 jogadores Online / Mínimo 6GB / Online Opcional / Dualshock 4 / Compatível com PS4 Pro",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/DragonBall.jpg",
         "local_img": "./assets/products/dragon-ball-fighter-z.png"
     },
     {
         "name": "Dragon Quest XI - PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/dragon%20quest%20XI.jpg",
         "local_img": "./assets/products/dragon-quest-xi---ps4.png"
     },
     {
         "name": "Drone DJI Mavic Pro",
+        "description": "Premium, 12.3MP, 4K, GPS",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dji%20Mavic%20Pro.png",
         "local_img": "./assets/products/drone-dji-mavic-pro.png"
     },
     {
         "name": "Drone DJI Neo 2 Fly More Combo BR - DJI070C",
+        "description": "<p>O DJI Neo 2 Fly More Combo oferece gravação em alta resolução, voo estável com sensores inteligentes e controle simplificado para capturas aéreas. O kit inclui baterias extras, hub de carregamento e acessórios para maior autonomia de voo.</p>",
         "price": "R$ 351,40",
+        "price_12": "R$ 388,39",
+        "price_24": "R$ 369,89",
+        "price_36": "R$ 351,40",
         "img": "https://images.digital.allugator.com/products/copy_EF047C57-5A31-43CE-B5EE-9784E4965F93.PNG",
         "local_img": "./assets/products/drone-dji-neo-2-fly-more-combo-br---dji070c.png"
     },
     {
         "name": "Drone DJI Phantom 3 Standard",
+        "description": "22 min de vôo, 12 MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dji%20Phantom%203%20Standard.png",
         "local_img": "./assets/products/drone-dji-phantom-3-standard.png"
     },
     {
         "name": "Drone DJI Phantom 4",
+        "description": "4K, 120fps HD, 28 min de vôo",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dji%20Phantom%204.png",
         "local_img": "./assets/products/drone-dji-phantom-4.png"
     },
     {
         "name": "Drone DJI Spark",
+        "description": "12MP, 1080p, 30FPS, GPS",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dji%20Spark.png",
         "local_img": "./assets/products/drone-dji-spark.png"
     },
     {
         "name": "Echo Dot 5ª Geração Amazon com Alexa Smart Speaker",
+        "description": "<p>Smart speaker com Alexa integrada, áudio aprimorado e conectividade Wi-Fi e Bluetooth. Permite controlar dispositivos inteligentes, reproduzir músicas, criar rotinas e acessar comandos por voz.</p>",
         "price": "R$ 66,41",
+        "price_12": "R$ 73,40",
+        "price_24": "R$ 69,91",
+        "price_36": "R$ 66,41",
         "img": "https://images.digital.allugator.com/products/copy_AA19C7B6-2742-4E53-9460-D3A8793CADF4.png",
         "local_img": "./assets/products/echo-dot-5ª-geração-amazon-com-alexa-smart-speaker.png"
     },
     {
         "name": "Elíptico Goper Smart",
+        "description": "LCD multifuncional, 16 resistências, Bluetooth, até 120kg",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/Eliptico%20Goper-1.png",
         "local_img": "./assets/products/elíptico-goper-smart.png"
     },
     {
         "name": "Estabilizador Steadycam Glicam Kicam",
+        "description": "Até 2.5kg de peso",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/steadycam%20kicam.png",
         "local_img": "./assets/products/estabilizador-steadycam-glicam-kicam.png"
     },
     {
         "name": "Estabilizador Steadycam MaxiGrua",
+        "description": "Até 2kg de Peso, Plate para Manfrotto,",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/steadycam%20maxigrua.png",
         "local_img": "./assets/products/estabilizador-steadycam-maxigrua.png"
     },
     {
         "name": "Estabilizador Steadycam S40",
+        "description": "Carga Máxima 3KG",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Steadycam%20S40.png",
         "local_img": "./assets/products/estabilizador-steadycam-s40.png"
     },
     {
         "name": "Estabilizador Zhiyun Crane 3 Eixos",
+        "description": "1.5G de Carga, 3 Eixos",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/estabilizados%20zhiyun%20crane.png",
         "local_img": "./assets/products/estabilizador-zhiyun-crane-3-eixos.png"
     },
     {
         "name": "Esteira Ergométrica ZiYou 150-S com Tablet Android HD 10.1”",
+        "description": "A Esteira ZiYou 150-S é compacta, dobrável e silenciosa, ideal para uso doméstico. Suporta usuários de até 100kg e 2m de altura, com velocidade de até 16km/h e inclinação manual em 3 níveis. Possui painel com dados de treino, sensores cardíacos, atalhos nos braços e 18 programas de treinamento. Leve, fácil de mover e perfeita para caminhar ou correr em casa.",
         "price": "R$ 236,55",
+        "price_12": "R$ 261,45",
+        "price_24": "R$ 249,00",
+        "price_36": "R$ 236,55",
         "img": "https://images.digital.allugator.com/products/ziesteira2.png",
         "local_img": "./assets/products/esteira-ergométrica-ziyou-150-s-com-tablet-android-hd-10.1”.png"
     },
     {
         "name": "Esteira Ergométrica ZiYou 250-S com Tablet Android HD 10.1”",
+        "description": "A Esteira ZiYou 250-S suporta até 120kg, tem área ampla de corrida, inclinação eletrônica, motor silencioso e painel intuitivo com atalhos e monitoramento. Dobrável e fácil de guardar, oferece programas variados para treinos intensos em casa.",
         "price": "R$ 312,55",
+        "price_12": "R$ 345,45",
+        "price_24": "R$ 329,00",
+        "price_36": "R$ 312,55",
         "img": "https://images.digital.allugator.com/products/zisteira2.png",
         "local_img": "./assets/products/esteira-ergométrica-ziyou-250-s-com-tablet-android-hd-10.1”.png"
     },
     {
         "name": "Esteira Goper Run PersonalTouch",
+        "description": "Tela touch 15\", Wi-Fi, amortecimento, treino personalizado",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/gopeira1.png",
         "local_img": "./assets/products/esteira-goper-run-personaltouch.png"
     },
     {
         "name": "F1 2018",
+        "description": "1 Jogador / De 2 a 20 Jogadors Online / No mínimo 35Gb / Dualshock 4 / Voz em EN-FR-SP-PT / Legendas em EN-FR-SP-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/F1+2018+box.jpg",
         "local_img": "./assets/products/f1-2018.png"
     },
     {
         "name": "FIFA 18",
+        "description": "De 1 a 4 Jogadores / De 2 a 22 Jogadore Online / No mínimo 50Gb / Dualshock 4 / Online Opcional / Voz em EN-PT / Legendas em EN-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Fifa18.jpg",
         "local_img": "./assets/products/fifa-18.png"
     },
     {
         "name": "Fifa 19 para PS4",
+        "description": "Singleplayer, Multiplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/fifa%2019.jpg",
         "local_img": "./assets/products/fifa-19-para-ps4.png"
     },
     {
         "name": "Final Fantasy XV",
+        "description": "Singleplayer",
         "price": "R$ 14,25",
+        "price_12": "R$ 15,75",
+        "price_24": "R$ 15,00",
+        "price_36": "R$ 14,25",
         "img": "https://images.digital.allugator.com/products/Screen%20Shot%202019-03-28%20at%2014.58.09.png",
         "local_img": "./assets/products/final-fantasy-xv.png"
     },
     {
         "name": "Flash Canon 430 EX",
+        "description": "até 70 pés, Posições do zoom: 24mm, 28mm, 35mm, 50mm, 70mm, 80mm, 105mm;",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Canon%20430%20ex%20v2.png",
         "local_img": "./assets/products/flash-canon-430-ex.png"
     },
     {
         "name": "Flash Canon 470ai Ex",
+        "description": "Inteligência Artificial (Ai Bounce),  E-TTLII, E-TTL, TTL",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Canon%20470ai.png",
         "local_img": "./assets/products/flash-canon-470ai-ex.png"
     },
     {
         "name": "Flash Canon 600 EX",
+        "description": "20-200mm, TTL",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Canon%20600ex.png",
         "local_img": "./assets/products/flash-canon-600-ex.png"
     },
     {
         "name": "Flash Canon 600EX-RT",
+        "description": "E-TTL II, E-TTL",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Canon%20600ex.png",
         "local_img": "./assets/products/flash-canon-600ex-rt.png"
     },
     {
         "name": "Flash Canon Speedlite 430 EX II",
+        "description": "até 80 pés, Posições do zoom: 24mm, 28mm, 35mm, 50mm, 70mm, 80mm, 105mm;",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/flash%20canon%20430%20EX%20II.jpg",
         "local_img": "./assets/products/flash-canon-speedlite-430-ex-ii.png"
     },
     {
         "name": "Flash Nikon SB-600",
+        "description": "auto-zoom 24mm a 85mm, 4 pilhas AA",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Nikon%20SB-600.png",
         "local_img": "./assets/products/flash-nikon-sb-600.png"
     },
     {
         "name": "Flash Nikon SB-700",
+        "description": "60cm a 20m de atuação",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Sb%20700.png",
         "local_img": "./assets/products/flash-nikon-sb-700.png"
     },
     {
         "name": "Flash Nikon SB-910",
+        "description": "Auto TLL, 60cm - 20m",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Nikon%20SB-910.png",
         "local_img": "./assets/products/flash-nikon-sb-910.png"
     },
     {
         "name": "Flash Yongnuo Speedlite YN568ex",
+        "description": "15-25m de alcance",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Yongnuo.png",
         "local_img": "./assets/products/flash-yongnuo-speedlite-yn568ex.png"
     },
     {
         "name": "Flash Yongnuo Speedlite YN568exIII",
+        "description": "15-25m de alcance",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/flash-speedlite-yongnuo-yn-568-ex-iii-para-canon_iZ1062676681XvZcXpZ1XfZ246871385-12782492841-1.png",
         "local_img": "./assets/products/flash-yongnuo-speedlite-yn568exiii.png"
     },
     {
         "name": "Flash Yongnuo Speedlite YN685ex",
+        "description": "E-TTL, E-TTL 2, 60m",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Flash%20Yongnuo%20YN%20685.png",
         "local_img": "./assets/products/flash-yongnuo-speedlite-yn685ex.png"
     },
     {
         "name": "Fone de Ouvido Sony WH-1000XM6 Noise Cancelling Bluetooth Hi-Res",
+        "description": "<p>Driver: 30mm com cúpula de fibra de carbono Cancelamento de ruído: Processador HD QN3 (7x mais rápido que o QN1) + 12 microfones Microfones para chamadas: Sistema beamforming AI com 6 microfones Bluetooth: 5.3, codec LDAC (até 990 kbps), AAC, SBC Áudio com fio: Sim (cabo P2 incluso) Resposta de frequência: 4 Hz – 40.000 Hz Bateria: até 30h (ANC ativo) / até 40h (ANC desativo) Carga rápida: 3 minutos = 3 horas de uso Carregamento completo: aprox. 3,5h via USB-C Recursos: Auto NC Optimizer, Ambient Sound Mode, DSEE Extreme, 360 Reality Audio, Head Tracking App: Sony Sound Connect (iOS e Android) PN: WH-1000XM6</p>",
         "price": "R$ 289,65",
+        "price_12": "R$ 320,14",
+        "price_24": "R$ 304,89",
+        "price_36": "R$ 289,65",
         "img": "https://images.digital.allugator.com/products/Fone de Ouvido Sony WH-1000XM6-1.png",
         "local_img": "./assets/products/fone-de-ouvido-sony-wh-1000xm6-noise-cancelling-bluetooth-hi-res.png"
     },
     {
         "name": "Frigobar Consul 117l",
+        "description": "Frigobar",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images-shoptime.b2w.io/produtos/01/00/item/119934/6/119934610_1GG.png",
         "local_img": "./assets/products/frigobar-consul-117l.png"
     },
     {
         "name": "Fujifilm XT20 (Mirrorless)",
+        "description": "Premium, Mirrorless, 24MP, ISO 51200, 4K UHD",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Fuji%20XT20.png",
         "local_img": "./assets/products/fujifilm-xt20-(mirrorless).png"
     },
     {
         "name": "Galaxy Buds",
+        "description": "Bluetooth 5.0, 6 horas de bateria",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Galaxy%20Buds.png",
         "local_img": "./assets/products/galaxy-buds.png"
     },
     {
         "name": "Galaxy Buds AAA",
+        "description": "Bluetooth 5.0, 6 horas de bateria",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Galaxy%20Buds.png",
         "local_img": "./assets/products/galaxy-buds-aaa.png"
     },
     {
         "name": "Galaxy Flip 256GB",
+        "description": "Tela AMOLED Dobrável de 6.7\", 8GB de RAM, Câmera Dupla",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Samsung Galaxy Z Flip 7 256GB-1.png",
         "local_img": "./assets/products/galaxy-flip-256gb.png"
     },
     {
         "name": "Galaxy Fold 512GB",
+        "description": "Tela AMOLED Dobrável de 7.3\", 12GB de RAM, 6 Câmeras",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Galaxy%20Fold.png",
         "local_img": "./assets/products/galaxy-fold-512gb.png"
     },
     {
         "name": "God of War 2018",
+        "description": "1 Jogador / Mínimo 50GB / Dualshock 4 / Voz em EN-FR-SP-PT / Legendas em EN-FR-SP-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/god%20of%20war.jpg",
         "local_img": "./assets/products/god-of-war-2018.png"
     },
     {
         "name": "God of War 3 Remastered",
+        "description": "1 Jogador / Mínimo 40GB / Dualshock 4 / Voz em EN / Legenda em EN-SP-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/GodOfWar3.jpg",
         "local_img": "./assets/products/god-of-war-3-remastered.png"
     },
     {
         "name": "Goper Smart Bike",
+        "description": "A Goper Smart Bike é uma bicicleta ergométrica moderna e robusta, ideal para treinos indoor de spinning. Oferece design ergonômico, ajustes precisos de assento e guidão, resistência magnética eficiente e suporta até 130 kg.",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/goper1.png",
         "local_img": "./assets/products/goper-smart-bike.png"
     },
     {
         "name": "Goper Smart Bike Com Tela de 15.4\"",
+        "description": "Se você busca melhorar o condicionamento físico, perder peso ou apenas se divertir enquanto pedala, a bicicleta ergométrica de spinning Goper Smart Bike com Tela de 15.4” é a parceira ideal. Eleve sua performance com a união perfeita entre tecnologia, inovação e os benefícios do spinning indoor.",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/goper smart bike 15.png",
         "local_img": "./assets/products/goper-smart-bike-com-tela-de-15.4.png"
     },
     {
         "name": "GoPro Hero 5",
+        "description": "12MP, 4K, LCD Display, Wi-Fi",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/GoPro%20Hero%205.png",
         "local_img": "./assets/products/gopro-hero-5.png"
     },
     {
         "name": "GoPro Hero 6-3d945a3d",
+        "description": "12MP / 4K / LCD-Display / Wi-Fi",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/2.jpg",
         "local_img": "./assets/products/gopro-hero-6-3d945a3d.png"
     },
     {
         "name": "GoPro Hero 6 + Caixa Estanque e Bastão Flutuante (Kit Mergulho)",
+        "description": "À prova d'água (10 metros sem caixa, 30 metros com a caixa)",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/caixa%20estanque%20%2B%20gopro.jpg",
         "local_img": "./assets/products/gopro-hero-6-+-caixa-estanque-e-bastão-flutuante-(kit-mergulho).png"
     },
     {
         "name": "GoPro Hero 7",
+        "description": "Hypersmooth, 4k, 12mp, Timelapse",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/GoPro%20Hero%207.jpg",
         "local_img": "./assets/products/gopro-hero-7.png"
     },
     {
         "name": "Gran Turismo Sport",
+        "description": "1 Jogador / De 2 a 24 Jogadores Online / Mínimo 60GB / Uso Online Opcional / Dualshock 4 / Legendas em EN-FR-SP-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/GranTurismoSport.jpg",
         "local_img": "./assets/products/gran-turismo-sport.png"
     },
     {
         "name": "Gravador Tascam DR 60",
+        "description": "2 Entradas XLR, TRS Entrada Mic/Linha",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Gravador%20Tascam%20DR%2060d.jpg",
         "local_img": "./assets/products/gravador-tascam-dr-60.png"
     },
     {
         "name": "GTA 5",
+        "description": "1 Jogador / De 2 a 30 Jogadores Online / Mínimo 55GB / Uso Online Opcional / Dualshock 4 / Saída de Vídeo em HD",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/GTA5.jpg",
         "local_img": "./assets/products/gta-5.png"
     },
     {
         "name": "Headset Gamer Nitro",
+        "description": "Auto Falante: 50 mm, Conectividade: Com fio, Microfone: Omnidirecional Flexível, Compatibilidade: Windows, Plug: 3.5 mm (CTIA), Sensibilidade: 115 dB+/-3 dB",
         "price": "R$ 712,50",
+        "price_12": "R$ 787,50",
+        "price_24": "R$ 750,00",
+        "price_36": "R$ 712,50",
         "img": "https://images.digital.allugator.com/products/161700-1200-auto.webp",
         "local_img": "./assets/products/headset-gamer-nitro.png"
     },
     {
         "name": "Horizon Zero Dawn",
+        "description": "1 Jogador / Mínimo 43GB / Dualshock 4 / Voz em EN-SP-PT / Legendas em EN-SP-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Horizon.jpg",
         "local_img": "./assets/products/horizon-zero-dawn.png"
     },
     {
         "name": "iMac 24\" M4 Retina 4.5K macOS",
+        "description": "<p>Processador: Apple M4 (CPU 8 núcleos ou 10 núcleos, até 4.4 GHz, processo 3nm) GPU: 8 núcleos ou 10 núcleos integrada Neural Engine: 16 núcleos Memória Unificada: 16GB ou 24GB (opções configuráveis) Armazenamento: 256GB, 512GB ou 1TB SSD (opções configuráveis) Tela: 24\" Retina 4.5K, 4480x2520, 218 PPI, 500 nits, True Tone, P3 wide color Câmera: 12MP Center Stage com suporte a Desk View, vídeo 1080p Áudio: Sistema de 6 alto-falantes com Spatial Audio + Dolby Atmos Conectividade: Wi-Fi 6E, Bluetooth 5.3, 2x ou 4x Thunderbolt 4, USB 3 Sistema Operacional: macOS Sequoia Cores disponíveis: Azul, Verde, Roxo, Rosa, Laranja, Amarelo e Prata</p>",
         "price": "R$ 2.108,91",
+        "price_12": "R$ 2.330,89",
+        "price_24": "R$ 2.219,90",
+        "price_36": "R$ 2.108,91",
         "img": "https://images.digital.allugator.com/products/imac-1.png",
         "local_img": "./assets/products/imac-24-m4-retina-4.5k-macos.png"
     },
     {
         "name": "iPad 10.2\"",
+        "description": "500 nits de brilho, chip a10",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Ipad%2010-2.png",
         "local_img": "./assets/products/ipad-10.2.png"
     },
     {
         "name": "iPad 10ª Geração",
+        "description": "Com design renovado, tela ampla de 10.9” e câmera de 12MP, oferece desempenho rápido e confiável para navegar, criar, estudar e se divertir. Um iPad prático e cheio de possibilidades para o seu cotidiano.",
         "price": "R$ 236,26",
+        "price_12": "R$ 261,13",
+        "price_24": "R$ 248,69",
+        "price_36": "R$ 236,26",
         "img": "https://images.digital.allugator.com/products/i1.png",
         "local_img": "./assets/products/ipad-10ª-geração.png"
     },
     {
         "name": "iPad A16 11\"",
+        "description": "Com potência e versatilidade em um design moderno, tela de alta qualidade, câmera de 12MP e desempenho avançado do chip A16, o iPad 11\" é ideal para estudar, trabalhar e se divertir com fluidez e estilo.",
         "price": "R$ 218,41",
+        "price_12": "R$ 241,40",
+        "price_24": "R$ 229,90",
+        "price_36": "R$ 218,41",
         "img": "https://images.digital.allugator.com/products/ipad1.png",
         "local_img": "./assets/products/ipad-a16-11.png"
     },
     {
         "name": "iPad Air",
+        "description": "10.5 polegadas, 500 nits de brilho, chip a12",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Ipad%20air%2010-5.png",
         "local_img": "./assets/products/ipad-air.png"
     },
     {
         "name": "iPad Air 5ª Geração",
+        "description": "Leve, elegante e poderoso, traz o chip M1 para alto desempenho em estudos, trabalho e entretenimento. Com tela de 10.9” impressionante e câmera de 12MP, entrega fluidez, versatilidade e qualidade em cada detalhe.",
         "price": "R$ 398,90",
+        "price_12": "R$ 440,89",
+        "price_24": "R$ 419,89",
+        "price_36": "R$ 398,90",
         "img": "https://images.digital.allugator.com/products/ip1.png",
         "local_img": "./assets/products/ipad-air-5ª-geração.png"
     },
     {
         "name": "iPad Mini",
+        "description": "7.9 polegadas, 500 nits de brilho, chip a12",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Ipad%20mini.png",
         "local_img": "./assets/products/ipad-mini.png"
     },
     {
         "name": "iPad Pro 11\"",
+        "description": "Tela Liquid Retina de 11” com ProMotion. Chip M4 ultrapotente, compatível com Apple Pencil e Magic Keyboard. O tablet mais avançado da Apple pra trabalho e criatividade.",
         "price": "R$ 647,86",
+        "price_12": "R$ 716,05",
+        "price_24": "R$ 681,96",
+        "price_36": "R$ 647,86",
         "img": "https://images.digital.allugator.com/products/pro11.png",
         "local_img": "./assets/products/ipad-pro-11.png"
     },
     {
         "name": "iPad Pro 11\" M5",
+        "description": "O iPad Pro com a potência do chip M5 da Apple traz um desempenho espantoso para você produzir mais sem esforço e fluxos de trabalho de IA avançados. Com tela Ultra Retina XDR espetacular, conexões Wi-Fi 72 e 5G ultrarrápidas3, Neural Accelerators para tarefas de IA e iPadOS repensado nos máximos detalhes, os limites do que o iPad Pro pode fazer foram ultrapassados. Junto com o Apple Pencil Pro e o Magic Keyboard, ele leva versatilidade, criatividade e produtividade sem limites para a ponta dos seus dedos.",
         "price": "R$ 612,65",
+        "price_12": "R$ 677,14",
+        "price_24": "R$ 644,89",
+        "price_36": "R$ 612,65",
         "img": "https://images.digital.allugator.com/products/iPad-Pro-11'-M5-1.png",
         "local_img": "./assets/products/ipad-pro-11-m5.png"
     },
     {
         "name": "iPad Pro 12.9\"",
+        "description": "iPad 12.9 + Apple Pencil + capa de teclado",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Ipad%20Pro.png",
         "local_img": "./assets/products/ipad-pro-12.9.png"
     },
     {
         "name": "iPhone 11",
+        "description": "6.1 polegadas, Retina LCD, Chip A13, Câmera Dupla",
         "price": "R$ 156,66",
+        "price_12": "R$ 173,15",
+        "price_24": "R$ 164,91",
+        "price_36": "R$ 156,66",
         "img": "https://images.digital.allugator.com/products/iPhone%2B11%2BThumb.png",
         "local_img": "./assets/products/iphone-11.png"
     },
     {
         "name": "iPhone 11 Pro",
+        "description": "5.8 polegadas, Super Retina OLED, Chip A13, Câmera Tripla",
         "price": "R$ 208,91",
+        "price_12": "R$ 230,90",
+        "price_24": "R$ 219,90",
+        "price_36": "R$ 208,91",
         "img": "https://images.digital.allugator.com/products/iPhone%2011%20Pro.png",
         "local_img": "./assets/products/iphone-11-pro.png"
     },
     {
         "name": "iPhone 11 Pro Max",
+        "description": "6.5 polegadas, Super Retina OLED, Chip A13, Câmera Tripla",
         "price": "R$ 194,66",
+        "price_12": "R$ 215,15",
+        "price_24": "R$ 204,90",
+        "price_36": "R$ 194,66",
         "img": "https://images.digital.allugator.com/products/iPhone%2011%20Pro%20Max.png",
         "local_img": "./assets/products/iphone-11-pro-max.png"
     },
     {
         "name": "iPhone 12",
+        "description": "6.1 polegadas, A14 Bionic, Super Retina XDR, Ceramic Shield, Câmera dupla, grande angular + ultra grande angular, f 1.6 e f2.4, 5G",
         "price": "R$ 193,69",
+        "price_12": "R$ 214,08",
+        "price_24": "R$ 203,88",
+        "price_36": "R$ 193,69",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/new-site/IPHONE+12/iPhone+12+Thumb.png",
         "local_img": "./assets/products/iphone-12.png"
     },
     {
         "name": "iPhone 12 Mini",
+        "description": "5.4 polegadas, A14 Bionic, Super Retina XDR, Ceramic Shield, Câmera dupla, grande angular + ultra grande angular, f2.4 e f 1.6, 5G",
         "price": "R$ 170,91",
+        "price_12": "R$ 188,90",
+        "price_24": "R$ 179,90",
+        "price_36": "R$ 170,91",
         "img": "https://images.digital.allugator.com/products/iPhone%2012%20Mini.png",
         "local_img": "./assets/products/iphone-12-mini.png"
     },
     {
         "name": "iPhone 12 Pro",
+        "description": "6.1 polegadas, A14 Bionic, Super Retina XDR, Ceramic Shield, Câmera tripla, grande angular, ultra grande angular, telefoto + sensor LiDAR, 5G",
         "price": "R$ 251,08",
+        "price_12": "R$ 277,51",
+        "price_24": "R$ 264,29",
+        "price_36": "R$ 251,08",
         "img": "https://images.digital.allugator.com/products/iPhone%2B12%2BPro-2.png",
         "local_img": "./assets/products/iphone-12-pro.png"
     },
     {
         "name": "iPhone 12 Pro Max",
+        "description": "6.7 polegadas, A14 Bionic, Super Retina XDR, Ceramic Shield, Câmera tripla, grande angular, ultra grande angular, telefoto + sensor LiDAR, 5G",
         "price": "R$ 232,66",
+        "price_12": "R$ 257,15",
+        "price_24": "R$ 244,90",
+        "price_36": "R$ 232,66",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/iphone/4x/iPhone+12+Pro+Max.png",
         "local_img": "./assets/products/iphone-12-pro-max.png"
     },
     {
         "name": "iPhone 13",
+        "description": "6.1 polegadas, A15 Bionic, Super Retina XDR OLED, Ceramic Glass, Câmera dupla, grande angular, ultra grande angular, 5G",
         "price": "R$ 175,66",
+        "price_12": "R$ 194,15",
+        "price_24": "R$ 184,90",
+        "price_36": "R$ 175,66",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/new-site/IPHONE+13/iPhone+13+Thumb.png",
         "local_img": "./assets/products/iphone-13.png"
     },
     {
         "name": "iPhone 13 Mini",
+        "description": "5.4 polegadas, A15 Bionic, Super Retina XDR OLED, Ceramic Glass, Câmera dupla, grande angular, ultra grande angular, 5G",
         "price": "R$ 194,66",
+        "price_12": "R$ 215,15",
+        "price_24": "R$ 204,90",
+        "price_36": "R$ 194,66",
         "img": "https://images.digital.allugator.com/products/iphone-13-mini.png",
         "local_img": "./assets/products/iphone-13-mini.png"
     },
     {
         "name": "iPhone 13 Pro",
+        "description": "6.1 polegadas, A15 Bionic, Super Retina XDR OLED, Ceramic Glass, Câmera tripla, grande angular, ultra grande angular, telefoto + sensor LiDAR, 5G",
         "price": "R$ 189,91",
+        "price_12": "R$ 209,90",
+        "price_24": "R$ 199,90",
+        "price_36": "R$ 189,91",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/new-site/IPHONE+13+PRO/iPhone+13+Pro+Thumb.png",
         "local_img": "./assets/products/iphone-13-pro.png"
     },
     {
         "name": "iPhone 13 Pro Max",
+        "description": "6.7 polegadas, A15 Bionic, Super Retina XDR OLED, Ceramic Glass, Câmera tripla, grande angular, ultra grande angular, telefoto + sensor LiDAR, 5G",
         "price": "R$ 265,90",
+        "price_12": "R$ 293,89",
+        "price_24": "R$ 279,89",
+        "price_36": "R$ 265,90",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/new-site/IPHONE+13+PRO+MAX/iPhone+13+Pro+Max+Thumb.png",
         "local_img": "./assets/products/iphone-13-pro-max.png"
     },
     {
         "name": "iPhone 14",
+        "description": "6.1 polegadas, A15, Super Retina XDR OLED, Ceramic Shield, Câmera dupla, grande angular, ultra grande angular, telefoto + sensor proximidade, 5G",
         "price": "R$ 208,91",
+        "price_12": "R$ 230,90",
+        "price_24": "R$ 219,90",
+        "price_36": "R$ 208,91",
         "img": "https://images.digital.allugator.com/products/iphone14-1.png",
         "local_img": "./assets/products/iphone-14.png"
     },
     {
         "name": "iPhone 14 Plus",
+        "description": "Super Retina XDR, OLED sem bordas de 6,7 polegadas (na diagonal), Resolução de 2278 x 1284 pixels a 458 ppp",
         "price": "R$ 370,36",
+        "price_12": "R$ 409,34",
+        "price_24": "R$ 389,85",
+        "price_36": "R$ 370,36",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/iphone/4x/iPhone+14+Plus.png",
         "local_img": "./assets/products/iphone-14-plus.png"
     },
     {
         "name": "iPhone 14 Pro",
+        "description": "6.1 polegadas, A16 Bionic, Super Retina XDR OLED, Ceramic Glass, Câmera tripla, grande angular, ultra grande angular, telefoto + sensor LiDAR, 5G",
         "price": "R$ 256,40",
+        "price_12": "R$ 283,39",
+        "price_24": "R$ 269,89",
+        "price_36": "R$ 256,40",
         "img": "https://images.digital.allugator.com/products/iphone14-pro-11.png",
         "local_img": "./assets/products/iphone-14-pro.png"
     },
     {
         "name": "iPhone 14 Pro Max",
+        "description": "Tela - LTPO Super Retina XDR OLED, Tamanho 6.7, Resolução 2796 x 1290, Densidade 460 ppi, Proteção Scratch-resistant ceramic glass, oleophobic coating, Extras Always-on display, Dolby Vision, 120Hz e HDR 10 Plus, CPU Hexa-core (2x3.46 GHz Avalanche e 4x Blizzard)",
         "price": "R$ 355,19",
+        "price_12": "R$ 392,58",
+        "price_24": "R$ 373,88",
+        "price_36": "R$ 355,19",
         "img": "https://images.digital.allugator.com/products/iphone14-pro-max1.png",
         "local_img": "./assets/products/iphone-14-pro-max.png"
     },
     {
         "name": "iPhone 15",
+        "description": "Chip A16 Bionic com GPU de 5 núcleos -  - Sistema avançado de câmera dupla",
         "price": "R$ 270,65",
+        "price_12": "R$ 299,14",
+        "price_24": "R$ 284,89",
+        "price_36": "R$ 270,65",
         "img": "https://images.digital.allugator.com/products/iphone15-1.png",
         "local_img": "./assets/products/iphone-15.png"
     },
     {
         "name": "iPhone 15 Pro",
+        "description": "Chip A17 Pro com GPU de 6 núcleos",
         "price": "R$ 294,40",
+        "price_12": "R$ 325,39",
+        "price_24": "R$ 309,89",
+        "price_36": "R$ 294,40",
         "img": "https://images.digital.allugator.com/products/iph15-pro-1.png",
         "local_img": "./assets/products/iphone-15-pro.png"
     },
     {
         "name": "iPhone 15 Pro Max",
+        "description": "Chip A17 Pro com GPU de 6 núcleos",
         "price": "R$ 360,90",
+        "price_12": "R$ 398,89",
+        "price_24": "R$ 379,89",
+        "price_36": "R$ 360,90",
         "img": "https://images.digital.allugator.com/products/iph15-pro-max1.png",
         "local_img": "./assets/products/iphone-15-pro-max.png"
     },
     {
         "name": "iPhone 16",
+        "description": "Chip A18 com GPU de 5 núcleos, Tela Super Retina XDR.",
         "price": "R$ 256,50",
+        "price_12": "R$ 283,50",
+        "price_24": "R$ 270,00",
+        "price_36": "R$ 256,50",
         "img": "https://images.digital.allugator.com/products/iph164.png",
         "local_img": "./assets/products/iphone-16.png"
     },
     {
         "name": "iPhone 16e",
+        "description": "<p>Chip A18, câmera Fusion de 48MP e tela de 6.1\" Super Retina XDR. Apple Intelligence e Face ID.</p>",
         "price": "R$ 327,65",
+        "price_12": "R$ 362,14",
+        "price_24": "R$ 344,89",
+        "price_36": "R$ 327,65",
         "img": "https://images.digital.allugator.com/products/Apple iPhone 16e - 1.png",
         "local_img": "./assets/products/iphone-16e.png"
     },
     {
         "name": "iPhone 16 Pro",
+        "description": "Chip A18 Pro com GPU de 6 núcleos, Tela Super Retina XDR , Tecnologia ProMotion  Tela Sempre Ativa.",
         "price": "R$ 427,40",
+        "price_12": "R$ 472,39",
+        "price_24": "R$ 449,89",
+        "price_36": "R$ 427,40",
         "img": "https://images.digital.allugator.com/products/iph16pro-1.png",
         "local_img": "./assets/products/iphone-16-pro.png"
     },
     {
         "name": "iPhone 16 Pro Max",
+        "description": "Chip A18 Pro com GPU de 6 núcleos, Tela Super Retina XDR , Tecnologia ProMotion  Tela Sempre Ativa.",
         "price": "R$ 522,40",
+        "price_12": "R$ 577,39",
+        "price_24": "R$ 549,89",
+        "price_36": "R$ 522,40",
         "img": "https://images.digital.allugator.com/products/iph16pro-max1.png",
         "local_img": "./assets/products/iphone-16-pro-max.png"
     },
     {
         "name": "iPhone 17",
+        "description": "Chip A19, Câmera Fusion 48 MP, Frontal Center Stage e Captura Dupla.",
         "price": "R$ 380,00",
+        "price_12": "R$ 420,00",
+        "price_24": "R$ 400,00",
+        "price_36": "R$ 380,00",
         "img": "https://images.digital.allugator.com/products/ip171.png",
         "local_img": "./assets/products/iphone-17.png"
     },
     {
         "name": "iPhone 17e",
+        "description": "<p>Chip A19, 256GB e tela Super Retina XDR de 6.1\". Apple Intelligence integrada e ótima autonomia</p>",
         "price": "R$ 375,15",
+        "price_12": "R$ 414,64",
+        "price_24": "R$ 394,89",
+        "price_36": "R$ 375,15",
         "img": "https://images.digital.allugator.com/products/Apple iPhone 17e - 1.png",
         "local_img": "./assets/products/iphone-17e.png"
     },
     {
         "name": "iPhone 17 Pro",
+        "description": "O design inovador do iPhone 17 Pro oferece resistência excepcional, duração de bateria avançada e maximiza a potência do chip A19 Pro. O sistema de Câmera Fusion Pro de 48 MP traz a teleobjetiva mais longa em um iPhone, com zoom de 8x. Já a câmera frontal Center Stage tira selfies em grupo mais inteligentes e grava vídeos com Captura Dupla. O Ceramic Shield 2 da tela é três vezes mais resistente a arranhões. A estrutura unibody em alumínio forjado dissipa melhor o calor. Sem contar os recursos da Apple Intelligence, como a ferramenta de Limpeza, e outras novidades.",
         "price": "R$ 588,90",
+        "price_12": "R$ 650,89",
+        "price_24": "R$ 619,89",
+        "price_36": "R$ 588,90",
         "img": "https://images.digital.allugator.com/products/17pro1.png",
         "local_img": "./assets/products/iphone-17-pro.png"
     },
     {
         "name": "iPhone 17 Pro Max",
+        "description": "O iPhone 17 Pro Max combina design resistente, bateria de longa duração e a potência do chip A19 Pro. Com câmera Fusion Pro de 48 MP e zoom exclusivo de até 12x, tela imersiva com Ceramic Shield 2 e recursos da Apple Intelligence, ele entrega desempenho máximo em todos os detalhes.",
         "price": "R$ 607,90",
+        "price_12": "R$ 671,89",
+        "price_24": "R$ 639,89",
+        "price_36": "R$ 607,90",
         "img": "https://images.digital.allugator.com/products/17promax1.png",
         "local_img": "./assets/products/iphone-17-pro-max.png"
     },
     {
         "name": "iPhone 7",
+        "description": "4.7 polegadas, retina, Chip A10, Câmera Simples",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/iphone7.jpg",
         "local_img": "./assets/products/iphone-7.png"
     },
     {
         "name": "iPhone 8",
+        "description": "4.7 polegadas, Retina OLED, Chip A11, Câmera Simples",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/iphone%208%20128.png",
         "local_img": "./assets/products/iphone-8.png"
     },
     {
         "name": "iPhone 8 Plus",
+        "description": "5.5 polegadas, Retina OLED, Chip A11, Câmera Dupla",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/iphone%208%20plus%20128.png",
         "local_img": "./assets/products/iphone-8-plus.png"
     },
     {
         "name": "iPhone Air",
+        "description": "O iPhone Air é o iPhone mais fino já feito, potencializado pelo chip A19 Pro. Resistência superior à de qualquer iPhone anterior, com estrutura em titânio polido, três vezes mais resistente a arranhões com Ceramic Shield 2 na parte da frente e quatro vezes mais resistente a rachaduras com Ceramic Shield na parte de trás. Selfies em grupo mais inteligentes e vídeo com Captura Dupla usando a nova câmera frontal Center Stage. Câmera Fusion principal de 48 MP e teleobjetiva de 2x com funcionalidades avançadas, como os retratos de última geração e diversas outras. Tela Super Retina XDR imersiva de 6,5 polegadas, com ProMotion de até 120 Hz. Bateria para o dia todo. Ferramentas úteis da Apple Intelligence, como Limpeza, entre outras.",
         "price": "R$ 626,90",
+        "price_12": "R$ 692,89",
+        "price_24": "R$ 659,89",
+        "price_36": "R$ 626,90",
         "img": "https://images.digital.allugator.com/products/ipair1.png",
         "local_img": "./assets/products/iphone-air.png"
     },
     {
         "name": "iPhone SE (2020)",
+        "description": "4.7 polegadas, retina OLED, Chip A13, Câmera Simples",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/iPhone%20SE%20-%20128%20GB-min.png",
         "local_img": "./assets/products/iphone-se-(2020).png"
     },
     {
         "name": "iPhone X",
+        "description": "5.8 polegadas, Retina OLED, Chip A11, Câmera Dupla",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Iphone%20x%20256.png",
         "local_img": "./assets/products/iphone-x.png"
     },
     {
         "name": "iPhone XR",
+        "description": "6.1 polegadas, Retina OLED, Chip A12, Câmera Simples",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Iphone%20xr%20256.png",
         "local_img": "./assets/products/iphone-xr.png"
     },
     {
         "name": "iPhone XS",
+        "description": "5.8 polegadas, Retina OLED, Chip A12, Câmera Dupla",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/iphone%20xs%20256.png",
         "local_img": "./assets/products/iphone-xs.png"
     },
     {
         "name": "JBL Boombox 3 Wi-Fi Bluetooth Portátil à Prova D'Água 200W",
+        "description": "<p>Potência de 180W (RMS). Conectividade Wi-Fi e Bluetooth 5.3. Resistência IP67 contra água e poeira. Bateria de até 24 horas. Função powerbank via USB-A para carregar outros dispositivos. Compatível com AirPlay, Alexa Multi-Room Music e Chromecast built-in. Peso aproximado de 6,7kg.&nbsp;</p>",
         "price": "R$ 237,41",
+        "price_12": "R$ 262,40",
+        "price_24": "R$ 249,90",
+        "price_36": "R$ 237,41",
         "img": "https://images.digital.allugator.com/products/Boombox 3 Wi-Fi - 1.png",
         "local_img": "./assets/products/jbl-boombox-3-wi-fi-bluetooth-portátil-à-prova-dágua-200w.png"
     },
     {
         "name": "Kindle Paperwhite 12ª Geração 2024",
+        "description": "<p>Tela antirreflexo de 7\" com 300 ppi e 16 tons de cinza. Armazenamento de 16GB. Wi-Fi dual-band (2,4 e 5 GHz). Resistência à água IPX8 (até 2m por 60min em água doce). Bateria de até 12 semanas. Porta USB-C. Compatível com formatos AZW, AZW3, TXT, PDF, MOBI, PRC. Suporta conversão de DOCX, DOC, HTML, EPUB, RTF, JPEG, GIF, PNG, BMP.</p>",
         "price": "R$ 90,16",
+        "price_12": "R$ 99,65",
+        "price_24": "R$ 94,91",
+        "price_36": "R$ 90,16",
         "img": "https://images.digital.allugator.com/products/Kindle Paperwhite - 1.png",
         "local_img": "./assets/products/kindle-paperwhite-12ª-geração-2024.png"
     },
     {
         "name": "Kit GoPro Hero 6",
+        "description": "Pau de selfie, suportes de punho/cabeça, garra, baterias extras, mini-tripé",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/kit%20go%20pro%20.jpg",
         "local_img": "./assets/products/kit-gopro-hero-6.png"
     },
     {
         "name": "Kit Greika SB01 Bivolt 480W",
+        "description": "60 a 480W, 8 Lâmpadas",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Kit%20Greika%20SB01%20Bivolt%20480W.png",
         "local_img": "./assets/products/kit-greika-sb01-bivolt-480w.png"
     },
     {
         "name": "Lanterna para Camping",
+        "description": "2700000 Lúmens / 980000W",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lanterna.jpg",
         "local_img": "./assets/products/lanterna-para-camping.png"
     },
     {
         "name": "LED Aputure AL-MW",
+        "description": "5150k, 6000 Lux, IP68, 5 painéis difusores, 3800mah",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Aputure%20AL-MW.png",
         "local_img": "./assets/products/led-aputure-al-mw.png"
     },
     {
         "name": "LED CN 160 Neewer",
+        "description": "160 LEDs Daylight",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/LED%20CN%20160%20Neewer.jpg",
         "local_img": "./assets/products/led-cn-160-neewer.png"
     },
     {
         "name": "Led HD - 160 com 3 Painéis de Cores",
+        "description": "2 a 20 pés, 160 LED",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/LED%20HD%20160.png",
         "local_img": "./assets/products/led-hd---160-com-3-painéis-de-cores.png"
     },
     {
         "name": "Lenovo Idea Tab Octa Core 8GB 256GB 11 2.5K 90Hz WiFi Android 15",
+        "description": "<p>Tela WVA de 11\" 2.5K (2560x1600) com 90Hz, 500 nits e tratamento AF Coating. Processador MediaTek Dimensity 6300 octa-core. Placa de vídeo Arm Mali-G57 MC2 GPU. 8GB de RAM LPDDR4x (soldada) e 256GB de armazenamento, expansível via microSD. Câmera traseira de 8MP (com autofoco) e frontal de 5MP (foco fixo). Wi-Fi 5 (802.11 a/b/g/n/ac), Bluetooth 5.2, USB-C. 4 alto-falantes Dolby Atmos. Bateria de 7.040mAh com carregamento de 20W. Acompanha capa protetora, caneta Lenovo Tab Pen, cabo USB-C e pino da bandeja para microSD. Android 15. Peso de 480g.&nbsp;</p>",
         "price": "R$ 170,91",
+        "price_12": "R$ 188,90",
+        "price_24": "R$ 179,90",
+        "price_36": "R$ 170,91",
         "img": "https://images.digital.allugator.com/products/Tablet Lenovo Idea Tab 11_ - 1.png",
         "local_img": "./assets/products/lenovo-idea-tab-octa-core-8gb-256gb-11-2.5k-90hz-wifi-android-15.png"
     },
     {
         "name": "Lenovo Legion Go S AMD Ryzen Z2 GO 8\" WUXGA 32GB 1TB SSD SteamOS",
+        "description": "Console portátil gamer equipado com processador AMD Ryzen Z2 GO, 32GB de RAM e SSD de 1TB para jogos AAA, multitarefa e carregamentos rápidos. Conta com tela WUXGA de 8” com alta taxa de atualização, gráficos AMD Radeon integrados e sistema SteamOS otimizado para bibliotecas Steam e jogos em nuvem. Possui controles integrados ergonômicos, conectividade Wi-Fi e design portátil para jogar em qualquer lugar.",
         "price": "R$ 740,90",
+        "price_12": "R$ 818,89",
+        "price_24": "R$ 779,89",
+        "price_36": "R$ 740,90",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F44c95bdd-4f6d-486b-b841-a563ec41de54%2Fgeneral-1780062111350-lenovo-legion-go-s-amd-ryzen-z2-go-8_-wuxga-32gb-1tb-ssd-steam-os-1.png",
         "local_img": "./assets/products/lenovo-legion-go-s-amd-ryzen-z2-go-8-wuxga-32gb-1tb-ssd-steamos.png"
     },
     {
         "name": "Lente Canon 100mm Macro 2.8",
+        "description": "Macro, USM",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/WhatsApp%20Image%202019-12-05%20at%2017.12.20.jpeg",
         "local_img": "./assets/products/lente-canon-100mm-macro-2.8.png"
     },
     {
         "name": "Lente Canon 10-22mm f3.5-4.5",
+        "description": "f3.5-4.5",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/canon%2010-22.png",
         "local_img": "./assets/products/lente-canon-10-22mm-f3.5-4.5.png"
     },
     {
         "name": "Lente Canon 18-135mm f/3.5-5.6",
+        "description": "Lente 18-135mm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2018-135mm.jpg",
         "local_img": "./assets/products/lente-canon-18-135mm-f-3.5-5.6.png"
     },
     {
         "name": "Lente Canon 24-105mm f4",
+        "description": "f4, L, usm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2024-105mm%20F4.png",
         "local_img": "./assets/products/lente-canon-24-105mm-f4.png"
     },
     {
         "name": "Lente Canon 24mm f2.8",
+        "description": "f2.8",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2024mm.png",
         "local_img": "./assets/products/lente-canon-24mm-f2.8.png"
     },
     {
         "name": "Lente Canon 40mm f2.8",
+        "description": "f2.8",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%2040mm.png",
         "local_img": "./assets/products/lente-canon-40mm-f2.8.png"
     },
     {
         "name": "Lente Canon 50mm f1.8/STM (Cinquentinha)",
+        "description": "Lente 50mm, Abertura F1.8, STM",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/50mmCanon2.jpg",
         "local_img": "./assets/products/lente-canon-50mm-f1.8-stm-(cinquentinha).png"
     },
     {
         "name": "Lente Canon 70-200mm (Telefoto) f2.8",
+        "description": "USM, Rosqueamento para Tripé na Lente",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2070-200.png",
         "local_img": "./assets/products/lente-canon-70-200mm-(telefoto)-f2.8.png"
     },
     {
         "name": "Lente Canon 75-300mm f/4-5.6",
+        "description": "75-300mm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Canon%2075-300mm.jpg",
         "local_img": "./assets/products/lente-canon-75-300mm-f-4-5.6.png"
     },
     {
         "name": "Lente Nikon 105mm f2.8 Macro",
+        "description": "Foco Mínimo 30cm, f2 a f32",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%20105mm%20Macro.png",
         "local_img": "./assets/products/lente-nikon-105mm-f2.8-macro.png"
     },
     {
         "name": "Lente Nikon 18-135mm f/3.5-5.6",
+        "description": "f3.5-5.6",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%2018-135.png",
         "local_img": "./assets/products/lente-nikon-18-135mm-f-3.5-5.6.png"
     },
     {
         "name": "Lente Nikon 18-200mm f/3.5-5.6",
+        "description": "Zoom Ótico 11x",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%20Nikon%2018-200mm%20f35.5-5.6%20rev1.png",
         "local_img": "./assets/products/lente-nikon-18-200mm-f-3.5-5.6.png"
     },
     {
         "name": "Lente Nikon 18-70mm f3.5-4.5",
+        "description": "f3.5-4.5",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/WhatsApp%20Image%202019-12-16%20at%2016.27.47.jpeg",
         "local_img": "./assets/products/lente-nikon-18-70mm-f3.5-4.5.png"
     },
     {
         "name": "Lente Nikon 35mm f1.8",
+        "description": "f1.8",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%2035mm.jpg",
         "local_img": "./assets/products/lente-nikon-35mm-f1.8.png"
     },
     {
         "name": "Lente Nikon 50mm f/1.4",
+        "description": "Motor SWM",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%20Nikkor%2050mm%201.4.png",
         "local_img": "./assets/products/lente-nikon-50mm-f-1.4.png"
     },
     {
         "name": "Lente Nikon 50mm f/1.8",
+        "description": "Foco Manual",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%20Nikon%2050mm%20f1.8.png",
         "local_img": "./assets/products/lente-nikon-50mm-f-1.8.png"
     },
     {
         "name": "Lente Nikon 55-200mm f4-5.6",
+        "description": "f4-5.6",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%2055-200%20Nikon.png",
         "local_img": "./assets/products/lente-nikon-55-200mm-f4-5.6.png"
     },
     {
         "name": "Lente Nikon 70-300mm f4-5.6",
+        "description": "Zoom 4x",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%2070-300mm.png",
         "local_img": "./assets/products/lente-nikon-70-300mm-f4-5.6.png"
     },
     {
         "name": "Lente Rokinon 35mm f1.5 (para Sony)",
+        "description": "f1.5, 35mm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Rokinon%2035mm.jpg",
         "local_img": "./assets/products/lente-rokinon-35mm-f1.5-(para-sony).png"
     },
     {
         "name": "Lente Samyang 85mm f1.4 (para Sony)",
+        "description": "85mm, f1.4",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%20Samyang%2085mm%20f1.4.jpg",
         "local_img": "./assets/products/lente-samyang-85mm-f1.4-(para-sony).png"
     },
     {
         "name": "Lente Sigma 10mm f2.8 Fisheye (para Canon)",
+        "description": "f 2.8",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Lente%20Sigma%2010mm%2028.png",
         "local_img": "./assets/products/lente-sigma-10mm-f2.8-fisheye-(para-canon).png"
     },
     {
         "name": "Lente Sigma 24-70mm f2.8 (para Canon)",
+        "description": "f2.8",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Sigma%2024-70mm.png",
         "local_img": "./assets/products/lente-sigma-24-70mm-f2.8-(para-canon).png"
     },
     {
         "name": "Lente Sigma Art 24mm 1.4 (para Canon)",
+        "description": "f1.4-f16",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/WhatsApp%20Image%202019-12-05%20at%2016.49.48.jpeg",
         "local_img": "./assets/products/lente-sigma-art-24mm-1.4-(para-canon).png"
     },
     {
         "name": "Lente Sigma Art 35mm f1.4 (Para Canon)",
+        "description": "f1.4",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Sigma%20Art%2035mm%20f1.4.png",
         "local_img": "./assets/products/lente-sigma-art-35mm-f1.4-(para-canon).png"
     },
     {
         "name": "Lente Sigma Art 50mm 1.4 (para Canon)",
+        "description": "f1.4-f16",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/WhatsApp%20Image%202019-12-05%20at%2015.25.04.jpeg",
         "local_img": "./assets/products/lente-sigma-art-50mm-1.4-(para-canon).png"
     },
     {
         "name": "Lente Sigma Art 85mm 1.4 (para Canon)",
+        "description": "f1.4-f16",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/WhatsApp%20Image%202019-12-05%20at%2015.23.21.jpeg",
         "local_img": "./assets/products/lente-sigma-art-85mm-1.4-(para-canon).png"
     },
     {
         "name": "Lente Sigma EX 10-20mm f4-5.6 (para Nikon)",
+        "description": "f4-5.6",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/lente%20sigma%2010-20mm%20.png",
         "local_img": "./assets/products/lente-sigma-ex-10-20mm-f4-5.6-(para-nikon).png"
     },
     {
         "name": "Lente Sigma EX 30mm f1.4 (para Nikon)",
+        "description": "f 1.4",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/lente%20sigma%2030mm%20f1.4.png",
         "local_img": "./assets/products/lente-sigma-ex-30mm-f1.4-(para-nikon).png"
     },
     {
         "name": "Lente Tamron 18-270mm (para Nikon)",
+        "description": "f3.5-6.3",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/lente%20tamron%2018270.png",
         "local_img": "./assets/products/lente-tamron-18-270mm-(para-nikon).png"
     },
     {
         "name": "Lente Yongnuo 100mm f2 (para Canon)",
+        "description": "Ultrasonic",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Yongnuo.png",
         "local_img": "./assets/products/lente-yongnuo-100mm-f2-(para-canon).png"
     },
     {
         "name": "Lente Yongnuo 50mm f1.8 (para Canon)",
+        "description": "f1.8",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/yongnuo%2050mm%20canon.png",
         "local_img": "./assets/products/lente-yongnuo-50mm-f1.8-(para-canon).png"
     },
     {
         "name": "Lente Yongnuo 50mm f1.8 (para Nikon)",
+        "description": "Nikon",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Yongnuo%2050mm.jpg",
         "local_img": "./assets/products/lente-yongnuo-50mm-f1.8-(para-nikon).png"
     },
     {
         "name": "Luz de LED Aputure M9",
+        "description": "5300-5700k, 1800mah",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Luz%20Aputure%20M9.png",
         "local_img": "./assets/products/luz-de-led-aputure-m9.png"
     },
     {
         "name": "MacBook Air 512GB",
+        "description": "Chip M1 (8 núcleos), SSD, 8GB RAM",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/macbook%20air.png",
         "local_img": "./assets/products/macbook-air-512gb.png"
     },
     {
         "name": "MacBook Air M1 13\" 256GB 8GB",
+        "description": "Leve, rápido e silencioso. Conta com chip Apple M1, tela Retina de 13\", bateria de longa duração e desempenho ideal para estudo, trabalho e uso diário.",
         "price": "R$ 371,34",
+        "price_12": "R$ 410,43",
+        "price_24": "R$ 390,88",
+        "price_36": "R$ 371,34",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/new-site/Macbook+Air+M113/Macboook+Air+1.png",
         "local_img": "./assets/products/macbook-air-m1-13-256gb-8gb.png"
     },
     {
         "name": "MacBook Air M5 13” 512GB 16GB",
+        "description": "<p>Processador: Apple M5 (CPU 10 núcleos: 4 super cores + 6 de eficiência, processo 3nm) GPU: 8 núcleos integrada (configurável para 10) Neural Engine: 16 núcleos Memória Unificada: 16GB (153 GB/s de largura de banda) Armazenamento: 512GB SSD (2x mais rápido que geração anterior) Tela: 13,6\" Liquid Retina, 2560x1664, 224 PPI, 500 nits, True Tone, P3 wide color Câmera: 12MP Center Stage com Desk View Áudio: Sistema de 4 alto-falantes com Spatial Audio + Dolby Atmos Conectividade: Wi-Fi 7, Bluetooth 6, 2x Thunderbolt 4, MagSafe 3, jack P2 Bateria: até 18h Sistema Operacional: macOS Tahoe Cores: Sky Blue, Midnight, Starlight, Silver</p>",
         "price": "R$ 740,90",
+        "price_12": "R$ 818,89",
+        "price_24": "R$ 779,89",
+        "price_36": "R$ 740,90",
         "img": "https://images.digital.allugator.com/products/Macbook-Air-M5-512GB-1.png",
         "local_img": "./assets/products/macbook-air-m5-13”-512gb-16gb.png"
     },
     {
         "name": "MacBook Pro 13\" 3.9GHZ",
+        "description": "i5 turboboost (até 3.9ghz), 256GB SSD, 8GB RAM",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Macbook%20Pro%2013%201.4.png",
         "local_img": "./assets/products/macbook-pro-13-3.9ghz.png"
     },
     {
         "name": "MacBook Pro 13\" 4.1GHZ",
+        "description": "i5 turboboost (até 4.1ghz), 256GB SSD, 8GB RAM",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Macbook%20Pro%2013%202.4.png",
         "local_img": "./assets/products/macbook-pro-13-4.1ghz.png"
     },
     {
         "name": "MacBook Pro 14 M5 16GB 1TB",
+        "description": "MACBOOK PRO 14\" M5 16GB 1TB",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/MACBOOK-PRO-DE-14-MEMORI_1763581994.webp",
         "local_img": "./assets/products/macbook-pro-14-m5-16gb-1tb.png"
     },
     {
         "name": "MacBook Pro 16\" i7",
+        "description": "i7 turboboost (até 4.5ghz), 512GB SSD, 16GB RAM, AMD 5300",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Macbook%20Pro%2016%20i5.png",
         "local_img": "./assets/products/macbook-pro-16-i7.png"
     },
     {
         "name": "MacBook Pro 16\" i9",
+        "description": "i9 turboboost (até 4.8ghz), 1TB SSD, 16GB RAM, AMD 5500",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Macbook%20Pro%2016%20i9.png",
         "local_img": "./assets/products/macbook-pro-16-i9.png"
     },
     {
         "name": "MacBook Pro M4 16\" 512GB 24GB",
+        "description": "-",
         "price": "R$ 864,02",
+        "price_12": "R$ 954,97",
+        "price_24": "R$ 909,49",
+        "price_36": "R$ 864,02",
         "img": "https://images.digital.allugator.com/products/download.avif",
         "local_img": "./assets/products/macbook-pro-m4-16-512gb-24gb.png"
     },
     {
         "name": "Mac Mini M4 10CPU 10GPU 16GB RAM 256GB SSD",
+        "description": "<p>MU9D3BZ/A -Mac Mini com chip Apple M4, CPU e GPU de 10 núcleos, 16GB de memória unificada e 512GB SSD. Alto desempenho, com Wi-Fi 6E, Bluetooth 5.3 e múltiplas conexões para uma rotina ágil e eficiente.</p>",
         "price": "R$ 484,40",
+        "price_12": "R$ 535,39",
+        "price_24": "R$ 509,89",
+        "price_36": "R$ 484,40",
         "img": "https://images.digital.allugator.com/products/Mac-mini,-M4,-24GB-1.png",
         "local_img": "./assets/products/mac-mini-m4-10cpu-10gpu-16gb-ram-256gb-ssd.png"
     },
     {
         "name": "Mac Mini M4 10CPU 10GPU 16GB RAM 512GB SSD",
+        "description": "<p>Mac Mini com chip Apple M4, CPU e GPU de 10 núcleos, 24GB de memória unificada e 512GB SSD. Alto desempenho, conectividade Wi-Fi 6E, Bluetooth 5.3 e múltiplas portas para uso versátil no dia a dia.</p>",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Mac-mini,-M4,-16GB-512GB-1.png",
         "local_img": "./assets/products/mac-mini-m4-10cpu-10gpu-16gb-ram-512gb-ssd.png"
     },
     {
         "name": "Mad Max - PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/mad%20max.jpg",
         "local_img": "./assets/products/mad-max---ps4.png"
     },
     {
         "name": "Máquina Lava e Seca",
+        "description": "13kg, lava e seca, EcoBubble, Wi-Fi",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/lava1.png",
         "local_img": "./assets/products/máquina-lava-e-seca.png"
     },
     {
         "name": "Mario Kart 8 Deluxe",
+        "description": "Multiplayer, Online",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/mario%20kart%208.jpg",
         "local_img": "./assets/products/mario-kart-8-deluxe.png"
     },
     {
         "name": "Mario Tenis Aces",
+        "description": "Multiplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Screen%20Shot%202019-04-02%20at%2011.46.02.png",
         "local_img": "./assets/products/mario-tenis-aces.png"
     },
     {
         "name": "Mario Tennis Aces",
+        "description": "Multiplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/mariotennis.jpg",
         "local_img": "./assets/products/mario-tennis-aces.png"
     },
     {
         "name": "Microfone Boya By-mm1",
+        "description": "Direcional, Cardioide",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Microfone%20Boya.png",
         "local_img": "./assets/products/microfone-boya-by-mm1.png"
     },
     {
         "name": "Microfone Direcional AM-BLACK-1 USB",
+        "description": "Plug and Play, 20Hz~18KHz, Sensibilidade -32dB ~ 136 dB,",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/AM-BLACK-1%20USB.png",
         "local_img": "./assets/products/microfone-direcional-am-black-1-usb.png"
     },
     {
         "name": "Microfone Direcional RODE Video Micro",
+        "description": "proteção para vento,  88mm, 42g",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images-na.ssl-images-amazon.com/images/I/616VGpbWAuL._SL1000_.jpg",
         "local_img": "./assets/products/microfone-direcional-rode-video-micro.png"
     },
     {
         "name": "Microfone Video Mic Go",
+        "description": "Super-cardioide,  -35b de sensibilidade",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Rode%20Video%20Mic%20Go.png",
         "local_img": "./assets/products/microfone-video-mic-go.png"
     },
     {
         "name": "Microfone Wireless Exclusivamente Para Caixa de Som O'Neal OMF 450",
+        "description": "Wireless, Caixa de Som O'Neal 450",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/mic%20omf%20450.jpg",
         "local_img": "./assets/products/microfone-wireless-exclusivamente-para-caixa-de-som-oneal-omf-450.png"
     },
     {
         "name": "Microondas 20 litros",
+        "description": "Microondas",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/micro_ondas_mto30_frontal_700x700_32361111022016.png",
         "local_img": "./assets/products/microondas-20-litros.png"
     },
     {
         "name": "Mini Projetor Portátil Hisense C2 Ultra 4K Ultra HD RGB a Laser",
+        "description": "Mini projetor portátil com resolução 4K UHD, tecnologia laser RGB e brilho de 3000 ANSI lúmens para imagens mais nítidas e cores intensas. Realiza projeções de 65” até 300” com suporte a Dolby Vision para maior contraste e definição. Conta com conectividade inteligente, áudio integrado e formato portátil para filmes, séries e games em tela grande.",
         "price": "R$ 1.244,40",
+        "price_12": "R$ 1.375,39",
+        "price_24": "R$ 1.309,89",
+        "price_36": "R$ 1.244,40",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F001bc0c0-7060-4c3e-8bdc-c1969c751b3b%2Fgeneral-1779999658987-mini-projetor-porta_til-hisense-c2-ultra-4k-1.png",
         "local_img": "./assets/products/mini-projetor-portátil-hisense-c2-ultra-4k-ultra-hd-rgb-a-laser.png"
     },
     {
         "name": "Mini Tripé Articulado",
+        "description": "16cm / Articulado",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Trip%C3%A9+articulado.jpg",
         "local_img": "./assets/products/mini-tripé-articulado.png"
     },
     {
         "name": "Mochila Camping",
+        "description": "Material Poliéster / Impermeável para Chuva / 70 Litros",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Mochil%C3%A3o.jpg",
         "local_img": "./assets/products/mochila-camping.png"
     },
     {
         "name": "Modelador Multifuncional Shark FlexStyle Lisos e Ondulados 1600W",
+        "description": "<p>Sistema 2 em 1 que alterna entre secador e multi-estilizador com um único giro. Tecnologia Coanda direciona o fluxo de ar automaticamente nos acessórios. Regula temperatura 1.000 vezes por segundo (máx. 100°C) para secagem sem danos. Leve (0,68 kg) com cabo de 2,4m. Acompanha 2 rolos de envoltura automática 3cm, Escova Oval, Escova Raquete e Concentrador de Modelagem — ideal para cachos automáticos, volume e alisamento</p>",
         "price": "R$ 218,41",
+        "price_12": "R$ 241,40",
+        "price_24": "R$ 229,90",
+        "price_36": "R$ 218,41",
         "img": "https://images.digital.allugator.com/products/copy_044C9779-FA19-463A-8DBD-6E51DE248EA5.png",
         "local_img": "./assets/products/modelador-multifuncional-shark-flexstyle-lisos-e-ondulados-1600w.png"
     },
     {
         "name": "Monitor Acer 23.8\" 120hz",
+        "description": "Monitor 23.8\" Full HD (1920x1080), Painel LED IPS 120HZ 1ms Adaptive Sync KG243Y G0bi",
         "price": "R$ 48,93",
+        "price_12": "R$ 54,08",
+        "price_24": "R$ 51,51",
+        "price_36": "R$ 48,93",
         "img": "https://images.digital.allugator.com/products/PACK-1%20-%20co%CC%81pia.png",
         "local_img": "./assets/products/monitor-acer-23.8-120hz.png"
     },
     {
         "name": "Monitor Acer 23.8\" Full HD 120Hz",
+        "description": "Imagem nítida e movimentos super fluidos. Resolução Full HD e 120Hz de taxa de atualização pra mais desempenho no trabalho, estudos e entretenimento. Design clean com bordas finas que deixa qualquer setup mais moderno.",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/D_NQ_NP_2X_795017-MLA91969612197_092025-F.webp",
         "local_img": "./assets/products/monitor-acer-23.8-full-hd-120hz.png"
     },
     {
         "name": "Monitor Acer 23.8\" Full HD 120hz-3a9a0460",
+        "description": "Imagem nítida em Full HD com taxa de atualização de 120 Hz pra mais fluidez no dia a dia.",
         "price": "R$ 63,37",
+        "price_12": "R$ 70,04",
+        "price_24": "R$ 66,71",
+        "price_36": "R$ 63,37",
         "img": "https://images.digital.allugator.com/products/a1.png",
         "local_img": "./assets/products/monitor-acer-23.8-full-hd-120hz-3a9a0460.png"
     },
     {
         "name": "Monitor ACER 23.8\" LED IPS",
+        "description": "23.8” Full HD (1920 x 1080) Painel LED IPS 100 Hz 1ms AMD Radeon FreeSync EK241Y EBI",
         "price": "R$ 46,55",
+        "price_12": "R$ 51,45",
+        "price_24": "R$ 49,00",
+        "price_36": "R$ 46,55",
         "img": "https://images.digital.allugator.com/products/Acer%20Monitor%2023%2C8_%20EK241Y%20EBI-image-01.png",
         "local_img": "./assets/products/monitor-acer-23.8-led-ips.png"
     },
     {
         "name": "Monitor Acer 27\" Full HD 120 hz",
+        "description": "Tela ampla de 27” com resolução Full HD e 120 Hz pra uma experiência mais imersiva.",
         "price": "R$ 72,47",
+        "price_12": "R$ 80,10",
+        "price_24": "R$ 76,28",
+        "price_36": "R$ 72,47",
         "img": "https://images.digital.allugator.com/products/a1.png",
         "local_img": "./assets/products/monitor-acer-27-full-hd-120-hz.png"
     },
     {
         "name": "Monitor Acer Nitro 27\"",
+        "description": "Monitor 27\" Full HD (1920x1080), Painel LED VA 100HZ 1ms FreeSync Premium ED273 Hbmiix",
         "price": "R$ 61,19",
+        "price_12": "R$ 67,63",
+        "price_24": "R$ 64,41",
+        "price_36": "R$ 61,19",
         "img": "https://images.digital.allugator.com/products/nitro-27-1.png",
         "local_img": "./assets/products/monitor-acer-nitro-27.png"
     },
     {
         "name": "Monitor Acer Nitro 27\" 320hz",
+        "description": "Desempenho máximo com painel IPS, 320 Hz e resposta ultrarrápida pra jogos competitivos.",
         "price": "R$ 82,67",
+        "price_12": "R$ 91,37",
+        "price_24": "R$ 87,02",
+        "price_36": "R$ 82,67",
         "img": "https://images.digital.allugator.com/products/KG271U-F3bmiipx-1.jpg",
         "local_img": "./assets/products/monitor-acer-nitro-27-320hz.png"
     },
     {
         "name": "Monitor Acer Portátil Duplo 15.6”",
+        "description": "15.6” Full HD (1920 x 1080), LED IPS, 60 Hz, 8 ms, Até ~135° de inclinação, Adaptive Sync PD163Q smiuux",
         "price": "R$ 75,91",
+        "price_12": "R$ 83,90",
+        "price_24": "R$ 79,91",
+        "price_36": "R$ 75,91",
         "img": "https://images.digital.allugator.com/products/PACK-3.png",
         "local_img": "./assets/products/monitor-acer-portátil-duplo-15.6”.png"
     },
     {
         "name": "Monitor Acer Portátil Duplo 18.5”",
+        "description": "18.5\" Full HD (1920 x 1080), LED IPS, 60 Hz, 4ms, Até ~90° de inclinação, Adaptive Sync PD193Q smiuux",
         "price": "R$ 125,32",
+        "price_12": "R$ 138,51",
+        "price_24": "R$ 131,92",
+        "price_36": "R$ 125,32",
         "img": "https://images.digital.allugator.com/products/dobra%CC%81vel-monitor-1.png",
         "local_img": "./assets/products/monitor-acer-portátil-duplo-18.5”.png"
     },
     {
         "name": "Monitor Apple Studio Display 27\" 5K Retina Vidro Convencional",
+        "description": "<p>Tela LCD Retina 5K de 27\" (5120x2880) com 600 nits, P3 wide color, True Tone e revestimento antirreflexo (vidro convencional). Chip Apple A19 com 8GB de RAM. Câmera Center Stage de 12MP com Desk View. Sistema de 6 alto-falantes com Áudio Espacial e quatro woofers force-cancelling. Microfones com array de qualidade de estúdio (3 microfones). Duas portas Thunderbolt 5 (uma upstream com até 96W de carregamento, outra downstream para daisy-chain de até 4 displays) e duas portas USB-C (10 Gb/s). Adaptador para montagem VESA. Compatível apenas com Macs com Apple silicon (macOS Tahoe 26.3.1 ou superior).</p>",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Smart Monitor Samsung M8 32_ - 1.png",
         "local_img": "./assets/products/monitor-apple-studio-display-27-5k-retina-vidro-convencional.png"
     },
     {
         "name": "Monitor Gamer Curvo LG UltraGear 34” WQHD UltraWide 160Hz 1ms",
+        "description": "<p>Monitor UltraWide curvo de 34” com resolução QuadHD 2K, taxa de atualização de 100Hz e suporte a HDR10. Conta com cobertura sRGB 99% e recurso Picture-by-Picture para multitarefa e maior produtividade.</p>",
         "price": "R$ 194,66",
+        "price_12": "R$ 215,15",
+        "price_24": "R$ 204,90",
+        "price_36": "R$ 194,66",
         "img": "https://images.digital.allugator.com/products/copy_46F7C816-6465-402A-A23F-BCBCF237B96C.png",
         "local_img": "./assets/products/monitor-gamer-curvo-lg-ultragear-34”-wqhd-ultrawide-160hz-1ms.png"
     },
     {
         "name": "Monitor LG UltraWide Curvo 34\" WQHD VA 100Hz AMD FreeSync 34WR50QC",
+        "description": "Monitor ultrawide curvo de 34 polegadas com resolução WQHD de 3440 x 1440, painel VA com curvatura de 1800R e proporção 21:9, oferecendo 30% mais área de tela em relação a monitores convencionais. Taxa de atualização de 100Hz, tempo de resposta de 5ms (GtG), brilho de 300 cd/m², contraste de 3000:1 e cobertura de cores sRGB 99% com suporte a HDR10. Conta com AMD FreeSync para movimentos fluidos em jogos, Dynamic Action Sync, Black Stabilizer e função Picture by Picture (PBP) para exibir conteúdo de dois computadores simultaneamente. Software OnScreen Control permite dividir a tela em múltiplas áreas diretamente pelo mouse. Recursos de cuidado ocular com Modo Leitura e Flicker Safe. Conectividade com 2 entradas HDMI 2.0 e 1 DisplayPort 1.4. Design com bordas reduzidas, suporte One Click e inclinação ajustável de -5 a +15 graus. Bivolt 100 a 240V.",
         "price": "R$ 237,41",
+        "price_12": "R$ 262,40",
+        "price_24": "R$ 249,90",
+        "price_36": "R$ 237,41",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F1ab67bf5-8ed4-4e38-9a04-1443e633f584%2Fgeneral-1780939808015-thum-1600x1062-_1_-1__1_.png",
         "local_img": "./assets/products/monitor-lg-ultrawide-curvo-34-wqhd-va-100hz-amd-freesync-34wr50qc.png"
     },
     {
         "name": "Monitor LG UltraWide Curvo 34\" WQHD VA 100Hz HDR10 34WR50QK",
+        "description": "Monitor ultrawide curvo de 34 polegadas com resolução WQHD de 3440 x 1440, painel VA com curvatura de 1800R e proporção 21:9, oferecendo 30% mais área de tela em relação a monitores convencionais. Taxa de atualização de 100Hz, tempo de resposta de 5ms (GtG), brilho de 300 cd/m², contraste de 3000:1 e cobertura de cores sRGB 99% com suporte a HDR10. Conta com função Picture by Picture (PBP) para exibir conteúdo de dois computadores simultaneamente e compatibilidade com o aplicativo LG Switch para divisão da tela em até seis áreas. Recursos de cuidado ocular com Modo Leitura e Flicker Safe. Conectividade com 2 entradas HDMI e 1 DisplayPort. Design com 3 lados praticamente sem bordas, suporte One Click e inclinação ajustável de -5 a +20 graus. Consumo de 33,2W e bivolt 100 a 240V.",
         "price": "R$ 208,91",
+        "price_12": "R$ 230,90",
+        "price_24": "R$ 219,90",
+        "price_36": "R$ 208,91",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F9719d4ab-d986-43fd-95c2-e960d7a9b0b4%2Fgeneral-1780929908972-monitor-lg-ultrawide-curvo-34-wqhd-va-100hz-amd-freesync-34wr50qc-2.png",
         "local_img": "./assets/products/monitor-lg-ultrawide-curvo-34-wqhd-va-100hz-hdr10-34wr50qk.png"
     },
     {
         "name": "Monopé DIGIPOD MP-274VH",
+        "description": "78cm-2M, 5kg de carga máxima",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Monop%C3%A9%20Digipod.png",
         "local_img": "./assets/products/monopé-digipod-mp-274vh.png"
     },
     {
         "name": "Monster Hunter World",
+        "description": "1 Jogador / De 2 a 4 Jogadores Online / Mínimo 16GB / Uso Online Opcional / Dualshock 4 / Voz em EN-FR-SP / Legendas em EN-FR-SP-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/MonsterHunter.jpg",
         "local_img": "./assets/products/monster-hunter-world.png"
     },
     {
         "name": "Moto G56 5G 256GB 8GBRAM+ 8GB Ram Boost",
+        "description": "<p>Smartphone Motorola Moto G56 5G Tela 6.7” 256GB 8GB RAM+8GB Ram Boost 50MP Sony Lytia 600 Moto AI TurboPower 33W IP69&nbsp;</p>",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Motorola-Moto-G56-1.png",
         "local_img": "./assets/products/moto-g56-5g-256gb-8gbram+-8gb-ram-boost.png"
     },
     {
         "name": "Motorola Edge 60 5G 512GB 12GB RAM Tela Quad-Curve 6.7\" pOLED",
+        "description": "<p>Processador: MediaTek Dimensity 7300 (Octa-core, até 2.5 GHz, 4nm) Memória RAM: 12GB + até 12GB RAM Boost (total 24GB virtual) Armazenamento: 512GB + slot microSDXC até 1TB Tela: 6,7\" pOLED Quad-Curve, 1220x2712 (Super HD), 120Hz, até 4500 nits, HDR10+, Pantone Validated, Gorilla Glass 7i Câmera traseira: 50MP Sony LYTIA 700C OIS (principal) + 50MP ultrawide/macro + 10MP teleobjetiva 3x OIS (Super Zoom 30x) Câmera frontal: 50MP Vídeo: 4K 30fps Bateria: 5200mAh, TurboPower 68W Sistema Operacional: Android 15 com Moto AI Resistência: IP68 + IP69 + MIL-STD-810H (16 testes militares) Conectividade: 5G, Wi-Fi 6, Bluetooth 5.4, NFC, USB-C Peso: 179g</p>",
         "price": "R$ 265,90",
+        "price_12": "R$ 293,89",
+        "price_24": "R$ 279,89",
+        "price_36": "R$ 265,90",
         "img": "https://images.digital.allugator.com/products/Smartphone Motorola Edge 60 5G 512 GB-1.png",
         "local_img": "./assets/products/motorola-edge-60-5g-512gb-12gb-ram-tela-quad-curve-6.7-poled.png"
     },
     {
         "name": "Motorola Edge 70 5G 256GB",
+        "description": "<p>Equipado com processador Snapdragon, 12GB de RAM e 256GB de armazenamento, oferece alto desempenho para multitarefa, jogos e produtividade. Conta com câmera avançada, conectividade 5G e tela pOLED com taxa de atualização de até 144Hz.</p>",
         "price": "R$ 398,90",
+        "price_12": "R$ 440,89",
+        "price_24": "R$ 419,89",
+        "price_36": "R$ 398,90",
         "img": "https://images.digital.allugator.com/products/178304-1200-auto.png",
         "local_img": "./assets/products/motorola-edge-70-5g-256gb.png"
     },
     {
         "name": "Motorola Edge 70 Fusion 5G 256GB",
+        "description": "<p>Com processador Snapdragon, 8GB de RAM e 256GB de armazenamento, entrega desempenho rápido para multitarefa e jogos. Conta com câmera de alta resolução, conectividade 5G e tela pOLED fluida com taxa de atualização de até 120Hz.</p>",
         "price": "R$ 275,40",
+        "price_12": "R$ 304,39",
+        "price_24": "R$ 289,89",
+        "price_36": "R$ 275,40",
         "img": "https://images.digital.allugator.com/products/copy_1C430C51-76ED-4B70-AFE8-0FEB229AE403.png",
         "local_img": "./assets/products/motorola-edge-70-fusion-5g-256gb.png"
     },
     {
         "name": "Motorola Moto G35 5G 256GB",
+        "description": "<p>Com processador octa-core, 12GB de RAM Boost e 256GB de armazenamento, entrega desempenho fluido para multitarefa, redes sociais e streaming. Conta com câmera de 50MP com inteligência artificial, conectividade 5G e tela de 6.7” com taxa de atualização de até 120Hz.</p>",
         "price": "R$ 123,41",
+        "price_12": "R$ 136,40",
+        "price_24": "R$ 129,91",
+        "price_36": "R$ 123,41",
         "img": "https://images.digital.allugator.com/products/copy_6B9B557D-453B-4909-8DD6-B7344357FF1F.png",
         "local_img": "./assets/products/motorola-moto-g35-5g-256gb.png"
     },
     {
         "name": "Motorola Moto G86 5G 256GB",
+        "description": "<p>Com processador MediaTek Dimensity, 8GB de RAM e 256GB de armazenamento, entrega desempenho fluido para multitarefa, jogos e streaming. Conta com câmera de alta resolução com inteligência artificial, conectividade 5G e tela pOLED de até 120Hz.</p>",
         "price": "R$ 208,91",
+        "price_12": "R$ 230,90",
+        "price_24": "R$ 219,90",
+        "price_36": "R$ 208,91",
         "img": "https://images.digital.allugator.com/products/copy_2D417935-191D-47D6-BDB6-3AC8956081B0.png",
         "local_img": "./assets/products/motorola-moto-g86-5g-256gb.png"
     },
     {
         "name": "Mouse Gamer Acer Nitro 7200 DPI",
+        "description": "DPI: Até 7200 de DPI com 6 níveis, Botões não programáveis: 6 botões, Clicks suportados: 3 milhões, Sensor: 6D de alta precisão, Conectividade: Com fio",
         "price": "R$ 712,50",
+        "price_12": "R$ 787,50",
+        "price_24": "R$ 750,00",
+        "price_36": "R$ 712,50",
         "img": "https://images.digital.allugator.com/products/Mouse%20Gamer%20Acer%20Nitro.webp",
         "local_img": "./assets/products/mouse-gamer-acer-nitro-7200-dpi.png"
     },
     {
         "name": "Nescafé Dolce Gusto NEO 110v",
+        "description": "Cafeteira Dolce Gusto para cafés pretos, com cápsulas compostáveis feitas com papel. Com a tecnologia SmartBrew, a NEO ajusta a extração dos cafés como um barista, com o simples toque de um botão.  OBS: compatível apenas com cápsulas NEO compostáveis.",
         "price": "R$ 23,65",
+        "price_12": "R$ 26,14",
+        "price_24": "R$ 24,89",
+        "price_36": "R$ 23,65",
         "img": "https://images.digital.allugator.com/products/dg1.png",
         "local_img": "./assets/products/nescafé-dolce-gusto-neo-110v.png"
     },
     {
         "name": "Nescafé Dolce Gusto NEO 220v",
+        "description": "Cafeteira Dolce Gusto para cafés pretos, com cápsulas compostáveis feitas com papel. Com a tecnologia SmartBrew, a NEO ajusta a extração dos cafés como um barista, com o simples toque de um botão.  OBS: compatível apenas com cápsulas NEO compostáveis.",
         "price": "R$ 23,65",
+        "price_12": "R$ 26,14",
+        "price_24": "R$ 24,89",
+        "price_36": "R$ 23,65",
         "img": "https://images.digital.allugator.com/products/dg1.png",
         "local_img": "./assets/products/nescafé-dolce-gusto-neo-220v.png"
     },
     {
         "name": "Nikon D3100",
+        "description": "14.2 MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/nikon%20d3100.png",
         "local_img": "./assets/products/nikon-d3100.png"
     },
     {
         "name": "Nikon D5100 + Lente 55-200mm",
+        "description": "16 MP, Full HD",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%20D5100%20%2B%2055-200.png",
         "local_img": "./assets/products/nikon-d5100-+-lente-55-200mm.png"
     },
     {
         "name": "Nikon D5300",
+        "description": "Tela LCD Articulada, 24.2 MP, Wi-Fi",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%20D5300.jpg",
         "local_img": "./assets/products/nikon-d5300.png"
     },
     {
         "name": "Nikon D610 (Fullframe) + Lente 50mm f1.8",
+        "description": "Premium, Fullframe, Corpo Vedado, 24MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%20D610.png",
         "local_img": "./assets/products/nikon-d610-(fullframe)-+-lente-50mm-f1.8.png"
     },
     {
         "name": "Nikon D7000 + 18-105mm",
+        "description": "16 MP, Full HD",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%20D7000%20%2B%2018-105mm.png",
         "local_img": "./assets/products/nikon-d7000-+-18-105mm.png"
     },
     {
         "name": "Nikon D7100",
+        "description": "24MP, 51 Pontos de AF",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%20D7100.png",
         "local_img": "./assets/products/nikon-d7100.png"
     },
     {
         "name": "Nikon D7200 + Lente 18-140mm",
+        "description": "24.2MP, Full HD 60fps, ISO 25600",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%207200D%20%2B%2018-140mm.png",
         "local_img": "./assets/products/nikon-d7200-+-lente-18-140mm.png"
     },
     {
         "name": "Nikon D800 (Fullframe) + Grip de Bateria + AF 24-120mm D",
+        "description": "Premium, 36mp, Fullframe",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Nikon%20D800%20%2B%20AF%2024-120mm%20D.png",
         "local_img": "./assets/products/nikon-d800-(fullframe)-+-grip-de-bateria-+-af-24-120mm-d.png"
     },
     {
         "name": "Nintendo Switch",
+        "description": "32 GB / HDMI / JoyCons",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/switch1.jpg",
         "local_img": "./assets/products/nintendo-switch.png"
     },
     {
         "name": "Nintendo Switch 2",
+        "description": "Tela LCD de 7,9\" HDR, 4K, 120Hz, Joy-Con magnético, GameChat com câmera",
         "price": "R$ 158,46",
+        "price_12": "R$ 175,14",
+        "price_24": "R$ 166,80",
+        "price_36": "R$ 158,46",
         "img": "https://images.digital.allugator.com/products/Nintendo%20Switch%202-1.png",
         "local_img": "./assets/products/nintendo-switch-2.png"
     },
     {
         "name": "Nintendo Switch Bundle - Mario 3 por 1",
+        "description": "Portatil, HDMI",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/switch%20bundle.jpg",
         "local_img": "./assets/products/nintendo-switch-bundle---mario-3-por-1.png"
     },
     {
         "name": "Nintendo Switch + Pokemon Let's Go Eevee",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/bundle%20eevee.jpg",
         "local_img": "./assets/products/nintendo-switch-+-pokemon-lets-go-eevee.png"
     },
     {
         "name": "Nintendo Switch + Pokemon Let's Go Pikachu",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/bundle%20pikachu.jpg",
         "local_img": "./assets/products/nintendo-switch-+-pokemon-lets-go-pikachu.png"
     },
     {
         "name": "Nintendo Switch + Super Smash Bros. Ultimate",
+        "description": "Multiplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/switch%20%2B%20smash.jpg",
         "local_img": "./assets/products/nintendo-switch-+-super-smash-bros.-ultimate.png"
     },
     {
         "name": "Nioh para PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/nioh.jpg",
         "local_img": "./assets/products/nioh-para-ps4.png"
     },
     {
         "name": "Notebook Acer Aspire 5 i5 256GB",
+        "description": "Processador Intel Core i5 11a geração, 8GB Memória RAM 256GB SSD, Tela 14\" Full HD, Windows 11 PRO A514-54-590S",
         "price": "R$ 113,92",
+        "price_12": "R$ 125,91",
+        "price_24": "R$ 119,92",
+        "price_36": "R$ 113,92",
         "img": "https://images.digital.allugator.com/products/asp1.png",
         "local_img": "./assets/products/notebook-acer-aspire-5-i5-256gb.png"
     },
     {
         "name": "Notebook Acer Aspire Go 15 i5-13420H 16GB 512GB SSD FHD Linux",
+        "description": "<p>Processador: Intel Core i5-13420H 13ª Geração (8 núcleos, até 4.60 GHz) Memória RAM: 16GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" TN Full HD 1920x1080, 60Hz, 220 nits, 45% NTSC, 16:9 GPU: Intel UHD (integrada) Sistema Operacional: Linux 64-Bits Bateria: 53Wh, até 8h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, USB-C 3.2 Gen 2x2 (2x) Teclado: Numérico, ABNT2 Peso: 1,8 kg PN: NX.JH6AL.001</p>",
         "price": "R$ 308,65",
+        "price_12": "R$ 341,14",
+        "price_24": "R$ 324,89",
+        "price_36": "R$ 308,65",
         "img": "https://images.digital.allugator.com/products/acer-aspire-go-15-i5-linux-1.png",
         "local_img": "./assets/products/notebook-acer-aspire-go-15-i5-13420h-16gb-512gb-ssd-fhd-linux.png"
     },
     {
         "name": "Notebook Acer Aspire Go 15 i5-13420H 16GB 512GB SSD W11",
+        "description": "<p>Processador: Intel Core i5-13420H 13ª Geração (8 núcleos, até 4.60 GHz) Memória RAM: 16GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" TN Full HD 1920x1080, 60Hz, 220 nits, 45% NTSC, 16:9 GPU: Intel UHD (integrada) Sistema Operacional: Windows 11 Home 64-Bits Bateria: 53Wh, até 8h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, USB-C 3.2 Gen 2x2 (2x) Teclado: Numérico, ABNT2 Peso: 1,8 kg PN: NX.JG7AL.004</p>",
         "price": "R$ 360,90",
+        "price_12": "R$ 398,89",
+        "price_24": "R$ 379,89",
+        "price_36": "R$ 360,90",
         "img": "https://images.digital.allugator.com/products/acer-aspire-go-15-i5-win-1.png",
         "local_img": "./assets/products/notebook-acer-aspire-go-15-i5-13420h-16gb-512gb-ssd-w11.png"
     },
     {
         "name": "Notebook Acer Aspire Go 15 i7-13620H 16GB Linux",
+        "description": "<p>Processador: Intel Core i7-13620H 13ª Geração (10 núcleos, até 4.90 GHz) Memória RAM: 16GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" TN Full HD 1920x1080, 60Hz, 220 nits, 45% NTSC, 16:9 GPU: Intel UHD (integrada) Sistema Operacional: Linux 64-Bits Bateria: 53Wh, até 8h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, USB-C 3.2 Gen 2x2 (2x) Teclado: Numérico, ABNT2 Peso: 1,8 kg PN: NX.JH6AL.004</p>",
         "price": "R$ 332,40",
+        "price_12": "R$ 367,39",
+        "price_24": "R$ 349,89",
+        "price_36": "R$ 332,40",
         "img": "https://images.digital.allugator.com/products/acer-aspire-go-15-i7-linux-1.png",
         "local_img": "./assets/products/notebook-acer-aspire-go-15-i7-13620h-16gb-linux.png"
     },
     {
         "name": "Notebook Acer Aspire Go 15 Touch i7-13620H 16GB 15.6\" FHD W11",
+        "description": "<p>Processador: Intel Core i7-13620H 13ª Geração (10 núcleos, até 4.90 GHz) Memória RAM: 16GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" IPS Touchscreen Full HD 1920x1080, 60Hz, 300 nits, 45% NTSC, 16:9 GPU: Intel UHD (integrada) Sistema Operacional: Windows 11 Home 64-Bits Bateria: 53Wh, até 8h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, USB-C 3.2 Gen 2x2 (2x) Teclado: Numérico, ABNT2 Peso: 1,8 kg PN: NX.JGCAL.002</p>",
         "price": "R$ 322,90",
+        "price_12": "R$ 356,89",
+        "price_24": "R$ 339,89",
+        "price_36": "R$ 322,90",
         "img": "https://images.digital.allugator.com/products/acer-aspire-go-15-i7-touch-win-1.png",
         "local_img": "./assets/products/notebook-acer-aspire-go-15-touch-i7-13620h-16gb-15.6-fhd-w11.png"
     },
     {
         "name": "Notebook Acer Aspire Vero i5 8GB",
+        "description": "Sistema Operacional Windows 11 Pro Processador Intel® Core™ i5 – 1335U de 13ª geração Armazenamento 512 GB SSD Memória 8 GB RAM LPDDR5 Gráfico Intel® Iris® Xe Graphics (integrado) Tela 15.6” Full HD (1920 x 1080) AV15-53P-51MR",
         "price": "R$ 398,81",
+        "price_12": "R$ 440,79",
+        "price_24": "R$ 419,80",
+        "price_36": "R$ 398,81",
         "img": "https://images.digital.allugator.com/products/AV15-53P-51MR-1.png",
         "local_img": "./assets/products/notebook-acer-aspire-vero-i5-8gb.png"
     },
     {
         "name": "Notebook Acer Aspire Vero i7 16GB",
+        "description": "Processador Intel Core i7-1355U (13ª geração), 16GB RAM LPDDR5, SSD 512GB, Intel Iris Xe Graphics integrada, Tela 15,6” Full HD, Windows 11 Pro AV15-53P-72JT",
         "price": "R$ 219,59",
+        "price_12": "R$ 242,70",
+        "price_24": "R$ 231,15",
+        "price_36": "R$ 219,59",
         "img": "https://images.digital.allugator.com/products/vv1.png",
         "local_img": "./assets/products/notebook-acer-aspire-vero-i7-16gb.png"
     },
     {
         "name": "Notebook Acer Nitro 5 RTX 3050 i5 8GB",
+        "description": "Placa de video RTX 3050 com 4GB, Tela 15.6” Full HD - 144 Hertz, Capacidade 512GB SSD, Processador Intel Core i5 12ª geração, Memória RAM 8GB 512GB SSD AN515-58-54UH",
         "price": "R$ 294,40",
+        "price_12": "R$ 325,39",
+        "price_24": "R$ 309,89",
+        "price_36": "R$ 294,40",
         "img": "https://images.digital.allugator.com/products/nitro5.png",
         "local_img": "./assets/products/notebook-acer-nitro-5-rtx-3050-i5-8gb.png"
     },
     {
         "name": "Notebook Acer Nitro 5 RTX3050 i5 8GB",
+        "description": "Placa de video RTX 3050 com 6GB, Tela 15.6” Full HD - 144 Hertz, Capacidade 512GB SSD, Processador Intel Core i5 13ª geração, Memória RAM 8GB ANV15-51-57WS",
         "price": "R$ 227,24",
+        "price_12": "R$ 251,16",
+        "price_24": "R$ 239,20",
+        "price_36": "R$ 227,24",
         "img": "https://images.digital.allugator.com/products/acer-nitro-img1.png",
         "local_img": "./assets/products/notebook-acer-nitro-5-rtx3050-i5-8gb.png"
     },
     {
         "name": "Notebook Acer Nitro 5 RTX 3070TI Ryzen 7 16GB",
+        "description": "Placa de video RTX 3070TI com 8GB, Tela 15.6” Full HD - 144 Hertz, Capacidade 1TB SSD, Memória RAM 16GB, Processador: AMD Ryzen 7 AN515-46-R5WF",
         "price": "R$ 383,47",
+        "price_12": "R$ 423,83",
+        "price_24": "R$ 403,65",
+        "price_36": "R$ 383,47",
         "img": "https://images.digital.allugator.com/products/Nitro%205%20RTX%203070TI%2016GB%20RAM%20Rayzen%207.png",
         "local_img": "./assets/products/notebook-acer-nitro-5-rtx-3070ti-ryzen-7-16gb.png"
     },
     {
         "name": "Notebook Acer Nitro V15 i5-13420H 16GB 512GB SSD RTX 4060 Linux",
+        "description": "<p>Processador: Intel Core i5-13420H 13ª Geração (8 núcleos, até 4.60 GHz) Memória RAM: 16GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" IPS Full HD 1920x1080, 165Hz, 300 nits, 45% NTSC, 16:9 GPU: NVIDIA GeForce RTX 4060 8GB GDDR6 Sistema Operacional: Linux 64-Bits Bateria: 57Wh, até 5h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, LAN 1Gbps, Thunderbolt 4 (1x) Teclado: Retroiluminado 1 cor, numérico, ABNT2 Peso: 2,11 kg PN: NH.U1UAL.001</p>",
         "price": "R$ 550,90",
+        "price_12": "R$ 608,89",
+        "price_24": "R$ 579,89",
+        "price_36": "R$ 550,90",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i5-rtx4060-linux-1.png",
         "local_img": "./assets/products/notebook-acer-nitro-v15-i5-13420h-16gb-512gb-ssd-rtx-4060-linux.png"
     },
     {
         "name": "Notebook Acer Nitro V15 i5-13420H 16GB RTX 4050 Linux",
+        "description": "<p>Processador: Intel Core i5-13420H 13ª Geração (8 núcleos, até 4.60 GHz) Memória RAM: 16GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" IPS Full HD 1920x1080, 144Hz, 250 nits, 45% NTSC, 16:9 GPU: NVIDIA GeForce RTX 4050 6GB GDDR6 Sistema Operacional: Linux Gutta 64-Bits Bateria: 57Wh, até 7h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, LAN 1Gbps, Thunderbolt 4 (1x) Teclado: Retroiluminado branco, numérico, ABNT2 Peso: 2,11 kg PN: NH.QS8AL.005</p>",
         "price": "R$ 503,40",
+        "price_12": "R$ 556,39",
+        "price_24": "R$ 529,89",
+        "price_36": "R$ 503,40",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i5-rtx4050-linux-1.png",
         "local_img": "./assets/products/notebook-acer-nitro-v15-i5-13420h-16gb-rtx-4050-linux.png"
     },
     {
         "name": "Notebook Acer Nitro V15 i7-13620H 16GB 512GB SSD RTX 4050 Linux",
+        "description": "<p>Processador: Intel Core i7-13620H 13ª Geração (10 núcleos, até 4.90 GHz) Memória RAM: 16GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" IPS Full HD 1920x1080, 165Hz, 300 nits, 45% NTSC, 16:9 GPU: NVIDIA GeForce RTX 4050 6GB GDDR6 Sistema Operacional: Linux 64-Bits Bateria: 57Wh, até 5h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, LAN 1Gbps, Thunderbolt 4 (1x) Teclado: Retroiluminado 1 cor, numérico, ABNT2 Peso: 2,11 kg PN: NH.U1TAL.001</p>",
         "price": "R$ 550,90",
+        "price_12": "R$ 608,89",
+        "price_24": "R$ 579,89",
+        "price_36": "R$ 550,90",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i7-rtx4050-linux-1.png",
         "local_img": "./assets/products/notebook-acer-nitro-v15-i7-13620h-16gb-512gb-ssd-rtx-4050-linux.png"
     },
     {
         "name": "Notebook Acer Nitro V15 i7-13620H 8GB 512GB SSD RTX 3050 Linux",
+        "description": "<p>Processador: Intel Core i7-13620H 13ª Geração (10 núcleos, até 4.90 GHz) Memória RAM: 8GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" IPS Full HD 1920x1080, 144Hz, 250 nits, 45% NTSC, 16:9 GPU: NVIDIA GeForce RTX 3050 6GB GDDR6 Sistema Operacional: Linux Gutta 64-Bits Bateria: 57Wh, até 7h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, LAN 1Gbps, Thunderbolt 4 (1x) Teclado: Retroiluminado branco, numérico, ABNT2 Peso: 2,11 kg PN: NH.QQDAL.008</p>",
         "price": "R$ 474,90",
+        "price_12": "R$ 524,89",
+        "price_24": "R$ 499,89",
+        "price_36": "R$ 474,90",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i7-rtx3050-linux-1.png",
         "local_img": "./assets/products/notebook-acer-nitro-v15-i7-13620h-8gb-512gb-ssd-rtx-3050-linux.png"
     },
     {
         "name": "Notebook Acer Nitro V15 i9-13900H 16GB 512GB SSD RTX 4060 W11",
+        "description": "<p>Processador: Intel Core i9-13900H 13ª Geração (14 núcleos, até 5.40 GHz) Memória RAM: 16GB DDR5 5200MHz Armazenamento: 512GB SSD NVMe PCIe 4.0 Tela: 15.6\" IPS Full HD 1920x1080, 165Hz, 300 nits, 45% NTSC, 16:9 GPU: NVIDIA GeForce RTX 4060 8GB GDDR6 Sistema Operacional: Windows 11 Home 64-Bits Bateria: 57Wh, até 5h de autonomia Conectividade: Wi-Fi 6, Bluetooth 5.1, LAN 1Gbps, Thunderbolt 4 (1x) Teclado: Retroiluminado 1 cor, numérico, ABNT2 Peso: 2,11 kg PN: NH.U0DAL.002</p>",
         "price": "R$ 645,90",
+        "price_12": "R$ 713,89",
+        "price_24": "R$ 679,89",
+        "price_36": "R$ 645,90",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i9-rtx4060-win-1.png",
         "local_img": "./assets/products/notebook-acer-nitro-v15-i9-13900h-16gb-512gb-ssd-rtx-4060-w11.png"
     },
     {
         "name": "Notebook Acer Predator Helios Neo 16 i9 RTX 4070",
+        "description": "<p>Processador: Intel Core i9-14900HX 14ª Geração (24 núcleos, até 5.8 GHz) Memória RAM: 32GB DDR5 5600MHz Armazenamento: 1TB SSD NVMe PCIe 4.0 Tela: 16\" IPS WQXGA 2560x1600, 240Hz, 500 nits, DCI-P3 100%, 16:10 GPU: NVIDIA GeForce RTX 4070 8GB GDDR6 Sistema Operacional: Windows 11 Home 64-Bits Bateria: 90Wh, até 3h de autonomia Conectividade: Wi-Fi 6E, Bluetooth 5.3, LAN 2.5G, Thunderbolt 4 (2x) Teclado: RGB 4 zonas, numérico, ABNT2 Peso: 2,6 kg PN: NH.QTVAL.002</p>",
         "price": "R$ 1.030,65",
+        "price_12": "R$ 1.139,14",
+        "price_24": "R$ 1.084,89",
+        "price_36": "R$ 1.030,65",
         "img": "https://images.digital.allugator.com/products/acer-predator-helios-neo-16-i9-rtx4070-1.png",
         "local_img": "./assets/products/notebook-acer-predator-helios-neo-16-i9-rtx-4070.png"
     },
     {
         "name": "Notebook Acer Predator Helios Neo RTX 4070 i7 16GB",
+        "description": "Processador Intel® Core™ i7-14700HX de 14ª geração, Placa de vídeo Nvidia® GeForce® RTX 4070 GDDR6, Memória RAM 16 GB DDR5, Capacidade 512 GB SSD, Tela 16” WQXGA (2560 x 1600) 240 Hz, Windows 11 Home PHN16-72-74VX",
         "price": "R$ 523,70",
+        "price_12": "R$ 578,82",
+        "price_24": "R$ 551,26",
+        "price_36": "R$ 523,70",
         "img": "https://images.digital.allugator.com/products/he1.png",
         "local_img": "./assets/products/notebook-acer-predator-helios-neo-rtx-4070-i7-16gb.png"
     },
     {
         "name": "Notebook Acer Predator Helios RTX 4050 i7 16GB",
+        "description": "Placa de video RTX 4050, Tela 16” - 165 Hertz, Capacidade 512GB SSD, Memória RAM 16GB, Processador Intel Core i7 13ª geração PHN16-71-76PL",
         "price": "R$ 427,45",
+        "price_12": "R$ 472,44",
+        "price_24": "R$ 449,95",
+        "price_36": "R$ 427,45",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/new-site/ACER+PREDATOR+HELIOS+NEO+16/Acer+Predator+Helios+Neo+16+Thumb.png",
         "local_img": "./assets/products/notebook-acer-predator-helios-rtx-4050-i7-16gb.png"
     },
     {
         "name": "Notebook Acer Swift X Ultra 7",
+        "description": "Processador Ultra 7 14ª geração, 32GB DDR5X, 512GB SSD, Tela 14.5\" 2880x1800, Windows 11 HOME SFX14-72G-74LP",
         "price": "R$ 521,55",
+        "price_12": "R$ 576,45",
+        "price_24": "R$ 549,00",
+        "price_36": "R$ 521,55",
         "img": "https://images.digital.allugator.com/products/Acer%20Swift%20X%20Ultra%207%20SFX14-72G-74LP-image-01.png",
         "local_img": "./assets/products/notebook-acer-swift-x-ultra-7.png"
     },
     {
         "name": "Notebook Acer TravelMate i5 16GB",
+        "description": "16GB Memória RAM DDR4, Processador Intel Core i5-1335U 13ª geração, Capacidade 512GB-SSD, Tela: 14”, Windows 11 PRO, TMP214-55-54ZZ",
         "price": "R$ 256,40",
+        "price_12": "R$ 283,39",
+        "price_24": "R$ 269,89",
+        "price_36": "R$ 256,40",
         "img": "https://images.digital.allugator.com/products/tm111.png",
         "local_img": "./assets/products/notebook-acer-travelmate-i5-16gb.png"
     },
     {
         "name": "Notebook Acer TravelMate i5 8GB",
+        "description": "Notebook Acer TravelMate i5 8GB RAM 512GB-SSD 14\" LED IPS WUXGA Windows 11 Pro TMP214-55-59VU",
         "price": "R$ 199,41",
+        "price_12": "R$ 220,40",
+        "price_24": "R$ 209,90",
+        "price_36": "R$ 199,41",
         "img": "https://images.digital.allugator.com/products/tm111.png",
         "local_img": "./assets/products/notebook-acer-travelmate-i5-8gb.png"
     },
     {
         "name": "Notebook Acer TravelMate i7 16GB",
+        "description": "16GB Memória RAM DDR4, Processador Intel Core i7-1355U 13ª geração, Capacidade 512GB-SSD, Tela: 14”, Windows 11 PRO, TMP214-55-70G2",
         "price": "R$ 256,40",
+        "price_12": "R$ 283,39",
+        "price_24": "R$ 269,89",
+        "price_36": "R$ 256,40",
         "img": "https://images.digital.allugator.com/products/tm111.png",
         "local_img": "./assets/products/notebook-acer-travelmate-i7-16gb.png"
     },
     {
         "name": "Notebook Acer Vero i5 16GB 512GB",
+        "description": "Processador Intel Core i5 11a gen, 16GB Memória RAM 512GB SSD AV15-51-577Q",
         "price": "R$ 211,66",
+        "price_12": "R$ 233,94",
+        "price_24": "R$ 222,80",
+        "price_36": "R$ 211,66",
         "img": "https://images.digital.allugator.com/products/vp1.png",
         "local_img": "./assets/products/notebook-acer-vero-i5-16gb-512gb.png"
     },
     {
         "name": "Notebook Acer Vero i5 8GB-DDR5 512GB",
+        "description": "Processador Intel Core i5-1335U 13ª geração, 8GB Memória RAM DDR5, Capacidade 512GB-SSD, Tela: 15.6” IPS, Windows 11 HOME, AV15-53P-56HM",
         "price": "R$ 199,41",
+        "price_12": "R$ 220,40",
+        "price_24": "R$ 209,90",
+        "price_36": "R$ 199,41",
         "img": "https://images.digital.allugator.com/products/vv1.png",
         "local_img": "./assets/products/notebook-acer-vero-i5-8gb-ddr5-512gb.png"
     },
     {
         "name": "Notebook Asus VivoBook 15 13ªGer i5 8GB 512GB SSD W11 Home",
+        "description": "Sistema Operacional: Windows 11 Home Tela: 15,6”  Intel Core™ i5 - 1334U - 13ªGeração Memória RAM: 8 GB Armazenamento: 512GB SSD",
         "price": "R$ 265,90",
+        "price_12": "R$ 293,89",
+        "price_24": "R$ 279,89",
+        "price_36": "R$ 265,90",
         "img": "https://images.digital.allugator.com/products/vivobook15.png",
         "local_img": "./assets/products/notebook-asus-vivobook-15-13ªger-i5-8gb-512gb-ssd-w11-home.png"
     },
     {
         "name": "Notebook Dell Gaming G7",
+        "description": "15.6 polegadas, Intel i5 8300H, 8GB, HD 1TB + SSD 128GB, GeForce GTX 1050 Ti 4GB",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dell%20G7.png",
         "local_img": "./assets/products/notebook-dell-gaming-g7.png"
     },
     {
         "name": "Notebook Gamer Acer Nitro V15 RTX 3050 i5 16GB",
+        "description": "Processador Intel Core i5-13420H 13ª geração, Placa de vídeo RTX 3050, 16GB Memória RAM DDR5, Capacidade 512GB-SSD, Tela: 15,6” - 144 Hertz, Windows 11 HOME, ANV15-51-52QB",
         "price": "R$ 322,90",
+        "price_12": "R$ 356,89",
+        "price_24": "R$ 339,89",
+        "price_36": "R$ 322,90",
         "img": "https://images.digital.allugator.com/products/nit1.png",
         "local_img": "./assets/products/notebook-gamer-acer-nitro-v15-rtx-3050-i5-16gb.png"
     },
     {
         "name": "Notebook Gamer Acer Nitro V15 RTX3050 i5 16GB",
+        "description": "Processador Intel Core i5-13420H 13ª geração, Placa de vídeo RTX 3050, 16GB Memória RAM DDR5, Capacidade 512GB-SSD, Tela: 15,6” - 144 Hertz, Windows 11 HOME, ANV15-51-52QB",
         "price": "R$ 294,40",
+        "price_12": "R$ 325,39",
+        "price_24": "R$ 309,89",
+        "price_36": "R$ 294,40",
         "img": "https://images.digital.allugator.com/products/nit1.png",
         "local_img": "./assets/products/notebook-gamer-acer-nitro-v15-rtx3050-i5-16gb.png"
     },
     {
         "name": "Notebook Gamer Acer Nitro V15 RTX3050 i5 8GB",
+        "description": "Processador Intel Core i5-13420H 13ª geração, Placa de video RTX 3050, 8GB RAM DDR5, Capacidade 512GB-SSD, Tela: 15,6”,  Windows 11 HOME, ANV15-51-58AZ",
         "price": "R$ 294,40",
+        "price_12": "R$ 325,39",
+        "price_24": "R$ 309,89",
+        "price_36": "R$ 294,40",
         "img": "https://images.digital.allugator.com/products/nit1.png",
         "local_img": "./assets/products/notebook-gamer-acer-nitro-v15-rtx3050-i5-8gb.png"
     },
     {
         "name": "Notebook Gamer Acer Nitro V15 RTX4050 i5 8GB",
+        "description": "Placa de video RTX 4050, Tela: 15.6” - 144 Hertz, Capacidade 512gb SSD, Memória RAM 8GB, Processador Intel Core i5-13420H de 13ª geração, Windows ANV15-51-54DL",
         "price": "R$ 313,40",
+        "price_12": "R$ 346,39",
+        "price_24": "R$ 329,89",
+        "price_36": "R$ 313,40",
         "img": "https://images.digital.allugator.com/products/nit1.png",
         "local_img": "./assets/products/notebook-gamer-acer-nitro-v15-rtx4050-i5-8gb.png"
     },
     {
         "name": "Notebook Gamer Acer Nitro V15 RTX4050 i7 16GB Linux",
+        "description": "Placa de video RTX 4050, Tela: 15.6” - 144 Hertz, Capacidade 512gb SSD, Memória RAM 16GB, Processador Intel Core i7-13620H de 13ª geração, Linux ANV15-51-7037",
         "price": "R$ 341,30",
+        "price_12": "R$ 377,23",
+        "price_24": "R$ 359,26",
+        "price_36": "R$ 341,30",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i7-rtx4050-linux-1.png",
         "local_img": "./assets/products/notebook-gamer-acer-nitro-v15-rtx4050-i7-16gb-linux.png"
     },
     {
         "name": "Notebook Gamer Acer Nitro V15 RTX4050 i7 16GB Windows",
+        "description": "Processador Intel Core i7-13620H 13ª geração High Edition com 10 núcleos, Placa de vídeo RTX 4050 com 6 GB de memória dedicada GDDR6, 16GB Memória RAM DDR5, Capacidade 512GB-SSD, Tela: 15,6” Full HD 144 Hertz, Windows 11 HOME, ANV15-51-76KQ",
         "price": "R$ 342,34",
+        "price_12": "R$ 378,37",
+        "price_24": "R$ 360,36",
+        "price_36": "R$ 342,34",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i5-rtx4050-1.png",
         "local_img": "./assets/products/notebook-gamer-acer-nitro-v15-rtx4050-i7-16gb-windows.png"
     },
     {
         "name": "Notebook Gamer Acer Nitro V15 RTX4060 i7 16GB Linux",
+        "description": "Notebook Gamer Acer Nitro V15 i7 16GB Linux 15.6” 512 GBSSD",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i5-rtx4060-linux-1.png",
         "local_img": "./assets/products/notebook-gamer-acer-nitro-v15-rtx4060-i7-16gb-linux.png"
     },
     {
         "name": "Notebook Gamer Acer Predator Helios RTX4060 i7 16GB 1TB SSD",
+        "description": "Processador Intel Core i7-13650HX 13ª geração, Placa de vídeo RTX 4060, 16GB Memória RAM DDR5, Capacidade 1TB-SSD, Tela: 16” - 165 Hertz, Windows 11 HOME, PHN16-71-709K",
         "price": "R$ 493,90",
+        "price_12": "R$ 545,89",
+        "price_24": "R$ 519,89",
+        "price_36": "R$ 493,90",
         "img": "https://images.digital.allugator.com/products/he1.png",
         "local_img": "./assets/products/notebook-gamer-acer-predator-helios-rtx4060-i7-16gb-1tb-ssd.png"
     },
     {
         "name": "Notebook Gamer Acer Predator Helios RTX4060 i7 16GB 512GB",
+        "description": "Placa de video RTX 4060, Tela: 16” - 165 Hertz, Capacidade 512gb SSD, Memória RAM 16GB, Processador Intel Core i7 13ª geração PHN16-71-72W6",
         "price": "R$ 474,90",
+        "price_12": "R$ 524,89",
+        "price_24": "R$ 499,89",
+        "price_36": "R$ 474,90",
         "img": "https://images.digital.allugator.com/products/he1.png",
         "local_img": "./assets/products/notebook-gamer-acer-predator-helios-rtx4060-i7-16gb-512gb.png"
     },
     {
         "name": "Notebook Gamer Acer Predator Triton 300 SE RTX3060 i7 16GB",
+        "description": "Placa de video RTX 3060, Tela 16”, Capacidade 512GB SSD, Memória RAM 16GB, Processador Intel Core i7 12º geração PT316-51s-72XA",
         "price": "R$ 379,05",
+        "price_12": "R$ 418,95",
+        "price_24": "R$ 399,00",
+        "price_36": "R$ 379,05",
         "img": "https://images.digital.allugator.com/products/tri1.png",
         "local_img": "./assets/products/notebook-gamer-acer-predator-triton-300-se-rtx3060-i7-16gb.png"
     },
     {
         "name": "Notebook Gamer Lenovo LOQ-e i5 16GB 512GB SSD RTX3050 15.6” W11",
+        "description": "Processador Intel Core i5-12450HX, 8C (4P + 4E) 12T, P-core up to 4.4GHz, E-core up to 3.1GHz Cache: 12MB Memória 16GB Tipo da Memória: DDR5-4800 Suporta até: Expansível até 32GB HD SSD de 512GB Tela Tipo de Tela: FHD Tamanho da Tela: 15.6\" 144Hz Resolução da Tela: FHD (1920x1080) Placa de Vídeo RTX3050 Capacidade da Placa: 6GB GDDR6",
         "price": "R$ 332,40",
+        "price_12": "R$ 367,39",
+        "price_24": "R$ 349,89",
+        "price_36": "R$ 332,40",
         "img": "https://images.digital.allugator.com/products/Notebook-Gamer-Lenovo-LOQ-e-i5-16GB-512GB-SSD-RTX3050-15.6”-W11-1.png",
         "local_img": "./assets/products/notebook-gamer-lenovo-loq-e-i5-16gb-512gb-ssd-rtx3050-15.6”-w11.png"
     },
     {
         "name": "Notebook Gamer Predator Helios RTX4060 i7 16GB 512GB SSD",
+        "description": "Placa de video RTX 4060, Tela: 16” - 165 Hertz, Capacidade 1TB SSD, Memória RAM 16GB, Processador Intel Core i7 13ª geração PHN16-71-74UE",
         "price": "R$ 359,87",
+        "price_12": "R$ 397,75",
+        "price_24": "R$ 378,81",
+        "price_36": "R$ 359,87",
         "img": "https://images.digital.allugator.com/products/neo1.png",
         "local_img": "./assets/products/notebook-gamer-predator-helios-rtx4060-i7-16gb-512gb-ssd.png"
     },
     {
         "name": "Notebook Inspiron 15 3000",
+        "description": "15.6 polegadas, Intel Core i5, 8GB, 2TB, AMD Radeon 520 GDDR5 de 2GB",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dell%20i15%203000.png",
         "local_img": "./assets/products/notebook-inspiron-15-3000.png"
     },
     {
         "name": "Notebook Inspiron 15 5000",
+        "description": "15.6 polegadas, Intel i7 4.6GHZ, 8GB, HD 2TB, GeForce MX130 2GB",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Dell%20Inspiron%20i15%205000.png",
         "local_img": "./assets/products/notebook-inspiron-15-5000.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad 1i i3 8GB 256GB 15.6\"",
+        "description": "Intel Core i3-1315U, 6C (2P + 4E) 8T, P-core 1.2, Windows 11, 8GB, 256GB HD, Tipo de Tela: Full HD, Tamanho da Tela: 15,6\", Resolução da Tela: 1920 x 1080 TN 250nits, Anti-glare, Placa de Vídeo, Integrada Intel UHD Graphics, Bluetooth 5.2, Áudio Stereo Speaker, Microfone Integrado, Webcam HD 720p com Obturador de Privacidade, Portas Frontais/Laterais/Traseiras, HDMI, USB, Saída Fone de Ouvido, USB-C, Modelo: 83QJ0001BO",
         "price": "R$ 237,41",
+        "price_12": "R$ 262,40",
+        "price_24": "R$ 249,90",
+        "price_36": "R$ 237,41",
         "img": "https://images.digital.allugator.com/products/Lenovo i3.png",
         "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i3-8gb-256gb-15.6.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad 1i i3 8GB 512GB SSD 15.6\" FHD W11",
+        "description": "Notebook com processador Intel Core i3-1315U de 13ª geração, 8GB de RAM e SSD de 512GB, garantindo bom desempenho para tarefas do dia a dia. Possui tela de 15,6” Full HD antirreflexo, gráficos Intel UHD integrados e Windows 11 Home. Conta ainda com Wi-Fi 6, Bluetooth 5.1, câmera HD com obturador de privacidade, alto-falantes com Dolby Audio e diversas portas (USB, USB-C e HDMI).",
         "price": "R$ 237,41",
+        "price_12": "R$ 262,40",
+        "price_24": "R$ 249,90",
+        "price_36": "R$ 237,41",
         "img": "https://images.digital.allugator.com/products/Notebook-Lenovo-IdeaPad-1i-i7-8GB-512GB-SSD-15.6'-HD-W11-5.png",
         "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i3-8gb-512gb-ssd-15.6-fhd-w11.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad 1i i7 16GB 512GB SSD 15.6\" HD W11",
+        "description": "Notebook com processador Intel Core i7-1255U de 12ª geração, 16GB de RAM e SSD de 512GB, oferecendo bom desempenho para multitarefa, estudos e trabalho. Possui tela de 15,6” HD antirreflexo (1366×768), gráficos integrados Intel Iris Xe e Windows 11 Home. Conta com Wi-Fi AC, Bluetooth 5.0, alto-falantes com Dolby Audio, webcam HD com privacidade e conexões USB, USB-C e HDMI.",
         "price": "R$ 332,40",
+        "price_12": "R$ 367,39",
+        "price_24": "R$ 349,89",
+        "price_36": "R$ 332,40",
         "img": "https://images.digital.allugator.com/products/Notebook-Lenovo-IdeaPad-1i-i7-8GB-512GB-SSD-15.6'-HD-W11-5.png",
         "local_img": "./assets/products/notebook-lenovo-ideapad-1i-i7-16gb-512gb-ssd-15.6-hd-w11.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad Slim 3 i5 16GB 512GB SSD 15.3” W11",
+        "description": "<p>O Lenovo IdeaPad Slim 3 i5 entrega desempenho e fluidez pra sua rotina. Com 16GB de RAM e 512GB SSD, você trabalha, estuda e usa vários programas ao mesmo tempo sem travar. A tela de 15.3” garante mais conforto visual, e o Windows 11 Home original oferece uma experiência moderna e segura. Fino, leve e eficiente na medida certa.</p>",
         "price": "R$ 303,90",
+        "price_12": "R$ 335,89",
+        "price_24": "R$ 319,89",
+        "price_36": "R$ 303,90",
         "img": "https://images.digital.allugator.com/products/Notebook-Lenovo-IdeaPad-Slim-3i-Gen10-2.png",
         "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i5-16gb-512gb-ssd-15.3”-w11.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad Slim 3 i7 16GB 512GB SSD 15.3” W11",
+        "description": "O Lenovo IdeaPad Slim 3 i7 é ideal pra quem precisa de desempenho e fluidez no dia a dia. Com 16GB de RAM e 512GB SSD, ele garante velocidade pra multitarefas, trabalho e estudos sem travar. A tela de 15.3” oferece mais conforto visual, e o Windows 11 original entrega uma experiência moderna e segura. Fino, leve e potente na medida certa.",
         "price": "R$ 389,40",
+        "price_12": "R$ 430,39",
+        "price_24": "R$ 409,89",
+        "price_36": "R$ 389,40",
         "img": "https://images.digital.allugator.com/products/Lenovo-IdeaPad-Slim-3-i7-24GB-512GB-15.3'-FHD-W11-1.png",
         "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i7-16gb-512gb-ssd-15.3”-w11.png"
     },
     {
         "name": "Notebook Lenovo IdeaPad Slim 3 i7 24GB 512GB 15.3\" FHD W11",
+        "description": "Intel Core i7 - 13620H, Windows 11, 24GB, 512GB HD, Tamanho da Tela: 15,3\", Resolução: Full HD, Wi-Fi® 6, 802.11ax 2x2 Wi-Fi® + Bluetooth® 5.2, M.2 card, Bluetooth 5.2, Áudio Stereo Speaker, Webcam HD 720p com Obturador de Privacidade, Modelo: 83NS0008BR",
         "price": "R$ 313,40",
+        "price_12": "R$ 346,39",
+        "price_24": "R$ 329,89",
+        "price_36": "R$ 313,40",
         "img": "https://images.digital.allugator.com/products/Lenovo IdeaPadd.png",
         "local_img": "./assets/products/notebook-lenovo-ideapad-slim-3-i7-24gb-512gb-15.3-fhd-w11.png"
     },
     {
         "name": "Notebook Lenovo Yoga Slim 7i i5 16GB 512GB SSD 14\" OLED W11",
+        "description": "Processador Core™ Ultra 5 125H - 12ª Geração Velocidade do Processador: Frequência máxima: P-core 4.5GHz / E-core 3.6GHz / LPE-core 2.5GHz Cache: 18MB Sistema Operacional Windows 11 Sistema Operacional Windows pré-instalado no produto, não acompanha mídia Memória 16GB Tipo de Memória: LPDDR5 HD SSD de 512GB Tela Tipo de Tela: FHD Tamanho da Tela: 14\" Resolução da Tela: OLED (1920 x 1200) Placa de Vídeo Integrated Intel Arc Graphics",
         "price": "R$ 284,91",
+        "price_12": "R$ 314,90",
+        "price_24": "R$ 299,90",
+        "price_36": "R$ 284,91",
         "img": "https://images.digital.allugator.com/products/Lenovo Yoga Slim i5.png",
         "local_img": "./assets/products/notebook-lenovo-yoga-slim-7i-i5-16gb-512gb-ssd-14-oled-w11.png"
     },
     {
         "name": "Notebook Nitro RTX 3050 i5 8GB Win11",
+        "description": "Processador Intel Core i5-13420H 13ª geração, Placa de vídeo RTX 3050 com 6 GB de memória dedicada GDDR6, 8GB Memória RAM DDR5, Capacidade 512GB-SSD, Tela: 15,6” - 144 Hertz, Windows 11 HOME, ANV15-51-58AZ",
         "price": "R$ 312,50",
+        "price_12": "R$ 345,39",
+        "price_24": "R$ 328,95",
+        "price_36": "R$ 312,50",
         "img": "https://images.digital.allugator.com/products/acer-nitro-v15-i7-rtx3050-1.png",
         "local_img": "./assets/products/notebook-nitro-rtx-3050-i5-8gb-win11.png"
     },
     {
         "name": "Notebook Samsung Galaxy Book4 i5 16GB 512GB SSD 15.6 FHD W11 Pro",
+        "description": "<p>Notebook Samsung Galaxy Book4 (NP754XGJ-KG3BR) com processador Intel Core i5 de 13ª geração, 16GB de memória RAM e 512GB SSD NVMe. Tela de 15,6” Full HD com acabamento antirreflexo, gráficos Intel Iris Xe integrados e sistema Windows 11 Pro. Design fino e leve (1,55 kg), com construção em metal. Conta com Wi-Fi 6, Bluetooth 5.2, múltiplas portas (USB-A, USB-C, HDMI, RJ45 e microSD) e áudio estéreo com Dolby Atmos.</p>",
         "price": "R$ 436,90",
+        "price_12": "R$ 482,89",
+        "price_24": "R$ 459,89",
+        "price_36": "R$ 436,90",
         "img": "https://images.digital.allugator.com/products/Notebook-Galaxy-Book4-i5-16GB-512GB-15.6”-1.png",
         "local_img": "./assets/products/notebook-samsung-galaxy-book4-i5-16gb-512gb-ssd-15.6-fhd-w11-pro.png"
     },
     {
         "name": "Notebook Samsung Galaxy Book4 W11 i5 16GB 512GB",
+        "description": "Windows 11 Home, Intel® Core™ i5, 16GB, 512GB SSD, 15.6'' Full HD LED, 1.55 kg",
         "price": "R$ 261,16",
+        "price_12": "R$ 288,65",
+        "price_24": "R$ 274,90",
+        "price_36": "R$ 261,16",
         "img": "https://images.digital.allugator.com/products/galaxybook.png",
         "local_img": "./assets/products/notebook-samsung-galaxy-book4-w11-i5-16gb-512gb.png"
     },
     {
         "name": "Notebook Samsung Galaxy Book4 W11 i7 16GB 512GB",
+        "description": "Windows 11 Home, Intel® Core™ i7, 16GB, 512GB SSD, 15.6'' Full HD LED, 1.55 kg",
         "price": "R$ 294,40",
+        "price_12": "R$ 325,39",
+        "price_24": "R$ 309,89",
+        "price_36": "R$ 294,40",
         "img": "https://images.digital.allugator.com/products/galaxybook.png",
         "local_img": "./assets/products/notebook-samsung-galaxy-book4-w11-i7-16gb-512gb.png"
     },
     {
         "name": "Óculos de Áudio JBL SoundGear Frames Bluetooth 5.2",
+        "description": "Óculos de áudio com alto-falantes integrados e conexão Bluetooth 5.2, desenvolvidos para reprodução de música e chamadas mãos-livres sem a necessidade de fones de ouvido. Conta com JBL Signature Sound, resposta de frequência de 100 Hz a 18 kHz, sensibilidade de 114 dB SPL e impedância de 20 Ohms. Suporte a conexão multiponto para alternar entre dois dispositivos simultaneamente, carregamento via USB-C e até 8 horas de bateria com carga rápida. Certificação IP54 contra respingos e poeira. Compatível com o aplicativo JBL Headphones. Peso de 52 g",
         "price": "R$ 66,41",
+        "price_12": "R$ 73,40",
+        "price_24": "R$ 69,91",
+        "price_36": "R$ 66,41",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F58c2f05c-99f2-40bd-a948-ea7886041167%2Fgeneral-1780940061750-_culos-de-_udio-jbl-soundgear-frames-bluetooth-5-5.png",
         "local_img": "./assets/products/óculos-de-áudio-jbl-soundgear-frames-bluetooth-5.2.png"
     },
     {
         "name": "Óculos de Realidade Virtual Meta Quest 3 512GB 120Hz 4K+",
+        "description": "<p>Processador: Qualcomm Snapdragon XR2 Gen 2 Memória RAM: 8GB Armazenamento: 512GB Display: LCD 2064x2208 por olho, 120Hz, lentes pancake Campo de visão: 110° horizontal Passthrough: Câmeras RGB coloridas para realidade mista Áudio: Spatial Audio integrado Conectividade: Wi-Fi 6E, Bluetooth 5.2, USB-C Bateria: até 2,2h de autonomia Peso: 515g Sistema Operacional: Meta Horizon OS PN: 899-00583-01</p>",
         "price": "R$ 379,90",
+        "price_12": "R$ 419,89",
+        "price_24": "R$ 399,89",
+        "price_36": "R$ 379,90",
         "img": "https://images.digital.allugator.com/products/Meta Quest 3-1.png",
         "local_img": "./assets/products/óculos-de-realidade-virtual-meta-quest-3-512gb-120hz-4k+.png"
     },
     {
         "name": "Óculos Inteligentes Oakley Meta HSTN com Meta AI",
+        "description": "<p>Câmera: 12 MP, vídeo 3K Ultra HD, mãos livres Microfones: Sistema de microfones integrado Áudio: Alto-falantes open-ear integrados com Bluetooth Assistente: Meta AI com comandos de voz e toque Bateria: até 8h de uso típico / até 5h de áudio contínuo / case com até 48h adicionais Lentes: Oakley Prizm (disponível em Prizm Polarizado, Clear e Transitions) Conectividade: Bluetooth, Wi-Fi Compatibilidade: Android 10+ / iOS 14.4+ Armação: O Matter™, design esportivo PN: OW8002</p>",
         "price": "R$ 337,15",
+        "price_12": "R$ 372,64",
+        "price_24": "R$ 354,89",
+        "price_36": "R$ 337,15",
         "img": "https://images.digital.allugator.com/products/Oakley Meta HSTN (Urbano)-1.png",
         "local_img": "./assets/products/óculos-inteligentes-oakley-meta-hstn-com-meta-ai.png"
     },
     {
         "name": "Óculos Inteligentes Oakley Meta Vanguard com Meta AI",
+        "description": "<p>Câmera: 12 MP ultrawide, campo de visão de 122°, vídeo 3K Microfones: Sistema de microfones integrado Áudio: Alto-falantes open-ear de alto desempenho (suporta até 30mph de vento) Assistente: Meta AI com comandos de voz e toque Bateria: até 9h de uso normal / case com até 36h adicionais Resistência: IP67 (água, suor e poeira) Lentes: Oakley Prizm 24K Integrações: Garmin, Strava, Meta AI app Conectividade: Bluetooth, Wi-Fi Compatibilidade: Android 10+ / iOS 14.4+</p>",
         "price": "R$ 417,90",
+        "price_12": "R$ 461,89",
+        "price_24": "R$ 439,89",
+        "price_36": "R$ 417,90",
         "img": "https://images.digital.allugator.com/products/Oakley Meta Vanguard-1.png",
         "local_img": "./assets/products/óculos-inteligentes-oakley-meta-vanguard-com-meta-ai.png"
     },
     {
         "name": "Óculos Inteligentes Ray-Ban Meta Skyler Gen 2 com Meta AI",
+        "description": "<p>Câmera: 12 MP ultrawide, vídeo 3K ultra-HD Microfones: 5 microfones integrados Áudio: Alto-falantes open-ear integrados Assistente: Meta AI com comandos de voz (sem necessidade de Wi-Fi) Conectividade: Bluetooth, Wi-Fi Bateria: até 8h de uso moderado / até 5h de streaming contínuo Carregamento: Case de carregamento incluso Compatibilidade: Android 10+ / iOS 14.4+ Armação: Nylon leve, estilo cat-eye PN: RW4014</p>",
         "price": "R$ 360,90",
+        "price_12": "R$ 398,89",
+        "price_24": "R$ 379,89",
+        "price_36": "R$ 360,90",
         "img": "https://images.digital.allugator.com/products/RAY-BAN META SKYLER - GEN-1.png",
         "local_img": "./assets/products/óculos-inteligentes-ray-ban-meta-skyler-gen-2-com-meta-ai.png"
     },
     {
         "name": "Óculos Inteligentes Ray-Ban Meta Wayfarer Gen 2 com Meta AI",
+        "description": "<p>Câmera: 12 MP ultrawide, vídeo 3K ultra-HD Microfones: 5 microfones integrados Áudio: Alto-falantes open-ear integrados Assistente: Meta AI com comandos de voz (sem necessidade de Wi-Fi) Conectividade: Bluetooth, Wi-Fi Bateria: até 8h de uso moderado / até 5h de streaming contínuo / case com até 48h adicionais Carregamento: Case de carregamento incluso Compatibilidade: Android 10+ / iOS 14.4+ Armação: Acetato injetado, estilo Wayfarer clássico PN: RW4012</p>",
         "price": "R$ 360,90",
+        "price_12": "R$ 398,89",
+        "price_24": "R$ 379,89",
+        "price_36": "R$ 360,90",
         "img": "https://images.digital.allugator.com/products/RAY-BAN META WAYFARER-1.png",
         "local_img": "./assets/products/óculos-inteligentes-ray-ban-meta-wayfarer-gen-2-com-meta-ai.png"
     },
     {
         "name": "Overwatch",
+        "description": "1 Jogador / De 2 a 12 Jogadores Online / Mínimo 30GB / Uso Online Opcional / Dualshock 4 / Voz em EN-FR-SP-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/OverWatch.jpg",
         "local_img": "./assets/products/overwatch.png"
     },
     {
         "name": "Panasonic GH5 (Assinatura)",
+        "description": "4k, 120fps, Fullframe, Mirrorless",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Panasonic%20GH5.png",
         "local_img": "./assets/products/panasonic-gh5-(assinatura).png"
     },
     {
         "name": "Panasonic GH5 (Mirrorless)",
+        "description": "Premium, 20.3MP, 4k, Mirrorless",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Panasonic%20GH5.png",
         "local_img": "./assets/products/panasonic-gh5-(mirrorless).png"
     },
     {
         "name": "Panasonic GH5 (Mirrorless) + Lente 12-35 f2.8",
+        "description": "Premium, 20.3MP, 4k, Mirrorless",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Panasonic%20GH5%20%2B1235mm.png",
         "local_img": "./assets/products/panasonic-gh5-(mirrorless)-+-lente-12-35-f2.8.png"
     },
     {
         "name": "Panasonic Lumix G7 (Mirrorless)",
+        "description": "Mirrorless, 16MP, Wi-Fi, 4K",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Panasonic%20G7%20rev1.png",
         "local_img": "./assets/products/panasonic-lumix-g7-(mirrorless).png"
     },
     {
         "name": "Patinete Adulto Scooter Elétrica Skortle 37KM Autonomia Motor 550W",
+        "description": "Patinete elétrico com motor de 550W e autonomia de até 37km para deslocamentos urbanos e trajetos diários. Conta com bateria de alta capacidade, suspensão dianteira para maior conforto e iluminação lateral integrada para mais visibilidade durante o uso. Possui estrutura reforçada, aceleração elétrica e sistema voltado para estabilidade e mobilidade em diferentes tipos de percurso.",
         "price": "R$ 246,90",
+        "price_12": "R$ 272,89",
+        "price_24": "R$ 259,89",
+        "price_36": "R$ 246,90",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F15b1c316-3349-4a87-8ef0-26abf3194dd0%2Fgeneral-1780064238190-copy_093CDF35-E280-4140-BE55-233042F44999.png",
         "local_img": "./assets/products/patinete-adulto-scooter-elétrica-skortle-37km-autonomia-motor-550w.png"
     },
     {
         "name": "PES 2019 - PS4",
+        "description": "online, multiplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/PES%2019.jpg",
         "local_img": "./assets/products/pes-2019---ps4.png"
     },
     {
         "name": "Playstation 4",
+        "description": "500Gb / Full HD / Wi-Fi",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Play__1_-removebg.png",
         "local_img": "./assets/products/playstation-4.png"
     },
     {
         "name": "Playstation 4 Pro",
+        "description": "500Gb, 4k, HDR",
         "price": "R$ 62,46",
+        "price_12": "R$ 69,03",
+        "price_24": "R$ 65,75",
+        "price_36": "R$ 62,46",
         "img": "https://images.digital.allugator.com/products/PS4%20Pro.png",
         "local_img": "./assets/products/playstation-4-pro.png"
     },
     {
         "name": "Playstation 4 + PSVR + 5 Jogos",
+        "description": "1 controle, PS Move, Multiplayer e Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/PSVR%20%2B%20PS4%20bundle%20-%20full%20-%201%20dualshock.jpg",
         "local_img": "./assets/products/playstation-4-+-psvr-+-5-jogos.png"
     },
     {
         "name": "Playstation VR + 5 Jogos",
+        "description": "PS Move, Multiplayer e Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/PSVR+%2B+PS4+bundle.jpg",
         "local_img": "./assets/products/playstation-vr-+-5-jogos.png"
     },
     {
         "name": "Playstation VR + Gran Turismo Sport + Demo PSVR",
+        "description": "PS Move, Multiplayer e Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/PSVR%20%2B%20Gran%20Turi.jpg",
         "local_img": "./assets/products/playstation-vr-+-gran-turismo-sport-+-demo-psvr.png"
     },
     {
         "name": "Pokemon Let's Go Eevee",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/lets%20go%20eevee.jpg",
         "local_img": "./assets/products/pokemon-lets-go-eevee.png"
     },
     {
         "name": "Pokemon Let's Go Pikachu",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/lets%20go%20pikachu.jpg",
         "local_img": "./assets/products/pokemon-lets-go-pikachu.png"
     },
     {
         "name": "POLAR Ignite 3 Bege",
+        "description": "O Polar Ignite 3 é um relógio fitness e de bem-estar, cheio de estilo, que ajuda você a viver uma vida com mais energia. Ele monitora seu sono, sua atividade e sua frequência cardíaca para fornecer orientação individualizada ao seu corpo e estilo de vida.",
         "price": "R$ 173,20",
+        "price_12": "R$ 191,43",
+        "price_24": "R$ 182,32",
+        "price_36": "R$ 173,20",
         "img": "https://images.digital.allugator.com/products/igb1.png",
         "local_img": "./assets/products/polar-ignite-3-bege.png"
     },
     {
         "name": "POLAR Pacer + Assessoria",
+        "description": "Relógio Esportivo com GPS",
         "price": "R$ 340,57",
+        "price_12": "R$ 376,42",
+        "price_24": "R$ 358,49",
+        "price_36": "R$ 340,57",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/new-site/POLAR+PACER/Polar+Pacer+Thumb+2.png",
         "local_img": "./assets/products/polar-pacer-+-assessoria.png"
     },
     {
         "name": "POLAR Pacer Pro + Assessoria",
+        "description": "Relógio Esportivo com GPS avançado",
         "price": "R$ 397,57",
+        "price_12": "R$ 439,42",
+        "price_24": "R$ 418,49",
+        "price_36": "R$ 397,57",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/new-site/POLAR+PACER+PRO/Polar+Pacer+Pro+Thumb+2.png",
         "local_img": "./assets/products/polar-pacer-pro-+-assessoria.png"
     },
     {
         "name": "Projetor 2500 Lumens - Bytetrade",
+        "description": "2500 Lumens, Até 120\", HDMI",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/projetor%20sem%20controle.jpg",
         "local_img": "./assets/products/projetor-2500-lumens---bytetrade.png"
     },
     {
         "name": "Projetor ACER 4.000 ANSI Lumens",
+        "description": "4.000 ANSI Lumens, 1920 x 1080, projeção de 62\" a 2m, 60hz, X1526HK",
         "price": "R$ 155,80",
+        "price_12": "R$ 172,20",
+        "price_24": "R$ 164,00",
+        "price_36": "R$ 155,80",
         "img": "https://images.digital.allugator.com/products/Acer%20Projetor%204.000%20Lumens%20X1526HK-image-02.png",
         "local_img": "./assets/products/projetor-acer-4.000-ansi-lumens.png"
     },
     {
         "name": "Projetor Epson Lifestudio Pop LED FHD GoogleTV Som Bose USB HDMI",
+        "description": "Mini projetor portátil com resolução 4K UHD, tecnologia laser RGB e brilho de 3000 ANSI lúmens para imagens mais nítidas e cores intensas. Realiza projeções de 65” até 300” com suporte a Dolby Vision para maior contraste e definição. Conta com conectividade inteligente, áudio integrado e formato portátil para filmes, séries e games em tela grande.",
         "price": "R$ 351,40",
+        "price_12": "R$ 388,39",
+        "price_24": "R$ 369,89",
+        "price_36": "R$ 351,40",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F30573479-ca0e-4607-84e5-689af3430191%2Fgeneral-1779999752028-projetor-epson-lifestudio-pop-ef-61w_-som-bose-2.png",
         "local_img": "./assets/products/projetor-epson-lifestudio-pop-led-fhd-googletv-som-bose-usb-hdmi.png"
     },
     {
         "name": "Projetor Intelbras Full HD 5200 Lúmens PFL5211 Wi-Fi",
+        "description": "<p>Projetor Full HD com brilho de 5.200 lúmens e projeção de até 200”. Conta com conectividade Wi-Fi integrada e alta definição para filmes, apresentações e conteúdos em tela grande.</p>",
         "price": "R$ 189,91",
+        "price_12": "R$ 209,90",
+        "price_24": "R$ 199,90",
+        "price_36": "R$ 189,91",
         "img": "https://images.digital.allugator.com/products/copy_3D701268-C4E1-43B9-AEAA-59FB95CE85CD.png",
         "local_img": "./assets/products/projetor-intelbras-full-hd-5200-lúmens-pfl5211-wi-fi.png"
     },
     {
         "name": "Projetor Intelbras Full HD 7400 Lúmens PFL6520",
+        "description": "Projetor Full HD com brilho de 7.400 lúmens e projeção de até 200” para filmes, apresentações e conteúdos em tela grande. Conta com conectividade Wi-Fi integrada, alta definição de imagem e compatibilidade com diferentes dispositivos para uso doméstico e profissional.",
         "price": "R$ 194,66",
+        "price_12": "R$ 215,15",
+        "price_24": "R$ 204,90",
+        "price_36": "R$ 194,66",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F5bdd4e21-5838-4402-9a6e-e23835f9c0a5%2Fgeneral-1779730655010-copy_2380B894-CFC5-40F1-B3D1-A15BCB8A5136.png",
         "local_img": "./assets/products/projetor-intelbras-full-hd-7400-lúmens-pfl6520.png"
     },
     {
         "name": "Projetor Multilaser Smart Full HD 300 ANSI Lumens PJ300N",
+        "description": "Projetor Smart Full HD com brilho de 300 ANSI lúmens e conectividade Bluetooth compatível com Android e iOS. Conta com sistema inteligente integrado para streaming, reprodução de conteúdos em tela grande e conexão sem fio com diferentes dispositivos para entretenimento e apresentações.",
         "price": "R$ 132,91",
+        "price_12": "R$ 146,90",
+        "price_24": "R$ 139,91",
+        "price_36": "R$ 132,91",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2Fb23226e4-0fc9-42fa-b998-fea0a9871130%2Fgeneral-1779999898326-projetor-smart-full-hd-multi_-300-ansi-lumens---pj300n-3.png",
         "local_img": "./assets/products/projetor-multilaser-smart-full-hd-300-ansi-lumens-pj300n.png"
     },
     {
         "name": "Pro Series Video LED Light",
+        "description": "6500k, Controle variável de brilho",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/WhatsApp%20Image%202019-12-04%20at%2014.47.40.jpeg",
         "local_img": "./assets/products/pro-series-video-led-light.png"
     },
     {
         "name": "PS4 com Controle Adicional e Fifa 19",
+        "description": "PS4 Slim",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/fifa%2019%20bundle%20final.jpg",
         "local_img": "./assets/products/ps4-com-controle-adicional-e-fifa-19.png"
     },
     {
         "name": "PS4 com Controle Adicional e PES 2019",
+        "description": "Singleplayer, Multiplayer, Online",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/bundle%20pes%202019.jpg",
         "local_img": "./assets/products/ps4-com-controle-adicional-e-pes-2019.png"
     },
     {
         "name": "PS4 com God of War",
+        "description": "1 Controle",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/god%20of%20war%20bundle%201.jpg",
         "local_img": "./assets/products/ps4-com-god-of-war.png"
     },
     {
         "name": "PSVR + 4 Jogos",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/psvr%20%2B%204.2.jpg",
         "local_img": "./assets/products/psvr-+-4-jogos.png"
     },
     {
         "name": "Rebatedor 2 em 1 Greika - 80cm",
+        "description": "80cm, 2 em 1",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/rebatedor%20greika%202%20em%201.png",
         "local_img": "./assets/products/rebatedor-2-em-1-greika---80cm.png"
     },
     {
         "name": "Rebatedor 5 em 1 - 105cm",
+        "description": "105 cm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/rebatedor%20greika%205%20em%201.png",
         "local_img": "./assets/products/rebatedor-5-em-1---105cm.png"
     },
     {
         "name": "Rebatedor 5 em 1 - 60cm",
+        "description": "5 em 1 (Branco, Prateado, Dourado, Rebatedor, Preto)",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/rebatedor%20greika%205%20em%201%2060cm.png",
         "local_img": "./assets/products/rebatedor-5-em-1---60cm.png"
     },
     {
         "name": "Red Dead Redemption 2 para PS4",
+        "description": "Singleplayer, Multiplayer Online (2-32)",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/red%20dead%20ps4.jpg",
         "local_img": "./assets/products/red-dead-redemption-2-para-ps4.png"
     },
     {
         "name": "Relógio Fitbit Charge 6 Fitness Tracker Google GPS WiFi 4GB OLED",
+        "description": "Smartband fitness com monitoramento contínuo de frequência cardíaca, sono, calorias e atividades físicas. Conta com GPS integrado, integração com aplicativos Google, notificações inteligentes e compatibilidade com equipamentos de academia para acompanhamento de desempenho em exercícios. Possui bateria de longa duração e resistência à água.",
         "price": "R$ 109,16",
+        "price_12": "R$ 120,65",
+        "price_24": "R$ 114,91",
+        "price_36": "R$ 109,16",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F3cb8956d-6f63-46b4-b0bf-7dd2a1555a22%2Fgeneral-1780000801627-fitbit-charge-6-fitness-tracker-com-aplicativos-do-google_-freque__ncia-cardi__aca-em-equipamentos-de-exerci__cios-1.png",
         "local_img": "./assets/products/relógio-fitbit-charge-6-fitness-tracker-google-gps-wifi-4gb-oled.png"
     },
     {
         "name": "Relógio Garmin Fenix 8 Solar Sapphire 51mm GPS",
+        "description": "<p>Tela MIP transflexiva de 1.4\" com lente em cristal de safira e bezel em titânio. Caixa de 51mm. Carregamento solar (Power Glass). GPS multibanda (L1+L5) com SatIQ. Bluetooth, Wi-Fi e ANT+. Bateria de até 48 dias em modo smartwatch (com solar) e até 149h em GPS. Armazenamento para mapas TopoActive e até 2.000 músicas. Resistência 10ATM e MIL-STD-810. Sensores: frequência cardíaca, SpO2, ECG, altímetro, barômetro, bússola. Microfone e alto-falante integrados para chamadas e assistente de voz</p>",
         "price": "R$ 759,90",
+        "price_12": "R$ 839,89",
+        "price_24": "R$ 799,89",
+        "price_36": "R$ 759,90",
         "img": "https://images.digital.allugator.com/products/Garmin Fênix 8 - 1.png",
         "local_img": "./assets/products/relógio-garmin-fenix-8-solar-sapphire-51mm-gps.png"
     },
     {
         "name": "Relógio Garmin Forerunner 165 Music 43mm 1.2\" AMOLED GPS",
+        "description": "<p>Tela AMOLED de 1.2\" (390x390) com touchscreen. Caixa de 43mm. GPS, GLONASS e Galileo. 4GB de armazenamento para músicas (compatível com Spotify, Deezer, Amazon Music — download offline com assinatura premium). Bluetooth e ANT+. Bateria de até 11 dias em modo smartwatch e 19h em GPS com música. Resistência à água 5ATM. Sensores: frequência cardíaca, SpO2, monitor de sono. Inclui métricas de corrida (cadência, ritmo, VO2 máx).</p>",
         "price": "R$ 170,91",
+        "price_12": "R$ 188,90",
+        "price_24": "R$ 179,90",
+        "price_36": "R$ 170,91",
         "img": "https://images.digital.allugator.com/products/Garmin Forerunner 165 - 1.png",
         "local_img": "./assets/products/relógio-garmin-forerunner-165-music-43mm-1.2-amoled-gps.png"
     },
     {
         "name": "Relógio Garmin Forerunner 55 GPS 5 ATM Monitor Cardíaco",
+        "description": "Smartwatch com GPS integrado voltado para corrida e fitness, com monitor de frequência cardíaca de pulso contínuo Garmin Elevate, monitoramento de estresse, sono avançado, Body Battery e taxa de respiração 24 horas. Suporte a múltiplos sistemas de satélite: GPS, GLONASS e Galileo. Autonomia de até 2 semanas no modo smartwatch ou até 20 horas no modo GPS. Visor transflectivo MIP legível sob luz solar com resolução de 208 x 208 pixels e diâmetro de 1.04 polegada. Resistência à água 5 ATM com perfis de natação em piscina, corrida indoor e outdoor, ciclismo, HIIT, Pilates, yoga e caminhada. Sugestão diária de treino de corrida, VO2 máximo, tempo de recuperação, Auto Lap, Auto Pause e treino com intervalos. Notificações inteligentes, controle de música, clima e compatibilidade com iPhone e Android via Bluetooth e ANT+. Pulseira de silicone com liberação rápida de 20 mm, caixa de 42 × 42 × 11,6 mm e peso de 37 g",
         "price": "R$ 113,91",
+        "price_12": "R$ 125,90",
+        "price_24": "R$ 119,91",
+        "price_36": "R$ 113,91",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F9e1f88e5-6927-4ce4-aafa-48f3c37575bf%2Fgeneral-1780927290767-smartwatch-garmin-forerunner-55-gps-5-atm-monitor-card_aco-2.png",
         "local_img": "./assets/products/relógio-garmin-forerunner-55-gps-5-atm-monitor-cardíaco.png"
     },
     {
         "name": "Relógio Garmin Forerunner 955 GPS Multi-Band 5 ATM 32GB",
+        "description": "Smartwatch para corrida, triatlo e esportes ao ar livre com GPS multi-band e suporte a GPS, GLONASS, Galileo, QZSS e BeiDou. Monitor de frequência cardíaca Garmin Elevate, oximetria de pulso, altímetro barométrico, bússola e giroscópio. Autonomia de até 15 dias no modo smartwatch, 42 horas no modo GPS ou 80 horas no modo UltraTrac. Armazenamento de 32 GB com mapas pré-carregados e navegação turn-by-turn. Métricas avançadas de corrida com VO2 máximo, limiar de lactato, potência, status e carga de treinamento e PacePro. Suporte a triátlon, natação, ciclismo, golfe com mais de 43.000 campos e mais de 30 perfis de atividade. Body Battery, sono avançado com Sleep Coach e Garmin Pay. Conectividade Bluetooth, ANT+ e Wi-Fi. Visor MIP colorido touchscreen de 1.3 polegada, caixa de 46,5 × 46,5 × 14,4 mm e peso de 52g.",
         "price": "R$ 299,15",
+        "price_12": "R$ 330,64",
+        "price_24": "R$ 314,89",
+        "price_36": "R$ 299,15",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F290f5ac5-f208-4faa-9f2b-6744c1f38466%2Fgeneral-1780927747544-smartwatch-garmin-forerunner-955-gps-multi-band-5-atm-32gb-2.png",
         "local_img": "./assets/products/relógio-garmin-forerunner-955-gps-multi-band-5-atm-32gb.png"
     },
     {
         "name": "Resident Evil 7 para PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Screen%20Shot%202019-03-27%20at%2016.49.16.png",
         "local_img": "./assets/products/resident-evil-7-para-ps4.png"
     },
     {
         "name": "Ring Light 11\" Lunix LN125",
+        "description": "6000k, 1800 lumens",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Rightlight%20Lunix%20Lnx-125.png",
         "local_img": "./assets/products/ring-light-11-lunix-ln125.png"
     },
     {
         "name": "Ring Light Bicolor 12\" SY D240C",
+        "description": "60W, 3200k - 5600k, Regulável",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Microfone%20Ring%20Light%20Sy%20D240c.png",
         "local_img": "./assets/products/ring-light-bicolor-12-sy-d240c.png"
     },
     {
         "name": "Ring Light Grapho DC24",
+        "description": "15 polegadas, 3500 a 5600k",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Ring%20Light%20DC24v.png",
         "local_img": "./assets/products/ring-light-grapho-dc24.png"
     },
     {
         "name": "Ring Light Neewer RL-12",
+        "description": "12 Polegadas, 55W, LED",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Ring%20Light%20Neewer%20V1.jpg",
         "local_img": "./assets/products/ring-light-neewer-rl-12.png"
     },
     {
         "name": "Ring Light RL 480 18\"",
+        "description": "3000k a 6000k",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/RL%20480%2018.png",
         "local_img": "./assets/products/ring-light-rl-480-18.png"
     },
     {
         "name": "Rise of The Tomb Raider",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/rise%20of%20the%20tomb%20raider.jpg",
         "local_img": "./assets/products/rise-of-the-tomb-raider.png"
     },
     {
         "name": "Robô Aspirador de Pó Karcher RCV 5 com Mapeamento a Laser 5000Pa",
+        "description": "Robô aspirador com mapeamento a laser LiDAR que cria automaticamente um mapa dos ambientes para programação personalizada de horários e definição de zonas proibidas. Sistema de detecção de obstáculos com laser, câmera e inteligência artificial evita cabos, meias e sapatos durante a operação. Sucção de 5000Pa com sensor Autoboost que reconhece automaticamente carpetes e tapetes, aumentando o poder de sucção nessas áreas. Função MOP permite limpeza seca, úmida ou combinada em pisos laminados e de madeira, com reservatório de água de 0,3L. Conta com retorno automático à base, sensor antiqueda, sensor anticolisão e controle via aplicativo com Wi-Fi 2.4GHz. Altura de 9,7 cm, bivolt.",
         "price": "R$ 341,90",
+        "price_12": "R$ 377,89",
+        "price_24": "R$ 359,89",
+        "price_36": "R$ 341,90",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F196d3e65-80da-4501-8fca-2a850f581296%2Fgeneral-1781012035147-rob_-aspirador-de-p_-karcher-rcv-5-com-mapeamento-a-laser-5000pa-4.png",
         "local_img": "./assets/products/robô-aspirador-de-pó-karcher-rcv-5-com-mapeamento-a-laser-5000pa.png"
     },
     {
         "name": "Robô Aspirador de Pó Xiaomi H40 com Base de Autolimpeza 10000Pa",
+        "description": "Robô aspirador com sucção de 10000Pa para limpeza seco e molhado, equipado com sistema anti-emaranhamento de 5 etapas para eliminar fios e pelos de pets sem interrupções. Conta com base de autolimpeza com reservatório de 4L que permite até 90 dias sem esvaziar manualmente. Navegação por mapeamento 3D via câmera, filtro HEPA, retorno automático à base, sensor anti-colisão e sensor antiqueda. Autonomia de até 90 minutos por carga. Controlado pelo aplicativo Xiaomi Home com agendamento personalizado e compatível com comandos de voz via Alexa e Google Assistant. Reservatório de pó de 0,4L e reservatório de água de 0,2L.",
         "price": "R$ 370,40",
+        "price_12": "R$ 409,39",
+        "price_24": "R$ 389,89",
+        "price_36": "R$ 370,40",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2Ff13ff8f2-cf36-4da0-b716-0f43260f58e4%2Fgeneral-1780950070544-rob_-aspirador-de-p_-xiaomi-h40-com-base-de-autolimpeza-10000pa-2.png",
         "local_img": "./assets/products/robô-aspirador-de-pó-xiaomi-h40-com-base-de-autolimpeza-10000pa.png"
     },
     {
         "name": "Robô Aspirador iRobot Combo j7+",
+        "description": "Aspira e passa pano, mapeamento inteligente, PrecisionVision",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/ROOMBAI1.png",
         "local_img": "./assets/products/robô-aspirador-irobot-combo-j7+.png"
     },
     {
         "name": "Ronin M",
+        "description": "Carga máxima: 3.6Kg",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/djironinm.png",
         "local_img": "./assets/products/ronin-m.png"
     },
     {
         "name": "Ronin S",
+        "description": "Carga Máxima 3.6Kg, Modo Esporte, Vida útil máxima da bateria: 12 horas",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/djironins.png",
         "local_img": "./assets/products/ronin-s.png"
     },
     {
         "name": "Roteador Acer Predator W6x",
+        "description": "Roteador Gamer Predator W6X, Wi-Fi 6 AX6000, Velocidade até 4804Mbps (5GHz), 160 MHz de largura de banda, 1GB RAM LPDDR4, LED decorativo, App Predator Connect",
         "price": "R$ 41,72",
+        "price_12": "R$ 46,11",
+        "price_24": "R$ 43,92",
+        "price_36": "R$ 41,72",
         "img": "https://images.digital.allugator.com/products/rot1.png",
         "local_img": "./assets/products/roteador-acer-predator-w6x.png"
     },
     {
         "name": "Samsung Galaxy A16 128GB",
+        "description": "6,7” FHD+ Super AMOLED 90Hz, câmera traseira tripla de 50MP e frontal de 13MP. Conta com NFC para pagamentos, processador Octa-core, 128GB de memória e 4GB de RAM. Tem bateria de 5.000mAh com carregamento rápido de 25W, leitor de digital na lateral, proteção IP54 e segurança garantida pelo Knox Vault e Cadeado Galaxy, além de 6 anos de atualizações.",
         "price": "R$ 93,00",
+        "price_12": "R$ 102,79",
+        "price_24": "R$ 97,89",
+        "price_36": "R$ 93,00",
         "img": "https://images.digital.allugator.com/products/br-galaxy-a16-sm-a165-sm-a165mzkdzto-544286890.avif",
         "local_img": "./assets/products/samsung-galaxy-a16-128gb.png"
     },
     {
         "name": "Samsung Galaxy A16 5G 128GB",
+        "description": "6,7” FHD+ Super AMOLED 90Hz, câmera tripla de 50MP e frontal de 13MP. Equipado com processador Exynos 1330, 128GB de memória e 4GB de RAM. Possui NFC, bateria de 5.000mAh com carregamento rápido de 25W, leitor de digital na lateral, certificação IP54 e proteção com Knox Vault e Cadeado Galaxy, além de 6 anos de atualizações.",
         "price": "R$ 83,50",
+        "price_12": "R$ 92,29",
+        "price_24": "R$ 87,89",
+        "price_36": "R$ 83,50",
         "img": "https://images.digital.allugator.com/products/ga16-1.png",
         "local_img": "./assets/products/samsung-galaxy-a16-5g-128gb.png"
     },
     {
         "name": "Samsung Galaxy A17 5G 128GB 6.7\" 4GB RAM Câmera Tripla 50MP IA",
+        "description": "<p>Tela Super AMOLED de 6.7\" com 90Hz, câmera de 50MP com OIS e 5G. Bateria de 5.000mAh.</p>",
         "price": "R$ 132,91",
+        "price_12": "R$ 146,90",
+        "price_24": "R$ 139,91",
+        "price_36": "R$ 132,91",
         "img": "https://images.digital.allugator.com/products/Samsung Galaxy A17 5G - 1.png",
         "local_img": "./assets/products/samsung-galaxy-a17-5g-128gb-6.7-4gb-ram-câmera-tripla-50mp-ia.png"
     },
     {
         "name": "Samsung Galaxy A37 128GB",
+        "description": "<p>Equipado com processador octa-core, 8GB de RAM e 128GB de armazenamento, o Galaxy A37 5G oferece desempenho rápido para o dia a dia, câmera de alta resolução e conectividade 5G. Conta com tela Super AMOLED com navegação fluida.</p>",
         "price": "R$ 289,65",
+        "price_12": "R$ 320,14",
+        "price_24": "R$ 304,89",
+        "price_36": "R$ 289,65",
         "img": "https://images.digital.allugator.com/products/copy_B9197291-ACD8-4C6B-9791-2A4E654B45D4.png",
         "local_img": "./assets/products/samsung-galaxy-a37-128gb.png"
     },
     {
         "name": "Samsung Galaxy A37 256GB",
+        "description": "<p>Com processador octa-core, 8GB de RAM e 256GB de armazenamento, o Galaxy A37 5G entrega desempenho fluido para multitarefa, redes sociais e streaming. Conta com câmera de alta resolução, conectividade 5G e tela Super AMOLED com alta taxa de atualização.</p>",
         "price": "R$ 332,40",
+        "price_12": "R$ 367,39",
+        "price_24": "R$ 349,89",
+        "price_36": "R$ 332,40",
         "img": "https://images.digital.allugator.com/products/copy_B9197291-ACD8-4C6B-9791-2A4E654B45D4.png",
         "local_img": "./assets/products/samsung-galaxy-a37-256gb.png"
     },
     {
         "name": "Samsung Galaxy A56 5G 128GB",
+        "description": "Tela 6,7\" Super AMOLED 120Hz, Exynos 1580, RAM 8/12GB, 128/256GB, Câmera 50+12+5MP, Frontal 12MP, Bateria 5000mAh, IP67",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/ga56-1.png",
         "local_img": "./assets/products/samsung-galaxy-a56-5g-128gb.png"
     },
     {
         "name": "Samsung Galaxy A56 5G 256GB",
+        "description": "Tela 6,7\" Super AMOLED 120Hz, Exynos 1580, RAM 8/12GB, 128/256GB, Câmera 50+12+5MP, Frontal 12MP, Bateria 5000mAh, IP67",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/ga56-1.png",
         "local_img": "./assets/products/samsung-galaxy-a56-5g-256gb.png"
     },
     {
         "name": "Samsung Galaxy A57 5G 128GB",
+        "description": "<p>Com chip Exynos 1680 (4nm) Octa-Core, tela Super AMOLED+ FHD+ 6.7\" 120Hz com Vision Booster e até 1.900 nits de pico, câmera tripla traseira 50MP OIS + 12MP Ultra Wide + 5MP Macro, resistência IP68, bateria 5.000mAh com carregamento Super-Rápido 45W (60% em 30 min) e 6 anos de atualizações de sistema</p>",
         "price": "R$ 318,15",
+        "price_12": "R$ 351,64",
+        "price_24": "R$ 334,89",
+        "price_36": "R$ 318,15",
         "img": "https://images.digital.allugator.com/products/br-galaxy-a56-5g-sm-a566-540642-sm-a566ezkazto-545718295.avif",
         "local_img": "./assets/products/samsung-galaxy-a57-5g-128gb.png"
     },
     {
         "name": "Samsung Galaxy A57 5G 256GB",
+        "description": "<p>Com chip Exynos 1680 (4nm) Octa-Core, tela Super AMOLED+ FHD+ 6.7\" 120Hz com Vision Booster e até 1.900 nits de pico, câmera tripla traseira 50MP OIS + 12MP Ultra Wide + 5MP Macro, resistência IP68, bateria 5.000mAh com carregamento Super-Rápido 45W (60% em 30 min) e 6 anos de atualizações de sistema</p>",
         "price": "R$ 370,40",
+        "price_12": "R$ 409,39",
+        "price_24": "R$ 389,89",
+        "price_36": "R$ 370,40",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F662e9a22-5198-4413-8ba7-bffec2b7f447%2Fgeneral-1779738698592-copy_31AC046F-300D-4DD0-A4F5-FE355E0907B8.png",
         "local_img": "./assets/products/samsung-galaxy-a57-5g-256gb.png"
     },
     {
         "name": "Samsung Galaxy Note 10 256GB",
+        "description": "6.3 polegadas, 8GB RAM, Snapdragon 855, Câmera Tripla",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Samsung%20Galaxy%20Note%2010%20128Gb.png",
         "local_img": "./assets/products/samsung-galaxy-note-10-256gb.png"
     },
     {
         "name": "Samsung Galaxy Note 20",
+        "description": "6.7 polegadas, 256GB de armazenamento, 8k, Chip Exynos 990 8 Cores",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Galaxy%20Note%2020.png",
         "local_img": "./assets/products/samsung-galaxy-note-20.png"
     },
     {
         "name": "Samsung Galaxy Note 20 Ultra (5G)",
+        "description": "6.9 polegadas, 256GB de armazenamento, 108MP, 8k, Chip Exynos 990 8 Cores",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Galaxy%20Note%2020%20Ultra.png",
         "local_img": "./assets/products/samsung-galaxy-note-20-ultra-(5g).png"
     },
     {
         "name": "Samsung Galaxy S10 128GB",
+        "description": "6.1 polegadas, Câmera Tripla (Selfie Simples), Snapdragon 855 ou Exynos",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/s10%2064.png",
         "local_img": "./assets/products/samsung-galaxy-s10-128gb.png"
     },
     {
         "name": "Samsung Galaxy S10+ 128GB",
+        "description": "6.4 Polegadas, Câmera Tripla, Snapdragon 855 ou Exynos 9820",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Samsung%20Galaxy%20S10%2B.png",
         "local_img": "./assets/products/samsung-galaxy-s10+-128gb.png"
     },
     {
         "name": "Samsung Galaxy S10 + 64GB",
+        "description": "6.4 Polegadas, Câmera Tripla, Snapdragon 855",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/s10%20%2B%2064.png",
         "local_img": "./assets/products/samsung-galaxy-s10-+-64gb.png"
     },
     {
         "name": "Samsung Galaxy S20 - 128GB",
+        "description": "6.2 Polegadas, 64MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Samsung%20Galaxy%20S20%20.png",
         "local_img": "./assets/products/samsung-galaxy-s20---128gb.png"
     },
     {
         "name": "Samsung Galaxy S20 Plus - 128GB",
+        "description": "6.7 Polegadas, 64MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Samsung%20Galaxy%20S20%20%2B.png",
         "local_img": "./assets/products/samsung-galaxy-s20-plus---128gb.png"
     },
     {
         "name": "Samsung Galaxy S20 Ultra - 128GB",
+        "description": "6.9 Polegadas, 108 MP, Vídeo 8K",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Samsung%20Galaxy%20S20%20Ultra.png",
         "local_img": "./assets/products/samsung-galaxy-s20-ultra---128gb.png"
     },
     {
         "name": "Samsung Galaxy S20 Ultra - 512GB",
+        "description": "6.9 Polegadas, 108 MP, Vídeo 8K",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/S20%20Ultra.png",
         "local_img": "./assets/products/samsung-galaxy-s20-ultra---512gb.png"
     },
     {
         "name": "Samsung Galaxy S21 - 128GB",
+        "description": "Tela 6,2” Câm. Tripla + Selfie 10MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/image%2022.png",
         "local_img": "./assets/products/samsung-galaxy-s21---128gb.png"
     },
     {
         "name": "Samsung Galaxy S21 Plus - 128GB",
+        "description": "Tela 6.7'' Dual Chip 8GB RAM Câmera Tripla + Selfie 10MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/image%2021.png",
         "local_img": "./assets/products/samsung-galaxy-s21-plus---128gb.png"
     },
     {
         "name": "Samsung Galaxy S21 Plus - 256GB",
+        "description": "Tela 6.7'' Dual Chip 8GB RAM Câmera Tripla + Selfie 10MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/image%2013.png",
         "local_img": "./assets/products/samsung-galaxy-s21-plus---256gb.png"
     },
     {
         "name": "Samsung Galaxy S25 5G 128GB",
+        "description": "Tela 6,2\" Dynamic AMOLED 2X 120Hz, Snapdragon 8 Elite, RAM 12GB, 128/256GB, Câmera 50+12+10MP, Frontal 12MP, Bateria 4000mAh, IP68",
         "price": "R$ 398,90",
+        "price_12": "R$ 440,89",
+        "price_24": "R$ 419,89",
+        "price_36": "R$ 398,90",
         "img": "https://images.digital.allugator.com/products/S25-1.png",
         "local_img": "./assets/products/samsung-galaxy-s25-5g-128gb.png"
     },
     {
         "name": "Samsung Galaxy S25 5G 256GB",
+        "description": "Tela 6,2\" Dynamic AMOLED 2X 120Hz, Snapdragon 8 Elite, RAM 12GB, 256GB, Câmera 50+12+10MP, Frontal 12MP, Bateria 4000mAh, IP68",
         "price": "R$ 343,48",
+        "price_12": "R$ 379,63",
+        "price_24": "R$ 361,56",
+        "price_36": "R$ 343,48",
         "img": "https://images.digital.allugator.com/products/gs25-1.png",
         "local_img": "./assets/products/samsung-galaxy-s25-5g-256gb.png"
     },
     {
         "name": "Samsung Galaxy S25+ 5G 256GB 12GB Câmera Tripla 6.7”",
+        "description": "<p>Tela Dynamic AMOLED 2X de 6.7\" (QHD+) com 120Hz. Processador Snapdragon 8 Elite for Galaxy (3nm). 12GB de RAM e 256GB de armazenamento. Câmera traseira tripla: 50MP (principal) + 12MP (ultrawide) + 10MP (telefoto com zoom óptico 3x). Frontal de 12MP. Bateria de 4.900mAh com carregamento rápido de 45W e sem fio. Wi-Fi 7, Bluetooth 5.4, NFC, USB-C. Resistência IP68. Dual SIM (físico + eSIM). Android 15 com One UI 7.</p>",
         "price": "R$ 778,90",
+        "price_12": "R$ 860,89",
+        "price_24": "R$ 819,89",
+        "price_36": "R$ 778,90",
         "img": "https://images.digital.allugator.com/products/SamsungGalaxyS25-1.png",
         "local_img": "./assets/products/samsung-galaxy-s25+-5g-256gb-12gb-câmera-tripla 6.7”.png"
     },
     {
         "name": "Samsung Galaxy S25 Ultra 256GB 12GB RAM 6.9\" 4K Galaxy AI",
+        "description": "<p>Processador: Qualcomm Snapdragon 8 Elite for Galaxy (Octa-core, até 4.47 GHz) Memória RAM: 12GB Armazenamento: 256GB (sem slot microSD) Tela: 6.9\" Dynamic AMOLED 2X, QHD+, 120Hz adaptativo, Gorilla Armor 2 Câmera traseira: 200MP (principal) + 50MP (ultrawide) + 50MP (5x telefoto) + 10MP (3x telefoto) Câmera frontal: 12MP Bateria: 5000mAh, carregamento rápido 45W e sem fio 15W Sistema Operacional: Android 15, One UI 8 Resistência: IP68 Conectividade: Wi-Fi 7, Bluetooth 5.4, NFC, 5G, USB-C 3.2 Stylus: S Pen integrado Peso: 218g</p>",
         "price": "R$ 579,40",
+        "price_12": "R$ 640,39",
+        "price_24": "R$ 609,89",
+        "price_36": "R$ 579,40",
         "img": "https://images.digital.allugator.com/products/Samsung Galaxy S25 Ultra 256GB-1.png",
         "local_img": "./assets/products/samsung-galaxy-s25-ultra-256gb-12gb-ram-6.9-4k-galaxy-ai.png"
     },
     {
         "name": "Samsung Galaxy S25 Ultra 5G 128GB",
+        "description": "Tela 6,9\" Dynamic AMOLED 2X 120Hz HDR10+, Snapdragon 8 Elite, RAM 12GB, 256GB/512GB/1TB, Câmera 200+50+50+10MP, Frontal 12MP, Bateria 5000mAh, IP68, S Pen",
         "price": "R$ 158,46",
+        "price_12": "R$ 175,14",
+        "price_24": "R$ 166,80",
+        "price_36": "R$ 158,46",
         "img": "https://images.digital.allugator.com/products/S25%20Ultra-1.png",
         "local_img": "./assets/products/samsung-galaxy-s25-ultra-5g-128gb.png"
     },
     {
         "name": "Samsung Galaxy S26 5G 256GB",
+        "description": "<p>Com processador premium, 12GB de RAM e 256GB de armazenamento, entrega alto desempenho para multitarefa, jogos e produtividade. Conta com câmera avançada, tela Dynamic AMOLED com alta taxa de atualização e conectividade 5G.</p>",
         "price": "R$ 693,40",
+        "price_12": "R$ 766,39",
+        "price_24": "R$ 729,89",
+        "price_36": "R$ 693,40",
         "img": "https://images.digital.allugator.com/products/copy_46C251B8-78C6-40F6-B4AE-0956BE05657C.png",
         "local_img": "./assets/products/samsung-galaxy-s26-5g-256gb.png"
     },
     {
         "name": "Samsung Galaxy Watch8 40mm Bluetooth Galaxy AI 1.34\" AMOLED GPS",
+        "description": "<p>Tela Super AMOLED de 1.34\" em cristal de safira, com até 3.000 nits de brilho e Always On Display. Processador Exynos W1000 (3nm). 2GB de RAM e 32GB de armazenamento. Bateria de 325mAh com até 30h de autonomia (AOD ligado) e até 40h (AOD desligado). Bluetooth 5.3, Wi-Fi, GPS de dupla frequência (L1+L5), NFC. Resistência 5ATM, IP68 e MIL-STD-810H. Sensores: ECG, frequência cardíaca, SpO2, BIA (composição corporal), temperatura, antioxidantes. Compatível com Android 11.0 ou superior.</p>",
         "price": "R$ 123,41",
+        "price_12": "R$ 136,40",
+        "price_24": "R$ 129,91",
+        "price_36": "R$ 123,41",
         "img": "https://images.digital.allugator.com/products/Samsung Galaxy Watch 8 - 1.png",
         "local_img": "./assets/products/samsung-galaxy-watch8-40mm-bluetooth-galaxy-ai-1.34-amoled-gps.png"
     },
     {
         "name": "Samsung Galaxy Watch Active 2-05abe010",
+        "description": "44mm, super AMOLED, Bluetooth 5.0",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Galaxy%20Active.png",
         "local_img": "./assets/products/samsung-galaxy-watch-active-2-05abe010.png"
     },
     {
         "name": "Samsung Galaxy Z Flip 7 256GB 12GB RAM Galaxy AI",
+        "description": "<p>Dobrável compacto com chip Snapdragon 8 Elite, tela principal Dynamic AMOLED 2X 6.9\" 120Hz e tela externa Super AMOLED 4.1\", câmera dupla traseira 50MP com OIS, Galaxy AI com Gemini, dobradiça Armor FlexHinge, resistência IP48 e bateria de 4.300mAh com carregamento de 25W.</p>",
         "price": "R$ 493,90",
+        "price_12": "R$ 545,89",
+        "price_24": "R$ 519,89",
+        "price_36": "R$ 493,90",
         "img": "https://images.digital.allugator.com/products/Samsung Galaxy Z Flip7 5G - 1.png",
         "local_img": "./assets/products/samsung-galaxy-z-flip-7-256gb-12gb-ram-galaxy-ai.png"
     },
     {
         "name": "Samsung Galaxy Z Flip7 FE 128GB",
+        "description": "<p>Smartphone dobrável compacto com chip Snapdragon 6 Gen 3, tela principal Dynamic AMOLED 2X 6.7\" 120Hz e tela externa Super AMOLED 3.4\" personalizável, câmera dupla traseira 50MP com OIS + 12MP Ultra Wide, Galaxy AI com Gemini, resistência IP48 e bateria de 4.000mAh com carregamento de 45W.</p>",
         "price": "R$ 389,40",
+        "price_12": "R$ 430,39",
+        "price_24": "R$ 409,89",
+        "price_36": "R$ 389,40",
         "img": "https://images.digital.allugator.com/products/copy_7AF139A9-A820-48B8-8EAA-76BDEB393396.png",
         "local_img": "./assets/products/samsung-galaxy-z-flip7-fe-128gb.png"
     },
     {
         "name": "Samsung Galaxy Z Flip7 FE 256GB",
+        "description": "<p>Com processador Exynos 2400, 8GB de RAM e 256GB de armazenamento, o Galaxy Z Flip7 FE entrega desempenho rápido para multitarefa, fotos em alta qualidade com câmera de 50MP e conectividade 5G. Conta com tela principal de 6.7” com até 120Hz, tela externa inteligente e resistência IP48.</p>",
         "price": "R$ 408,40",
+        "price_12": "R$ 451,39",
+        "price_24": "R$ 429,89",
+        "price_36": "R$ 408,40",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F884c6e36-5aef-413d-85da-078c5e2390a3%2Fgeneral-1779736631596-Samsung-Galaxy-Z-Flip7-FE-1.png",
         "local_img": "./assets/products/samsung-galaxy-z-flip7-fe-256gb.png"
     },
     {
         "name": "Samsung Galaxy Z Fold 7 512GB 12GB RAM Galaxy AI",
+        "description": "<p>Processador: Qualcomm Snapdragon 8 Elite for Galaxy (3nm, Octa-core, até 4.47 GHz) Memória RAM: 12GB Armazenamento: 512GB (sem slot microSD) Tela interna: 8.0\" Dynamic AMOLED 2X, 2184x1968, 120Hz adaptativo, até 2600 nits Tela externa: 6.5\" Dynamic AMOLED 2X, 2520x1080, 120Hz, 21:9 Câmera traseira: 200MP (principal) + 12MP (ultrawide) + 10MP (3x telefoto) Câmera frontal: 10MP (externa) + 10MP (interna) Bateria: 4400mAh, carregamento rápido 25W e sem fio 15W Sistema Operacional: Android 16, One UI 8 Resistência: IP48 Conectividade: Wi-Fi 7, Bluetooth 5.4, NFC, 5G, USB-C 3.2 Peso: 215g (dobrado: 4.2mm de espessura)</p>",
         "price": "R$ 717,15",
+        "price_12": "R$ 792,64",
+        "price_24": "R$ 754,89",
+        "price_36": "R$ 717,15",
         "img": "https://images.digital.allugator.com/products/Samsung Galaxy Z Fold 7 512GB-1.png",
         "local_img": "./assets/products/samsung-galaxy-z-fold-7-512gb-12gb-ram-galaxy-ai.png"
     },
     {
         "name": "Samsung Note 10+ 128gb",
+        "description": "6.8 Polegadas, Câmera Tripla, Snapdragon 855",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/S10%20Plus.png",
         "local_img": "./assets/products/samsung-note-10+-128gb.png"
     },
     {
         "name": "Samsung Note 10+ 256GB",
+        "description": "6.8 Polegadas, Câmera Tripla, Snapdragon 855",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/s10%20%2B%20256.png",
         "local_img": "./assets/products/samsung-note-10+-256gb.png"
     },
     {
         "name": "Samsung Note 10+ 512GB",
+        "description": "6.8 Polegadas, Câmera Tripla, Snapdragon 855",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/s10%20%2B%20512.png",
         "local_img": "./assets/products/samsung-note-10+-512gb.png"
     },
     {
         "name": "Samsung TV 55\"",
+        "description": "55\", Neo QLED, 4K, AI, 144Hz, Dolby Atmos, Alexa",
         "price": "R$ 158,46",
+        "price_12": "R$ 175,14",
+        "price_24": "R$ 166,80",
+        "price_36": "R$ 158,46",
         "img": "https://images.digital.allugator.com/products/TV%20Samsung%2055-1.png",
         "local_img": "./assets/products/samsung-tv-55.png"
     },
     {
         "name": "Secador Cabelo Shark SpeedStyle Cacheados e Crespos 1700W 127V",
+        "description": "<p>Secador compacto e leve (0,75kg) com tecnologia de regulação de temperatura 1.000 vezes por segundo, atingindo no máximo 100°C para proteger os fios. Inclui 4 configurações de temperatura (100°C, 85°C, 65°C e ambiente), 3 velocidades de fluxo de ar e jato de ar frio. Acompanha Difusor DefrizzFast (para cachos definidos), Escova QuickSmooth e Finalizador RapidGloss com tecnologia Coanda para acabamento sem frizz.</p>",
         "price": "R$ 161,41",
+        "price_12": "R$ 178,40",
+        "price_24": "R$ 169,91",
+        "price_36": "R$ 161,41",
         "img": "https://images.digital.allugator.com/products/copy_F5F045B4-1F3B-45BD-B68B-9CE05C40FFED.PNG",
         "local_img": "./assets/products/secador-cabelo-shark-speedstyle-cacheados-e-crespos-1700w-127v.png"
     },
     {
         "name": "Shadow of The Tomb Raider para PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/shadow%20of%20the%20tomb%20raider.jpg",
         "local_img": "./assets/products/shadow-of-the-tomb-raider-para-ps4.png"
     },
     {
         "name": "Shadow of War",
+        "description": "1 Jogador / Mínimo 50GB / Uso Online Opcional / Dualshock 4 / Legendas em EN-FR-SP-PT",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/ShadowOfWar.jpg",
         "local_img": "./assets/products/shadow-of-war.png"
     },
     {
         "name": "Skyrim VR",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/skyrim%20vr%202.jpg",
         "local_img": "./assets/products/skyrim-vr.png"
     },
     {
         "name": "Slider Dolly de Mesa Alhva Trilho 2m",
+        "description": "2m, Flexivel",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Slider%20Dolly%20de%20Mesa%20Alhva%20Trilho%202m.jpg",
         "local_img": "./assets/products/slider-dolly-de-mesa-alhva-trilho-2m.png"
     },
     {
         "name": "Smart Display Echo Show 15 15.6 Full HD com Alexa e Fire TV",
+        "description": "<p>Tela: 15,6\" Full HD 1080p touchscreen Processador: Amlogic Pop1 (com suporte a codec AV1) Memória RAM: 3GB Armazenamento: 16GB Câmera: 13MP wide-angle com auto-framing e cancelamento de ruído Áudio: 2x woofers de 2\" + 2x tweeters de 0,6\" Assistente: Alexa + Alexa+ Fire TV: integrado (Prime Video, Netflix, YouTube, Apple TV+, e mais) Conectividade: Wi-Fi 6E, Bluetooth, Zigbee, Thread, Matter Smart Home Hub: Zigbee, Thread e Matter integrados Privacidade: botão físico de desligar microfone/câmera + obturador de câmera Montagem: suporte para parede incluso (suporte de mesa vendido separadamente)</p>",
         "price": "R$ 246,90",
+        "price_12": "R$ 272,89",
+        "price_24": "R$ 259,89",
+        "price_36": "R$ 246,90",
         "img": "https://images.digital.allugator.com/products/Smart Display Echo Show 15 (2ª Geração) Amazon com 15,6_ Full HD com Alexa e Fire TV Branco-1.png",
         "local_img": "./assets/products/smart-display-echo-show-15-15.6-full-hd-com-alexa-e-fire-tv.png"
     },
     {
         "name": "SmartMonitor Samsung M8 32\" 4K USB-C 65W USB Hub HDMI Bluetooth",
+        "description": "<p>Tela 4K UHD (3840x2160) de 32\" com HDR10+. Plataforma Tizen com apps de streaming nativos (Netflix, Prime Video, YouTube, Disney+ etc.). Wi-Fi, Bluetooth, AirPlay 2. Conexões: HDMI, USB-C com 65W para carregar notebook, microSD. Compatível com Samsung DeX e Microsoft 365.</p>",
         "price": "R$ 398,90",
+        "price_12": "R$ 440,89",
+        "price_24": "R$ 419,89",
+        "price_36": "R$ 398,90",
         "img": "https://images.digital.allugator.com/products/Smart Monitor Samsung M8 32_ - 1.png",
         "local_img": "./assets/products/smartmonitor-samsung-m8-32-4k-usb-c-65w-usb-hub-hdmi-bluetooth.png"
     },
     {
         "name": "Smart Ring Samsung Galaxy",
+        "description": "<p>Anel inteligente em titânio que monitora sono, batimentos e energia 24h. Bateria de até 7 dias, IP68 e 10ATM. Saúde no seu dedo, sem peso.</p>",
         "price": "R$ 313,40",
+        "price_12": "R$ 346,39",
+        "price_24": "R$ 329,89",
+        "price_36": "R$ 313,40",
         "img": "https://images.digital.allugator.com/products/Samsung Galaxy Ring - 01.png",
         "local_img": "./assets/products/smart-ring-samsung-galaxy.png"
     },
     {
         "name": "SmartTV LED LG 50\" UltraHD 4K USB HDMI USB Wi-Fi ThinQ AI",
+        "description": "Smart TV LED LG 50\" 50UP7750PSB - Ultra HD 4K - HDMI - USB - Wi-Fi - Inteligência Artificial ThinQ AI - Conversor Digital",
         "price": "R$ 122,55",
+        "price_12": "R$ 135,45",
+        "price_24": "R$ 129,00",
+        "price_36": "R$ 122,55",
         "img": "https://images.digital.allugator.com/products/501.png",
         "local_img": "./assets/products/smarttv-led-lg-50-ultrahd-4k-usb-hdmi-usb-wi-fi-thinq-ai.png"
     },
     {
         "name": "SmartTV LED LG 60\" Ultra HD 4K HDMI USB Wi-Fi ThinQ AI WebOS",
+        "description": "Smart TV LED LG 60UP7750PSB de 60 polegadas - Ultra HD 4K - HDMI - USB - Wi-Fi - ThinQ AI - WebOS 6.0 - Conversor Digital",
         "price": "R$ 198,55",
+        "price_12": "R$ 219,45",
+        "price_24": "R$ 209,00",
+        "price_36": "R$ 198,55",
         "img": "https://images.digital.allugator.com/products/sm601.png",
         "local_img": "./assets/products/smarttv-led-lg-60-ultra-hd-4k-hdmi-usb-wi-fi-thinq-ai-webos.png"
     },
     {
         "name": "SmartTV LED LG NanoCell 55\" Ultra HD 4K Wi-Fi ThinQ AI HDMI USB",
+        "description": "Smart TV LED LG 55SM8600PSA NanoCell 55\" - Ultra HD 4K - HDMI - USB - Wi-Fi - ThinQ AI - Controle Smart Magic",
         "price": "R$ 151,05",
+        "price_12": "R$ 166,95",
+        "price_24": "R$ 159,00",
+        "price_36": "R$ 151,05",
         "img": "https://images.digital.allugator.com/products/nano1.png",
         "local_img": "./assets/products/smarttv-led-lg-nanocell-55-ultra-hd-4k-wi-fi-thinq-ai-hdmi-usb.png"
     },
     {
         "name": "SmartTV LG 55\" NanoCell Ultra HD 4K HDR Wi-Fi IA",
+        "description": "Smart TV LG 55\" NanoCell 55NANO81SNA - Ultra HD 4K - HDR - HDMI - USB - Wi-Fi - Inteligência ArtificiaI - Conversor Digital",
         "price": "R$ 160,55",
+        "price_12": "R$ 177,45",
+        "price_24": "R$ 169,00",
+        "price_36": "R$ 160,55",
         "img": "https://images.digital.allugator.com/products/551.png",
         "local_img": "./assets/products/smarttv-lg-55-nanocell-ultra-hd-4k-hdr-wi-fi-ia.png"
     },
     {
         "name": "SmartTV LG 65\" NanoCell UltraHD 4K HDR 120Hz HDMI Wi-Fi IA WebOS",
+        "description": "Smart TV LG 65\" NanoCell 65NANO85SPA - Ultra HD 4K - HDR - 120Hz - HDMI - USB - Wi-Fi - Inteligência Artificial - WebOS 6.0",
         "price": "R$ 236,55",
+        "price_12": "R$ 261,45",
+        "price_24": "R$ 249,00",
+        "price_36": "R$ 236,55",
         "img": "https://images.digital.allugator.com/products/651.png",
         "local_img": "./assets/products/smarttv-lg-65-nanocell-ultrahd-4k-hdr-120hz-hdmi-wi-fi-ia-webos.png"
     },
     {
         "name": "Sony A7s II (Mirrorless Fullframe) + 28mm f2 + Grip de Bateria",
+        "description": "Premium, 4k, 120fps, Fullframe, Mirrorless",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Sony%20A7s%20II.jpg",
         "local_img": "./assets/products/sony-a7s-ii-(mirrorless-fullframe)-+-28mm-f2-+-grip-de-bateria.png"
     },
     {
         "name": "Sony A7s Mark II (Assinatura)",
+        "description": "Mirrorless, FullFrame, 4k, 120fps",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Sony%20A7s%20II.jpg",
         "local_img": "./assets/products/sony-a7s-mark-ii-(assinatura).png"
     },
     {
         "name": "Soundbar JBL Bar 800 7.1 Canais com Dolby Atmos Surround Removível",
+        "description": "Soundbar 7.1 canais com Dolby Atmos e caixas surround removíveis para áudio tridimensional e experiência mais imersiva em filmes, séries e jogos. Conta com subwoofer dedicado para graves mais potentes, conectividade sem fio e múltiplas opções de conexão para TVs e dispositivos compatíveis.",
         "price": "R$ 427,40",
+        "price_12": "R$ 472,39",
+        "price_24": "R$ 449,89",
+        "price_36": "R$ 427,40",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F70c3b66f-471f-45c4-a5b6-dbedff166252%2Fgeneral-1780060759390-soundbar-jbl-bar-800-7-1.png",
         "local_img": "./assets/products/soundbar-jbl-bar-800-7.1-canais-com-dolby-atmos-surround-removível.png"
     },
     {
         "name": "Soundbar JBL Cinema SB180 2.1 Canais com Subwoofer Sem Fio de 6,5\"",
+        "description": "Soundbar 2.1 canais com subwoofer dedicado, conexão Bluetooth e entrada USB para reprodução de músicas e conteúdos multimídia. Oferece áudio mais potente, graves reforçados e melhor experiência sonora para filmes, séries e entretenimento.",
         "price": "R$ 132,91",
+        "price_12": "R$ 146,90",
+        "price_24": "R$ 139,91",
+        "price_36": "R$ 132,91",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2Fc490fdd4-8808-4739-bc63-5e6629a0d0a9%2Fgeneral-1780000034440-soundbar-jbl-cinema-sb180_-2-1.png",
         "local_img": "./assets/products/soundbar-jbl-cinema-sb180-2.1-canais-com-subwoofer-sem-fio-de-6,5.png"
     },
     {
         "name": "Soundbar LG 300W RMS 2.1 Canais Dolby Digital BT HDMI AI SoundPro",
+        "description": "Soundbar 2.1 canais com potência de 300W RMS, tecnologia AI Sound Pro e subwoofer sem fio para graves mais potentes e áudio mais imersivo. Conta com conectividade simplificada para TVs e dispositivos compatíveis, oferecendo melhor experiência para filmes, músicas e jogos.",
         "price": "R$ 109,16",
+        "price_12": "R$ 120,65",
+        "price_24": "R$ 114,91",
+        "price_36": "R$ 109,16",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2Fa0c65f08-6840-4592-9ee5-78c3f2fa39c9%2Fgeneral-1780000680403-soundbar-lg-300w-rms-2-1.png",
         "local_img": "./assets/products/soundbar-lg-300w-rms-2.1-canais-dolby-digital-bt-hdmi-ai-soundpro.png"
     },
     {
         "name": "Spider-Man para PS4",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Spider%20Man.jpg",
         "local_img": "./assets/products/spider-man-para-ps4.png"
     },
     {
         "name": "Super Mario Odyssey",
+        "description": "Multiplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/marioodyssey.jpg",
         "local_img": "./assets/products/super-mario-odyssey.png"
     },
     {
         "name": "Super Smash Bros Ultimate",
+        "description": "Singleplayer, Multiplayer, Online",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/super%20smash%20bros%20ultimate.jpg",
         "local_img": "./assets/products/super-smash-bros-ultimate.png"
     },
     {
         "name": "Suporte de Cabeça para GoPro",
+        "description": "Suporte Ajustável",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/suporte%20cabe%C3%A7a%20GoPro.jpg",
         "local_img": "./assets/products/suporte-de-cabeça-para-gopro.png"
     },
     {
         "name": "Suporte de Peito para GoPro",
+        "description": "Suporte Ajustável",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Suporte+Peito.jpg",
         "local_img": "./assets/products/suporte-de-peito-para-gopro.png"
     },
     {
         "name": "Suporte Garra para GoPro",
+        "description": "Suporte Ajustável",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Suporte+Garra.jpg",
         "local_img": "./assets/products/suporte-garra-para-gopro.png"
     },
     {
         "name": "Suporte Punho para GoPro",
+        "description": "Suporte Ajustável",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Suporte+Punho.jpg",
         "local_img": "./assets/products/suporte-punho-para-gopro.png"
     },
     {
         "name": "Tablet Apple iPad Air 13\" M4 128GB Wi-Fi Liquid Retina",
+        "description": "Chip Apple M4 (CPU 8 nucleos + GPU 9 nucleos), tela Liquid Retina 13\" 2732x2048 pixels 264ppi com True Tone, Wide Color P3 e 600 nits, 12GB de memoria unificada, camera traseira 12MP e frontal 12MP Center Stage, conectividade Wi-Fi 7 e Bluetooth 6, compativel com Apple Pencil Pro e Magic Keyboard, Apple Intelligence e bateria com ate 10h de uso.",
         "price": "R$ 693,40",
+        "price_12": "R$ 766,39",
+        "price_24": "R$ 729,89",
+        "price_36": "R$ 693,40",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F178ce672-b78a-4d05-9aaa-afa73fd3b4a4%2Fgeneral-1780931669624-ipad-air-13-apple-m4-128gb-wi-fi-3.png",
         "local_img": "./assets/products/tablet-apple-ipad-air-13-m4-128gb-wi-fi-liquid-retina.png"
     },
     {
         "name": "Tablet Infantil Mickey 64GB 7” Quad-Core Multi",
+        "description": "<p>Tablet infantil com 4GB de RAM, 64GB de armazenamento e tela de 7”. Conta com Android 13, processador quad-core e conteúdo ideal para jogos, vídeos e aplicativos educativos.</p>",
         "price": "R$ 69,25",
+        "price_12": "R$ 76,54",
+        "price_24": "R$ 72,89",
+        "price_36": "R$ 69,25",
         "img": "https://images.digital.allugator.com/products/copy_16C045DF-B813-4820-A4C7-92B1F4E487CF.png",
         "local_img": "./assets/products/tablet-infantil-mickey-64gb-7”-quad-core-multi.png"
     },
     {
         "name": "Tablet Infantil Patrulha Canina Wifi 64GB 8” Octa-core Multi",
+        "description": "<p>Tablet infantil com 6GB de RAM, 64GB de armazenamento e tela de 8”. Equipado com Android 13 e processador octa-core para jogos, vídeos e aplicativos educativos.</p>",
         "price": "R$ 85,41",
+        "price_12": "R$ 94,40",
+        "price_24": "R$ 89,91",
+        "price_36": "R$ 85,41",
         "img": "https://images.digital.allugator.com/products/copy_B1FB7193-B3E3-433A-ABBA-D1AC703202A8.png",
         "local_img": "./assets/products/tablet-infantil-patrulha-canina-wifi-64gb-8”-octa-core-multi.png"
     },
     {
         "name": "Tablet Multilaser Vingadores com Controle Parental 4GB 64GB 7” Wifi Android 13 Quad Core",
+        "description": "Tablet infantil com 4GB de RAM, 64GB de armazenamento e tela de 7” para vídeos, jogos e aplicativos educativos. Equipado com Android 13, processador quad-core e conexão Wi-Fi para navegação e entretenimento no dia a dia. Conta com interface temática dos Vingadores e controle parental para gerenciamento de conteúdo e tempo de uso.",
         "price": "R$ 80,66",
+        "price_12": "R$ 89,15",
+        "price_24": "R$ 84,91",
+        "price_36": "R$ 80,66",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F8875bfff-6c94-4f60-b067-b103d82bbeb5%2Fgeneral-1780078166468-WhatsApp_Image_2026-05-29_at_15.09.12.jpeg",
         "local_img": "./assets/products/tablet-multilaser-vingadores-com-controle-parental-4gb-64gb-7”-wifi-android-13-quad-core.png"
     },
     {
         "name": "Tablet Samsung Galaxy A11 64GB 4GB RAM 8.7” Câmera 8MP",
+        "description": "Tablet com 4GB de RAM, 64GB de armazenamento e tela de 8.7” para estudos, vídeos e navegação no dia a dia. Conta com bateria de 5.100mAh para maior autonomia, câmera frontal de 5MP e câmera traseira de 8MP para chamadas e registros rápidos. Possui conectividade Wi-Fi e interface otimizada para multitarefa.",
         "price": "R$ 161,41",
+        "price_12": "R$ 178,40",
+        "price_24": "R$ 169,91",
+        "price_36": "R$ 161,41",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2Ffb200a2f-5878-42f0-9110-b865e4df1b11%2Fgeneral-1780063527506-galaxy-tab-a11-2.png",
         "local_img": "./assets/products/tablet-samsung-galaxy-a11-64gb-4gb-ram-8.7”-câmera-8mp.png"
     },
     {
         "name": "Tablet Samsung Galaxy Tab A11 EE",
+        "description": "<p>.</p>",
         "price": "R$ 645,90",
+        "price_12": "R$ 713,89",
+        "price_24": "R$ 679,89",
+        "price_36": "R$ 645,90",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F04850c56-9586-4aff-8710-557eae0b60c1%2Fgeneral-1780000338493-galaxy-tab-a11-1.png",
         "local_img": "./assets/products/tablet-samsung-galaxy-tab-a11-ee.png"
     },
     {
         "name": "Tablet Samsung Galaxy Tab A9 Enterprise Edition",
+        "description": "Leve, moderno e feito para o seu dia a dia, o Tablet Samsung Galaxy A9 8.7” conta com processador Snapdragon 695, 4GB RAM e 64GB de armazenamento, oferece desempenho rápido para estudos, trabalho e lazer. Conta com câmera traseira de 8MP e frontal para videochamadas, em um design leve e prático.",
         "price": "R$ 85,41",
+        "price_12": "R$ 94,40",
+        "price_24": "R$ 89,91",
+        "price_36": "R$ 85,41",
         "img": "https://images.digital.allugator.com/products/ss1.png",
         "local_img": "./assets/products/tablet-samsung-galaxy-tab-a9-enterprise-edition.png"
     },
     {
         "name": "Tablet Samsung Galaxy Tab S10 FE 5G 10.9 8GB RAM S Pen Galaxy AI",
+        "description": "<p>Processador: Samsung Exynos 1580 (Octa-core) Memória RAM: 8GB Armazenamento: 128GB ou 256GB (expansível via microSD até 2TB) Tela: 10,9\" Dynamic AMOLED, 2304x1440, 90Hz Câmera traseira: 13MP Câmera frontal: 12MP Bateria: 8000mAh, carregamento rápido 45W S Pen: incluso Sistema Operacional: Android 15, One UI 7 com Galaxy AI Resistência: IP68 Conectividade: 5G, Wi-Fi 6, Bluetooth 5.3, NFC, USB-C 3.2 Dimensões: 168,5 x 255,3 x 6,5mm Cores: Gray, Silver, Light Blue</p>",
         "price": "R$ 313,40",
+        "price_12": "R$ 346,39",
+        "price_24": "R$ 329,89",
+        "price_36": "R$ 313,40",
         "img": "https://images.digital.allugator.com/products/Tablet Samsung Galaxy Tab S10 FE 5G - 128GB-1.png",
         "local_img": "./assets/products/tablet-samsung-galaxy-tab-s10-fe-5g-10.9-8gb-ram-s-pen-galaxy-ai.png"
     },
     {
         "name": "Tablet Samsung Galaxy Tab S10 FE Plus",
+        "description": "tela de 13,1\", 8 GB de RAM, 128 GB de armazenamento (expansível), processador Exynos 1380, Android 15, câmeras de 13 MP (traseira) e 12 MP (frontal), bateria de 10.090 mAh com carregamento rápido, Wi-Fi 6, Bluetooth 5.3, resistência IP68 e acompanha S Pen.",
         "price": "R$ 79,23",
+        "price_12": "R$ 87,57",
+        "price_24": "R$ 83,40",
+        "price_36": "R$ 79,23",
         "img": "https://images.digital.allugator.com/products/Tablet Samsung Galaxy Tab S10 FE 5G - 128GB-1.png",
         "local_img": "./assets/products/tablet-samsung-galaxy-tab-s10-fe-plus.png"
     },
     {
         "name": "Tablet Samsung Galaxy Tab S11 256GB 12GB RAM 11\" GalaxyAI",
+        "description": "Tablet com 12GB de RAM, 256GB de armazenamento e tela de 11” para produtividade, estudos e entretenimento. Conta com Galaxy AI para recursos inteligentes, conectividade Wi-Fi, suporte multitarefa avançado e compatibilidade com anotações e edição de documentos. Acompanha S Pen e capa teclado para maior versatilidade no trabalho e estudos.",
         "price": "R$ 645,90",
+        "price_12": "R$ 713,89",
+        "price_24": "R$ 679,89",
+        "price_36": "R$ 645,90",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F0f4f19c8-ea94-4593-84d8-ece8b5261f19%2Fgeneral-1780063587475-copy_AF9F5BC9-5F9B-48CB-9EA4-A7E93A7F1BCE.png",
         "local_img": "./assets/products/tablet-samsung-galaxy-tab-s11-256gb-12gb-ram-11-galaxyai.png"
     },
     {
         "name": "Teclado Apple Magic Keyboard para iPad Air 13\" M4 USB-C Trackpad",
+        "description": "<p>Teclado em alumínio com design flutuante (cantilever) e ângulo ajustável. Compatível com iPad Air 13\" (M4, M3 e M2). Mecanismo scissor com 1mm de curso. Trackpad de vidro com gestos Multi-Touch. Linha de 14 teclas de função (brilho, volume, atalhos). Conexão por Smart Connector (sem necessidade de Bluetooth nem bateria — usa energia do iPad). Conector USB-C lateral para passagem de carga (mantém a porta USB-C do iPad livre). Layout US (ANSI) inglês.&nbsp;</p>",
         "price": "R$ 265,90",
+        "price_12": "R$ 293,89",
+        "price_24": "R$ 279,89",
+        "price_36": "R$ 265,90",
         "img": "https://images.digital.allugator.com/products/Apple Magic Keyboard - 1.png",
         "local_img": "./assets/products/teclado-apple-magic-keyboard-para-ipad-air-13-m4-usb-c-trackpad.png"
     },
     {
         "name": "Tela Verde 1.65 x 2.8m",
+        "description": "1.65m x 2.8m",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/tela%20verde%20dalila%20v2.png",
         "local_img": "./assets/products/tela-verde-1.65-x-2.8m.png"
     },
     {
         "name": "Tela Verde 3x3 Newborn",
+        "description": "3mx3m, com Suporte",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Tela%20Verde%20Newborn%203x3.png",
         "local_img": "./assets/products/tela-verde-3x3-newborn.png"
     },
     {
         "name": "The Witcher 3",
+        "description": "1 Jogador / Mínimo 35GB / Dualshock 4 / Saída de Vídeo em HD",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Witcher3.jpg",
         "local_img": "./assets/products/the-witcher-3.png"
     },
     {
         "name": "Transmissor Canon Speedlite ST-E3-RT",
+        "description": "Controle de até 5 grupos ou 15 flashes",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Speedlite%20Transmitter%20ST-E3-RT.png",
         "local_img": "./assets/products/transmissor-canon-speedlite-st-e3-rt.png"
     },
     {
         "name": "Tripé Articulado para Câmera + Adaptador de Celular",
+        "description": "até 1.20m de altura, articulado",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://http2.mlstatic.com/tripe-telescopico-profissional-sl-2111-130-mts-suporte-cel-D_NQ_NP_753305-MLB20862183802_082016-F.jpg",
         "local_img": "./assets/products/tripé-articulado-para-câmera-+-adaptador-de-celular.png"
     },
     {
         "name": "Tripé Greika WT 3770",
+        "description": "1.64m",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Tripe%20Greika%20WT3770.png",
         "local_img": "./assets/products/tripé-greika-wt-3770.png"
     },
     {
         "name": "Tripé Magnus VT 4000",
+        "description": "Cabeça Fluida, 7KG",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/tripe%20vt4000.jpg",
         "local_img": "./assets/products/tripé-magnus-vt-4000.png"
     },
     {
         "name": "Tripé Magnus VT 4000-f10e8e21",
+        "description": "Cabeça Fluida, 7KG, 170cm",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/tripe%20vt4000.jpg",
         "local_img": "./assets/products/tripé-magnus-vt-4000-f10e8e21.png"
     },
     {
         "name": "Tripé Manfrotto MK290 Light",
+        "description": "146cm, 4kg Carga Max,",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Trip%C3%A9%20Manfrotto%20MK290.png",
         "local_img": "./assets/products/tripé-manfrotto-mk290-light.png"
     },
     {
         "name": "Tripé Manfrotto MT293A3",
+        "description": "1.4m, 6kg",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Tripe%20Manfrotto%20290%20M293A3.png",
         "local_img": "./assets/products/tripé-manfrotto-mt293a3.png"
     },
     {
         "name": "Tripé Vanguard MK2",
+        "description": "1,40M",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Trip%C3%A9%20Vanguard%20MK%20290.png",
         "local_img": "./assets/products/tripé-vanguard-mk2.png"
     },
     {
         "name": "Uncharted 4",
+        "description": "1 Jogador / De 2 a 10 Jogadores Online / Mínimo 50GB / Uso Online Opcional / Dualshock 4",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Uncharted4.jpg",
         "local_img": "./assets/products/uncharted-4.png"
     },
     {
         "name": "Videokê VSK 1.0 - 200 músicas",
+        "description": "200 músicas brasileiras, HDMI, Componente",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/videoke%20vsk%201.0.jpg",
         "local_img": "./assets/products/videokê-vsk-1.0---200-músicas.png"
     },
     {
         "name": "Xbox Series S 512GB",
+        "description": "O console mais compacto da nova geração. Gráficos em até 120 FPS, carregamento ultrarrápido e acesso a centenas de jogos digitais com o Game Pass. Potência e performance em um design minimalista.",
         "price": "R$ 180,41",
+        "price_12": "R$ 199,40",
+        "price_24": "R$ 189,90",
+        "price_36": "R$ 180,41",
         "img": "https://images.digital.allugator.com/products/xbox1.png",
         "local_img": "./assets/products/xbox-series-s-512gb.png"
     },
     {
         "name": "Xiaomi Mi 10 128GB",
+        "description": "6.7 Polegadas, Snapdragon 865, 90Hz, Câmera Tripla",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/mi%2010%20pro.png",
         "local_img": "./assets/products/xiaomi-mi-10-128gb.png"
     },
     {
         "name": "Xiaomi Mi 9T 128GB",
+        "description": "6.4 Polegadas, Tela Inteira, Snapdragon 730",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Xiaomi%20Mi%209T.png",
         "local_img": "./assets/products/xiaomi-mi-9t-128gb.png"
     },
     {
         "name": "Xiaomi Mi 9T Pro 128GB",
+        "description": "6.4 Polegadas, Tela Inteira, Snapdragon 855",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Xiaomi%20Mi%209TPro.png",
         "local_img": "./assets/products/xiaomi-mi-9t-pro-128gb.png"
     },
     {
         "name": "Xiaomi Mi Note 10 128gb",
+        "description": "6.5 Polegadas, Snapdragon 730, 108MP",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Xiaomi%20Mi%20Note%2010.png",
         "local_img": "./assets/products/xiaomi-mi-note-10-128gb.png"
     },
     {
         "name": "Xiaomi Note 10 Lite 64GB",
+        "description": "6GB RAM, Camera 64MP, 5260mAh",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/xiaomi.jpg",
         "local_img": "./assets/products/xiaomi-note-10-lite-64gb.png"
     },
     {
         "name": "Zelda Breath of The Wild",
+        "description": "Singleplayer",
         "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/zeldabotw.jpg",
         "local_img": "./assets/products/zelda-breath-of-the-wild.png"
     }
