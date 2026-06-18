@@ -1,265 +1,192 @@
+"""
+Sincroniza produtos da API oficial da Allugator.
+API: api-gateway.dev.digital.allugator.com/api/public/v1/products
+Sem necessidade de Playwright/scraping — dados completos via JSON.
+"""
+
 import os
 import json
 import time
 import requests
-from urllib.parse import urljoin, urlparse, parse_qs
-from playwright.sync_api import sync_playwright
 
-BASE_URL = "https://allugator.com"
-CATALOG_URL = "https://allugator.com/catalog"
+API_BASE = "https://api-gateway.dev.digital.allugator.com/api/public/v1/products"
+API_PARAMS = {
+    "pageSize": 500,
+    "sortOrder": "asc",
+    "includeCommercialTags": "false",
+    "includePhotos": "true",
+    "soldOutLast": "false",
+    "excludeSoldOut": "false",
+}
+
 OUTPUT_DIR = "assets/products"
 JSON_OUTPUT = "assets/products.json"
 JS_OUTPUT = "assets/products.js"
 
-
-def extract_clean_img_url(img_url):
-    if not img_url:
-        return None
-    if img_url.startswith('/_next/image'):
-        params = parse_qs(urlparse(img_url).query)
-        if 'url' in params:
-            img_url = params['url'][0]
-    if not img_url.startswith('http'):
-        img_url = urljoin(BASE_URL, img_url)
-    return img_url
+HEADERS = {
+    "User-Agent": "Mozilla/5.0",
+    "Accept": "application/json",
+}
 
 
-def sync_products():
-    print(f"🚀 Sincronizando produtos de {CATALOG_URL}...")
+def fetch_all_products():
+    """Busca todos os produtos paginando a API."""
+    all_items = []
+    page = 0
 
-    db = {}
-    if os.path.exists(JSON_OUTPUT):
+    while True:
+        params = {**API_PARAMS, "pageIndex": page}
+        print(f"   Buscando página {page}...")
         try:
-            with open(JSON_OUTPUT, 'r', encoding='utf-8') as f:
-                for p in json.load(f):
-                    db[p['name']] = p
-            print(f"📂 {len(db)} produtos existentes carregados.")
-        except Exception:
-            print("⚠️ Erro ao carregar banco existente, iniciando do zero.")
+            r = requests.get(API_BASE, params=params, headers=HEADERS, timeout=30)
+            r.raise_for_status()
+            body = r.json()
+        except Exception as e:
+            print(f"⚠️ Erro ao buscar página {page}: {e}")
+            break
 
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+        items = body.get("data") or []
+        pagination = body.get("pagination") or {}
+        all_items.extend(items)
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=True,
-            args=["--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"]
-        )
-        context = browser.new_context(
-            user_agent=(
-                "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/120.0.0.0 Safari/537.36"
-            ),
-            viewport={"width": 1280, "height": 900},
-        )
-        page = context.new_page()
-        page.set_default_timeout(120000)
+        print(f"   → {len(items)} produtos (total acumulado: {len(all_items)})")
 
-        # ── Interceptar respostas de API para capturar dados de produto ──────
-        api_products = []
+        if not pagination.get("can_next_page"):
+            break
+        page += 1
 
-        def handle_response(response):
-            try:
-                url = response.url
-                ct = response.headers.get("content-type", "")
-                if "json" not in ct:
-                    return
-                # Filtrar URLs relevantes (produtos, catálogo, API)
-                if not any(k in url for k in ["/api/", "product", "catalog", "item", "search"]):
-                    return
-                data = response.json()
-                # Procurar lista de produtos em diferentes formatos de resposta
-                candidates = []
-                if isinstance(data, list):
-                    candidates = data
-                elif isinstance(data, dict):
-                    for key in ["products", "items", "data", "results", "catalog", "docs", "list"]:
-                        if key in data and isinstance(data[key], list):
-                            candidates = data[key]
-                            break
-                for item in candidates:
-                    if isinstance(item, dict) and ("name" in item or "title" in item):
-                        name = item.get("name") or item.get("title", "")
-                        if name:
-                            api_products.append(item)
-            except Exception:
-                pass
-
-        page.on("response", handle_response)
-
-        # ── Navegar e carregar todos os produtos ─────────────────────────────
-        print("🔗 Acessando catálogo...")
-        page.goto(CATALOG_URL, wait_until="networkidle")
-        page.wait_for_timeout(3000)
-
-        # Scroll agressivo para carregar todos via infinite scroll / lazy load
-        print("🖱️ Rolando para carregar todos os produtos...")
-        prev_height = 0
-        stable_rounds = 0
-
-        while stable_rounds < 4:
-            page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-            page.wait_for_timeout(2500)
-            new_height = page.evaluate("document.body.scrollHeight")
-            if new_height == prev_height:
-                stable_rounds += 1
-            else:
-                stable_rounds = 0
-                prev_height = new_height
-            print(f"   Altura: {new_height}px (estável: {stable_rounds}/4)")
-
-        # ── DEBUG: mostrar o que foi encontrado no DOM ───────────────────────
-        all_links = page.query_selector_all("a[href]")
-        catalog_hrefs = []
-        for link in all_links:
-            href = link.get_attribute("href") or ""
-            if "/catalog/" in href:
-                catalog_hrefs.append(href)
-
-        print(f"\nDEBUG: {len(catalog_hrefs)} links com /catalog/ encontrados:")
-        for h in catalog_hrefs[:20]:
-            print(f"   {h}")
-
-        print(f"\nDEBUG: {len(api_products)} produtos capturados via API/JSON")
-
-        # ── Estratégia 1: dados vindos de respostas de API ───────────────────
-        new_count = 0
-        dl_headers = {"User-Agent": "Mozilla/5.0"}
-
-        if api_products:
-            print(f"\n✅ Usando {len(api_products)} produtos da API...")
-            for item in api_products:
-                try:
-                    name = (item.get("name") or item.get("title") or "").strip()
-                    if not name or len(name) < 3:
-                        continue
-                    price = item.get("price") or item.get("monthly_price") or "Consulte"
-                    img_url = (
-                        item.get("image") or item.get("img") or item.get("thumbnail")
-                        or item.get("imageUrl") or item.get("image_url") or ""
-                    )
-                    img_url = extract_clean_img_url(img_url)
-                    if not img_url:
-                        continue
-                    _save_product(db, name, price, img_url, dl_headers, new_count)
-                except Exception as e:
-                    print(f"   ⚠️ Erro: {e}")
-        else:
-            # ── Estratégia 2: scraping DOM com múltiplos seletores ───────────
-            print("\n⚠️ Nenhum dado via API. Tentando scraping do DOM...")
-
-            # Tentar seletores de card de produto comuns
-            product_selectors = [
-                "article",
-                "[class*='product-card']",
-                "[class*='ProductCard']",
-                "[class*='catalog-item']",
-                "[class*='product-item']",
-                "[data-testid*='product']",
-                "[data-testid*='card']",
-            ]
-
-            items = []
-            for sel in product_selectors:
-                found = page.query_selector_all(sel)
-                if found:
-                    print(f"   Seletor '{sel}': {len(found)} elementos")
-                    items = found
-                    break
-
-            # Fallback: usar os links /catalog/ encontrados, filtrando slugs de produto
-            if not items:
-                print("   Usando links /catalog/ como fallback...")
-                all_link_els = page.query_selector_all("a[href*='/catalog/']")
-                # Produto tem slug com pelo menos 2 segmentos: /catalog/categoria/produto
-                items = [
-                    el for el in all_link_els
-                    if len([p for p in (el.get_attribute("href") or "").strip("/").split("/") if p]) >= 2
-                ]
-                print(f"   {len(items)} links de produto encontrados após filtragem")
-
-            print(f"\n🔍 {len(items)} cards encontrados. Extraindo...")
-
-            for item in items:
-                try:
-                    name = None
-                    for sel in ["h2", "h3", "h4", "[class*='name']", "[class*='title']", "p"]:
-                        el = item.query_selector(sel)
-                        if el:
-                            text = el.inner_text().strip()
-                            if text and len(text) > 3 and "R$" not in text and "/mês" not in text:
-                                name = text
-                                break
-
-                    img_el = item.query_selector("img")
-                    if not name and img_el:
-                        alt = img_el.get_attribute("alt") or ""
-                        if alt.strip() and len(alt.strip()) > 3:
-                            name = alt.strip()
-
-                    if not name:
-                        continue
-
-                    price = "Consulte"
-                    for t_el in item.query_selector_all("*"):
-                        try:
-                            t = t_el.inner_text().strip()
-                            if "R$" in t and "/mês" in t and len(t) < 60:
-                                price = t
-                                break
-                        except Exception:
-                            continue
-
-                    if not img_el:
-                        continue
-
-                    img_url = extract_clean_img_url(img_el.get_attribute("src"))
-                    if not img_url:
-                        continue
-
-                    _save_product(db, name, price, img_url, dl_headers, new_count)
-
-                except Exception as e:
-                    print(f"   ⚠️ Erro ao processar item: {e}")
-
-        browser.close()
-
-    final_list = list(db.values())
-    with open(JSON_OUTPUT, "w", encoding="utf-8") as f:
-        json.dump(final_list, f, indent=4, ensure_ascii=False)
-    with open(JS_OUTPUT, "w", encoding="utf-8") as f:
-        f.write(f"window.alluProducts = {json.dumps(final_list, indent=4, ensure_ascii=False)};")
-
-    print(f"\n✨ Sincronização concluída! Total: {len(final_list)} produtos.")
+    return all_items
 
 
-def _save_product(db, name, price, img_url, headers, counter):
-    safe_name = (
+def best_price(skus):
+    """Retorna o menor preço parcelado válido entre os SKUs."""
+    values = []
+    for sku in skus:
+        v = sku.get("installment_value")
+        try:
+            fv = float(v)
+            if fv > 0:
+                values.append(fv)
+        except (TypeError, ValueError):
+            continue
+    if not values:
+        return None
+    return min(values)
+
+
+def main_photo_url(product_photos):
+    """Retorna a URL da foto principal (ou primeira disponível)."""
+    if not product_photos:
+        return None
+    main = next((p for p in product_photos if p.get("main")), product_photos[0])
+    return main.get("url")
+
+
+def safe_filename(name):
+    return (
         name.lower()
         .replace(" ", "-")
         .replace("/", "-")
         .replace('"', "")
         .replace(":", "")
         .replace("?", "")
+        .replace("'", "")
     )
-    filename = f"{safe_name}.png"
-    filepath = os.path.join(OUTPUT_DIR, filename)
-    local_path = f"./assets/products/{filename}"
 
-    if name not in db or not os.path.exists(filepath):
+
+def sync_products():
+    print("🚀 Sincronizando produtos via API oficial da Allugator...")
+
+    # Carregar banco existente (preserva imagens já baixadas)
+    db = {}
+    if os.path.exists(JSON_OUTPUT):
         try:
-            res = requests.get(img_url, headers=headers, timeout=15)
-            if res.status_code == 200:
-                with open(filepath, "wb") as f:
-                    f.write(res.content)
-                db[name] = {"name": name, "price": price, "local_img": local_path}
-                print(f"   ✅ {name}")
-                return True
-        except Exception as e:
-            print(f"   ⚠️ Erro ao baixar {name}: {e}")
-    else:
-        db[name]["price"] = price
-    return False
+            with open(JSON_OUTPUT, "r", encoding="utf-8") as f:
+                for p in json.load(f):
+                    db[p["name"]] = p
+            print(f"📂 {len(db)} produtos existentes carregados.")
+        except Exception:
+            print("⚠️ Banco existente inválido — iniciando do zero.")
+
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+    # Buscar todos os produtos da API
+    print("🔗 Conectando à API...")
+    raw_products = fetch_all_products()
+    print(f"✅ {len(raw_products)} produtos recebidos da API.\n")
+
+    new_count = 0
+    updated_count = 0
+    skip_count = 0
+
+    for item in raw_products:
+        # Ignorar produtos arquivados
+        if item.get("archived"):
+            skip_count += 1
+            continue
+
+        name = (item.get("name") or "").strip()
+        if not name:
+            skip_count += 1
+            continue
+
+        # Preço parcelado
+        price_val = best_price(item.get("skus") or [])
+        if price_val:
+            price_str = "R$ " + f"{price_val:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+        else:
+            price_str = "Consulte"
+
+        # URL da foto
+        img_url = main_photo_url(item.get("product_photos") or [])
+        if not img_url:
+            skip_count += 1
+            continue
+
+        # Caminho local
+        filename = f"{safe_filename(name)}.png"
+        filepath = os.path.join(OUTPUT_DIR, filename)
+        local_path = f"./assets/products/{filename}"
+
+        # Baixar imagem se necessário
+        needs_download = name not in db or not os.path.exists(filepath)
+        if needs_download:
+            try:
+                res = requests.get(img_url, headers=HEADERS, timeout=15)
+                if res.status_code == 200:
+                    with open(filepath, "wb") as f:
+                        f.write(res.content)
+                    if name not in db:
+                        new_count += 1
+                    else:
+                        updated_count += 1
+                    print(f"   ✅ {name} ({price_str})")
+                else:
+                    print(f"   ⚠️ Imagem não encontrada ({res.status_code}): {name}")
+                    img_url = None
+            except Exception as e:
+                print(f"   ⚠️ Erro ao baixar {name}: {e}")
+        else:
+            # Atualizar apenas preço e img URL (mantém local_img existente)
+            updated_count += 1
+
+        db[name] = {
+            "name": name,
+            "price": price_str,
+            "img": img_url or db.get(name, {}).get("img", ""),
+            "local_img": local_path,
+        }
+
+    # Salvar JSON e JS
+    final_list = list(db.values())
+    with open(JSON_OUTPUT, "w", encoding="utf-8") as f:
+        json.dump(final_list, f, indent=4, ensure_ascii=False)
+    with open(JS_OUTPUT, "w", encoding="utf-8") as f:
+        f.write(f"window.alluProducts = {json.dumps(final_list, indent=4, ensure_ascii=False)};")
+
+    print(f"\n✨ Sincronização concluída!")
+    print(f"   ➕ Novos: {new_count} | 🔄 Atualizados: {updated_count} | ⏭️ Ignorados: {skip_count}")
+    print(f"   📦 Total no banco: {len(final_list)} produtos")
 
 
 if __name__ == "__main__":

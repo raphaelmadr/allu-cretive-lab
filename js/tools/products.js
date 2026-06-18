@@ -22,8 +22,8 @@ export function renderProductsTools(sidebarContent) {
             listHTML += `
                 <div class="preset-card product-draggable" data-product='${JSON.stringify(p).replace(/'/g, "&#39;")}' style="padding:12px; display:flex; flex-direction:column; gap:8px; cursor:pointer;">
                     <div style="height:100px; width:100%; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
-                        <img src="${p.local_img}" 
-                             onerror="this.onerror=null; this.src='${p.img}';"
+                        <img src="${p.img || p.local_img}"
+                             onerror="this.onerror=null; this.src='${p.local_img}';"
                              style="max-height:85%; max-width:85%; object-fit:contain;">
                     </div>
                     <span style="font-size:0.7rem; font-weight:700; color:white; line-height:1.2; text-align:center;">${p.name}</span>
