@@ -18,16 +18,31 @@ function isColorDark(hex) {
 
 function fuzzyMatchProduct(productName, products) {
     if (!productName || !products || !products.length) return null;
-    const normalize = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9\s]/g, '');
+
+    // Palavras genéricas que causam falsos positivos
+    const STOPWORDS = new Set(['com', 'para', 'por', 'mais', 'sua', 'seu', 'plus', 'music', 'nano', 'lite', 'new', 'the', 'and', 'pro', 'max', 'mini', 'air', 'ultra']);
+
+    const normalize = s => s.toLowerCase()
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9\s]/g, '');
+
     const query = normalize(productName);
-    const words = query.split(/\s+/).filter(w => w.length > 2);
+    // Remove stopwords e palavras com menos de 3 chars
+    const words = query.split(/\s+/).filter(w => w.length > 2 && !STOPWORDS.has(w));
+
+    if (!words.length) return null;
+
     let best = null, bestScore = 0;
     for (const p of products) {
         const name = normalize(p.name || '');
         const score = words.reduce((acc, w) => acc + (name.includes(w) ? 1 : 0), 0);
         if (score > bestScore) { bestScore = score; best = p; }
     }
-    return bestScore >= 1 ? best : null;
+
+    // Exige pelo menos 2 palavras correspondentes (ou todas, se o produto tiver só 2)
+    const minRequired = Math.min(2, words.length);
+    return bestScore >= minRequired ? best : null;
 }
 
 function detectProductScale(productName) {
@@ -515,6 +530,33 @@ async function renderAILayout(canvas, layout, formatConfig, creative) {
     if (layout.productImage && creative.productName) {
         const apiProds = window.alluProducts || [];
         const match = fuzzyMatchProduct(creative.productName, apiProds);
+
+        if (!match) {
+            // Produto não encontrado no catálogo — placeholder editável
+            const placeholderH = isHorizontalCanvas ? H * 0.6 : H * 0.35;
+            const placeholderW = isHorizontalCanvas ? W * 0.35 : W * 0.6;
+            const placeholderLeft = isHorizontalCanvas ? W * 0.72 : W * 0.5;
+            const placeholderTop = isHorizontalCanvas ? H * 0.5 : Math.max(flowY + 20, H * 0.50);
+            productTopY = placeholderTop;
+
+            const rect = new fabric.Rect({
+                width: placeholderW, height: placeholderH,
+                fill: 'rgba(0,0,0,0.04)', stroke: 'rgba(0,0,0,0.12)',
+                strokeWidth: 1, strokeDashArray: [6, 4],
+                rx: 16, ry: 16, originX: 'center', originY: 'center'
+            });
+            const label = new fabric.Text(`📦 ${creative.productName}\n(produto não encontrado no catálogo)`, {
+                fontFamily: 'Plus Jakarta Sans', fontSize: Math.max(W * 0.018, 12),
+                fill: 'rgba(0,0,0,0.35)', textAlign: 'center',
+                originX: 'center', originY: 'center', lineHeight: 1.4
+            });
+            const group = new fabric.Group([rect, label], {
+                left: placeholderLeft, top: placeholderTop,
+                originX: 'center', originY: 'center',
+                selectable: true, evented: true
+            });
+            canvas.add(group);
+        }
 
         if (match && (match.local_img || match.img)) {
             const imgSrc = (match.local_img && match.local_img.startsWith('./'))
