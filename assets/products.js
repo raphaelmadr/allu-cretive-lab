@@ -2938,10 +2938,10 @@ window.alluProducts = [
     {
         "name": "iPhone 16e",
         "description": "<p>Chip A18, câmera Fusion de 48MP e tela de 6.1\" Super Retina XDR. Apple Intelligence e Face ID.</p>",
-        "price": "R$ 327,65",
-        "price_12": "R$ 362,14",
-        "price_24": "R$ 344,89",
-        "price_36": "R$ 327,65",
+        "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/Apple iPhone 16e - 1.png",
         "local_img": "./assets/products/iphone-16e.png"
     },
@@ -5248,10 +5248,10 @@ window.alluProducts = [
     {
         "name": "Samsung Galaxy A16 5G 128GB",
         "description": "6,7” FHD+ Super AMOLED 90Hz, câmera tripla de 50MP e frontal de 13MP. Equipado com processador Exynos 1330, 128GB de memória e 4GB de RAM. Possui NFC, bateria de 5.000mAh com carregamento rápido de 25W, leitor de digital na lateral, certificação IP54 e proteção com Knox Vault e Cadeado Galaxy, além de 6 anos de atualizações.",
-        "price": "R$ 83,50",
-        "price_12": "R$ 92,29",
-        "price_24": "R$ 87,89",
-        "price_36": "R$ 83,50",
+        "price": "Consulte",
+        "price_12": "Consulte",
+        "price_24": "Consulte",
+        "price_36": "Consulte",
         "img": "https://images.digital.allugator.com/products/ga16-1.png",
         "local_img": "./assets/products/samsung-galaxy-a16-5g-128gb.png"
     },
