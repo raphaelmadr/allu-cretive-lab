@@ -2808,10 +2808,10 @@
     {
         "name": "iPhone 12 Pro Max",
         "description": "6.7 polegadas, A14 Bionic, Super Retina XDR, Ceramic Shield, Câmera tripla, grande angular, ultra grande angular, telefoto + sensor LiDAR, 5G",
-        "price": "R$ 232,66",
-        "price_12": "R$ 257,15",
-        "price_24": "R$ 244,90",
-        "price_36": "R$ 232,66",
+        "price": "R$ 265,90",
+        "price_12": "R$ 293,89",
+        "price_24": "R$ 279,89",
+        "price_36": "R$ 265,90",
         "img": "https://yacare-products-image.s3.sa-east-1.amazonaws.com/iphone/4x/iPhone+12+Pro+Max.png",
         "local_img": "./assets/products/iphone-12-pro-max.png"
     },
