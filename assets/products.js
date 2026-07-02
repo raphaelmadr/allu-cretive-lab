@@ -1428,10 +1428,10 @@ window.alluProducts = [
     {
         "name": "Asus Vivobook Go 15 i3 8GB 512 SSD W11 Home FHD",
         "description": "Intel® Core™ i3 - N305,  Velocidade do Processador: 1,8 GHz,  Cache: 6 MB, Geração: 12ª, Windows 11 Home, 8GB DDR4, 512 GB SSD HD, Tipo de Tela: LED-backlit Anti-Glare, Tamanho da Tela: 15,6\",  Resolução da Tela: 1920x1080, Placa de Vídeo UHD Graphics, Conexão Wireless Wi-Fi 5 (802.11ac) (Dual band) 1*1 Bluetooth 5.1",
-        "price": "Consulte",
-        "price_12": "Consulte",
-        "price_24": "Consulte",
-        "price_36": "Consulte",
+        "price": "R$ 408,50",
+        "price_12": "R$ 451,50",
+        "price_24": "R$ 430,00",
+        "price_36": "R$ 408,50",
         "img": "https://images.digital.allugator.com/products/Asus Vivobook Go 15 i3 8GB 512 SSD W11 Home FHD-1.png",
         "local_img": "./assets/products/asus-vivobook-go-15-i3-8gb-512-ssd-w11-home-fhd.png"
     },
@@ -1518,10 +1518,10 @@ window.alluProducts = [
     {
         "name": "Bicicleta Goper Smart Bike",
         "description": "Tela 21\", Bluetooth, aulas ao vivo/on-demand, resistência magnética",
-        "price": "R$ 95,00",
-        "price_12": "R$ 105,00",
-        "price_24": "R$ 100,00",
-        "price_36": "R$ 95,00",
+        "price": "R$ 76,00",
+        "price_12": "R$ 84,00",
+        "price_24": "R$ 80,00",
+        "price_36": "R$ 76,00",
         "img": "https://images.digital.allugator.com/products/Bicicleta-Goper-SmartBike-1.png",
         "local_img": "./assets/products/bicicleta-goper-smart-bike.png"
     },
