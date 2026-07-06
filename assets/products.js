@@ -1156,10 +1156,10 @@ window.alluProducts = [
     {
         "name": "ASUS ROG Ally",
         "description": "Um portátil gamer poderoso com Windows 11. Tela Full HD de 120 Hz, processador Ryzen Z1 Extreme e desempenho de console na palma da sua mão.",
-        "price": "R$ 158,46",
-        "price_12": "R$ 175,14",
-        "price_24": "R$ 166,80",
-        "price_36": "R$ 158,46",
+        "price": "R$ 228,76",
+        "price_12": "R$ 252,84",
+        "price_24": "R$ 240,80",
+        "price_36": "R$ 228,76",
         "img": "https://images.digital.allugator.com/products/ASUS-ROG-Ally.png",
         "local_img": "./assets/products/asus-rog-ally.png"
     },
@@ -2988,10 +2988,10 @@ window.alluProducts = [
     {
         "name": "iPhone 17 Pro",
         "description": "O design inovador do iPhone 17 Pro oferece resistência excepcional, duração de bateria avançada e maximiza a potência do chip A19 Pro. O sistema de Câmera Fusion Pro de 48 MP traz a teleobjetiva mais longa em um iPhone, com zoom de 8x. Já a câmera frontal Center Stage tira selfies em grupo mais inteligentes e grava vídeos com Captura Dupla. O Ceramic Shield 2 da tela é três vezes mais resistente a arranhões. A estrutura unibody em alumínio forjado dissipa melhor o calor. Sem contar os recursos da Apple Intelligence, como a ferramenta de Limpeza, e outras novidades.",
-        "price": "R$ 588,90",
-        "price_12": "R$ 650,89",
-        "price_24": "R$ 619,89",
-        "price_36": "R$ 588,90",
+        "price": "R$ 493,90",
+        "price_12": "R$ 545,89",
+        "price_24": "R$ 519,89",
+        "price_36": "R$ 493,90",
         "img": "https://images.digital.allugator.com/products/17pro1.png",
         "local_img": "./assets/products/iphone-17-pro.png"
     },
