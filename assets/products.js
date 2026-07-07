@@ -134,10 +134,10 @@ window.alluProducts = [
     {
         "name": "AirPods Pro 2 ANC Bluetooth Spatial Audio USB-C",
         "description": "<p>Chip: Apple H2 Design: In-ear com ponteiras de silicone (XS, S, M, L) Bluetooth: 5.3 Cancelamento de ruído: Active Noise Cancellation (2x mais eficaz que geração anterior) Recursos: Adaptive Audio, Transparency Mode, Conversation Awareness, Spatial Audio com head tracking, Dolby Atmos, DSEE Extreme Saúde auditiva: Hearing Protection, Hearing Test, Hearing Aid (FDA) Bateria: até 6h por carga (ANC ativo) / até 30h com estojo MagSafe Carga rápida: 5 min = 1h de uso Carregamento: USB-C, MagSafe, Qi, carregador Apple Watch Resistência: IP54 (fones + estojo) Peso por fone: 5,3g PN: MXK23BZ/A</p>",
-        "price": "R$ 213,66",
-        "price_12": "R$ 236,15",
-        "price_24": "R$ 224,90",
-        "price_36": "R$ 213,66",
+        "price": "R$ 211,75",
+        "price_12": "R$ 234,04",
+        "price_24": "R$ 222,89",
+        "price_36": "R$ 211,75",
         "img": "https://images.digital.allugator.com/products/airpods-pro-2-1.png",
         "local_img": "./assets/products/airpods-pro-2-anc-bluetooth-spatial-audio-usb-c.png"
     },
