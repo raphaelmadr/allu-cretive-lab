@@ -652,10 +652,10 @@ window.alluProducts = [
     {
         "name": "PlayStation 5 Pro",
         "description": "O PlayStation®5 Pro oferece recursos avançados como ray tracing aprimorado, imagem ultra nítida em TVs 4K e jogabilidade  super fluida com alta taxa de quadros.",
-        "price": "R$ 394,15",
-        "price_12": "R$ 435,64",
-        "price_24": "R$ 414,89",
-        "price_36": "R$ 394,15",
+        "price": "R$ 399,00",
+        "price_12": "R$ 441,00",
+        "price_24": "R$ 420,00",
+        "price_36": "R$ 399,00",
         "img": "https://images.digital.allugator.com/products/ps5-pro-1.png",
         "local_img": "./assets/products/playstation-5-pro.png"
     },
