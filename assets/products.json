@@ -1628,10 +1628,10 @@
     {
         "name": "Caixa de Som JBL Charge 5 Wi-Fi Bluetooth IP67 20h Powerbank",
         "description": "<p>Potência: 40W Drivers: Woofer de longo curso + tweeter dedicado + 2 radiadores passivos de graves Wi-Fi: Dual-band Wi-Fi 6, AirPlay 2, Chromecast built-in, Alexa Multi-Room Music, Spotify Connect Bluetooth: 5.3, LE Audio, Auracast (stereo pair e multi-speaker) Bateria: até 20h de autonomia Powerbank: porta USB-A para carregar dispositivos Resistência: IP67 (água e poeira) Auto-tuning: microfones integrados para otimização de áudio por ambiente App: JBL One (EQ, configurações e serviços de música) Carregamento: USB-C Materiais: plástico e tecido reciclados pós-consumo</p>",
-        "price": "R$ 189,91",
-        "price_12": "R$ 209,90",
-        "price_24": "R$ 199,90",
-        "price_36": "R$ 189,91",
+        "price": "R$ 181,35",
+        "price_12": "R$ 200,44",
+        "price_24": "R$ 190,89",
+        "price_36": "R$ 181,35",
         "img": "https://images.digital.allugator.com/products/JBL Charge 5 Wi-Fi-1.png",
         "local_img": "./assets/products/caixa-de-som-jbl-charge-5-wi-fi-bluetooth-ip67-20h-powerbank.png"
     },
@@ -5768,20 +5768,20 @@
     {
         "name": "Soundbar JBL Bar 800 7.1 Canais com Dolby Atmos Surround Removível",
         "description": "Soundbar 7.1 canais com Dolby Atmos e caixas surround removíveis para áudio tridimensional e experiência mais imersiva em filmes, séries e jogos. Conta com subwoofer dedicado para graves mais potentes, conectividade sem fio e múltiplas opções de conexão para TVs e dispositivos compatíveis.",
-        "price": "R$ 427,40",
-        "price_12": "R$ 472,39",
-        "price_24": "R$ 449,89",
-        "price_36": "R$ 427,40",
+        "price": "R$ 418,85",
+        "price_12": "R$ 462,94",
+        "price_24": "R$ 440,89",
+        "price_36": "R$ 418,85",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F70c3b66f-471f-45c4-a5b6-dbedff166252%2Fgeneral-1780060759390-soundbar-jbl-bar-800-7-1.png",
         "local_img": "./assets/products/soundbar-jbl-bar-800-7.1-canais-com-dolby-atmos-surround-removível.png"
     },
     {
         "name": "Soundbar JBL Cinema SB180 2.1 Canais com Subwoofer Sem Fio de 6,5\"",
         "description": "Soundbar 2.1 canais com subwoofer dedicado, conexão Bluetooth e entrada USB para reprodução de músicas e conteúdos multimídia. Oferece áudio mais potente, graves reforçados e melhor experiência sonora para filmes, séries e entretenimento.",
-        "price": "R$ 132,91",
-        "price_12": "R$ 146,90",
-        "price_24": "R$ 139,91",
-        "price_36": "R$ 132,91",
+        "price": "R$ 124,36",
+        "price_12": "R$ 137,45",
+        "price_24": "R$ 130,91",
+        "price_36": "R$ 124,36",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2Fc490fdd4-8808-4739-bc63-5e6629a0d0a9%2Fgeneral-1780000034440-soundbar-jbl-cinema-sb180_-2-1.png",
         "local_img": "./assets/products/soundbar-jbl-cinema-sb180-2.1-canais-com-subwoofer-sem-fio-de-6,5.png"
     },
