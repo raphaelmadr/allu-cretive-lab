@@ -678,10 +678,10 @@
     {
         "name": "Cadeira Acer Gamer Predator",
         "description": "Cadeira Gamer Predator 3ª Geração, Couro PU, Espuma D55, Pistão Class 3 (10cm), Suporte Lombar, Ajustável, Suporta até 120kg",
-        "price": "R$ 60,72",
-        "price_12": "R$ 67,11",
-        "price_24": "R$ 63,92",
-        "price_36": "R$ 60,72",
+        "price": "R$ 41,72",
+        "price_12": "R$ 46,11",
+        "price_24": "R$ 43,92",
+        "price_36": "R$ 41,72",
         "img": "https://images.digital.allugator.com/products/cad1.png",
         "local_img": "./assets/products/cadeira-acer-gamer-predator.png"
     },
