@@ -2898,10 +2898,10 @@
     {
         "name": "iPhone 15",
         "description": "Chip A16 Bionic com GPU de 5 núcleos -  - Sistema avançado de câmera dupla",
-        "price": "R$ 270,65",
-        "price_12": "R$ 299,14",
-        "price_24": "R$ 284,89",
-        "price_36": "R$ 270,65",
+        "price": "R$ 361,00",
+        "price_12": "R$ 399,00",
+        "price_24": "R$ 380,00",
+        "price_36": "R$ 361,00",
         "img": "https://images.digital.allugator.com/products/iphone15-1.png",
         "local_img": "./assets/products/iphone-15.png"
     },
@@ -2968,10 +2968,10 @@
     {
         "name": "iPhone 17",
         "description": "Chip A19, Câmera Fusion 48 MP, Frontal Center Stage e Captura Dupla.",
-        "price": "R$ 380,00",
-        "price_12": "R$ 420,00",
-        "price_24": "R$ 400,00",
-        "price_36": "R$ 380,00",
+        "price": "R$ 389,50",
+        "price_12": "R$ 430,50",
+        "price_24": "R$ 410,00",
+        "price_36": "R$ 389,50",
         "img": "https://images.digital.allugator.com/products/ip171.png",
         "local_img": "./assets/products/iphone-17.png"
     },
