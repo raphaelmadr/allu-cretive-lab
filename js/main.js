@@ -90,24 +90,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnPreview = document.getElementById('btn-preview-animation');
     if (btnPreview) {
         const originalPreviewHTML = btnPreview.innerHTML;
+        const originalPreviewTitle = btnPreview.title;
+        const resetPreviewButton = () => {
+            btnPreview.innerHTML = originalPreviewHTML;
+            btnPreview.title = originalPreviewTitle;
+        };
         btnPreview.onclick = () => {
             const activeCanvas = state.getCanvas();
             if (!activeCanvas) return;
 
             if (isPreviewing()) {
                 stopPreview();
-                btnPreview.innerHTML = originalPreviewHTML;
+                resetPreviewButton();
                 return;
             }
 
-            const started = playPreview(activeCanvas, {
-                onDone: () => { btnPreview.innerHTML = originalPreviewHTML; }
-            });
+            const started = playPreview(activeCanvas, { onDone: resetPreviewButton });
             if (!started) {
                 notifications.toast('Nenhuma animação definida neste canva ainda.', 'error');
                 return;
             }
-            btnPreview.innerHTML = '<i class="fa-solid fa-stop"></i><span class="btn-label"> Parar</span>';
+            btnPreview.innerHTML = '<i class="fa-solid fa-stop"></i>';
+            btnPreview.title = 'Parar Prévia';
         };
     }
 
@@ -116,16 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnSync) {
         btnSync.onclick = async () => {
             const originalHTML = btnSync.innerHTML;
-            const icon = btnSync.querySelector('i');
-            if(icon) icon.classList.add('fa-spin');
-            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:var(--accent);"></i> Atualizando...';
-            
+            const originalTitle = btnSync.title;
+            btnSync.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="color:var(--accent);"></i>';
+            btnSync.title = 'Atualizando...';
+
             try {
                 const module = await import('./tools/products.js');
                 const count = await module.syncProductsWithAPI();
-                
+
                 btnSync.innerHTML = originalHTML;
-                
+                btnSync.title = originalTitle;
+
                 if (count > 0) {
                     notifications.alert('Sincronização Concluída', `✅ ${count} produtos atualizados com sucesso via API da Allugator!`, 'fa-cloud-arrow-down');
                     // If the active tab is products, update the sidebar to show the new prices
@@ -142,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) {
                 console.error('Erro ao sincronizar produtos:', err);
                 btnSync.innerHTML = originalHTML;
+                btnSync.title = originalTitle;
                 notifications.alert('Erro na API', "❌ Ocorreu um erro ao conectar com a API.", 'fa-circle-xmark');
             }
 

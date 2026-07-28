@@ -138,14 +138,17 @@ body {
 }
 
 /* Top Header (Responsivo) */
-/* Antes o header tinha altura fixa (60px) e nenhum wrap: em janelas estreitas os
-   grupos de botões da direita (Exportar/Prévia/Atualizar) eram simplesmente
-   cortados pelo `overflow:hidden` do .main-content. Agora o header cresce em
-   altura (min-height) e os grupos quebram linha em vez de desaparecer. */
+/* O header nunca quebra em duas linhas: `flex-wrap: wrap` no nível externo fazia
+   o bloco inteiro de ações (.top-header-actions) pular para uma segunda linha
+   de uma vez (um item flex não quebra parcialmente), deixando o badge de
+   formato sozinho em cima. Em vez disso, mantemos tudo em uma linha só —
+   os botões secundários (Atualizar/Prévia) ficam só com ícone + tooltip
+   (mesma convenção do `.btn-tool` da sidebar), e a barra de ações vira
+   scroll horizontal como último recurso em janelas muito estreitas, nunca
+   quebra de linha nem corte de conteúdo. */
 .top-header {
     min-height: 60px;
-    flex-wrap: wrap;
-    row-gap: 10px;
+    flex-wrap: nowrap;
     column-gap: 20px;
 }
 
@@ -160,17 +163,28 @@ body {
     display: flex;
     gap: 20px;
     align-items: center;
-    flex-wrap: wrap;
-    row-gap: 10px;
+    flex-wrap: nowrap;
     justify-content: flex-end;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
 }
 
-/* Em janelas mais estreitas, esconde o texto dos botões de ação (mantém ícone +
-   tooltip via atributo title) para reduzir a chance de quebra de linha. */
-@media (max-width: 1440px) {
-    .btn-label {
-        display: none;
-    }
+/* Cada grupo mantém seu tamanho natural — sem isso os botões espremeriam antes
+   do scroll horizontal entrar em ação. */
+.top-header-actions > * {
+    flex-shrink: 0;
+}
+
+/* Scrollbar discreta (só aparece se realmente faltar espaço) */
+.top-header-actions::-webkit-scrollbar {
+    height: 4px;
+}
+.top-header-actions::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 4px;
 }
 
 /* UI Elements */

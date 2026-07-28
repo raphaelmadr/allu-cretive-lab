@@ -154,15 +154,15 @@
                     <button id="btn-zoom-fit" title="Ajustar à tela (⌘ 0)" style="width:28px; height:28px; border-radius:6px; background:transparent; border:none; color:var(--text-secondary); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; font-size:0.85rem;" onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='white';" onmouseout="this.style.background='transparent'; this.style.color='var(--text-secondary)';"><i class="fa-solid fa-expand"></i></button>
                 </div>
 
-                <button class="btn-primary" id="btn-sync" title="Atualizar Catálogo" style="padding:8px 16px; border-radius:8px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; gap:8px; white-space:nowrap;">
-                    <i class="fa-solid fa-arrows-rotate" style="color:var(--accent);"></i><span class="btn-label"> Atualizar Catálogo</span>
+                <button class="btn-primary" id="btn-sync" title="Atualizar Catálogo" style="width:38px; height:38px; border-radius:8px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                    <i class="fa-solid fa-arrows-rotate" style="color:var(--accent);"></i>
                 </button>
-                <button class="btn-primary" id="btn-preview-animation" title="Testar animações do canva atual" style="padding:8px 16px; border-radius:8px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; gap:8px; white-space:nowrap;">
-                    <i class="fa-solid fa-play"></i><span class="btn-label"> Prévia</span>
+                <button class="btn-primary" id="btn-preview-animation" title="Testar animações do canva atual" style="width:38px; height:38px; border-radius:8px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                    <i class="fa-solid fa-play"></i>
                 </button>
-                <div style="position: relative;" id="export-dropdown-container">
+                <div style="position: relative; flex-shrink:0;" id="export-dropdown-container">
                     <button class="btn-primary" id="btn-download" title="Exportar" style="padding:8px 16px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; gap:8px; white-space:nowrap;">
-                        <i class="fa-solid fa-download"></i><span class="btn-label"> Exportar </span><i class="fa-solid fa-chevron-down" style="font-size: 0.7em;"></i>
+                        <i class="fa-solid fa-download"></i> Exportar <i class="fa-solid fa-chevron-down" style="font-size: 0.7em;"></i>
                     </button>
                     <div id="export-menu" style="display:none; position:absolute; top:100%; right:0; margin-top:8px; background:var(--bg-main); border:1px solid var(--glass-border); border-radius:8px; padding:8px; width:220px; z-index:1000; box-shadow:0 10px 30px rgba(0,0,0,0.5);">
                         <div style="padding:4px 6px 10px;">
