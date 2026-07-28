@@ -185,6 +185,10 @@ async function loadFfmpeg() {
     const { toBlobURL } = window.FFmpegUtil;
 
     const ffmpeg = new FFmpeg();
+    // Loga a saída interna do ffmpeg (equivalente ao stderr da CLI) no console —
+    // sem isso, uma falha de codec/argumentos silenciosa vira um output.mp4
+    // vazio sem nenhuma pista de por quê.
+    ffmpeg.on('log', ({ message }) => console.log('[ffmpeg]', message));
     // O core é carregado internamente via `import()` dinâmico pelo worker — isso
     // exige um módulo ES de verdade (com `export`), então tem que ser o build
     // ESM do core mesmo usando o wrapper (@ffmpeg/ffmpeg) em UMD. O build UMD
@@ -227,7 +231,7 @@ export async function exportAsVideo(fps = 30) {
         await ffmpeg.writeFile(name, await fetchFile(result.frames[i]));
     }
 
-    await ffmpeg.exec([
+    const exitCode = await ffmpeg.exec([
         '-framerate', String(fps),
         '-i', 'frame%05d.png',
         '-c:v', 'libx264',
@@ -235,8 +239,17 @@ export async function exportAsVideo(fps = 30) {
         '-movflags', '+faststart',
         'output.mp4',
     ]);
+    // `exec` resolve com o código de saída em vez de rejeitar em caso de falha —
+    // sem checar isso, um erro de codec/argumentos vira um output.mp4 vazio
+    // baixado silenciosamente como se tivesse dado certo.
+    if (exitCode !== 0) {
+        throw new Error(`ffmpeg terminou com código ${exitCode}. Veja o console (prefixo "[ffmpeg]") para o log completo.`);
+    }
 
     const data = await ffmpeg.readFile('output.mp4');
+    if (!data || data.byteLength === 0) {
+        throw new Error('O arquivo de vídeo gerado ficou vazio (0 bytes). Veja o console (prefixo "[ffmpeg]") para o log completo.');
+    }
     downloadBlob(new Blob([data.buffer], { type: 'video/mp4' }), `${getFilenameBase()}.mp4`);
 
     // Limpa os arquivos da instância do ffmpeg para a próxima exportação
