@@ -8,9 +8,10 @@
 // Vercel usa timeout default de 10s — geração de imagem rotineiramente leva 10-30s.
 export const config = { maxDuration: 60 };
 
-// Cascata de modelos de imagem do Gemini, do mais estável para o mais novo/preview —
-// mesma filosofia de redundância do texto em ai-orchestrator.js.
-const GEMINI_IMAGE_MODELS = ['gemini-2.5-flash-image', 'gemini-2.0-flash-preview-image-generation'];
+// `gemini-2.0-flash-preview-image-generation` foi removido daqui: a v1beta rejeitou
+// com "model not found" em teste real. `gemini-2.5-flash-image` (Nano Banana) é o
+// único nome confirmado por múltiplas fontes independentes para generateContent.
+const GEMINI_IMAGE_MODELS = ['gemini-2.5-flash-image'];
 
 function aspectRatioFromDimensions(w, h) {
     const ratio = w / h;
@@ -56,7 +57,7 @@ async function generateWithGemini(prompt, aspectRatio) {
                     body: JSON.stringify({
                         contents: [{ parts: [{ text: prompt }] }],
                         generationConfig: {
-                            responseModalities: ['IMAGE'],
+                            responseModalities: ['TEXT', 'IMAGE'],
                             imageConfig: { aspectRatio }
                         }
                     })
