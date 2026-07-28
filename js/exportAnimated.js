@@ -151,23 +151,44 @@ export async function exportAsGif(fps = 15) {
     });
 }
 
+function loadScript(url) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = url;
+        script.onload = resolve;
+        script.onerror = () => reject(new Error(`Falha ao carregar script: ${url}`));
+        document.head.appendChild(script);
+    });
+}
+
+// Build UMD (script tag, expõe globals) em vez de `import()` do esm.sh: é o
+// setup oficialmente documentado pelo ffmpeg.wasm para uso sem bundler, e evita
+// o problema de resolução de caminho relativo do worker interno do pacote que
+// o build ESM tem quando servido por um CDN que reescreve módulos (esm.sh) —
+// isso travava `ffmpeg.load()` para sempre, sem nunca resolver nem rejeitar.
+let ffmpegLibsPromise = null;
+function loadFfmpegLibs() {
+    if (window.FFmpegWASM && window.FFmpegUtil) return Promise.resolve();
+    if (ffmpegLibsPromise) return ffmpegLibsPromise;
+    ffmpegLibsPromise = Promise.all([
+        loadScript('https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd/ffmpeg.js'),
+        loadScript('https://unpkg.com/@ffmpeg/util@0.12.1/dist/umd/index.js'),
+    ]);
+    return ffmpegLibsPromise;
+}
+
 let ffmpegInstance = null;
 async function loadFfmpeg() {
     if (ffmpegInstance) return ffmpegInstance;
-    const { FFmpeg } = await import('https://esm.sh/@ffmpeg/ffmpeg@0.12.10');
-    const { toBlobURL } = await import('https://esm.sh/@ffmpeg/util@0.12.1');
+    await loadFfmpegLibs();
+    const { FFmpeg } = window.FFmpegWASM;
+    const { toBlobURL } = window.FFmpegUtil;
 
     const ffmpeg = new FFmpeg();
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
-    // O próprio pacote @ffmpeg/ffmpeg roda seu wrapper num worker interno — sem
-    // apontar `classWorkerURL` para uma versão blob-ificada do worker do pacote,
-    // ele tenta instanciar o Worker direto da URL do CDN (esm.sh) e cai no mesmo
-    // SecurityError de origem cruzada do gif.js acima.
-    const ffmpegBaseURL = 'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm';
+    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
     await ffmpeg.load({
         coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
         wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-        classWorkerURL: await toBlobURL(`${ffmpegBaseURL}/worker.js`, 'text/javascript'),
     });
     ffmpegInstance = ffmpeg;
     return ffmpeg;
@@ -181,10 +202,8 @@ export async function exportAsVideo(fps = 30) {
         return;
     }
 
-    const [ffmpeg, { fetchFile }] = await Promise.all([
-        loadFfmpeg(),
-        import('https://esm.sh/@ffmpeg/util@0.12.1'),
-    ]);
+    const ffmpeg = await loadFfmpeg();
+    const { fetchFile } = window.FFmpegUtil;
 
     canvas.discardActiveObject();
     canvas.renderAll();
