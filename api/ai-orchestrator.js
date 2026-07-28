@@ -8,7 +8,7 @@
  * 2. Faz Rotação de Chaves (Key Pooling) se existirem chaves secundárias.
  * 3. Faz Fallback final para a OpenAI se todas as alternativas do Google falharem.
  */
-export async function callAIWithFallback(prompt, imageBase64 = null) {
+export async function callAIWithFallback(prompt, imageBase64 = null, temperature = null) {
     // 1. Mapear todas as chaves do Gemini disponíveis nas envs
     const geminiKeys = [];
     if (process.env.GEMINI_API_KEY) geminiKeys.push(process.env.GEMINI_API_KEY);
@@ -31,7 +31,7 @@ export async function callAIWithFallback(prompt, imageBase64 = null) {
         for (const model of geminiModels) {
             try {
                 console.log(`[Orchestrator] Tentando Google Gemini (${model}) com a chave terminada em ...${key.slice(-4)}`);
-                const result = await callGemini(model, key, prompt, imageBase64);
+                const result = await callGemini(model, key, prompt, imageBase64, temperature);
                 return result; // Se der certo, retorna imediatamente!
             } catch (error) {
                 console.warn(`[Orchestrator] Falha no Gemini (${model}):`, error.message);
@@ -48,7 +48,7 @@ export async function callAIWithFallback(prompt, imageBase64 = null) {
     if (process.env.OPENAI_API_KEY) {
         try {
             console.log(`[Orchestrator] Acionando protocolo de emergência: OpenAI (gpt-4o)`);
-            const openaiResult = await callOpenAI(process.env.OPENAI_API_KEY, prompt, imageBase64);
+            const openaiResult = await callOpenAI(process.env.OPENAI_API_KEY, prompt, imageBase64, temperature);
             return openaiResult;
         } catch (openaiError) {
             console.error(`[Orchestrator] Falha fatal também na OpenAI:`, openaiError.message);
@@ -60,7 +60,7 @@ export async function callAIWithFallback(prompt, imageBase64 = null) {
     throw new Error('Falha total nas IAs. Verifique os Rate Limits e as chaves de API (' + lastError.message + ')');
 }
 
-async function callGemini(model, apiKey, prompt, imageBase64) {
+async function callGemini(model, apiKey, prompt, imageBase64, temperature = null) {
     let parts = [{ text: prompt }];
 
     if (imageBase64) {
@@ -80,7 +80,8 @@ async function callGemini(model, apiKey, prompt, imageBase64) {
         body: JSON.stringify({
             contents: [{ parts }],
             generationConfig: {
-                responseMimeType: "application/json"
+                responseMimeType: "application/json",
+                ...(temperature !== null && { temperature })
             }
         })
     });
@@ -104,7 +105,7 @@ async function callGemini(model, apiKey, prompt, imageBase64) {
     }
 }
 
-async function callOpenAI(apiKey, prompt, imageBase64) {
+async function callOpenAI(apiKey, prompt, imageBase64, temperature = null) {
     let messages = [
         {
             role: "user",
@@ -134,7 +135,8 @@ async function callOpenAI(apiKey, prompt, imageBase64) {
         body: JSON.stringify({
             model: 'gpt-4o', // Modelo principal rápido e multimodal
             messages: messages,
-            response_format: { type: "json_object" }
+            response_format: { type: "json_object" },
+            ...(temperature !== null && { temperature })
         })
     });
 

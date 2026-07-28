@@ -48,8 +48,10 @@ Visão geral das próximas etapas de desenvolvimento.
 - [ ] Modo de apresentação de slides integrado.
 
 ## Fase 7: Inteligência e Conectividade (Próximos Passos)
+- [x] Modo IA: geração de imagens fotográficas/ilustrativas guiada pela marca (chat + base de conhecimento + DALL-E 3), com saída editável direto no canvas.
 - [ ] Integração com APIs de bancos de imagens (Pexels/Unsplash) para assets rápidos.
 - [ ] Assistente de IA para geração de títulos e copies curtas para posts.
 - [ ] Sistema de exportação direta para redes sociais via API.
 - [ ] Ferramenta de corte (Crop) inteligente para imagens de produtos.
 - [ ] Histórico de versões de arquivos na nuvem.
+- [ ] Modo IA v2: base de conhecimento com busca semântica real (RAG/embeddings) sobre a base editorial completa, hoje coberta apenas por um documento único curado manualmente.

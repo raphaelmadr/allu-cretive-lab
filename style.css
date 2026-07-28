@@ -822,3 +822,132 @@ p.subtitle {
     font-weight: 700;
 }
 
+/* ===== Modo IA — Chat ===== */
+.ai-chat-log {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 12px;
+}
+
+.ai-msg { display: flex; }
+.ai-msg.user { justify-content: flex-end; }
+.ai-msg.assistant { justify-content: flex-start; }
+
+.ai-msg-bubble {
+    max-width: 88%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.ai-msg.user .ai-msg-bubble {
+    background: var(--accent);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.ai-msg.assistant .ai-msg-bubble {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    color: white;
+    border-bottom-left-radius: 4px;
+}
+
+.ai-msg.assistant.error .ai-msg-bubble {
+    background: rgba(255, 68, 68, 0.12);
+    border-color: rgba(255, 68, 68, 0.4);
+    color: #ffb3b3;
+}
+
+.ai-proposal-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ai-doc-tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(39, 174, 96, 0.15);
+    color: var(--accent);
+    margin-right: 4px;
+}
+
+.ai-generate-btn {
+    margin-top: 6px;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    font-size: 0.72rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.ai-generate-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.ai-typing-dots span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 3px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+    animation: aiTypingBounce 1.2s infinite ease-in-out;
+}
+.ai-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.ai-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes aiTypingBounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* position:sticky em vez de calc(100vh - Npx): funciona dentro do overflow-y:auto
+   que .sidebar-content já tem nativamente, sem precisar de um scroll container
+   aninhado. O bottom:-20px compensa o padding:20px do .sidebar-content. */
+.ai-chat-inputbar {
+    position: sticky;
+    bottom: -20px;
+    background: var(--bg-main);
+    padding: 12px 0 4px 0;
+    display: flex;
+    gap: 8px;
+    border-top: 1px solid var(--glass-border);
+}
+
+.ai-chat-textarea {
+    flex: 1;
+    resize: none;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: white;
+    font-family: inherit;
+    font-size: 0.78rem;
+    padding: 8px;
+    outline: none;
+}
+
+.ai-chat-send-btn {
+    width: 40px;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    cursor: pointer;
+}
+

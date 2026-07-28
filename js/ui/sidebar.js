@@ -12,6 +12,7 @@ import { renderPropertiesTools } from '../tools/properties.js';
 import { renderBadgesTools } from '../tools/badges.js';
 import { renderModelsTools } from '../tools/models.js';
 import { renderIconsTools } from '../tools/icons.js';
+import { renderAiModeTools } from '../tools/aiMode.js';
 
 export function setupSidebar() {
     const tabs = document.querySelectorAll('.btn-tool[data-tab]');
@@ -99,6 +100,11 @@ export function updateSidebar(tab, sidebarTitle, sidebarContent) {
             sidebarTitle.innerText = 'Ícones';
             if(sidebarSubtitle) sidebarSubtitle.innerText = 'Biblioteca Lucide';
             renderIconsTools(sidebarContent);
+            break;
+        case 'ai-mode':
+            sidebarTitle.innerText = 'Modo IA';
+            if(sidebarSubtitle) sidebarSubtitle.innerText = 'Geração de imagens guiada pela marca';
+            renderAiModeTools(sidebarContent);
             break;
     }
 }
