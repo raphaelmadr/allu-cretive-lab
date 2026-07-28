@@ -120,17 +120,22 @@ export function setupExport() {
                     }
                 } catch (err) {
                     console.error("Erro ao exportar:", err);
-                    
-                    if (err.message.includes("SecurityError") || err.message.includes("Tainted")) {
+
+                    // Mostra o detalhe técnico direto no modal (além do console) para que o
+                    // usuário consiga reportar o erro exato sem precisar abrir o DevTools.
+                    const escapeHtml = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                    const detailHTML = `<br><br><span style="font-size:0.72rem; opacity:0.65; word-break:break-word; display:block;">Detalhe técnico: ${escapeHtml(err && err.message ? err.message : err)}</span>`;
+
+                    if (err.message && (err.message.includes("SecurityError") || err.message.includes("Tainted"))) {
                         notifications.alert(
-                            "Erro de Segurança", 
-                            "Não foi possível gerar a imagem devido a restrições de segurança com imagens externas. Tente remover o último produto adicionado ou recarregar a página.",
+                            "Erro de Segurança",
+                            "Não foi possível gerar a imagem devido a restrições de segurança com imagens externas. Tente remover o último produto adicionado ou recarregar a página." + detailHTML,
                             "fa-shield-halved"
                         );
                     } else {
                         notifications.alert(
-                            "Erro na Exportação", 
-                            "Ops! Ocorreu um erro ao tentar exportar seu design. Por favor, tente novamente.",
+                            "Erro na Exportação",
+                            "Ops! Ocorreu um erro ao tentar exportar seu design. Por favor, tente novamente." + detailHTML,
                             "fa-circle-xmark"
                         );
                     }
