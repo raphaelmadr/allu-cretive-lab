@@ -78,6 +78,18 @@ function loadImage(src) {
     });
 }
 
+// Workers só podem ser instanciados com um script de mesma origem — passar a URL
+// do CDN direto para `new Worker(...)` derruba com SecurityError ("cannot be
+// accessed from origin"). Buscamos o script nós mesmos e o expomos via blob:
+// (mesma origem, por definição), igual ao que `toBlobURL` do @ffmpeg/util já
+// faz para o core/wasm do ffmpeg — só faltava para os workers de gif.js e ffmpeg.
+async function blobifyScript(url) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Falha ao buscar script (${response.status}): ${url}`);
+    const text = await response.text();
+    return URL.createObjectURL(new Blob([text], { type: 'text/javascript' }));
+}
+
 let gifJsPromise = null;
 function loadGifJs() {
     if (window.GIF) return Promise.resolve();
@@ -92,6 +104,14 @@ function loadGifJs() {
     return gifJsPromise;
 }
 
+let gifWorkerBlobUrlPromise = null;
+function getGifWorkerBlobUrl() {
+    if (!gifWorkerBlobUrlPromise) {
+        gifWorkerBlobUrlPromise = blobifyScript('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
+    }
+    return gifWorkerBlobUrlPromise;
+}
+
 export async function exportAsGif(fps = 15) {
     const canvas = state.getCanvas();
     if (!canvas) return;
@@ -100,7 +120,7 @@ export async function exportAsGif(fps = 15) {
         return;
     }
 
-    await loadGifJs();
+    const [, workerBlobUrl] = await Promise.all([loadGifJs(), getGifWorkerBlobUrl()]);
 
     canvas.discardActiveObject();
     canvas.renderAll();
@@ -116,7 +136,7 @@ export async function exportAsGif(fps = 15) {
             quality: 10,
             width: result.width,
             height: result.height,
-            workerScript: 'https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js',
+            workerScript: workerBlobUrl,
         });
 
         images.forEach((img) => gif.addFrame(img, { delay: Math.round(1000 / fps) }));
@@ -139,9 +159,15 @@ async function loadFfmpeg() {
 
     const ffmpeg = new FFmpeg();
     const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
+    // O próprio pacote @ffmpeg/ffmpeg roda seu wrapper num worker interno — sem
+    // apontar `classWorkerURL` para uma versão blob-ificada do worker do pacote,
+    // ele tenta instanciar o Worker direto da URL do CDN (esm.sh) e cai no mesmo
+    // SecurityError de origem cruzada do gif.js acima.
+    const ffmpegBaseURL = 'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/esm';
     await ffmpeg.load({
         coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
         wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+        classWorkerURL: await toBlobURL(`${ffmpegBaseURL}/worker.js`, 'text/javascript'),
     });
     ffmpegInstance = ffmpeg;
     return ffmpeg;
