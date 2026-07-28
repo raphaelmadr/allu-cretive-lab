@@ -2,6 +2,14 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [0.9.0] - 2026-07-28
+### Adicionado
+- **Motor de Animações de Entrada (`js/animationEngine.js`)**: novo sistema que anima qualquer objeto do canvas (imagem, texto, selo, forma ou grupo) do estado inicial até a posição/escala/ângulo já definidos pelo usuário, que passam a ser o estado final da animação. 10 presets disponíveis: Fade In, Deslizar (Esquerda/Direita/Cima/Baixo), Zoom In/Out, Pop, Girar e Nenhuma.
+- **Controles de Animação (`js/tools/animations.js`)**: grade de seleção de preset com sliders de Duração (200–3000ms) e Atraso (0–3000ms), compartilhada entre o painel de Propriedades e a barra de ferramentas flutuante (novo botão "Animar").
+- **Botão "Prévia"**: reproduz a linha do tempo de animações do canva ativo em tempo real diretamente na barra superior, com aviso caso nenhum objeto tenha animação definida.
+- **Exportação Animada em GIF e MP4 (`js/exportAnimated.js`)**: novas opções no dropdown de Exportar que renderizam a timeline quadro a quadro (frames determinísticos) e codificam o resultado como GIF ou MP4.
+- **Persistência de Animações**: a propriedade `animationData` de cada objeto agora é incluída na serialização de projetos (.allu), no histórico de undo/redo, na duplicação de objetos e nos Modelos salvos, garantindo que as animações configuradas sobrevivam a save/load, duplicar e desfazer/refazer.
+
 ## [0.8.0] - 2026-07-28
 ### Corrigido
 - **Ferramenta de Crop (Recorte de Imagem)**: reescrita da matemática de recorte para usar a matriz de transformação completa do Fabric.js (`calcTransformMatrix`/`invertTransform`/`transformPoint`) em vez de subtração direta de `left/top`. Isso corrige o recorte de imagens rotacionadas e com escala não-uniforme, que antes gerava um `clipPath` deslocado/distorcido.

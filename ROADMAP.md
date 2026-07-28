@@ -44,7 +44,7 @@ Visão geral das próximas etapas de desenvolvimento.
 - [x] Refinamento do Workflow de Ícones (Lucide) com edição dinâmica.
 - [x] Otimização da persistência de projetos (.allu) com integridade total.
 - [ ] Persistência em Servidor para Templates (Node.js/API integration).
-- [ ] Suporte a animações básicas e exportação de GIFs/Vídeos.
+- [x] Suporte a animações básicas e exportação de GIFs/Vídeos.
 - [ ] Modo de apresentação de slides integrado.
 
 ## Fase 7: Inteligência e Conectividade (Próximos Passos)

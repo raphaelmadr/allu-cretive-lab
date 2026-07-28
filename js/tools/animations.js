@@ -7,7 +7,12 @@ import { history } from '../history.js';
 import { ANIMATION_PRESETS, DEFAULT_DURATION, DEFAULT_DELAY, playPreview } from '../animationEngine.js';
 
 export function animationControlsHTML(obj, idPrefix, compact = false) {
-    const data = obj.animationData || { preset: 'none', duration: DEFAULT_DURATION, delay: DEFAULT_DELAY };
+    // Numa seleção múltipla (ActiveSelection), o objeto é um wrapper transitório do
+    // Fabric.js que desaparece ao desselecionar — usamos o primeiro item real como
+    // referência para exibir o preset/timing atuais (mesma convenção do resto do
+    // arquivo para edições em lote: ver `forEachObject` em wireAnimationControls).
+    const reference = (obj.type === 'activeSelection' ? obj.getObjects()[0] : obj) || obj;
+    const data = reference.animationData || { preset: 'none', duration: DEFAULT_DURATION, delay: DEFAULT_DELAY };
     const cols = compact ? 5 : 5;
     const gridHTML = ANIMATION_PRESETS.map((p) => `
         <button type="button" class="${idPrefix}-preset-btn" data-preset="${p.id}" title="${p.label}"
@@ -47,17 +52,27 @@ export function animationControlsHTML(obj, idPrefix, compact = false) {
 export function wireAnimationControls(container, canvas, obj, idPrefix) {
     const timingBox = container.querySelector(`#${idPrefix}-timing`);
 
-    const ensureData = () => {
-        if (!obj.animationData) obj.animationData = { preset: 'none', duration: DEFAULT_DURATION, delay: DEFAULT_DELAY };
-        return obj.animationData;
+    // Numa seleção múltipla, `obj` é um ActiveSelection transitório: gravar
+    // animationData nele se perde assim que o usuário clica fora e o Fabric
+    // desfaz o agrupamento. Por isso aplicamos a mudança em cada objeto real
+    // da seleção, igual às outras ações em lote deste arquivo (camadas, opacidade).
+    const targets = obj.type === 'activeSelection' ? obj.getObjects() : [obj];
+
+    const ensureData = (target) => {
+        if (!target.animationData) target.animationData = { preset: 'none', duration: DEFAULT_DURATION, delay: DEFAULT_DELAY };
+        return target.animationData;
     };
 
     container.querySelectorAll(`.${idPrefix}-preset-btn`).forEach((btn) => {
         btn.onclick = () => {
-            const data = ensureData();
-            data.preset = btn.dataset.preset;
-            if (!data.duration) data.duration = DEFAULT_DURATION;
-            if (data.delay === undefined) data.delay = DEFAULT_DELAY;
+            let lastData = null;
+            targets.forEach((target) => {
+                const data = ensureData(target);
+                data.preset = btn.dataset.preset;
+                if (!data.duration) data.duration = DEFAULT_DURATION;
+                if (data.delay === undefined) data.delay = DEFAULT_DELAY;
+                lastData = data;
+            });
 
             container.querySelectorAll(`.${idPrefix}-preset-btn`).forEach((b) => {
                 const active = b === btn;
@@ -65,7 +80,7 @@ export function wireAnimationControls(container, canvas, obj, idPrefix) {
                 b.style.background = active ? 'rgba(39,174,96,0.15)' : 'rgba(255,255,255,0.02)';
                 b.style.color = active ? 'var(--accent)' : 'var(--text-secondary)';
             });
-            if (timingBox) timingBox.style.display = data.preset === 'none' ? 'none' : 'flex';
+            if (timingBox && lastData) timingBox.style.display = lastData.preset === 'none' ? 'none' : 'flex';
 
             canvas.renderAll();
             history.save();
@@ -78,7 +93,7 @@ export function wireAnimationControls(container, canvas, obj, idPrefix) {
         durationInput.oninput = (e) => {
             const val = parseInt(e.target.value);
             durationVal.innerText = val + 'ms';
-            ensureData().duration = val;
+            targets.forEach((target) => { ensureData(target).duration = val; });
         };
         durationInput.onchange = () => history.save();
     }
@@ -89,7 +104,7 @@ export function wireAnimationControls(container, canvas, obj, idPrefix) {
         delayInput.oninput = (e) => {
             const val = parseInt(e.target.value);
             delayVal.innerText = val + 'ms';
-            ensureData().delay = val;
+            targets.forEach((target) => { ensureData(target).delay = val; });
         };
         delayInput.onchange = () => history.save();
     }
