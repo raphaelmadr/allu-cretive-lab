@@ -6,6 +6,7 @@ export const state = {
     activePreset: null,
     currentUser: null,
     activeDesignId: null,
+    cropModeActive: false,
 
     
     setCanvas(canvasInstance) {

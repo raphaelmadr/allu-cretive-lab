@@ -31,7 +31,7 @@ Visão geral das próximas etapas de desenvolvimento.
 - [x] Implementar sistema de "Desfazer/Refazer" (Undo/Redo).
 - [x] Adicionar mais modelos de posts e apresentações (Carousel Mode).
 - [x] Melhorar gerenciamento de camadas (Visibility & Lock).
-- [ ] Implementar ferramenta de corte (Crop) para imagens.
+- [x] Implementar ferramenta de corte (Crop) para imagens.
 - [x] Suporte a salvamento de rascunhos localmente (Auto-save / Models).
 - [x] Reestruturação de Onboarding com integração de Templates.
 - [x] Implementação de Sistema de Formas Geométricas e Selos (Badges).

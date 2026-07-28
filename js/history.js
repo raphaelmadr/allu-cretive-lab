@@ -131,6 +131,11 @@ export function setupHistoryEvents() {
         const activeCanvas = state.getCanvas();
         if (!activeCanvas) return;
 
+        // Bloqueia atalhos globais enquanto o modo de recorte estiver ativo,
+        // já que undo/delete/copiar-colar destruiriam o retângulo de recorte
+        // ou substituiriam o canvas por um snapshot antigo no meio da operação.
+        if (state.cropModeActive) return;
+
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
             if (e.shiftKey) history.redo();
             else history.undo();

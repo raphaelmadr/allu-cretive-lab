@@ -384,12 +384,19 @@ export function renderPropertiesTools(sidebarContent) {
             </div>
         `;
     } else if (active.type === 'image') {
+        const existingClip = (active.clipPath && active.clipPath.type === 'rect') ? active.clipPath : null;
+        const isCropped = existingClip && (Math.round(existingClip.width) < Math.round(active.width) || Math.round(existingClip.height) < Math.round(active.height));
+
         propertiesHTML += `
             <p class="subtitle" style="margin-bottom:12px;">Edição de Imagem</p>
             <div style="background:rgba(255,255,255,0.02); padding:20px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:20px;">
                 <button id="btn-crop-start" class="btn-primary" style="width:100%; padding:12px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; font-weight:700;">
                     <i class="fa-solid fa-crop"></i> Recortar Imagem
                 </button>
+                ${isCropped ? `
+                <button id="btn-crop-reset" class="btn-primary" style="width:100%; padding:11px; border-radius:8px; background:transparent; border:1px solid var(--glass-border); color:var(--text-secondary); cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; font-weight:600; margin-top:10px;">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Remover Recorte
+                </button>` : ''}
                 <p style="font-size:0.65rem; color:var(--text-secondary); margin-top:8px; text-align:center;">Corte não-destrutivo. Você pode reajustar depois.</p>
             </div>
         `;
@@ -1019,40 +1026,159 @@ export function renderPropertiesTools(sidebarContent) {
         btnCropStart.onclick = () => startCropping(active, canvas, sidebarContent);
     }
 
+    const btnCropReset = div.querySelector('#btn-crop-reset');
+    if (btnCropReset) {
+        btnCropReset.onclick = () => {
+            const clip = active.clipPath;
+            if (clip && (clip.rx || 0) > 0) {
+                // Mantém o arredondamento de cantos, só remove o recorte
+                clip.set({
+                    left: -active.width / 2,
+                    top: -active.height / 2,
+                    width: active.width,
+                    height: active.height
+                });
+            } else {
+                active.set('clipPath', null);
+            }
+            active.dirty = true;
+            canvas.renderAll();
+            history.save();
+            updateSidebar('properties');
+        };
+    }
+
     sidebarContent.appendChild(div);
 }
 
+// Converte os 4 cantos de `rect` (em coordenadas absolutas do canvas) para o
+// espaço local de `target` (origem no centro do objeto, unidades não escaladas
+// — a mesma convenção que o clipPath do Fabric espera). Funciona corretamente
+// para imagens rotacionadas, escaladas de forma não-uniforme e espelhadas,
+// pois passa sempre pela matriz de transformação completa (nunca subtração
+// direta de left/top).
+function getLocalRectBounds(rect, target) {
+    const invMatrix = fabric.util.invertTransform(target.calcTransformMatrix());
+    const rectMatrix = rect.calcTransformMatrix();
+    const hw = rect.width / 2;
+    const hh = rect.height / 2;
+    const corners = [
+        { x: -hw, y: -hh }, { x: hw, y: -hh }, { x: hw, y: hh }, { x: -hw, y: hh }
+    ]
+        .map(p => fabric.util.transformPoint(p, rectMatrix))
+        .map(p => fabric.util.transformPoint(p, invMatrix));
+
+    const xs = corners.map(p => p.x);
+    const ys = corners.map(p => p.y);
+    const left = Math.min(...xs);
+    const top = Math.min(...ys);
+    return { left, top, width: Math.max(...xs) - left, height: Math.max(...ys) - top };
+}
+
+// Garante que os limites (já no espaço local do target) nunca ultrapassem a
+// imagem original e nunca fiquem menores que um tamanho mínimo utilizável.
+function clampLocalBounds(bounds, target) {
+    const MIN_SIZE = 10;
+    const maxLeft = -target.width / 2;
+    const maxTop = -target.height / 2;
+
+    let width = Math.min(Math.max(bounds.width, MIN_SIZE), target.width);
+    let height = Math.min(Math.max(bounds.height, MIN_SIZE), target.height);
+    let left = Math.min(Math.max(bounds.left, maxLeft), maxLeft + target.width - width);
+    let top = Math.min(Math.max(bounds.top, maxTop), maxTop + target.height - height);
+
+    return { left, top, width, height };
+}
+
+// Aplica um retângulo de limites locais (espaço do target) de volta como a
+// transformação canvas do retângulo de recorte interativo.
+function applyLocalBoundsToCropRect(cropRect, bounds, target) {
+    const center = fabric.util.transformPoint(
+        { x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 },
+        target.calcTransformMatrix()
+    );
+    cropRect.set({
+        left: center.x,
+        top: center.y,
+        originX: 'center',
+        originY: 'center',
+        angle: target.angle || 0,
+        flipX: !!target.flipX,
+        flipY: !!target.flipY,
+        scaleX: target.scaleX,
+        scaleY: target.scaleY,
+        width: bounds.width,
+        height: bounds.height
+    });
+    cropRect.setCoords();
+}
+
 export function startCropping(target, canvas, sidebarContent) {
-    if (!target || target.type !== 'image') return;
-    
+    if (!target || target.type !== 'image' || state.cropModeActive) return;
+
+    state.cropModeActive = true;
+    history.isProcessing = true; // suprime history.save() dos eventos add/remove/modified deste modo
+
     canvas.discardActiveObject();
+
+    // Trava todos os outros objetos para que nada mais possa ser selecionado,
+    // movido ou apagado enquanto o recorte estiver em andamento.
+    canvas.selection = false;
+    const lockedObjects = canvas.getObjects().filter(o => o !== target);
+    lockedObjects.forEach(o => {
+        o._cropPrevSelectable = o.selectable;
+        o._cropPrevEvented = o.evented;
+        o.selectable = false;
+        o.evented = false;
+    });
+
     target.set({ selectable: false, evented: false });
-    
+
+    // Se a imagem já tiver um recorte, reabre o quadro exatamente onde ele
+    // está (em vez de resetar para os limites cheios da imagem); preserva
+    // também o arredondamento de cantos existente.
+    const existingClip = (target.clipPath && target.clipPath.type === 'rect') ? target.clipPath : null;
+    const preservedRadius = existingClip ? (existingClip.rx || 0) : 0;
+    const initialBounds = existingClip
+        ? { left: existingClip.left, top: existingClip.top, width: existingClip.width, height: existingClip.height }
+        : { left: -target.width / 2, top: -target.height / 2, width: target.width, height: target.height };
+
     const cropRect = new fabric.Rect({
-        left: target.left,
-        top: target.top,
-        width: target.getScaledWidth(),
-        height: target.getScaledHeight(),
         fill: 'rgba(0,0,0,0.3)',
-        stroke: 'var(--accent)',
+        stroke: '#27AE60',
         strokeWidth: 2,
-        cornerColor: 'var(--accent)',
+        strokeUniform: true,
+        cornerColor: '#27AE60',
         cornerStyle: 'circle',
         transparentCorners: false,
+        lockRotation: true,
         id: 'crop-rect'
     });
-    
+    applyLocalBoundsToCropRect(cropRect, initialBounds, target);
+    cropRect.setControlsVisibility({ mtr: false });
+
     canvas.add(cropRect);
     canvas.setActiveObject(cropRect);
-    
+    canvas.renderAll();
+
+    // Reaplica o clamp somente ao soltar o mouse (não a cada frame do drag),
+    // para nunca deixar o quadro fora dos limites da imagem sem competir com
+    // o próprio arraste interativo do Fabric.
+    const onCropRectModified = () => {
+        const bounds = clampLocalBounds(getLocalRectBounds(cropRect, target), target);
+        applyLocalBoundsToCropRect(cropRect, bounds, target);
+        canvas.renderAll();
+    };
+    cropRect.on('modified', onCropRectModified);
+
     const sidebarTitle = document.getElementById('sidebar-title');
     const originalTitle = sidebarTitle.innerText;
-    
+
     sidebarTitle.innerText = 'Recortar Imagem';
     sidebarContent.innerHTML = `
         <div class="animate-fade" style="padding:20px; background:rgba(39, 174, 96, 0.1); border-radius:12px; border:1px solid var(--accent); margin-top:20px;">
             <p class="subtitle" style="color:var(--accent); font-weight:700;">Modo de Recorte Ativo</p>
-            <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:20px; line-height:1.4;">Ajuste o retângulo sobre a área que deseja manter e clique em confirmar.</p>
+            <p style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:20px; line-height:1.4;">Ajuste o retângulo sobre a área que deseja manter e clique em confirmar. (Enter confirma, Esc cancela)</p>
             <div style="display:flex; flex-direction:column; gap:10px;">
                 <button id="btn-crop-confirm" class="btn-primary" style="width:100%; background:var(--accent); color:white; padding:14px; border-radius:8px; border:none; cursor:pointer; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px;">
                     <i class="fa-solid fa-check"></i> Confirmar Recorte
@@ -1061,42 +1187,56 @@ export function startCropping(target, canvas, sidebarContent) {
             </div>
         </div>
     `;
-    
-    document.getElementById('btn-crop-confirm').onclick = () => {
-        const rectLeft = cropRect.left;
-        const rectTop = cropRect.top;
-        const rectW = cropRect.getScaledWidth();
-        const rectH = cropRect.getScaledHeight();
-        
-        const relLeft = (rectLeft - target.left) / target.scaleX;
-        const relTop = (rectTop - target.top) / target.scaleY;
-        const relW = rectW / target.scaleX;
-        const relH = rectH / target.scaleY;
-        
+
+    const confirmCrop = () => {
+        const bounds = clampLocalBounds(getLocalRectBounds(cropRect, target), target);
         const clipPath = new fabric.Rect({
-            left: relLeft - target.width / 2,
-            top: relTop - target.height / 2,
-            width: relW,
-            height: relH,
+            left: bounds.left,
+            top: bounds.top,
+            width: bounds.width,
+            height: bounds.height,
             originX: 'left',
-            originY: 'top'
+            originY: 'top',
+            rx: preservedRadius,
+            ry: preservedRadius
         });
-        
         target.set('clipPath', clipPath);
+        target.dirty = true;
         finishCrop();
     };
-    
-    document.getElementById('btn-crop-cancel').onclick = () => {
-        finishCrop();
+
+    const cancelCrop = () => finishCrop();
+
+    document.getElementById('btn-crop-confirm').onclick = confirmCrop;
+    document.getElementById('btn-crop-cancel').onclick = cancelCrop;
+
+    const onKeyDown = (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); confirmCrop(); }
+        else if (e.key === 'Escape') { e.preventDefault(); cancelCrop(); }
     };
-    
+    window.addEventListener('keydown', onKeyDown);
+
     function finishCrop() {
+        window.removeEventListener('keydown', onKeyDown);
+        cropRect.off('modified', onCropRectModified);
         canvas.remove(cropRect);
+
         target.set({ selectable: true, evented: true });
+        lockedObjects.forEach(o => {
+            o.selectable = o._cropPrevSelectable;
+            o.evented = o._cropPrevEvented;
+            delete o._cropPrevSelectable;
+            delete o._cropPrevEvented;
+        });
+        canvas.selection = true;
+
         canvas.setActiveObject(target);
         canvas.renderAll();
         sidebarTitle.innerText = originalTitle;
-        updateSidebar('properties'); 
+
+        state.cropModeActive = false;
+        history.isProcessing = false;
+        updateSidebar('properties');
         history.save();
     }
 }

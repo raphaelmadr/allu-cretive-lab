@@ -49,6 +49,13 @@ function closeAllPopups() {
 
 function onSelectionChange(canvas, e) {
     const active = canvas.getActiveObject();
+    // O retângulo de recorte é um objeto interno/transitório do modo de
+    // recorte (js/tools/properties.js) — nunca deve ganhar a barra flutuante,
+    // já que suas ações (excluir, duplicar, mudar cor) corromperiam o modo.
+    if (active && active.id === 'crop-rect') {
+        hideToolbar();
+        return;
+    }
     if (active) {
         currentActiveObject = active;
         renderToolbar(canvas, active);

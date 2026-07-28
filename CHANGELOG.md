@@ -2,6 +2,19 @@
 
 Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 
+## [0.8.0] - 2026-07-28
+### Corrigido
+- **Ferramenta de Crop (Recorte de Imagem)**: reescrita da matemática de recorte para usar a matriz de transformação completa do Fabric.js (`calcTransformMatrix`/`invertTransform`/`transformPoint`) em vez de subtração direta de `left/top`. Isso corrige o recorte de imagens rotacionadas e com escala não-uniforme, que antes gerava um `clipPath` deslocado/distorcido.
+- **Corrupção do modo de recorte pela troca automática de aba (`js/carousel.js`)**: o listener `onSelection` (ligado a `mouse:down`/`selection:created/updated`) forçava a aba "Propriedades" de volta ao estado genérico assim que o retângulo de recorte era clicado, destruindo o painel "Modo de Recorte Ativo". Corrigido com a mesma trava `state.cropModeActive` usada nos atalhos globais.
+- **Barra de ferramentas flutuante sobre o retângulo de recorte**: o retângulo interativo (`crop-rect`) era tratado como uma forma comum pela barra flutuante, expondo botões de Preenchimento/Borda/Duplicar/Excluir que corrompiam o modo de recorte se clicados. A barra agora ignora esse objeto.
+### Adicionado
+- **Recorte não-destrutivo com estado preservado**: reabrir o recorte em uma imagem já cortada agora posiciona o quadro exatamente sobre a região mantida (em vez de resetar para a imagem inteira), e preserva o arredondamento de cantos (Cantos) aplicado anteriormente.
+- **Botão "Remover Recorte"**: novo botão no painel de Propriedades para imagens já cortadas, que remove o recorte (mantendo o arredondamento, se houver) sem precisar desfazer todo o histórico.
+- **Clamp aos limites da imagem**: o quadro de recorte não pode mais ser arrastado/redimensionado para fora da imagem original.
+- **Atalhos de teclado no modo de recorte**: `Enter` confirma, `Esc` cancela.
+- **Undo em passo único**: toda a operação de recorte (abrir, ajustar, confirmar/cancelar) agora gera exatamente uma entrada no histórico de undo/redo, em vez de várias entradas intermediárias.
+- **Bloqueio de interações concorrentes**: durante o modo de recorte, os demais objetos do canvas ficam travados e os atalhos globais (Delete, Ctrl+Z/Y, Ctrl+C/V) ficam inertes, evitando estados corrompidos.
+
 ## [0.7.0] - 2026-05-26
 ### Adicionado
 - **Duplicação de Canva (Página)**: Novo botão compacto de duplicar página no rodapé da plataforma, clonando instantaneamente o canva atual com todos os seus elementos e metadados.

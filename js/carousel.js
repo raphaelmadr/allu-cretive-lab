@@ -149,11 +149,16 @@ export const carousel = {
     },
 
     onSelection(canvasInstance) {
+        // Durante o modo de recorte (js/tools/properties.js), qualquer clique no
+        // retângulo de recorte passaria por aqui e forçaria a aba "Propriedades"
+        // de volta ao estado genérico, destruindo o painel "Modo de Recorte Ativo".
+        if (state.cropModeActive) return;
+
         const index = state.canvases.indexOf(canvasInstance);
         if (index !== -1) {
             state.setActiveCanvas(index);
             this.updateUI();
-            
+
             // Centralizar a página ativa no viewport do canvas
             const container = canvasInstance.getElement().parentNode;
             if (container) {
