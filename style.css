@@ -153,8 +153,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex: 1 1 320px;
-    min-width: 0;
+    flex: 0 0 auto;
 }
 
 .top-header-actions {
@@ -164,12 +163,6 @@ body {
     flex-wrap: wrap;
     row-gap: 10px;
     justify-content: flex-end;
-}
-
-.header-filename-input {
-    flex: 1 1 160px;
-    min-width: 90px;
-    max-width: 380px;
 }
 
 /* Em janelas mais estreitas, esconde o texto dos botões de ação (mantém ícone +
