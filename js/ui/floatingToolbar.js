@@ -4,6 +4,7 @@ import { history } from '../history.js';
 import { colors, textColors } from '../config.js';
 import { notifications } from './notifications.js';
 import { buildIconObject } from '../tools/icons.js';
+import { animationControlsHTML, wireAnimationControls } from '../tools/animations.js';
 
 let toolbarElement = null;
 let currentActiveObject = null;
@@ -997,6 +998,15 @@ function renderToolbar(canvas, active) {
     toolbarElement.appendChild(createDivider());
 
     // ── 6. OPÇÕES COMUNS (Todos os elementos) ──────────────────────────────────
+    // Animação de Entrada (qualquer tipo de objeto)
+    const animBtn = createButton('animate', '<i class="fa-solid fa-wand-magic-sparkles"></i> Animar', 'Animação de Entrada');
+    const animPopup = createPopup('popup-animate');
+    animPopup.style.width = '230px';
+    animPopup.innerHTML = animationControlsHTML(active, 'toolbar-anim', true);
+    wireAnimationControls(animPopup, canvas, active, 'toolbar-anim');
+    animBtn.appendChild(animPopup);
+    toolbarElement.appendChild(animBtn);
+
     // Posição (Camadas)
     const layersBtn = createButton('layers', '<i class="fa-solid fa-layer-group"></i>', 'Posição');
     const layersPopup = createPopup('popup-layers');
@@ -1172,7 +1182,8 @@ function duplicateObject(active, canvas) {
         'productData', 'currentMode', 'isAlluCard', 'isAlluTable', 'selectable', 'hasControls', 'id', 
         'isBadge', 'badgePresetId', 'badgeShape', 'innerShadowBlur', 'innerShadowColor', 'innerShadowOffsetX', 
         'innerShadowOffsetY', 'charSpacing', 'lineHeight', 'shadow', 'fakePriceCard', 'priceCard', 
-        'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge'
+        'fakePriceMonths', 'priceMonths', 'isDiscountBadgeRect', 'isDiscountBadgeText', 'showDiscountBadge',
+        'animationData'
     ];
     active.clone((clonedObj) => {
         canvas.discardActiveObject();

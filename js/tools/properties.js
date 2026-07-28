@@ -3,6 +3,7 @@ import { state } from '../state.js';
 import { colors, backgroundColors, textColors } from '../config.js';
 import { history } from '../history.js';
 import { updateSidebar } from '../ui/sidebar.js';
+import { animationControlsHTML, wireAnimationControls } from './animations.js';
 // TODO: import addProductToCanvas
 
 export function renderPropertiesTools(sidebarContent) {
@@ -580,6 +581,13 @@ export function renderPropertiesTools(sidebarContent) {
     propertiesHTML += textEffectsHTML;
 
     propertiesHTML += `
+        <p class="subtitle" style="margin-top:24px; margin-bottom:12px;">Animação de Entrada</p>
+        <div style="background:rgba(255,255,255,0.02); padding:20px; border-radius:12px; border:1px solid var(--glass-border); margin-bottom:24px;">
+            ${animationControlsHTML(active, 'prop-anim')}
+        </div>
+    `;
+
+    propertiesHTML += `
         <p class="subtitle" style="margin-top:24px; margin-bottom:12px;">Camadas (Layers)</p>
         <div style="display:flex; justify-content:space-between; gap:8px; margin-bottom:24px;">
             <button id="prop-layer-up" class="btn-tool" style="flex:1; border:1px solid var(--glass-border); border-radius:8px; padding:10px; background:rgba(255,255,255,0.02); color:white; cursor:pointer;" title="Trazer para Frente (1 nível)"><i class="fa-solid fa-angle-up"></i></button>
@@ -1010,6 +1018,8 @@ export function renderPropertiesTools(sidebarContent) {
     setupSwatches('text', 'text');
     setupSwatches('bg', 'bg');
     setupSwatches('border', 'border');
+
+    wireAnimationControls(div, canvas, active, 'prop-anim');
 
     const btnUp = div.querySelector('#prop-layer-up');
     const btnFront = div.querySelector('#prop-layer-front');

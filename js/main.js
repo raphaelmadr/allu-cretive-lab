@@ -12,6 +12,7 @@ import { setupZoom } from './zoom.js';
 import { initStorage } from './storage.js';
 import { notifications } from './ui/notifications.js';
 import { initFloatingToolbar } from './ui/floatingToolbar.js';
+import { playPreview, stopPreview, isPreviewing } from './animationEngine.js';
 
 
 
@@ -84,6 +85,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    // Botão de Prévia (roda a linha do tempo de animações em tempo real)
+    const btnPreview = document.getElementById('btn-preview-animation');
+    if (btnPreview) {
+        const originalPreviewHTML = btnPreview.innerHTML;
+        btnPreview.onclick = () => {
+            const activeCanvas = state.getCanvas();
+            if (!activeCanvas) return;
+
+            if (isPreviewing()) {
+                stopPreview();
+                btnPreview.innerHTML = originalPreviewHTML;
+                return;
+            }
+
+            const started = playPreview(activeCanvas, {
+                onDone: () => { btnPreview.innerHTML = originalPreviewHTML; }
+            });
+            if (!started) {
+                notifications.toast('Nenhuma animação definida neste canva ainda.', 'error');
+                return;
+            }
+            btnPreview.innerHTML = '<i class="fa-solid fa-stop"></i> Parar';
+        };
+    }
 
     // Sync button
     const btnSync = document.getElementById('btn-sync');

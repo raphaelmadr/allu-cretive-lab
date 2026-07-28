@@ -2,6 +2,7 @@
 import { state } from './state.js';
 import { carousel } from './carousel.js';
 import { notifications } from './ui/notifications.js';
+import { exportAsGif, exportAsVideo } from './exportAnimated.js';
 
 
 export function setupExport() {
@@ -47,6 +48,20 @@ export function setupExport() {
                     if (!state || !state.canvases) {
                         console.error("Estado ou lista de canvases não encontrada:", state);
                         throw new Error("O sistema de exportação não foi inicializado corretamente.");
+                    }
+
+                    // GIF/MP4 são renderizados quadro a quadro a partir das animações
+                    // definidas no canva ATIVO (sem o fluxo de exportação em lote do carrossel)
+                    if (format === 'gif' || format === 'mp4') {
+                        btnMain.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Renderizando quadros...';
+                        if (format === 'gif') {
+                            await exportAsGif();
+                        } else {
+                            await exportAsVideo();
+                        }
+                        btnMain.innerHTML = originalContent;
+                        guides.forEach(g => g.style.display = 'block');
+                        return;
                     }
 
                     // Usar state.canvases para verificar múltiplas páginas

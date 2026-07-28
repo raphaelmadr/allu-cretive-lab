@@ -159,6 +159,9 @@
                 <button class="btn-primary" id="btn-sync" style="padding:8px 16px; border-radius:8px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; gap:8px;">
                     <i class="fa-solid fa-arrows-rotate" style="color:var(--accent);"></i> Atualizar Catálogo
                 </button>
+                <button class="btn-primary" id="btn-preview-animation" title="Testar animações do canva atual" style="padding:8px 16px; border-radius:8px; background:rgba(255,255,255,0.05); color:white; border:1px solid var(--glass-border); cursor:pointer; display:flex; align-items:center; gap:8px;">
+                    <i class="fa-solid fa-play"></i> Prévia
+                </button>
                 <div style="position: relative;" id="export-dropdown-container">
                     <button class="btn-primary" id="btn-download" style="padding:8px 16px; border-radius:8px; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; gap:8px;">
                         <i class="fa-solid fa-download"></i> Exportar <i class="fa-solid fa-chevron-down" style="font-size: 0.7em;"></i>
@@ -167,6 +170,9 @@
                         <button class="export-option" data-format="png" style="width:100%; text-align:left; padding:10px; background:transparent; border:none; color:white; cursor:pointer; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">Exportar PNG</button>
                         <button class="export-option" data-format="jpg" style="width:100%; text-align:left; padding:10px; background:transparent; border:none; color:white; cursor:pointer; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">Exportar JPG</button>
                         <button class="export-option" data-format="pdf" style="width:100%; text-align:left; padding:10px; background:transparent; border:none; color:white; cursor:pointer; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">Exportar PDF</button>
+                        <div style="height:1px; background:var(--glass-border); margin:6px 0;"></div>
+                        <button class="export-option" data-format="gif" style="width:100%; text-align:left; padding:10px; background:transparent; border:none; color:white; cursor:pointer; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">Exportar GIF (animado)</button>
+                        <button class="export-option" data-format="mp4" style="width:100%; text-align:left; padding:10px; background:transparent; border:none; color:white; cursor:pointer; border-radius:6px; transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'">Exportar MP4 (animado)</button>
                     </div>
                 </div>
             </div>
