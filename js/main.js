@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 notifications.toast('Nenhuma animação definida neste canva ainda.', 'error');
                 return;
             }
-            btnPreview.innerHTML = '<i class="fa-solid fa-stop"></i> Parar';
+            btnPreview.innerHTML = '<i class="fa-solid fa-stop"></i><span class="btn-label"> Parar</span>';
         };
     }
 

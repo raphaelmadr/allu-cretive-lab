@@ -137,6 +137,49 @@ body {
     border: 1px solid rgba(0,0,0,0.05);
 }
 
+/* Top Header (Responsivo) */
+/* Antes o header tinha altura fixa (60px) e nenhum wrap: em janelas estreitas os
+   grupos de botões da direita (Exportar/Prévia/Atualizar) eram simplesmente
+   cortados pelo `overflow:hidden` do .main-content. Agora o header cresce em
+   altura (min-height) e os grupos quebram linha em vez de desaparecer. */
+.top-header {
+    min-height: 60px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 20px;
+}
+
+.top-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 320px;
+    min-width: 0;
+}
+
+.top-header-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    justify-content: flex-end;
+}
+
+.header-filename-input {
+    flex: 1 1 160px;
+    min-width: 90px;
+    max-width: 380px;
+}
+
+/* Em janelas mais estreitas, esconde o texto dos botões de ação (mantém ícone +
+   tooltip via atributo title) para reduzir a chance de quebra de linha. */
+@media (max-width: 1440px) {
+    .btn-label {
+        display: none;
+    }
+}
+
 /* UI Elements */
 .btn-tool {
     width: 100%;
