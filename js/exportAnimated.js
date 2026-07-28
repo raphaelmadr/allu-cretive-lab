@@ -186,9 +186,15 @@ async function loadFfmpeg() {
 
     const ffmpeg = new FFmpeg();
     const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+    // O bundle UMD do @ffmpeg/ffmpeg carrega seu próprio worker interno a partir
+    // de um chunk separado (814.ffmpeg.js) via `new Worker(url)` clássico — que
+    // exige mesma origem independente de CORS. Sem blob-ificar esse chunk
+    // também, o construtor do Worker derruba com SecurityError.
+    const ffmpegBaseURL = 'https://unpkg.com/@ffmpeg/ffmpeg@0.12.10/dist/umd';
     await ffmpeg.load({
         coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
         wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+        classWorkerURL: await blobifyScript(`${ffmpegBaseURL}/814.ffmpeg.js`),
     });
     ffmpegInstance = ffmpeg;
     return ffmpeg;
