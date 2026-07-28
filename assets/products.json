@@ -1188,10 +1188,10 @@
     {
         "name": "AirPods 2",
         "description": "Bluetooth, 15hrs de Bateria",
-        "price": "R$ 76,00",
-        "price_12": "R$ 84,00",
-        "price_24": "R$ 80,00",
-        "price_36": "R$ 76,00",
+        "price": "R$ 95,00",
+        "price_12": "R$ 105,00",
+        "price_24": "R$ 100,00",
+        "price_36": "R$ 95,00",
         "img": "https://images.digital.allugator.com/products/Airpods%202.png",
         "local_img": "./assets/products/airpods-2.png"
     },
