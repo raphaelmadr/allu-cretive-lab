@@ -185,7 +185,12 @@ async function loadFfmpeg() {
     const { toBlobURL } = window.FFmpegUtil;
 
     const ffmpeg = new FFmpeg();
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd';
+    // O core é carregado internamente via `import()` dinâmico pelo worker — isso
+    // exige um módulo ES de verdade (com `export`), então tem que ser o build
+    // ESM do core mesmo usando o wrapper (@ffmpeg/ffmpeg) em UMD. O build UMD
+    // do core não exporta nada (só define uma variável global), e o `import()`
+    // falha com "failed to import ffmpeg-core.js" ao tentar carregá-lo.
+    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
     // O bundle UMD do @ffmpeg/ffmpeg carrega seu próprio worker interno a partir
     // de um chunk separado (814.ffmpeg.js) via `new Worker(url)` clássico — que
     // exige mesma origem independente de CORS. Sem blob-ificar esse chunk
