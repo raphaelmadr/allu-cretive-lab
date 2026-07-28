@@ -10,6 +10,7 @@ import { notifications } from './ui/notifications.js';
 import { getTimelineDuration, buildSnapshots, applyFrame, restoreSnapshots } from './animationEngine.js';
 
 const HOLD_MS = 500; // segura no quadro final um pouco antes de encerrar o loop/arquivo
+const MIN_TOTAL_DURATION_MS = 8000; // duração mínima do vídeo/gif exportado, para servir como anúncio completo
 
 function getFilenameBase() {
     const input = document.getElementById('export-filename');
@@ -46,7 +47,10 @@ async function renderFrames(canvas, fps) {
 
     const dims = getExportDimensions(canvas);
     const multiplier = dims.w / canvas.getWidth();
-    const totalMs = duration + HOLD_MS;
+    // O vídeo/gif sempre dura pelo menos MIN_TOTAL_DURATION_MS: a animação de
+    // entrada pode levar só 1-2s, mas o anúncio precisa ficar visível tempo
+    // suficiente para o público ler as informações depois que ela termina.
+    const totalMs = Math.max(duration + HOLD_MS, MIN_TOTAL_DURATION_MS);
     const frameCount = Math.max(1, Math.round((totalMs / 1000) * fps));
     const snapshots = buildSnapshots(canvas);
     const frames = [];
