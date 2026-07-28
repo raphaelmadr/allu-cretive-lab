@@ -143,9 +143,13 @@ body {
    de uma vez (um item flex não quebra parcialmente), deixando o badge de
    formato sozinho em cima. Em vez disso, mantemos tudo em uma linha só —
    os botões secundários (Atualizar/Prévia) ficam só com ícone + tooltip
-   (mesma convenção do `.btn-tool` da sidebar), e a barra de ações vira
-   scroll horizontal como último recurso em janelas muito estreitas, nunca
-   quebra de linha nem corte de conteúdo. */
+   (mesma convenção do `.btn-tool` da sidebar), e o cluster de ferramentas
+   (alinhamento/histórico/zoom/atualizar/prévia) vira scroll horizontal como
+   último recurso em janelas muito estreitas.
+   Importante: o scroll (`overflow-x`) fica isolado em `.top-header-tools`,
+   SEM incluir o botão Exportar — um `overflow` não-visible em qualquer
+   ancestral do menu dropdown (#export-menu) o corta, já que ele é
+   position:absolute e "vaza" para fora da linha do header. */
 .top-header {
     min-height: 60px;
     flex-wrap: nowrap;
@@ -164,6 +168,15 @@ body {
     gap: 20px;
     align-items: center;
     flex-wrap: nowrap;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.top-header-tools {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: nowrap;
     justify-content: flex-end;
     flex: 1 1 auto;
     min-width: 0;
@@ -174,15 +187,15 @@ body {
 
 /* Cada grupo mantém seu tamanho natural — sem isso os botões espremeriam antes
    do scroll horizontal entrar em ação. */
-.top-header-actions > * {
+.top-header-tools > * {
     flex-shrink: 0;
 }
 
 /* Scrollbar discreta (só aparece se realmente faltar espaço) */
-.top-header-actions::-webkit-scrollbar {
+.top-header-tools::-webkit-scrollbar {
     height: 4px;
 }
-.top-header-actions::-webkit-scrollbar-thumb {
+.top-header-tools::-webkit-scrollbar-thumb {
     background: var(--glass-border);
     border-radius: 4px;
 }
