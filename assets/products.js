@@ -134,10 +134,10 @@ window.alluProducts = [
     {
         "name": "AirPods Pro 2 ANC Bluetooth Spatial Audio USB-C",
         "description": "<p>Chip: Apple H2 Design: In-ear com ponteiras de silicone (XS, S, M, L) Bluetooth: 5.3 Cancelamento de ruído: Active Noise Cancellation (2x mais eficaz que geração anterior) Recursos: Adaptive Audio, Transparency Mode, Conversation Awareness, Spatial Audio com head tracking, Dolby Atmos, DSEE Extreme Saúde auditiva: Hearing Protection, Hearing Test, Hearing Aid (FDA) Bateria: até 6h por carga (ANC ativo) / até 30h com estojo MagSafe Carga rápida: 5 min = 1h de uso Carregamento: USB-C, MagSafe, Qi, carregador Apple Watch Resistência: IP54 (fones + estojo) Peso por fone: 5,3g PN: MXK23BZ/A</p>",
-        "price": "R$ 211,75",
-        "price_12": "R$ 234,04",
-        "price_24": "R$ 222,89",
-        "price_36": "R$ 211,75",
+        "price": "R$ 171,00",
+        "price_12": "R$ 189,00",
+        "price_24": "R$ 180,00",
+        "price_36": "R$ 171,00",
         "img": "https://images.digital.allugator.com/products/airpods-pro-2-1.png",
         "local_img": "./assets/products/airpods-pro-2-anc-bluetooth-spatial-audio-usb-c.png"
     },
@@ -1058,10 +1058,10 @@ window.alluProducts = [
     {
         "name": "Controle PS5 Dualsense",
         "description": "O Controle DualSense proporciona uma experiência de jogo avançada, com bateria de íon-lítio recarregável, dimensões compactas e de peso leve, ergonomicamente desenhado para conforto durante longas sessões de jogo.",
-        "price": "R$ 32,97",
-        "price_12": "R$ 36,44",
-        "price_24": "R$ 34,71",
-        "price_36": "R$ 32,97",
+        "price": "R$ 28,50",
+        "price_12": "R$ 31,50",
+        "price_24": "R$ 30,00",
+        "price_36": "R$ 28,50",
         "img": "https://images.digital.allugator.com/products/manete-1.png",
         "local_img": "./assets/products/controle-ps5-dualsense.png"
     },
@@ -1188,10 +1188,10 @@ window.alluProducts = [
     {
         "name": "AirPods 2",
         "description": "Bluetooth, 15hrs de Bateria",
-        "price": "R$ 95,00",
-        "price_12": "R$ 105,00",
-        "price_24": "R$ 100,00",
-        "price_36": "R$ 95,00",
+        "price": "R$ 114,00",
+        "price_12": "R$ 126,00",
+        "price_24": "R$ 120,00",
+        "price_36": "R$ 114,00",
         "img": "https://images.digital.allugator.com/products/Airpods%202.png",
         "local_img": "./assets/products/airpods-2.png"
     },
@@ -1588,10 +1588,10 @@ window.alluProducts = [
     {
         "name": "Caixa de Som Bluetooth Portátil JBL Boombox 4 210W IP68 34h",
         "description": "Caixa de som portátil com 210W de potência, dois woofers, dois tweeters e três radiadores passivos para graves profundos e som limpo em alto volume. AI Sound Boost analisa o áudio em tempo real e ajusta o som para maior potência com menos distorção. Certificação IP68 contra água e poeira, autonomia de até 34 horas de reprodução e bateria substituível. Suporte a áudio lossless, conexão Auracast para parear múltiplas caixas e reforço de graves ajustável. Conectividade Bluetooth e USB. Peso de 5,87 kg e dimensões de 262,9 × 212,9 × 506,4 mm",
-        "price": "R$ 265,90",
-        "price_12": "R$ 293,89",
-        "price_24": "R$ 279,89",
-        "price_36": "R$ 265,90",
+        "price": "R$ 170,91",
+        "price_12": "R$ 188,90",
+        "price_24": "R$ 179,90",
+        "price_36": "R$ 170,91",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F429ebae9-6fbd-4f86-8083-1956764af263%2Fgeneral-1781013485213-caixa-de-som-bluetooth-port_til-jbl-boombox-4-210w-ip68-34-horas-3.png",
         "local_img": "./assets/products/caixa-de-som-bluetooth-portátil-jbl-boombox-4-210w-ip68-34h.png"
     },
@@ -2898,10 +2898,10 @@ window.alluProducts = [
     {
         "name": "iPhone 15",
         "description": "Chip A16 Bionic com GPU de 5 núcleos -  - Sistema avançado de câmera dupla",
-        "price": "R$ 332,50",
-        "price_12": "R$ 367,50",
-        "price_24": "R$ 350,00",
-        "price_36": "R$ 332,50",
+        "price": "R$ 451,25",
+        "price_12": "R$ 498,75",
+        "price_24": "R$ 475,00",
+        "price_36": "R$ 451,25",
         "img": "https://images.digital.allugator.com/products/iphone15-1.png",
         "local_img": "./assets/products/iphone-15.png"
     },
@@ -2968,10 +2968,10 @@ window.alluProducts = [
     {
         "name": "iPhone 17",
         "description": "Chip A19, Câmera Fusion 48 MP, Frontal Center Stage e Captura Dupla.",
-        "price": "R$ 399,00",
-        "price_12": "R$ 441,00",
-        "price_24": "R$ 420,00",
-        "price_36": "R$ 399,00",
+        "price": "R$ 570,00",
+        "price_12": "R$ 630,00",
+        "price_24": "R$ 600,00",
+        "price_36": "R$ 570,00",
         "img": "https://images.digital.allugator.com/products/ip171.png",
         "local_img": "./assets/products/iphone-17.png"
     },
@@ -4678,10 +4678,10 @@ window.alluProducts = [
     {
         "name": "Óculos de Áudio JBL SoundGear Frames Bluetooth 5.2",
         "description": "Óculos de áudio com alto-falantes integrados e conexão Bluetooth 5.2, desenvolvidos para reprodução de música e chamadas mãos-livres sem a necessidade de fones de ouvido. Conta com JBL Signature Sound, resposta de frequência de 100 Hz a 18 kHz, sensibilidade de 114 dB SPL e impedância de 20 Ohms. Suporte a conexão multiponto para alternar entre dois dispositivos simultaneamente, carregamento via USB-C e até 8 horas de bateria com carga rápida. Certificação IP54 contra respingos e poeira. Compatível com o aplicativo JBL Headphones. Peso de 52 g",
-        "price": "R$ 66,41",
-        "price_12": "R$ 73,40",
-        "price_24": "R$ 69,91",
-        "price_36": "R$ 66,41",
+        "price": "R$ 57,85",
+        "price_12": "R$ 63,94",
+        "price_24": "R$ 60,89",
+        "price_36": "R$ 57,85",
         "img": "https://only-public-files.s3.sa-east-1.amazonaws.com/products-images-prod%2F58c2f05c-99f2-40bd-a948-ea7886041167%2Fgeneral-1780940061750-_culos-de-_udio-jbl-soundgear-frames-bluetooth-5-5.png",
         "local_img": "./assets/products/óculos-de-áudio-jbl-soundgear-frames-bluetooth-5.2.png"
     },
