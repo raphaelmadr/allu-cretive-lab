@@ -8,7 +8,7 @@ Todas as mudanças notáveis neste projeto serão documentadas neste arquivo.
 - **Base de Conhecimento de Marca (`BRAND_KNOWLEDGE.js`)**: documento único com seções identificadas por ID (`DS-CORES-01`, `DS-MOOD-01`, `DS-FOTO-01` etc.) injetado no prompt do orquestrador — a IA é obrigada a citar quais seções consultou (`meta.consulted_docs`) antes de propor uma imagem.
 - **Prompt Mestre do allu Image AI (`IA_PROMPTS.js` → `IMAGE_AI_MASTER_PROMPT`)**: fluxo obrigatório de 6 etapas (entender → consultar base → sintetizar → construir JSON estruturado → validar → entregar), com missão explícita de produzir criativos elegantes, versáteis e otimizados para clique/conversão — não apenas peças "corretas" na marca.
 - **Endpoint orquestrador (`api/generate-prompt.js`)**: monta o prompt mestre + base de conhecimento + histórico da conversa, valida o schema da resposta (incluindo IDs de `consulted_docs` contra a base real) e reenvia automaticamente uma vez com instrução de correção caso a IA retorne algo incompleto.
-- **Endpoint de geração de imagem (`api/generate-image.js`)**: integração com DALL-E 3, com o tamanho da imagem calculado deterministicamente a partir das dimensões reais do canvas ativo (não de um enum livre da IA).
+- **Endpoint de geração de imagem (`api/generate-image.js`)**: integração com Gemini (`gemini-2.5-flash-image`, com fallback em cascata para `gemini-2.0-flash-preview-image-generation`) reaproveitando as chaves `GEMINI_API_KEY`/`_2`/`_3` já configuradas — DALL-E 3 vira fallback opcional, só usado se `OPENAI_API_KEY` estiver configurada. Proporção da imagem calculada a partir das dimensões reais do canvas ativo (não de um enum livre da IA).
 
 ## [0.9.0] - 2026-07-28
 ### Adicionado
