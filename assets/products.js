@@ -2958,10 +2958,10 @@ window.alluProducts = [
     {
         "name": "iPhone 16 Pro Max",
         "description": "Chip A18 Pro com GPU de 6 núcleos, Tela Super Retina XDR , Tecnologia ProMotion  Tela Sempre Ativa.",
-        "price": "R$ 522,40",
-        "price_12": "R$ 577,39",
-        "price_24": "R$ 549,89",
-        "price_36": "R$ 522,40",
+        "price": "R$ 519,95",
+        "price_12": "R$ 574,68",
+        "price_24": "R$ 547,31",
+        "price_36": "R$ 519,95",
         "img": "https://images.digital.allugator.com/products/iph16pro-max1.png",
         "local_img": "./assets/products/iphone-16-pro-max.png"
     },
