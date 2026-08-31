@@ -2938,10 +2938,10 @@ window.alluProducts = [
     {
         "name": "iPhone 16e",
         "description": "<p>Chip A18, câmera Fusion de 48MP e tela de 6.1\" Super Retina XDR. Apple Intelligence e Face ID.</p>",
-        "price": "Consulte",
-        "price_12": "Consulte",
-        "price_24": "Consulte",
-        "price_36": "Consulte",
+        "price": "R$ 327,65",
+        "price_12": "R$ 362,14",
+        "price_24": "R$ 344,89",
+        "price_36": "R$ 327,65",
         "img": "https://images.digital.allugator.com/products/Apple iPhone 16e - 1.png",
         "local_img": "./assets/products/iphone-16e.png"
     },
