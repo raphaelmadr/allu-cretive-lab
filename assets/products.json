@@ -2968,10 +2968,10 @@
     {
         "name": "iPhone 17",
         "description": "Chip A19, Câmera Fusion 48 MP, Frontal Center Stage e Captura Dupla.",
-        "price": "R$ 760,00",
-        "price_12": "R$ 840,00",
-        "price_24": "R$ 800,00",
-        "price_36": "R$ 760,00",
+        "price": "R$ 486,40",
+        "price_12": "R$ 537,60",
+        "price_24": "R$ 512,00",
+        "price_36": "R$ 486,40",
         "img": "https://images.digital.allugator.com/products/ip171.png",
         "local_img": "./assets/products/iphone-17.png"
     },
@@ -2998,10 +2998,10 @@
     {
         "name": "iPhone 17 Pro Max",
         "description": "O iPhone 17 Pro Max combina design resistente, bateria de longa duração e a potência do chip A19 Pro. Com câmera Fusion Pro de 48 MP e zoom exclusivo de até 12x, tela imersiva com Ceramic Shield 2 e recursos da Apple Intelligence, ele entrega desempenho máximo em todos os detalhes.",
-        "price": "R$ 712,50",
-        "price_12": "R$ 787,50",
-        "price_24": "R$ 750,00",
-        "price_36": "R$ 712,50",
+        "price": "R$ 607,90",
+        "price_12": "R$ 671,89",
+        "price_24": "R$ 639,89",
+        "price_36": "R$ 607,90",
         "img": "https://images.digital.allugator.com/products/17promax4.png",
         "local_img": "./assets/products/iphone-17-pro-max.png"
     },
