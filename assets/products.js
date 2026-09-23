@@ -652,10 +652,10 @@ window.alluProducts = [
     {
         "name": "PlayStation 5 Pro",
         "description": "O PlayStation®5 Pro oferece recursos avançados como ray tracing aprimorado, imagem ultra nítida em TVs 4K e jogabilidade  super fluida com alta taxa de quadros.",
-        "price": "R$ 399,00",
-        "price_12": "R$ 441,00",
-        "price_24": "R$ 420,00",
-        "price_36": "R$ 399,00",
+        "price": "R$ 427,50",
+        "price_12": "R$ 472,50",
+        "price_24": "R$ 450,00",
+        "price_36": "R$ 427,50",
         "img": "https://images.digital.allugator.com/products/ps5-pro-1.png",
         "local_img": "./assets/products/playstation-5-pro.png"
     },
@@ -2968,10 +2968,10 @@ window.alluProducts = [
     {
         "name": "iPhone 17",
         "description": "Chip A19, Câmera Fusion 48 MP, Frontal Center Stage e Captura Dupla.",
-        "price": "R$ 332,50",
-        "price_12": "R$ 367,50",
-        "price_24": "R$ 350,00",
-        "price_36": "R$ 332,50",
+        "price": "R$ 760,00",
+        "price_12": "R$ 840,00",
+        "price_24": "R$ 800,00",
+        "price_36": "R$ 760,00",
         "img": "https://images.digital.allugator.com/products/ip171.png",
         "local_img": "./assets/products/iphone-17.png"
     },
